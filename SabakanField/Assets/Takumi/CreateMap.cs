@@ -41,8 +41,6 @@ public class CreateMap : MonoBehaviour
         //CSVファイルの行数を格納
         int height = 0;
 
-        //for文用。一行目は読み込まない
-        int i = 1;
         StringBuilder builder = new StringBuilder();
 
         builder.Clear();
