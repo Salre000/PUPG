@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3776281697325523358}
   - component: {fileID: 3776281697325523357}
   m_Layer: 0
-  m_Name: Plane (1)
+  m_Name: NatureMapTile_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

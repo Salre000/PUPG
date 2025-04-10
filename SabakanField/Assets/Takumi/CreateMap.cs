@@ -74,7 +74,7 @@ public class CreateMap : MonoBehaviour
 
                 GameObject mapTile = GetRandomMapTile((MapTileType)MapTypeNumber);
 
-                mapTile.transform.localPosition = new Vector3(x * mapReto, 10, z * mapReto);
+                mapTile.transform.localPosition = new Vector3(x * mapReto, 0, z * mapReto);
 
                 int randAngle = Random.Range(0, 4);
 
