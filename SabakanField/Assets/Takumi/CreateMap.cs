@@ -41,8 +41,6 @@ public class CreateMap : MonoBehaviour
         //CSVファイルの行数を格納
         int height = 0;
 
-        //for文用。一行目は読み込まない
-        int i = 1;
         StringBuilder builder = new StringBuilder();
 
         builder.Clear();
@@ -74,7 +72,7 @@ public class CreateMap : MonoBehaviour
 
                 GameObject mapTile = GetRandomMapTile((MapTileType)MapTypeNumber);
 
-                mapTile.transform.localPosition = new Vector3(x * mapReto, 10, z * mapReto);
+                mapTile.transform.localPosition = new Vector3(x * mapReto, 0, z * mapReto);
 
                 int randAngle = Random.Range(0, 4);
 

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mapTile:
   - {fileID: 3776281697325523356, guid: 214f40fcdd61dac4090cc4bdddd1e20e, type: 3}
+  - {fileID: 7065666011937765111, guid: 3253193bf484dba46b4ec30baac67bcd, type: 3}
