@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 947831bed6f84cb4aa67cab4415958f8, type: 3}
+  m_Name: WallMap
+  m_EditorClassIdentifier: 
+  _mapTile:
+  - {fileID: 4523329995155507795, guid: a1232aa64e690b544b996c45e6f41b2b, type: 3}
