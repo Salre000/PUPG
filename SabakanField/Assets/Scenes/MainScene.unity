@@ -1476,6 +1476,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1537261231}
   m_CullTransparentMesh: 1
+--- !u!1 &1584106591
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1584106593}
+  - component: {fileID: 1584106592}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1584106592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584106591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06c6a202a245b5469a480bb060fe37c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _CQBMap: {fileID: 11400000, guid: 453048029402c7745ae54230e2831592, type: 2}
+  _frackAreaMap: {fileID: 11400000, guid: b8de4b07a10dbfb4688b9757f602b6a8, type: 2}
+  _wallMap: {fileID: 11400000, guid: 996d65d7f46ddd54ea578069afd4e49c, type: 2}
+  _natureMap: {fileID: 11400000, guid: 7e075aa6361ae4a45847d714d4da6b5b, type: 2}
+  _planData: {fileID: 11400000, guid: c6e3b436d68e52a409549bb298ce42d4, type: 2}
+--- !u!4 &1584106593
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584106591}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 23.74912, y: -3.8056195, z: 26.467785}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1686606212
 GameObject:
   m_ObjectHideFlags: 0
@@ -1620,7 +1669,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
