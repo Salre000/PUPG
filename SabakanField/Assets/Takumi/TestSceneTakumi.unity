@@ -1572,7 +1572,7 @@ MonoBehaviour:
   _frackAreaMap: {fileID: 0}
   _wallMap: {fileID: 0}
   _natureMap: {fileID: 0}
-  _mapPlanAseet: {fileID: 11500000, guid: b06c6a202a245b5469a480bb060fe37c, type: 3}
+  _planData: {fileID: 11400000, guid: c6e3b436d68e52a409549bb298ce42d4, type: 2}
 --- !u!1 &1002187098
 GameObject:
   m_ObjectHideFlags: 0
@@ -4492,6 +4492,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 263474101182797910, guid: a1232aa64e690b544b996c45e6f41b2b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.04
+      objectReference: {fileID: 0}
     - target: {fileID: 4523329995155507795, guid: a1232aa64e690b544b996c45e6f41b2b, type: 3}
       propertyPath: m_Name
       value: Plane (2)

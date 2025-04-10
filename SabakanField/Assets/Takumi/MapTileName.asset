@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 947831bed6f84cb4aa67cab4415958f8, type: 3}
-  m_Name: NatureMap
+  m_Script: {fileID: 11500000, guid: 9b9cfe684a5cf704c8309cad73441b86, type: 3}
+  m_Name: MapTileName
   m_EditorClassIdentifier: 
-  _mapTile:
-  - {fileID: 3776281697325523356, guid: 214f40fcdd61dac4090cc4bdddd1e20e, type: 3}
+  _mapPlanDataName:
+  - MapPlanData_1

@@ -10,7 +10,7 @@ public class MapPlanDataObject : ScriptableObject
     [SerializeField] private List<string> _mapPlanDataName = new List<string>();
 
     //マッププランの名前を返す関数
-    public string GetMapTile(int number) { return _mapPlanDataName[number]; }
+    public string GetMapTileName(int number) { return _mapPlanDataName[number]; }
 
     //マップデータの種類数
     public int mapTileMax { get { return _mapPlanDataName.Count; } }
