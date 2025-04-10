@@ -22,7 +22,7 @@ public class CreateMap : MonoBehaviour
 
     private readonly string _PLAN_PASS = "MapPlanData/";
 
-    private readonly int _MAX_SIZE = 9;
+    private readonly int _MAX_SIZE = 6;
 
     //  ƒ}ƒbƒv‚ÌŽí—Þ‚Ì—ñ‹“‘Ì
     enum MapTileType 
