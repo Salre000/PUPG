@@ -536,7 +536,7 @@ GameObject:
   - component: {fileID: 3133784819067890608}
   - component: {fileID: 6228685673969366169}
   m_Layer: 0
-  m_Name: FrackAreaMapTile_1
+  m_Name: FlagAreaMapTile_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

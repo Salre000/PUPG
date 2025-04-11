@@ -12,17 +12,28 @@ public class CreateMap : MonoBehaviour
     [Header("近接戦闘のマップオブジェクトリスト")]
     [SerializeField]private MapTile _CQBMap;
     [Header("陣地の近くのマップオブジェクトリスト")]
-    [SerializeField]private MapTile _frackAreaMap;
+    [SerializeField]private MapTile _flagAreaMap;
     [Header("壁の多いのマップオブジェクトリスト")]
     [SerializeField]private MapTile _wallMap;
     [Header("障害物の少ないのマップオブジェクトリスト")]
     [SerializeField]private MapTile _natureMap;
     [Header("マップの原型のエクセルデータの名前が入っているオブジェクト")]
     [SerializeField] private MapPlanDataObject _planData;
+    [Header("マップに配置するフラッグのモデルオブジェクト")]
+    [SerializeField] private GameObject _flagObjectBase;
+    [Header("フラッグのマテリアル、プレイヤー、エネミーの順番")]
+    [SerializeField]　private Material []_flagMaterial=new Material[2];
 
     private readonly string _PLAN_PASS = "MapPlanData/";
 
-    private readonly int _MAX_SIZE = 6;
+    const int _MAX_SIZE = 6;
+
+    const float _MAP_HEIGHT = 0.5f;
+    const int MAP_RETO = 10;
+
+
+    private readonly Vector3 _ENEMYFLAG_POSITION = new Vector3((MAP_RETO*_MAX_SIZE)-MAP_RETO, _MAP_HEIGHT, (MAP_RETO * _MAX_SIZE) - MAP_RETO);
+    private readonly Vector3 _PLAYERFLAG_POSITION = new Vector3((MAP_RETO / 2), _MAP_HEIGHT, (MAP_RETO / 2));
 
     //  マップの種類の列挙体
     enum MapTileType 
@@ -34,6 +45,16 @@ public class CreateMap : MonoBehaviour
     }
 
     public void Awake()
+    {
+        //地面と障害物を生成する関数
+        CreateGraund();
+
+        //フラッグの生成する関数
+        CreateFlag();
+
+
+    }
+    private void CreateGraund() 
     {
         //読み込んだCSVファイルを格納
         List<string[]> csvDatas = new List<string[]>();
@@ -62,9 +83,8 @@ public class CreateMap : MonoBehaviour
             height++; // 行数加算
         }
 
-        int mapReto = 10;
 
-        for(int x=0;x< _MAX_SIZE; x++) 
+        for (int x = 0; x < _MAX_SIZE; x++)
         {
             for (int z = 0; z < _MAX_SIZE; z++)
             {
@@ -72,13 +92,16 @@ public class CreateMap : MonoBehaviour
 
                 GameObject mapTile = GetRandomMapTile((MapTileType)MapTypeNumber);
 
-                mapTile.transform.localPosition = new Vector3(x * mapReto, 0, z * mapReto);
+                mapTile.transform.localPosition = new Vector3(x * MAP_RETO, 0, z * MAP_RETO);
 
                 int randAngle = Random.Range(0, 4);
 
-                mapTile.transform.eulerAngles = new Vector3(0, 90*randAngle,0);
+                mapTile.transform.eulerAngles = new Vector3(0, 90 * randAngle, 0);
             }
         }
+
+
+
     }
 
     private GameObject GetRandomMapTile(MapTileType mapType)
@@ -93,8 +116,8 @@ public class CreateMap : MonoBehaviour
                 return GameObject.Instantiate(_CQBMap.GetMapTile(randomNumber));
 
             case MapTileType.Frack:
-                randomNumber = Random.Range(0, _frackAreaMap.mapTileMax);
-                return GameObject.Instantiate(_frackAreaMap.GetMapTile(randomNumber));
+                randomNumber = Random.Range(0, _flagAreaMap.mapTileMax);
+                return GameObject.Instantiate(_flagAreaMap.GetMapTile(randomNumber));
 
             case MapTileType.Wall:
                 randomNumber = Random.Range(0,_wallMap.mapTileMax);
@@ -112,6 +135,25 @@ public class CreateMap : MonoBehaviour
 
     }
 
+    private void CreateFlag() 
+    {
+        GameObject PlayerFlagObject = GameObject.Instantiate(_flagObjectBase);
+
+        PlayerFlagObject.transform.GetChild(1).gameObject.GetComponent<SkinnedMeshRenderer>().materials[0] = _flagMaterial[0];
+
+        PlayerFlagObject.transform.position = _PLAYERFLAG_POSITION;
+
+        GameObject enemyFlagObject = GameObject.Instantiate(_flagObjectBase);
+
+        enemyFlagObject.transform.GetChild(1).gameObject.GetComponent<SkinnedMeshRenderer>().materials[0] = _flagMaterial[0];
+
+        enemyFlagObject.transform.position = _ENEMYFLAG_POSITION;
+
+
+
+
+
+    }
 
 
 }
