@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class LookCamera : MonoBehaviour
 {
@@ -11,6 +10,11 @@ public class LookCamera : MonoBehaviour
     private float _deadzoneY = 0.1f;
     [SerializeField]
     private GameObject player;
+
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
     void Update()
     {
         MouseCameraRotation();
