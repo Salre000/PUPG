@@ -23,6 +23,8 @@ public class CreateMap : MonoBehaviour
     [SerializeField] private GameObject _flagObjectBase;
     [Header("フラッグのマテリアル、プレイヤー、エネミーの順番")]
     [SerializeField]　private Material []_flagMaterial=new Material[2];
+    [Header("マップの範囲外と区切る壁のプレハブ")]
+    [SerializeField] private GameObject _wallObject;
 
     private readonly string _PLAN_PASS = "MapPlanData/";
 
@@ -52,7 +54,7 @@ public class CreateMap : MonoBehaviour
         //フラッグの生成する関数
         CreateFlag();
 
-
+        CreateMapWall();
     }
     private void CreateGraund() 
     {
@@ -155,5 +157,68 @@ public class CreateMap : MonoBehaviour
 
     }
 
+    private void CreateMapWall()
+    {
+        int objectRate = 5;
+
+        int objectspece = 2;
+
+
+        for(int i = 0; i < objectRate * _MAX_SIZE; i++) 
+        {
+            GameObject wall = GameObject.Instantiate(_wallObject);
+            Vector3 position = Vector3.zero;
+
+            position.x = -MAP_RETO/2;
+            position.y = 1.5f;
+            position.z = i* objectspece-4;
+
+            wall.transform.eulerAngles = new Vector3(0, 90, 0);
+
+            wall.transform.position = position;
+
+
+            wall = GameObject.Instantiate(_wallObject);
+            position = Vector3.zero;
+
+            position.x = MAP_RETO*_MAX_SIZE-MAP_RETO/2;
+            position.y = 1.5f;
+            position.z = i* objectspece-4;
+
+            wall.transform.eulerAngles = new Vector3(0, 90, 0);
+
+            wall.transform.position = position;
+
+            wall = GameObject.Instantiate(_wallObject);
+            position = Vector3.zero;
+
+            position.x = i * objectspece - 4;
+            position.y = 1.5f;
+            position.z = MAP_RETO * _MAX_SIZE - MAP_RETO / 2;
+
+            wall.transform.eulerAngles = new Vector3(0, 0, 0);
+
+            wall.transform.position = position;
+
+
+            wall = GameObject.Instantiate(_wallObject);
+            position = Vector3.zero;
+
+            position.x = i * objectspece - 4;
+            position.y = 1.5f;
+            position.z = -MAP_RETO / 2;
+
+            wall.transform.eulerAngles = new Vector3(0, 0, 0);
+
+            wall.transform.position = position;
+
+
+        }
+
+
+
+
+
+    }
 
 }
