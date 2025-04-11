@@ -4355,6 +4355,14 @@ PrefabInstance:
       propertyPath: _aiObject
       value: 
       objectReference: {fileID: 9213432157738317115, guid: 68e37ce96f23a3d4c957b00b1b8ba1a2, type: 3}
+    - target: {fileID: 8295004249178600180, guid: 68e37ce96f23a3d4c957b00b1b8ba1a2, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8295004249178600180, guid: 68e37ce96f23a3d4c957b00b1b8ba1a2, type: 3}
+      propertyPath: m_Constraints
+      value: 116
+      objectReference: {fileID: 0}
     - target: {fileID: 8401323367022948225, guid: 68e37ce96f23a3d4c957b00b1b8ba1a2, type: 3}
       propertyPath: m_RootOrder
       value: 0
