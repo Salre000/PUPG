@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 947831bed6f84cb4aa67cab4415958f8, type: 3}
-  m_Name: FrackAreaMap
+  m_Name: FlagAreaMap
   m_EditorClassIdentifier: 
   _mapTile:
   - {fileID: 7814354353965447260, guid: 5ddaa71a5b09c11419e620dff013e32c, type: 3}
