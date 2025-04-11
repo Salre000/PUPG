@@ -139,13 +139,13 @@ public class CreateMap : MonoBehaviour
     {
         GameObject PlayerFlagObject = GameObject.Instantiate(_flagObjectBase);
 
-        PlayerFlagObject.transform.GetChild(1).gameObject.GetComponent<SkinnedMeshRenderer>().materials[0] = _flagMaterial[0];
+        PlayerFlagObject.transform.GetChild(1).gameObject.GetComponent<SkinnedMeshRenderer>().materials = new Material[1] { _flagMaterial[0] };
 
         PlayerFlagObject.transform.position = _PLAYERFLAG_POSITION;
 
         GameObject enemyFlagObject = GameObject.Instantiate(_flagObjectBase);
 
-        enemyFlagObject.transform.GetChild(1).gameObject.GetComponent<SkinnedMeshRenderer>().materials[0] = _flagMaterial[0];
+        enemyFlagObject.transform.GetChild(1).gameObject.GetComponent<SkinnedMeshRenderer>().materials = new Material[1] { _flagMaterial[1] };
 
         enemyFlagObject.transform.position = _ENEMYFLAG_POSITION;
 
