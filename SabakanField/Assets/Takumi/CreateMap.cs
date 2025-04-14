@@ -92,6 +92,7 @@ public class CreateMap : MonoBehaviour
         {
             for (int z = 0; z < _MAX_SIZE; z++)
             {
+
                 int MapTypeNumber = int.Parse(csvDatas[x][z]);
 
                 GameObject mapTile = GetRandomMapTile((MapTileType)MapTypeNumber);

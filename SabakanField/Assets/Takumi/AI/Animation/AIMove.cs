@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIMove : MonoBehaviour
+public class AIMove : MonoBehaviour,BulletMove
 {
     private readonly Vector3[] RAYCAST_OFFSET = 
         { 
@@ -20,9 +20,6 @@ public class AIMove : MonoBehaviour
     private bool rotateFlag=false;
 
     private float daleyTime = 0;
-
-
-
     enum ChengeAngleType
     {
         Left,
@@ -34,6 +31,15 @@ public class AIMove : MonoBehaviour
     {
         animator = GetComponent<Animator>();
     }
+
+    public void HitAction()
+    {
+        Debug.Log(this.gameObject.name + "ƒŒƒC‚É“–‚½‚Á‚½");
+
+        this.gameObject.SetActive(false);
+    }
+
+
     private void FixedUpdate()
     {
         if(rotateFlag) daleyTime+= Time.deltaTime;
@@ -50,6 +56,9 @@ public class AIMove : MonoBehaviour
             {
                 if (Vector3.Distance(this.transform.position, hit.point) > AngleRange) continue;
 
+
+                BulletManager.RayHitTest(startPos + RAYCAST_OFFSET[i], this.transform.forward);
+
                 //‰ñ“]’†‚¾‚Á‚½‚ç‰½‚à‚µ‚È‚¢
                 if (rotateFlag) return;
 
@@ -59,7 +68,6 @@ public class AIMove : MonoBehaviour
 
 
         }
-        Debug.Log(daleyTime);
         if (daleyTime < 0.2f) return;
 
         ResetAnimation();
@@ -153,6 +161,4 @@ public class AIMove : MonoBehaviour
         return true;
 
     }
-
-
 }
