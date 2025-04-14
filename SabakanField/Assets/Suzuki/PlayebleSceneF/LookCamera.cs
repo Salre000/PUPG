@@ -9,7 +9,10 @@ public class LookCamera : MonoBehaviour
     [SerializeField]
     private float _deadzoneY = 0.1f;
     [SerializeField]
-    private GameObject player;
+    private GameObject _player;
+
+    private readonly float _LOOKDOWNLIMIT = 0.7f;
+    private readonly float _LOOKUPLIMIT = -0.7f;
 
     private void Awake()
     {
@@ -26,7 +29,7 @@ public class LookCamera : MonoBehaviour
         float mouseCameraX = Input.GetAxis("Mouse X");
         if (Mathf.Abs(mouseCameraX) > _deadzoneX) 
         {
-            player.transform.RotateAround(player.transform.position, Vector3.up, mouseCameraX); 
+            _player.transform.RotateAround(_player.transform.position, Vector3.up, mouseCameraX); 
 
         }
         float mauseCameraY = Input.GetAxis("Mouse Y");
@@ -35,10 +38,27 @@ public class LookCamera : MonoBehaviour
         {
             transform.RotateAround(transform.position, Vector3.right, -mauseCameraY);
         }
-        Quaternion vector3 = transform.rotation;
-        vector3.y = 0f;
-        vector3.z = 0f;
-        transform.localRotation = vector3;
+        LookLimit();
+        Quaternion quate = transform.rotation;
+        quate.y = 0f;
+        quate.z = 0f;
+        transform.localRotation = quate;
+    }
+
+    private void LookLimit()
+    {
+        if (transform.localRotation.x > _LOOKDOWNLIMIT)
+        {
+            Quaternion quate=transform.localRotation;
+            quate.x = _LOOKDOWNLIMIT;
+            transform.localRotation = quate;
+        }
+        if (transform.localRotation.x < _LOOKUPLIMIT)
+        {
+            Quaternion quate = transform.localRotation;
+            quate.x = _LOOKUPLIMIT;
+            transform.localRotation = quate;
+        }
     }
 
 }
