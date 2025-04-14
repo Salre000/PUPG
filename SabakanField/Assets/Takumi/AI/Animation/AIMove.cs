@@ -9,10 +9,6 @@ public class AIMove : MonoBehaviour,BulletMove
         { 
          new Vector3(0, 1f, 0),
          new Vector3(0, 0.5f, 0),
-         new Vector3(0, 0.5f, 1),
-         new Vector3(0, 0.5f, -1),
-         new Vector3(1, 0.5f, 0),
-         new Vector3(-1, 0.5f, 0),
     };
 
     private readonly float ChengeAngleRange = 10;
@@ -118,7 +114,7 @@ public class AIMove : MonoBehaviour,BulletMove
 
 
         }
-        if (daleyTime < 0.2f) return;
+        if (daleyTime < 0.35f) return;
 
         ResetAnimation();
 
@@ -280,6 +276,10 @@ public class AIMove : MonoBehaviour,BulletMove
         animator.SetBool("Back", true);
 
         nowMode = NowMode.Back;
+
+        this.transform.LookAt(hitObject.transform);
+
+        this.transform.eulerAngles=new Vector3( 0, this.transform.eulerAngles.y, 0);
 
         Debug.Log(collision.gameObject.name);
 
