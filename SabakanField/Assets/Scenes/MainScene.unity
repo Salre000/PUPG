@@ -1516,6 +1516,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 35476c8527235264193fdf697835aafb, type: 2}
   - {fileID: 2100000, guid: e8ff6c361574bc247b44df15c4405935, type: 2}
   _wallObject: {fileID: 2781940646285111054, guid: 09a76d33d83d1ec4ba12ceccd8fab23e, type: 3}
+  _aiObject: {fileID: 9213432157738317115, guid: 68e37ce96f23a3d4c957b00b1b8ba1a2, type: 3}
 --- !u!4 &1584106593
 Transform:
   m_ObjectHideFlags: 0

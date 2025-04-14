@@ -10,21 +10,23 @@ using UnityEngine.Rendering;
 public class CreateMap : MonoBehaviour
 {
     [Header("近接戦闘のマップオブジェクトリスト")]
-    [SerializeField]private MapTile _CQBMap;
+    [SerializeField] private MapTile _CQBMap;
     [Header("陣地の近くのマップオブジェクトリスト")]
-    [SerializeField]private MapTile _flagAreaMap;
+    [SerializeField] private MapTile _flagAreaMap;
     [Header("壁の多いのマップオブジェクトリスト")]
-    [SerializeField]private MapTile _wallMap;
+    [SerializeField] private MapTile _wallMap;
     [Header("障害物の少ないのマップオブジェクトリスト")]
-    [SerializeField]private MapTile _natureMap;
+    [SerializeField] private MapTile _natureMap;
     [Header("マップの原型のエクセルデータの名前が入っているオブジェクト")]
     [SerializeField] private MapPlanDataObject _planData;
     [Header("マップに配置するフラッグのモデルオブジェクト")]
     [SerializeField] private GameObject _flagObjectBase;
     [Header("フラッグのマテリアル、プレイヤー、エネミーの順番")]
-    [SerializeField]　private Material []_flagMaterial=new Material[2];
+    [SerializeField] private Material[] _flagMaterial = new Material[2];
     [Header("マップの範囲外と区切る壁のプレハブ")]
     [SerializeField] private GameObject _wallObject;
+    [Header("AIのプレハブベース")]
+    [SerializeField] private GameObject _aiObject;
 
     private readonly string _PLAN_PASS = "MapPlanData/";
 
@@ -34,13 +36,13 @@ public class CreateMap : MonoBehaviour
     const int MAP_RETO = 10;
 
 
-    private readonly Vector3 _ENEMYFLAG_POSITION = new Vector3((MAP_RETO*_MAX_SIZE)-MAP_RETO, _MAP_HEIGHT, (MAP_RETO * _MAX_SIZE) - MAP_RETO);
+    private readonly Vector3 _ENEMYFLAG_POSITION = new Vector3((MAP_RETO * _MAX_SIZE) - MAP_RETO, _MAP_HEIGHT, (MAP_RETO * _MAX_SIZE) - MAP_RETO);
     private readonly Vector3 _PLAYERFLAG_POSITION = new Vector3((MAP_RETO / 2), _MAP_HEIGHT, (MAP_RETO / 2));
 
     //  マップの種類の列挙体
-    enum MapTileType 
+    enum MapTileType
     {
-        CQB=0,
+        CQB = 0,
         Frack,
         Wall,
         Nature
@@ -56,7 +58,7 @@ public class CreateMap : MonoBehaviour
 
         CreateMapWall();
     }
-    private void CreateGraund() 
+    private void CreateGraund()
     {
         //読み込んだCSVファイルを格納
         List<string[]> csvDatas = new List<string[]>();
@@ -90,6 +92,7 @@ public class CreateMap : MonoBehaviour
         {
             for (int z = 0; z < _MAX_SIZE; z++)
             {
+
                 int MapTypeNumber = int.Parse(csvDatas[x][z]);
 
                 GameObject mapTile = GetRandomMapTile((MapTileType)MapTypeNumber);
@@ -99,22 +102,24 @@ public class CreateMap : MonoBehaviour
                 int randAngle = Random.Range(0, 4);
 
                 mapTile.transform.eulerAngles = new Vector3(0, 90 * randAngle, 0);
+                if((MapTileType)MapTypeNumber==MapTileType.Frack) CreateAI(new Vector3(x * MAP_RETO, 0, z * MAP_RETO));
+
             }
         }
 
 
 
     }
-
+    
     private GameObject GetRandomMapTile(MapTileType mapType)
     {
 
-        int randomNumber =-1;
+        int randomNumber = -1;
 
         switch (mapType)
         {
             case MapTileType.CQB:
-                randomNumber=Random.Range(0,_CQBMap.mapTileMax);
+                randomNumber = Random.Range(0, _CQBMap.mapTileMax);
                 return GameObject.Instantiate(_CQBMap.GetMapTile(randomNumber));
 
             case MapTileType.Frack:
@@ -122,7 +127,7 @@ public class CreateMap : MonoBehaviour
                 return GameObject.Instantiate(_flagAreaMap.GetMapTile(randomNumber));
 
             case MapTileType.Wall:
-                randomNumber = Random.Range(0,_wallMap.mapTileMax);
+                randomNumber = Random.Range(0, _wallMap.mapTileMax);
                 return GameObject.Instantiate(_wallMap.GetMapTile(randomNumber));
 
             case MapTileType.Nature:
@@ -137,7 +142,7 @@ public class CreateMap : MonoBehaviour
 
     }
 
-    private void CreateFlag() 
+    private void CreateFlag()
     {
         GameObject PlayerFlagObject = GameObject.Instantiate(_flagObjectBase);
 
@@ -164,14 +169,14 @@ public class CreateMap : MonoBehaviour
         int objectspece = 2;
 
 
-        for(int i = 0; i < objectRate * _MAX_SIZE; i++) 
+        for (int i = 0; i < objectRate * _MAX_SIZE; i++)
         {
             GameObject wall = GameObject.Instantiate(_wallObject);
             Vector3 position = Vector3.zero;
 
-            position.x = -MAP_RETO/2;
+            position.x = -MAP_RETO / 2;
             position.y = 1.5f;
-            position.z = i* objectspece-4;
+            position.z = i * objectspece - 4;
 
             wall.transform.eulerAngles = new Vector3(0, 90, 0);
 
@@ -181,9 +186,9 @@ public class CreateMap : MonoBehaviour
             wall = GameObject.Instantiate(_wallObject);
             position = Vector3.zero;
 
-            position.x = MAP_RETO*_MAX_SIZE-MAP_RETO/2;
+            position.x = MAP_RETO * _MAX_SIZE - MAP_RETO / 2;
             position.y = 1.5f;
-            position.z = i* objectspece-4;
+            position.z = i * objectspece - 4;
 
             wall.transform.eulerAngles = new Vector3(0, 90, 0);
 
@@ -216,6 +221,19 @@ public class CreateMap : MonoBehaviour
         }
 
 
+
+
+
+    }
+
+
+    private void CreateAI(Vector3 pos)
+    {
+        GameObject ai = GameObject.Instantiate(_aiObject);
+
+        ai.transform.position = pos;
+
+        ai.transform.eulerAngles = new Vector3(0, Random.Range(0,360), 0);
 
 
 
