@@ -14,6 +14,7 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         Movement();
+
     }
 
     private void Movement()
@@ -33,4 +34,6 @@ public class PlayerMove : MonoBehaviour
         else
             _speed=_walkSpeed;
     }
+
+
 }
