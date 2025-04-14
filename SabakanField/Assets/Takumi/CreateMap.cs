@@ -38,7 +38,7 @@ public class CreateMap : MonoBehaviour
     const int MAP_RETO = 10;
 
 
-    private readonly Vector3 _ENEMYFLAG_POSITION = new Vector3((MAP_RETO * _MAX_SIZE) - MAP_RETO, _MAP_HEIGHT, (MAP_RETO * _MAX_SIZE) - MAP_RETO);
+    private readonly Vector3 _ENEMYFLAG_POSITION = new Vector3((MAP_RETO * _MAX_SIZE) - (MAP_RETO+ (MAP_RETO / 2)), _MAP_HEIGHT, (MAP_RETO * _MAX_SIZE) - (MAP_RETO + (MAP_RETO / 2)));
     private readonly Vector3 _PLAYERFLAG_POSITION = new Vector3((MAP_RETO / 2), _MAP_HEIGHT, (MAP_RETO / 2));
 
     //  マップの種類の列挙体
@@ -52,15 +52,24 @@ public class CreateMap : MonoBehaviour
         WeaponSpawn//武器がスポーンする場所
     }
 
+    private AIManager _AIManager;
+
     public void Awake()
     {
+        _AIManager=GetComponent<AIManager>();
+
         //地面と障害物を生成する関数
         CreateGraund();
 
         //フラッグの生成する関数
         CreateFlag();
 
+        //マップの境目の壁を生成する関数
         CreateMapWall();
+
+        //Aiを生成する関数
+        _AIManager.CreateAI();
+
     }
     private void CreateGraund()
     {
@@ -106,7 +115,6 @@ public class CreateMap : MonoBehaviour
                 int randAngle = Random.Range(0, 4);
 
                 mapTile.transform.eulerAngles = new Vector3(0, 90 * randAngle, 0);
-                if((MapTileType)MapTypeNumber==MapTileType.Frack) CreateAI(new Vector3(x * MAP_RETO, 0, z * MAP_RETO));
 
             }
         }
@@ -161,13 +169,14 @@ public class CreateMap : MonoBehaviour
         PlayerFlagObject.transform.GetChild(1).gameObject.GetComponent<SkinnedMeshRenderer>().materials = new Material[1] { _flagMaterial[0] };
 
         PlayerFlagObject.transform.position = _PLAYERFLAG_POSITION;
+        _AIManager.SetFlagObject(PlayerFlagObject, 0);
 
         GameObject enemyFlagObject = GameObject.Instantiate(_flagObjectBase);
 
         enemyFlagObject.transform.GetChild(1).gameObject.GetComponent<SkinnedMeshRenderer>().materials = new Material[1] { _flagMaterial[1] };
 
         enemyFlagObject.transform.position = _ENEMYFLAG_POSITION;
-
+        _AIManager.SetFlagObject(enemyFlagObject, 1);
 
 
 

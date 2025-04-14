@@ -9,6 +9,10 @@ public class AIMove : MonoBehaviour,BulletMove
         { 
          new Vector3(0, 1f, 0),
          new Vector3(0, 0.5f, 0),
+         new Vector3(0, 0.5f, 1),
+         new Vector3(0, 0.5f, -1),
+         new Vector3(1, 0.5f, 0),
+         new Vector3(-1, 0.5f, 0),
     };
 
     private readonly float ChengeAngleRange = 10;
@@ -27,6 +31,23 @@ public class AIMove : MonoBehaviour,BulletMove
         None
     }
 
+    enum NowMode 
+    {
+        Wandering,
+        Shot,
+        Back,
+        Chase,
+        ChageAngle
+
+    }
+    [SerializeField]NowMode nowMode = NowMode.Wandering;
+
+    NowMode nextMode= NowMode.Wandering;
+
+    [SerializeField]float nextMoveAngle = 0;
+
+    private readonly float _EPSILON = 5.0f;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -36,15 +57,35 @@ public class AIMove : MonoBehaviour,BulletMove
     {
         Debug.Log(this.gameObject.name + "ƒŒƒC‚É“–‚½‚Á‚½");
 
-        this.gameObject.SetActive(false);
     }
 
 
     private void FixedUpdate()
     {
-        if(rotateFlag) daleyTime+= Time.deltaTime;
+        switch (nowMode)
+        {
+            case NowMode.Wandering:
+                Wandering();
+                break;
+            case NowMode.Shot:
+                break;
+            case NowMode.Back:
+                Back();
+                break;
+            case NowMode.Chase:
+                break;
+            case NowMode.ChageAngle:
+                ChangeAngle();
+                break;
+        }
+    }
+    public void EndShot() { nowMode = NowMode.Wandering; }
+    private void Wandering() 
+    {
 
-        Vector3 startPos = this.transform.position + this.transform.forward/10;
+        if (rotateFlag) daleyTime += Time.deltaTime;
+
+        Vector3 startPos = this.transform.position + this.transform.forward / 10;
 
         for (int i = 0; i < RAYCAST_OFFSET.Length; i++)
         {
@@ -52,8 +93,17 @@ public class AIMove : MonoBehaviour,BulletMove
 
             RaycastHit hit;
 
-            if (Physics.Raycast(startPos + RAYCAST_OFFSET[i], this.transform.forward, out hit)) 
+            if (Physics.Raycast(startPos + RAYCAST_OFFSET[i], this.transform.forward, out hit))
             {
+                BulletMove bulletMove=hit.transform.gameObject.GetComponentInParent<BulletMove>();
+                //if (bulletMove != null&&i<2) 
+                //{
+                //    animator.SetTrigger("Shot");
+                //    nowMode = NowMode.Shot;
+
+                //    return;
+                //}
+
                 if (Vector3.Distance(this.transform.position, hit.point) > AngleRange) continue;
 
 
@@ -62,8 +112,8 @@ public class AIMove : MonoBehaviour,BulletMove
                 //‰ñ“]’†‚¾‚Á‚½‚ç‰½‚à‚µ‚È‚¢
                 if (rotateFlag) return;
 
-                rotateFlag=true;
-                if (ChengeAngle(startPos,i, hit.transform.gameObject)) return;
+                rotateFlag = true;
+                if (ChengeAngle(startPos, i, hit.transform.gameObject)) return;
             }
 
 
@@ -72,6 +122,21 @@ public class AIMove : MonoBehaviour,BulletMove
 
         ResetAnimation();
 
+
+    }
+
+
+    private void ChangeAngle() 
+    {
+        float angle=this.transform.eulerAngles.y;
+        angle += 360.0f;
+        angle %= 360.0f;
+
+        if (angle > nextMoveAngle + _EPSILON || angle < nextMoveAngle - _EPSILON) return;
+        ResetAnimation();
+
+        nowMode = nextMode;
+
     }
 
     //ƒŒƒC‚É‰½‚à“–‚½‚ç‚È‚©‚Á‚½‚Æ‚«‚Ìˆ—
@@ -79,9 +144,12 @@ public class AIMove : MonoBehaviour,BulletMove
     {
         animator.SetBool("Left", false);
         animator.SetBool("Right", false);
+        animator.SetBool("Back", false);
         rotateFlag = false;
         daleyTime = 0;
     }
+
+
 
     private bool ChengeAngle(Vector3 startPos, int heightNumber,GameObject tragetObject)
     {
@@ -141,12 +209,26 @@ public class AIMove : MonoBehaviour,BulletMove
 
 
 
-
+            if (angleVec >= 100) 
+            {
+                angleType = ChengeAngleType.Left;
+                break;
+            }
             //•ÏX‚·‚é•ûŒü‚ªŒˆ‚Ü‚Á‚½‚ç
             if (angleType != ChengeAngleType.None) break;
         }
 
-        switch (angleType)
+
+        ChangeLRAnime(angleType);
+
+
+        return true;
+
+    }
+
+    private void ChangeLRAnime(ChengeAngleType chenge) 
+    {
+        switch (chenge)
         {
             case ChengeAngleType.Left:
                 animator.SetBool("Left", true);
@@ -158,7 +240,48 @@ public class AIMove : MonoBehaviour,BulletMove
                 break;
         }
 
-        return true;
+
+    }
+
+    private GameObject hitObject;
+    private void Back() 
+    {
+        if (Vector3.Distance(hitObject.transform.position, this.transform.position) > AngleRange) return;
+
+        ResetAnimation();
+
+        
+        nextMode = NowMode.Wandering;
+
+        nowMode = NowMode.ChageAngle;
+       Vector3 vec= endPosition-this.transform.position+this.transform.forward/2;
+
+        nextMoveAngle=Mathf.Atan2(vec.x,vec.z)*Mathf.Rad2Deg+UnityEngine.Random.Range(-50,50);
+
+        nextMoveAngle += 360.0f;
+        nextMoveAngle %= 360.0f;
+
+
+        ChengeAngle(this.transform.position+this.transform.forward,0, hitObject);
+
+        hitObject = null;
+    }
+
+    Vector3 endPosition = Vector3.zero;
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "Floor") return;
+
+        endPosition = this.transform.position + this.transform.forward;
+
+        hitObject = collision.gameObject;
+
+        animator.SetBool("Back", true);
+
+        nowMode = NowMode.Back;
+
+        Debug.Log(collision.gameObject.name);
 
     }
 }
