@@ -34,6 +34,8 @@ public class AIManager : MonoBehaviour
 
                 ai.transform.eulerAngles = new Vector3(0, createAngle, 0);
 
+                ai.GetComponent<AIMove>().SetFlagAngle(flagObject[(i + 1) % 2]);
+
             }
 
         }
