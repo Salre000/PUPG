@@ -17,6 +17,8 @@ public class CreateMap : MonoBehaviour
     [SerializeField] private MapTile _wallMap;
     [Header("障害物の少ないのマップオブジェクトリスト")]
     [SerializeField] private MapTile _natureMap;
+    [Header("弾が補充できるマップオブジェクトリスト")]
+    [SerializeField] private MapTile _amoReChageMap;
     [Header("マップの原型のエクセルデータの名前が入っているオブジェクト")]
     [SerializeField] private MapPlanDataObject _planData;
     [Header("マップに配置するフラッグのモデルオブジェクト")]
@@ -45,7 +47,9 @@ public class CreateMap : MonoBehaviour
         CQB = 0,
         Frack,
         Wall,
-        Nature
+        Nature,
+        AmmunitionReCharge,//弾を補給できる場所
+        WeaponSpawn//武器がスポーンする場所
     }
 
     public void Awake()
@@ -133,7 +137,15 @@ public class CreateMap : MonoBehaviour
             case MapTileType.Nature:
                 randomNumber = Random.Range(0, _natureMap.mapTileMax);
                 return GameObject.Instantiate(_natureMap.GetMapTile(randomNumber));
+            case MapTileType.AmmunitionReCharge:
 
+                randomNumber = Random.Range(0, _amoReChageMap.mapTileMax);
+                return GameObject.Instantiate(_amoReChageMap.GetMapTile(randomNumber));
+
+            case MapTileType.WeaponSpawn:
+
+                randomNumber = Random.Range(0, _amoReChageMap.mapTileMax);
+                return GameObject.Instantiate(_amoReChageMap.GetMapTile(randomNumber));
         }
 
         return null;
