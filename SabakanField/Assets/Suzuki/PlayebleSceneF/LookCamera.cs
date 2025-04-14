@@ -11,6 +11,8 @@ public class LookCamera : MonoBehaviour
     [SerializeField]
     private GameObject _player;
 
+    static public float recoilNum = 0.0f;
+
     private readonly float _LOOKDOWNLIMIT = 0.7f;
     private readonly float _LOOKUPLIMIT = -0.7f;
 
@@ -27,6 +29,7 @@ public class LookCamera : MonoBehaviour
     {
         //マウスカーソルで左右視点+横回転
         float mouseCameraX = Input.GetAxis("Mouse X");
+        recoilNum = mouseCameraX;
         if (Mathf.Abs(mouseCameraX) > _deadzoneX) 
         {
             _player.transform.RotateAround(_player.transform.position, Vector3.up, mouseCameraX); 
