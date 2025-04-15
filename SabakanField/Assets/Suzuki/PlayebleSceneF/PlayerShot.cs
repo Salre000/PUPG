@@ -11,12 +11,11 @@ public class PlayerShot : MonoBehaviour
     private float _horizonRecoil = 0.01f;
     // リコイル開始/終了
     private bool _verticalRecoilFlag = false;
-    private bool _horizonRecoilFlag = false;
     Quaternion cameraQuate= Quaternion.identity;
     // リコイルで
     private float _resetNum = 0.005f;
     // 反動で視点が上がりきるまでの時間
-    private float _recoilTime = 0.1f;
+    private float _recoilTime = 0.3f;
     [SerializeField]
     GameObject _player = null;
     private Quaternion _playerQuate = Quaternion.identity;
@@ -76,15 +75,11 @@ public class PlayerShot : MonoBehaviour
         _player.transform.localRotation = Quaternion.Slerp(_player.transform.localRotation
             , _playerQuate
             , _recoilTime);
-        //// れコイル制御をしたときSlerpを続かせない
-        //float numX = transform.localRotation.x - cameraQuate.x;
-        //numX-=LookCamera.recoilNum/2;
-        //if ((numX <= _resetNum)) _verticalRecoilFlag = false;
 
         // マウスの動きを検知したらSlerpを通らなくする
         float mouseCameraX = Input.GetAxis("Mouse X");
         float mauseCameraY = Input.GetAxis("Mouse Y");
-        if( mouseCameraX >= 0.1f || mauseCameraY >= 0.1f )
+        if( mouseCameraX >= _resetNum || mauseCameraY >= _resetNum )
             _verticalRecoilFlag = false;
 
     }
