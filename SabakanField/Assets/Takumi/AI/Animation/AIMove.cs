@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIMove : MonoBehaviour,BulletMove
+public class AIMove : MonoBehaviour, BulletMove
 {
-    private readonly Vector3[] RAYCAST_OFFSET = 
-        { 
+    private readonly Vector3[] RAYCAST_OFFSET =
+        {
          new Vector3(0, 1f, 0),
          new Vector3(0, 0.5f, 0),
     };
@@ -17,7 +17,7 @@ public class AIMove : MonoBehaviour,BulletMove
 
     private Animator animator;
 
-    private bool rotateFlag=false;
+    private bool rotateFlag = false;
 
     private float daleyTime = 0;
 
@@ -26,12 +26,12 @@ public class AIMove : MonoBehaviour,BulletMove
     private Vector3 gameStartPosition = Vector3.zero;
 
     private System.Func<bool> _PlayerFaction;
-    public void SetPlayerFaction(System.Func<bool> playerFaction) {  _PlayerFaction = playerFaction; }
+    public void SetPlayerFaction(System.Func<bool> playerFaction) { _PlayerFaction = playerFaction; }
 
     public bool PlayerFaction() { return _PlayerFaction(); }
 
-    public bool GetISLife() {  return isLife; } 
-    GameObject flag ;
+    public bool GetISLife() { return isLife; }
+    GameObject flag;
     GameObject playerFlag;
     public void SetFlagAngle(GameObject flag) { this.flag = flag; }
     public void SetPlayerFlag(GameObject flag) { playerFlag = flag; }
@@ -42,7 +42,7 @@ public class AIMove : MonoBehaviour,BulletMove
         None
     }
 
-    enum NowMode 
+    enum NowMode
     {
         Wandering,
         Shot,
@@ -51,11 +51,11 @@ public class AIMove : MonoBehaviour,BulletMove
         ChageAngle
 
     }
-    [SerializeField]NowMode nowMode = NowMode.Wandering;
+    [SerializeField] NowMode nowMode = NowMode.Wandering;
 
-    NowMode nextMode= NowMode.Wandering;
+    NowMode nextMode = NowMode.Wandering;
 
-    [SerializeField]float nextMoveAngle = 0;
+    [SerializeField] float nextMoveAngle = 0;
 
     private readonly float _EPSILON = 5.0f;
 
@@ -66,10 +66,10 @@ public class AIMove : MonoBehaviour,BulletMove
     private void Start()
     {
         animator = GetComponent<Animator>();
-        Vector3 position=  this.transform.position;
+        Vector3 position = this.transform.position;
         position.y = 0;
         this.transform.position = position;
-        gameStartPosition=this.transform.position;
+        gameStartPosition = this.transform.position;
 
     }
 
@@ -89,12 +89,15 @@ public class AIMove : MonoBehaviour,BulletMove
 
         ChackDash();
 
+        SearchEnemy();
+
         switch (nowMode)
         {
             case NowMode.Wandering:
                 Wandering();
                 break;
             case NowMode.Shot:
+                Shot();
                 break;
             case NowMode.Back:
                 Back();
@@ -109,20 +112,114 @@ public class AIMove : MonoBehaviour,BulletMove
     public void EndShot() { nowMode = NowMode.Wandering; }
 
     bool dashFlag = false;
-    private void ChackDash() 
+    private void ChackDash()
     {
 
-        if (Vector3.Distance(playerFlag.transform.position, this.transform.position) < DashRange && !dashFlag) 
+        if (Vector3.Distance(playerFlag.transform.position, this.transform.position) < DashRange && !dashFlag)
         {
             //アニメーションをダッシュに変える
         }
-        else if (dashFlag) 
+        else if (dashFlag)
         {
             //アニメーションをゆっくりに変える
         }
 
     }
-    private void Wandering() 
+
+    private void SearchEnemy()
+    {
+        List<GameObject> targets = TargetEnemysInAngle();
+
+        if (targets.Count <= 0) return;
+
+        TargetGetAngle(targets);
+
+    }
+    //このAIの視界内に敵はいるのかを判断する関数
+    private List<GameObject> TargetEnemysInAngle()
+    {
+
+        List<AIMove> targetObjcets = AIUtility.GetRelativeEnemy(PlayerFaction());
+
+        List<GameObject> targets = new List<GameObject>();
+
+
+        for(int i = 0; i < targetObjcets.Count; i++) 
+        {
+            Vector3 vec=targetObjcets[i].transform.position-this.transform.position;
+            if (Vector3.Dot(this.transform.forward, vec) < 0.5) continue;
+
+            targets.Add(targetObjcets[i].gameObject);
+
+        }
+
+
+        return targets;
+
+
+
+    }
+
+    //視界内にいる敵にrayが通るかを判断して角度を導く
+    private void TargetGetAngle(List<GameObject> targets)
+    {
+        if (shotingFlag) return;
+        shotingFlag = true;
+
+        GameObject hitObject=null;
+
+        for (int i = 0; i < targets.Count; i++)
+        {
+            RaycastHit hit;
+            Vector3 startPosition=this.transform.position+this.transform.forward;
+
+            Vector3 dir = targets[i].transform.position - this.transform.position;
+            if (Physics.Raycast(startPosition, dir, out hit)) 
+            {
+                if (hit.transform.gameObject != targets[i]) continue;
+
+                hitObject = hit.transform.gameObject;
+
+            }
+
+
+        }
+        if (hitObject == null) return;
+
+        Vector3 tragetDir = hitObject.transform.position - this.transform.position;
+
+        nextMoveAngle = Mathf.Atan2(tragetDir.x, tragetDir.z);
+
+        nextMoveAngle += 360.0f;
+        nextMoveAngle %= 360.0f;
+
+
+        nowMode = NowMode.ChageAngle;
+        nextMode = NowMode.Shot;
+
+    }
+
+    private bool shotingFlag = false;
+    private void Shot()
+    {
+
+        Vector3 startPos = this.transform.position + this.transform.forward / 10;
+        RaycastHit hit;
+
+        if (Physics.Raycast(startPos + RAYCAST_OFFSET[0], this.transform.forward, out hit))
+        {
+            BulletMove bulletMove = hit.transform.gameObject.GetComponentInParent<BulletMove>();
+            if (bulletMove != null && PlayerFaction() != bulletMove.PlayerFaction())
+            {
+                animator.SetTrigger("Shot");
+                nowMode = NowMode.Shot;
+                BulletMoveFunction.RayHitTest(startPos + RAYCAST_OFFSET[0], this.transform.forward);
+                shotingFlag = false;
+                return;
+            }
+        }
+    }
+    private void Wandering()
     {
 
         if (rotateFlag) daleyTime += Time.deltaTime;
@@ -137,15 +234,6 @@ public class AIMove : MonoBehaviour,BulletMove
 
             if (Physics.Raycast(startPos + RAYCAST_OFFSET[i], this.transform.forward, out hit))
             {
-                BulletMove bulletMove = hit.transform.gameObject.GetComponentInParent<BulletMove>();
-                if (bulletMove != null && i < 2&& PlayerFaction()!=bulletMove.PlayerFaction())
-                {
-                    animator.SetTrigger("Shot");
-                    nowMode = NowMode.Shot;
-                    BulletMoveFunction.RayHitTest(startPos + RAYCAST_OFFSET[i], this.transform.forward);
-
-                    return;
-                }
 
                 if (Vector3.Distance(this.transform.position, hit.point) > AngleRange) continue;
 
@@ -168,9 +256,9 @@ public class AIMove : MonoBehaviour,BulletMove
     }
 
     //ここでAIの角度に指向性を持たせる必要がある
-    private void ChangeAngle() 
+    private void ChangeAngle()
     {
-        float angle=this.transform.eulerAngles.y;
+        float angle = this.transform.eulerAngles.y;
         angle += 360.0f;
         angle %= 360.0f;
 
@@ -193,7 +281,7 @@ public class AIMove : MonoBehaviour,BulletMove
 
 
 
-    private bool ChengeAngle(Vector3 startPos, int heightNumber,GameObject tragetObject)
+    private bool ChengeAngle(Vector3 startPos, int heightNumber, GameObject tragetObject)
     {
         //現在の角度
         float nowAngle = Mathf.Atan2(this.transform.forward.x, this.transform.forward.z) * Mathf.Rad2Deg;
@@ -203,7 +291,7 @@ public class AIMove : MonoBehaviour,BulletMove
         //変更した角度の量
         float angleVec = 0;
 
-        Vector3 rayAngle=Vector3.zero;
+        Vector3 rayAngle = Vector3.zero;
         while (true)
         {
             angleVec++;
@@ -211,8 +299,8 @@ public class AIMove : MonoBehaviour,BulletMove
             RaycastHit hit;
 
             //左方向の方向ベクトル
-            rayAngle.x=Mathf.Sin((nowAngle+angleVec)*Mathf.Deg2Rad);
-            rayAngle.z=Mathf.Cos((nowAngle+angleVec)*Mathf.Deg2Rad);
+            rayAngle.x = Mathf.Sin((nowAngle + angleVec) * Mathf.Deg2Rad);
+            rayAngle.z = Mathf.Cos((nowAngle + angleVec) * Mathf.Deg2Rad);
 
             //左方向のレイ
             if (Physics.Raycast(startPos + RAYCAST_OFFSET[heightNumber], rayAngle, out hit))
@@ -235,15 +323,15 @@ public class AIMove : MonoBehaviour,BulletMove
 
 
             //右方向のレイ
-            if (Physics.Raycast(startPos + RAYCAST_OFFSET[heightNumber], rayAngle, out hit)) 
+            if (Physics.Raycast(startPos + RAYCAST_OFFSET[heightNumber], rayAngle, out hit))
             {
-                if (Vector3.Distance(this.transform.position, hit.point) > ChengeAngleRange) 
+                if (Vector3.Distance(this.transform.position, hit.point) > ChengeAngleRange)
                 {
                     if (tragetObject != hit.transform.gameObject)
                         angleType = ChengeAngleType.Left;
                 }
             }
-            else 
+            else
             {
                 angleType = ChengeAngleType.Left;
 
@@ -251,7 +339,7 @@ public class AIMove : MonoBehaviour,BulletMove
 
 
 
-            if (angleVec >= 100) 
+            if (angleVec >= 100)
             {
                 angleType = ChengeAngleType.Left;
                 break;
@@ -268,7 +356,7 @@ public class AIMove : MonoBehaviour,BulletMove
 
     }
 
-    private void ChangeLRAnime(ChengeAngleType chenge) 
+    private void ChangeLRAnime(ChengeAngleType chenge)
     {
         switch (chenge)
         {
@@ -286,20 +374,20 @@ public class AIMove : MonoBehaviour,BulletMove
     }
 
     private GameObject hitObject;
-    private void Back() 
+    private void Back()
     {
         if (Vector3.Distance(hitObject.transform.position, this.transform.position) > AngleRange) return;
 
         ResetAnimation();
 
-        
+
         nextMode = NowMode.Wandering;
 
         nowMode = NowMode.ChageAngle;
 
-        Vector3 vec=flag.transform.position-this.transform.position;
+        Vector3 vec = flag.transform.position - this.transform.position;
         //現在の角度
-        float nowAngle = Mathf.Atan2(vec.x, vec.z)*Mathf.Rad2Deg;
+        float nowAngle = Mathf.Atan2(vec.x, vec.z) * Mathf.Rad2Deg;
 
 
         //変更した角度の量
@@ -379,18 +467,24 @@ public class AIMove : MonoBehaviour,BulletMove
 
         this.transform.LookAt(hitObject.transform);
 
-        this.transform.eulerAngles=new Vector3( 0, this.transform.eulerAngles.y, 0);
+        this.transform.eulerAngles = new Vector3(0, this.transform.eulerAngles.y, 0);
 
     }
 
-    public void Respawn() 
+    public void Respawn()
     {
         ResetAnimation();
 
         Vector3 vec = playerFlag.transform.position - gameStartPosition;
-        float angle=Mathf.Atan2(vec.x, vec.z);
-        this.transform.position =new Vector3(Mathf.Sin(angle),0,Mathf.Cos(angle))+ playerFlag.transform.position;
+        float angle = Mathf.Atan2(vec.x, vec.z);
+        this.transform.position = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle)) + playerFlag.transform.position;
         isLife = true;
 
+    }
+
+    public void GroundSet()
+    {
+        Vector3 position = this.transform.position;
+        position.y = 0;
     }
 }
