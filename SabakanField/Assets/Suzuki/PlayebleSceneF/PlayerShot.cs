@@ -38,9 +38,9 @@ public class PlayerShot : MonoBehaviour
 
     private void Shot()
     {
-        if (!PlayerManager.PlayerBulletMagazinCheck())
+        if (!BulletManager.PlayerBulletMagazinCheck())
             return;
-        PlayerManager.PlayerBulletShot();
+        BulletManager.PlayerBulletShot();
         Vector3 lay = BulletMoveFunction.RayHitTest(transform.position, transform.forward);
         LayHitTest(lay);
         cameraQuate = transform.localRotation;

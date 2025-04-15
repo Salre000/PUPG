@@ -20,17 +20,17 @@ public class UIBulletNum : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            PlayerManager.PlayerReload();
+            BulletManager.PlayerReload();
         }
     }
 
     private void BulletMagazineText()
     {
         _stringBuilder.Clear();
-        _stringBuilder.Append(PlayerManager.GetPlayerBulletMagazine());
+        _stringBuilder.Append(BulletManager.GetPlayerBulletMagazine());
         _bulletText.text = _stringBuilder.ToString();
         _stringBuilder.Clear();
-        _stringBuilder.Append(PlayerManager.GetBulletMagazine());
+        _stringBuilder.Append(BulletManager.GetBulletMagazine());
         _magazineText.text = _stringBuilder.ToString();
     }
 }

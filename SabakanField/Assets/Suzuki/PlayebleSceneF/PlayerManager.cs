@@ -4,52 +4,23 @@ using UnityEngine;
 
 public static class PlayerManager
 {
-    // 銃に入る弾の上限
-    private const int _LIMIT_BULLET = 30;
-    // プレイヤーの銃に込められている弾の数
-    static int playerBulletMagazine = 30;
-    // 銃に込められている弾を除く、所有している残弾の最大数
-    static int bulletMagazin = 120;
+    // プレイヤー関連
 
-    // 撃った分だけ銃から弾を減らす
-    static public void PlayerBulletShot(int ammo = 1)
-    {
-        playerBulletMagazine -= ammo;
-    }
-    static public void PlayerReload()
-    {
-        if (bulletMagazin <= 0) return;
-        // 無駄なく弾を補充する
-        int reloadBullet = 0;
-        reloadBullet = _LIMIT_BULLET - playerBulletMagazine;
-        bulletMagazin -= reloadBullet;
-        // 残りの弾が30未満の場合
-        if(bulletMagazin < 0)
-        {
-            reloadBullet+=bulletMagazin;
-            bulletMagazin = 0;
-        }
-        // リロード完了
-        playerBulletMagazine += reloadBullet;
-
-    }
-
-    // 残弾チェック
-    static public bool PlayerBulletMagazinCheck()
-    {
-        if (playerBulletMagazine > 0)
-            return true;
-        else
-            return false;
-    }
+    //private float 
 
     // プレイヤーが(敵の)旗の範囲内に存在するか
     static public bool PlayerInFlagRange(Vector3 position) 
     {
+        // 敵側の旗オブジェクトを取得
+        GameObject goalFlag = CreateMapManager.GetFlag(1);
+        if(goalFlag == null ) return false;
+
+        // 引数と敵旗が
+        if ((position - goalFlag.transform.position).sqrMagnitude <= 2.0f) { }
+
 
         return true;
     }
 
-    static public int GetPlayerBulletMagazine() { return playerBulletMagazine; }
-    static public int GetBulletMagazine() { return bulletMagazin; }
+
 }
