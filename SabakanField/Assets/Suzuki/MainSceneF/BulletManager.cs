@@ -42,4 +42,6 @@ public static class BulletManager
     }
     static public int GetPlayerBulletMagazine() { return playerBulletMagazine; }
     static public int GetBulletMagazine() { return bulletMagazin; }
+
+    static public void SetMAXBulletMagazine(){bulletMagazin = 120;}
 }

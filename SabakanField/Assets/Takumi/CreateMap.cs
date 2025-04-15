@@ -40,7 +40,7 @@ public class CreateMap : MonoBehaviour
 
     const int _MAX_SIZE = 6;
 
-    const float _MAP_HEIGHT = 0.5f;
+    const float _MAP_HEIGHT = 0.2f;
     const int MAP_RETO = 10;
 
 

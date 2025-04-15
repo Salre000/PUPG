@@ -60,13 +60,15 @@ public class AIManager : MonoBehaviour
                 float createAngle = angle+(15*j)-30;
                 GameObject ai=GameObject.Instantiate(origenAI);
 
-                ai.transform.position = flagObject[i].transform.position + new Vector3(Mathf.Sin(createAngle*Mathf.Deg2Rad),0,Mathf.Cos(createAngle * Mathf.Deg2Rad));
 
                 ai.transform.eulerAngles = new Vector3(0, createAngle, 0);
+
+                ai.transform.position = flagObject[i].transform.position + new Vector3(Mathf.Sin(createAngle*Mathf.Deg2Rad),0,Mathf.Cos(createAngle * Mathf.Deg2Rad));
 
                 AIMove aIMove = ai.GetComponent<AIMove>();
 
                 aIMove.SetFlagAngle(flagObject[(i + 1) % 2]);
+                aIMove.SetPlayerFlag(flagObject[i]);
 
 
 

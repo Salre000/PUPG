@@ -32,7 +32,9 @@ public class AIMove : MonoBehaviour,BulletMove
 
     public bool GetISLife() {  return isLife; } 
     GameObject flag ;
+    GameObject playerFlag;
     public void SetFlagAngle(GameObject flag) { this.flag = flag; }
+    public void SetPlayerFlag(GameObject flag) { playerFlag = flag; }
     enum ChengeAngleType
     {
         Left,
@@ -57,14 +59,24 @@ public class AIMove : MonoBehaviour,BulletMove
 
     private readonly float _EPSILON = 5.0f;
 
+    //自分のフラックとの距離がこれ以下だったら走って向かう
+    private float DashRange = 0;
+
+
     private void Start()
     {
         animator = GetComponent<Animator>();
+        Vector3 position=  this.transform.position;
+        position.y = 0;
+        this.transform.position = position;
         gameStartPosition=this.transform.position;
+
     }
 
     public void HitAction()
     {
+        if (!isLife) return;
+
         Debug.Log(this.gameObject.name + "レイに当たった");
         animator.SetTrigger("Death");
         isLife = false;
@@ -75,10 +87,7 @@ public class AIMove : MonoBehaviour,BulletMove
     {
         if (!isLife) return;
 
-
-
-        Debug.DrawRay(this.transform.position + RAYCAST_OFFSET[0],(flag.transform.position-this.transform.position)*5);
-
+        ChackDash();
 
         switch (nowMode)
         {
@@ -98,6 +107,21 @@ public class AIMove : MonoBehaviour,BulletMove
         }
     }
     public void EndShot() { nowMode = NowMode.Wandering; }
+
+    bool dashFlag = false;
+    private void ChackDash() 
+    {
+
+        if (Vector3.Distance(playerFlag.transform.position, this.transform.position) < DashRange && !dashFlag) 
+        {
+            //アニメーションをダッシュに変える
+        }
+        else if (dashFlag) 
+        {
+            //アニメーションをゆっくりに変える
+        }
+
+    }
     private void Wandering() 
     {
 
@@ -114,7 +138,7 @@ public class AIMove : MonoBehaviour,BulletMove
             if (Physics.Raycast(startPos + RAYCAST_OFFSET[i], this.transform.forward, out hit))
             {
                 BulletMove bulletMove = hit.transform.gameObject.GetComponentInParent<BulletMove>();
-                if (bulletMove != null && i < 2)
+                if (bulletMove != null && i < 2&& PlayerFaction()!=bulletMove.PlayerFaction())
                 {
                     animator.SetTrigger("Shot");
                     nowMode = NowMode.Shot;
@@ -362,7 +386,10 @@ public class AIMove : MonoBehaviour,BulletMove
     public void Respawn() 
     {
         ResetAnimation();
-        this.transform.position = gameStartPosition;
+
+        Vector3 vec = playerFlag.transform.position - gameStartPosition;
+        float angle=Mathf.Atan2(vec.x, vec.z);
+        this.transform.position =new Vector3(Mathf.Sin(angle),0,Mathf.Cos(angle))+ playerFlag.transform.position;
         isLife = true;
 
     }
