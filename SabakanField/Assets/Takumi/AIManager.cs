@@ -11,13 +11,26 @@ public class AIManager : MonoBehaviour
     List<bool> enemyLife = new List<bool>();
 
     GameObject []flagObject=new GameObject[2];
+    [SerializeField] private Material []color=new Material[2];
+
     [SerializeField] GameObject origenAI;
 
     private readonly int AI_NUMBER = 5;
 
+    public void Awake()
+    {
+        AIUtility.aIManager = this;
+    }
     public void FixedUpdate()
     {
         ScanAILife();
+
+    }
+
+    public List<AIMove> GetRelativeEnemy(bool isPlayerTeam) 
+    {
+        if (isPlayerTeam) return enemys;
+        else return players;
 
     }
 
@@ -74,13 +87,16 @@ public class AIManager : MonoBehaviour
 
                 if (i < 0) 
                 {
+                    ai.transform.GetChild(0).GetComponent<MeshRenderer>().material = color[0];
 
                     aIMove.SetPlayerFaction(() => false);
                     players.Add(aIMove); 
                 
                 }
-                else 
+                else
                 {
+                    ai.transform.GetChild(0).GetComponent<MeshRenderer>().material = color[1];
+
                     aIMove.SetPlayerFaction(() => true);
                     enemys.Add(aIMove); 
                 }

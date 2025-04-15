@@ -9,28 +9,17 @@ using UnityEngine.Rendering;
 
 public class CreateMap : MonoBehaviour
 {
-    [Header("近接戦闘のマップオブジェクトリスト")]
-    [SerializeField] private MapTile _CQBMap;
-    [Header("陣地の近くのマップオブジェクトリスト")]
-    [SerializeField] private MapTile _flagAreaMap;
-    [Header("壁の多いのマップオブジェクトリスト")]
-    [SerializeField] private MapTile _wallMap;
-    [Header("障害物の少ないのマップオブジェクトリスト")]
-    [SerializeField] private MapTile _natureMap;
-    [Header("弾が補充できるマップオブジェクトリスト")]
-    [SerializeField] private MapTile _amoReChageMap;
-    [Header("武器が切り替えられるマップオブジェクトリスト")]
-    [SerializeField] private MapTile _WeaponMap;
-    [Header("マップの原型のエクセルデータの名前が入っているオブジェクト")]
-    [SerializeField] private MapPlanDataObject _planData;
-    [Header("マップに配置するフラッグのモデルオブジェクト")]
-    [SerializeField] private GameObject _flagObjectBase;
-    [Header("フラッグのマテリアル、プレイヤー、エネミーの順番")]
-    [SerializeField] private Material[] _flagMaterial = new Material[2];
-    [Header("マップの範囲外と区切る壁のプレハブ")]
-    [SerializeField] private GameObject _wallObject;
-    [Header("AIのプレハブベース")]
-    [SerializeField] private GameObject _aiObject;
+    [SerializeField, Header("近接戦闘のマップオブジェクトリスト")]private MapTile _CQBMap;
+    [SerializeField, Header("陣地の近くのマップオブジェクトリスト")]private MapTile _flagAreaMap;
+    [SerializeField, Header("壁の多いのマップオブジェクトリスト")]private MapTile _wallMap;
+    [SerializeField, Header("障害物の少ないのマップオブジェクトリスト")]private MapTile _natureMap;
+    [SerializeField, Header("弾が補充できるマップオブジェクトリスト")]private MapTile _amoReChageMap;
+    [SerializeField, Header("武器が切り替えられるマップオブジェクトリスト")]private MapTile _WeaponMap;
+    [SerializeField, Header("マップの原型のエクセルデータの名前が入っているオブジェクト")]private MapPlanDataObject _planData;
+    [SerializeField, Header("マップに配置するフラッグのモデルオブジェクト")]private GameObject _flagObjectBase;
+    [SerializeField, Header("フラッグのマテリアル、プレイヤー、エネミーの順番")]private Material[] _flagMaterial = new Material[2];
+    [SerializeField, Header("マップの範囲外と区切る壁のプレハブ")]private GameObject _wallObject;
+    [SerializeField,Header("AIのプレハブベース")]private GameObject _aiObject;
 
     private readonly string _PLAN_PASS = "MapPlanData/";
 
