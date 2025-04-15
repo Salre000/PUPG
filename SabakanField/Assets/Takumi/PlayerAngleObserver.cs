@@ -10,13 +10,14 @@ public class PlayerAngleObserver : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindWithTag("Player").transform;
+        player = GameObject.FindWithTag("Player")?.transform;
         offSetVec.y = offSet;
     }
 
     // Update is called once per frame
     private void FixedUpdate()
     {
+        if (player == null) return;
         this.transform.eulerAngles=player.eulerAngles+ offSetVec;
     }
 }
