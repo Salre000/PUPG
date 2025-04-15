@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -17,8 +18,12 @@ public class UIManager : MonoBehaviour
     private StringBuilder _stringBuilder = new StringBuilder();
     // パーセント表示
     private const float _MAX_FLAG_GAGE = 1.0f;
+    // 母数の%を決める
+    private const float _PAERCENT = 10.0f;
 
     private float _count = 0.0f;
+
+    private bool _DebugClearCheck = false;
 
 
     private void Awake()
@@ -48,6 +53,7 @@ public class UIManager : MonoBehaviour
         if (_count >= _MAX_FLAG_GAGE)
         {
             _count = _MAX_FLAG_GAGE;
+            DebugGoClearSceneCheck();
             return true;
         }
 
@@ -59,7 +65,7 @@ public class UIManager : MonoBehaviour
     {
         if (GageMaxCheck())
             return;
-        _count = count / 100.0f;
+        _count = count / _PAERCENT;
         // ゲージの上昇
 
         _playerSideGageImage.fillAmount = _count;
@@ -70,8 +76,15 @@ public class UIManager : MonoBehaviour
     {
 
         _stringBuilder.Clear();
-        float count = _count * 100.0f;
+        float count = _count * _PAERCENT;
         _stringBuilder.AppendFormat("{0:0.0}%", count);
         _playerSideGagePaercentText.text =_stringBuilder.ToString();
+    }
+
+    private void DebugGoClearSceneCheck()
+    {
+        if(!_DebugClearCheck)
+        SceneManager.LoadScene("ClearScene",LoadSceneMode.Additive);
+        _DebugClearCheck=true;
     }
 }
