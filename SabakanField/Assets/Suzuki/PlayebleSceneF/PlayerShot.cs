@@ -20,6 +20,7 @@ public class PlayerShot : MonoBehaviour
     GameObject _player = null;
     private Quaternion _playerQuate = Quaternion.identity;
 
+    // デバッグでレイが当たったとこを確認する用
     [SerializeField]
     GameObject _object;
 

@@ -9,7 +9,7 @@ public static class PlayerManager
     // ƒvƒŒƒCƒ„[‚Ìe‚É‚ß‚ç‚ê‚Ä‚¢‚é’e‚Ì”
     static int playerBulletMagazine = 30;
     // e‚É‚ß‚ç‚ê‚Ä‚¢‚é’e‚ğœ‚­AŠ—L‚µ‚Ä‚¢‚éc’e‚ÌÅ‘å”
-    static int bulletMagazin = 40;
+    static int bulletMagazin = 120;
 
     // Œ‚‚Á‚½•ª‚¾‚¯e‚©‚ç’e‚ğŒ¸‚ç‚·
     static public void PlayerBulletShot(int ammo = 1)
@@ -41,6 +41,13 @@ public static class PlayerManager
             return true;
         else
             return false;
+    }
+
+    // ƒvƒŒƒCƒ„[‚ª(“G‚Ì)Šø‚Ì”ÍˆÍ“à‚É‘¶İ‚·‚é‚©
+    static public bool PlayerInFlagRange(Vector3 position) 
+    {
+
+        return true;
     }
 
     static public int GetPlayerBulletMagazine() { return playerBulletMagazine; }
