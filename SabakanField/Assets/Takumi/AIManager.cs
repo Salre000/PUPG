@@ -85,7 +85,7 @@ public class AIManager : MonoBehaviour
 
 
 
-                if (i < 0) 
+                if (i <= 0) 
                 {
                     ai.transform.GetChild(0).GetComponent<MeshRenderer>().material = color[0];
 
