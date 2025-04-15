@@ -12,9 +12,10 @@ public class FlagGetPlayer : MonoBehaviour
             FlagGetCheck();
     }
 
-    private void FlagGetCheck()
+    private bool FlagGetCheck()
     {
-        Debug.Log("Šø‚ÌŽüˆÍ‚É‚¢‚Ü‚·");
+        UIManager.Instance.num+=1*Time.deltaTime;
+        return true;
     }
 
 }
