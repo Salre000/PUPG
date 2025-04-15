@@ -67,11 +67,15 @@ public class AIMove : MonoBehaviour,BulletMove
     {
         Debug.Log(this.gameObject.name + "レイに当たった");
         animator.SetTrigger("Death");
+        isLife = false;
     }
 
 
     private void FixedUpdate()
     {
+        if (!isLife) return;
+
+
 
         Debug.DrawRay(this.transform.position + RAYCAST_OFFSET[0],(flag.transform.position-this.transform.position)*5);
 
@@ -114,7 +118,7 @@ public class AIMove : MonoBehaviour,BulletMove
                 {
                     animator.SetTrigger("Shot");
                     nowMode = NowMode.Shot;
-                    BulletManager.RayHitTest(startPos + RAYCAST_OFFSET[i], this.transform.forward);
+                    BulletMoveFunction.RayHitTest(startPos + RAYCAST_OFFSET[i], this.transform.forward);
 
                     return;
                 }
@@ -273,7 +277,6 @@ public class AIMove : MonoBehaviour,BulletMove
         //現在の角度
         float nowAngle = Mathf.Atan2(vec.x, vec.z)*Mathf.Rad2Deg;
 
-        ChengeAngleType angleType = ChengeAngleType.None;
 
         //変更した角度の量
         float angleVec = 0;
@@ -360,7 +363,7 @@ public class AIMove : MonoBehaviour,BulletMove
     {
         ResetAnimation();
         this.transform.position = gameStartPosition;
-
+        isLife = true;
 
     }
 }

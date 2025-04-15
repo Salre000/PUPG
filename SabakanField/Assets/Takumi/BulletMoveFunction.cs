@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class BulletManager 
+public static class BulletMoveFunction 
 {
 
     //射撃の処理の関数・当たった対象にインターフェースクラスが付いている事が前提
