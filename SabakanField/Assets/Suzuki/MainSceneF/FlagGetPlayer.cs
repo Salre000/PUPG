@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FlagGetPlayer : MonoBehaviour
 {
+    private float count = 0.0f;
 
     private void Update()
     {
@@ -14,7 +15,8 @@ public class FlagGetPlayer : MonoBehaviour
 
     private bool FlagGetCheck()
     {
-        UIManager.Instance.num+=1*Time.deltaTime;
+        count+=1*Time.deltaTime;
+        UIManager.Instance.FlagCountGage(count);
         return true;
     }
 
