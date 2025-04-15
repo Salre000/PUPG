@@ -15,7 +15,7 @@ public class AIManager : MonoBehaviour
 
     [SerializeField] GameObject origenAI;
 
-    private readonly int AI_NUMBER = 5;
+    private readonly int AI_NUMBER = 1;
 
     public void Awake()
     {
@@ -27,10 +27,10 @@ public class AIManager : MonoBehaviour
 
     }
 
-    public List<AIMove> GetRelativeEnemy(bool isPlayerTeam) 
+    public List<AIMove> GetRelativeEnemy(bool isEnemyTeam) 
     {
-        if (isPlayerTeam) return enemys;
-        else return players;
+        if (isEnemyTeam) return players;
+        else return enemys;
 
     }
 

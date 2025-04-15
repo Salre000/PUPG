@@ -53,7 +53,7 @@ public class AIMove : MonoBehaviour, BulletMove
     }
     [SerializeField] NowMode nowMode = NowMode.Wandering;
 
-    NowMode nextMode = NowMode.Wandering;
+    [SerializeField]NowMode nextMode = NowMode.Wandering;
 
     [SerializeField] float nextMoveAngle = 0;
 
@@ -147,7 +147,9 @@ public class AIMove : MonoBehaviour, BulletMove
         for(int i = 0; i < targetObjcets.Count; i++) 
         {
             Vector3 vec=targetObjcets[i].transform.position-this.transform.position;
-            if (Vector3.Dot(this.transform.forward, vec) < 0.5) continue;
+            if (Vector3.Dot(this.transform.forward, vec) < 0.8) continue;
+
+
 
             targets.Add(targetObjcets[i].gameObject);
 
@@ -163,22 +165,29 @@ public class AIMove : MonoBehaviour, BulletMove
     //Ž‹ŠE“à‚É‚¢‚é“G‚Éray‚ª’Ê‚é‚©‚ð”»’f‚µ‚ÄŠp“x‚ð“±‚­
     private void TargetGetAngle(List<GameObject> targets)
     {
-        if (shotingFlag) return;
-        shotingFlag = true;
-
         GameObject hitObject=null;
 
         for (int i = 0; i < targets.Count; i++)
         {
             RaycastHit hit;
-            Vector3 startPosition=this.transform.position+this.transform.forward;
+            Vector3 startPosition=this.transform.position+this.transform.forward+RAYCAST_OFFSET[0];
+
+            Debug.DrawLine(startPosition, targets[i].transform.position, Color.yellow);
+
 
             Vector3 dir = targets[i].transform.position - this.transform.position;
             if (Physics.Raycast(startPosition, dir, out hit)) 
             {
-                if (hit.transform.gameObject != targets[i]) continue;
+
+
+                BulletMove bullet = hit.transform.GetComponentInParent<BulletMove>();
+
+
+                if (bullet==null) continue;
 
                 hitObject = hit.transform.gameObject;
+
+
 
             }
 
@@ -186,14 +195,20 @@ public class AIMove : MonoBehaviour, BulletMove
         }
         if (hitObject == null) return;
 
+        hitObject.name = "“–‚½‚Á‚½";
+
+        shotingFlag = true;
         Vector3 tragetDir = hitObject.transform.position - this.transform.position;
 
-        nextMoveAngle = Mathf.Atan2(tragetDir.x, tragetDir.z);
+        nextMoveAngle = Mathf.Atan2(tragetDir.x, tragetDir.z)*Mathf.Rad2Deg;
 
         nextMoveAngle += 360.0f;
         nextMoveAngle %= 360.0f;
 
+        Vector3 Cross = Vector3.Cross(this.transform.forward, tragetDir);
 
+        if (Cross.y > 0) animator.SetBool("Left", true);
+        else animator.SetBool("Right", true);
         nowMode = NowMode.ChageAngle;
         nextMode = NowMode.Shot;
 
@@ -212,8 +227,10 @@ public class AIMove : MonoBehaviour, BulletMove
             if (bulletMove != null && PlayerFaction() != bulletMove.PlayerFaction())
             {
                 animator.SetTrigger("Shot");
-                nowMode = NowMode.Shot;
+
                 BulletMoveFunction.RayHitTest(startPos + RAYCAST_OFFSET[0], this.transform.forward);
+
+
                 shotingFlag = false;
                 return;
             }

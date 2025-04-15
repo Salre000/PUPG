@@ -56,7 +56,7 @@ public class CreateMap : MonoBehaviour
         CreateMapManager.createMap = this;
 
         //地面と障害物を生成する関数
-        CreateGraund();
+       // CreateGraund();
 
         //フラッグの生成する関数
         CreateFlag();
@@ -254,5 +254,7 @@ public class CreateMap : MonoBehaviour
 
 
     }
+
+
 
 }
