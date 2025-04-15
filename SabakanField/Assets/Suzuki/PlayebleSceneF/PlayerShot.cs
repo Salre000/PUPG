@@ -21,6 +21,8 @@ public class PlayerShot : MonoBehaviour
     GameObject _player = null;
     private Quaternion _playerQuate = Quaternion.identity;
 
+    [SerializeField]
+    GameObject _object;
 
 
     // Update is called once per frame
@@ -39,7 +41,8 @@ public class PlayerShot : MonoBehaviour
         if (!PlayerManager.PlayerBulletMagazinCheck())
             return;
         PlayerManager.PlayerBulletShot();
-        BulletManager.RayHitTest(transform.position, transform.forward);
+        Vector3 lay = BulletManager.RayHitTest(transform.position, transform.forward);
+        LayHitTest(lay);
         cameraQuate = transform.localRotation;
         _playerQuate = _player.transform.localRotation;
         // ècîΩìÆé¿ëï
@@ -55,6 +58,12 @@ public class PlayerShot : MonoBehaviour
             // â°îΩìÆé¿ëï
             _playerQuate.y += _horizonRecoil;
 
+    }
+
+    private void LayHitTest(Vector3 lay)
+    {
+        GameObject gameobject = Instantiate(_object);
+        gameobject.transform.position = lay;
     }
 
     // îΩìÆ
