@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class AIManager : MonoBehaviour
@@ -61,11 +62,24 @@ public class AIManager : MonoBehaviour
 
                 ai.transform.eulerAngles = new Vector3(0, createAngle, 0);
 
-                ai.GetComponent<AIMove>().SetFlagAngle(flagObject[(i + 1) % 2]);
+                AIMove aIMove = ai.GetComponent<AIMove>();
+
+                aIMove.SetFlagAngle(flagObject[(i + 1) % 2]);
 
 
-                if (i < 0) players.Add(ai.GetComponent<AIMove>());
-                else enemys.Add(ai.GetComponent<AIMove>());
+
+                if (i < 0) 
+                {
+
+                    aIMove.SetPlayerFaction(() => false);
+                    players.Add(aIMove); 
+                
+                }
+                else 
+                {
+                    aIMove.SetPlayerFaction(() => true);
+                    enemys.Add(aIMove); 
+                }
 
             }
 

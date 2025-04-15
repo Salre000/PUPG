@@ -25,6 +25,11 @@ public class AIMove : MonoBehaviour,BulletMove
 
     private Vector3 gameStartPosition = Vector3.zero;
 
+    private System.Func<bool> _PlayerFaction;
+    public void SetPlayerFaction(System.Func<bool> playerFaction) {  _PlayerFaction = playerFaction; }
+
+    public bool PlayerFaction() { return _PlayerFaction(); }
+
     public bool GetISLife() {  return isLife; } 
     GameObject flag ;
     public void SetFlagAngle(GameObject flag) { this.flag = flag; }
@@ -61,7 +66,7 @@ public class AIMove : MonoBehaviour,BulletMove
     public void HitAction()
     {
         Debug.Log(this.gameObject.name + "ƒŒƒC‚É“–‚½‚Á‚½");
-
+        animator.SetTrigger("Death");
     }
 
 
@@ -109,6 +114,7 @@ public class AIMove : MonoBehaviour,BulletMove
                 {
                     animator.SetTrigger("Shot");
                     nowMode = NowMode.Shot;
+                    BulletManager.RayHitTest(startPos + RAYCAST_OFFSET[i], this.transform.forward);
 
                     return;
                 }
@@ -116,7 +122,6 @@ public class AIMove : MonoBehaviour,BulletMove
                 if (Vector3.Distance(this.transform.position, hit.point) > AngleRange) continue;
 
 
-                BulletManager.RayHitTest(startPos + RAYCAST_OFFSET[i], this.transform.forward);
 
                 //‰ñ“]’†‚¾‚Á‚½‚ç‰½‚à‚µ‚È‚¢
                 if (rotateFlag) return;
@@ -353,7 +358,7 @@ public class AIMove : MonoBehaviour,BulletMove
 
     public void Respawn() 
     {
-
+        ResetAnimation();
         this.transform.position = gameStartPosition;
 
 
