@@ -24,16 +24,18 @@ public class AIManager : MonoBehaviour
     private void ScanAILife() 
     {
         playersLife.Clear();
+        players.Capacity= players.Capacity;
         for(int i = 0; i < players.Count; i++) 
         {
-            playersLife[i] = players[i].GetISLife();
+            playersLife.Add(players[i].GetISLife());
 
         }
 
         enemyLife.Clear();
+        enemyLife.Capacity=enemys.Capacity;
         for(int i = 0; i < enemys.Count; i++) 
         {
-            enemyLife[i] = enemys[i].GetISLife();
+            enemyLife.Add(enemys[i].GetISLife());
 
         }
 
