@@ -4,13 +4,40 @@ using UnityEngine;
 
 public class AIManager : MonoBehaviour
 {
-    List<GameObject> players = new List<GameObject>();
-    List<GameObject> enemys = new List<GameObject>();
+    List<AIMove> players = new List<AIMove>();
+    List<bool> playersLife = new List<bool>();
+    List<AIMove> enemys = new List<AIMove>();
+    List<bool> enemyLife = new List<bool>();
 
     GameObject []flagObject=new GameObject[2];
     [SerializeField] GameObject origenAI;
 
     private readonly int AI_NUMBER = 5;
+
+    public void FixedUpdate()
+    {
+        ScanAILife();
+
+    }
+
+    private void ScanAILife() 
+    {
+        playersLife.Clear();
+        for(int i = 0; i < players.Count; i++) 
+        {
+            playersLife[i] = players[i].GetISLife();
+
+        }
+
+        enemyLife.Clear();
+        for(int i = 0; i < enemys.Count; i++) 
+        {
+            enemyLife[i] = enemys[i].GetISLife();
+
+        }
+
+
+    }
 
     public void SetFlagObject(GameObject flagObject,int number) 
     {
@@ -35,6 +62,10 @@ public class AIManager : MonoBehaviour
                 ai.transform.eulerAngles = new Vector3(0, createAngle, 0);
 
                 ai.GetComponent<AIMove>().SetFlagAngle(flagObject[(i + 1) % 2]);
+
+
+                if (i < 0) players.Add(ai.GetComponent<AIMove>());
+                else enemys.Add(ai.GetComponent<AIMove>());
 
             }
 

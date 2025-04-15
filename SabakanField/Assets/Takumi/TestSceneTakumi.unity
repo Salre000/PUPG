@@ -936,6 +936,7 @@ MonoBehaviour:
   _wallMap: {fileID: 11400000, guid: 996d65d7f46ddd54ea578069afd4e49c, type: 2}
   _natureMap: {fileID: 11400000, guid: 7e075aa6361ae4a45847d714d4da6b5b, type: 2}
   _amoReChageMap: {fileID: 11400000, guid: 0036f1479da96a9418e0fda45967cab3, type: 2}
+  _WeaponMap: {fileID: 11400000, guid: c73b42aeaa3fbf64c9e6d94f07531658, type: 2}
   _planData: {fileID: 11400000, guid: c6e3b436d68e52a409549bb298ce42d4, type: 2}
   _flagObjectBase: {fileID: 1000014124467848, guid: df8b2e05e6bc70e4eb740280ce078f7f, type: 3}
   _flagMaterial:

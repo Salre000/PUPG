@@ -19,6 +19,8 @@ public class CreateMap : MonoBehaviour
     [SerializeField] private MapTile _natureMap;
     [Header("弾が補充できるマップオブジェクトリスト")]
     [SerializeField] private MapTile _amoReChageMap;
+    [Header("武器が切り替えられるマップオブジェクトリスト")]
+    [SerializeField] private MapTile _WeaponMap;
     [Header("マップの原型のエクセルデータの名前が入っているオブジェクト")]
     [SerializeField] private MapPlanDataObject _planData;
     [Header("マップに配置するフラッグのモデルオブジェクト")]
@@ -158,8 +160,8 @@ public class CreateMap : MonoBehaviour
 
             case MapTileType.WeaponSpawn:
 
-                randomNumber = Random.Range(0, _amoReChageMap.mapTileMax);
-                return GameObject.Instantiate(_amoReChageMap.GetMapTile(randomNumber));
+                randomNumber = Random.Range(0, _WeaponMap.mapTileMax);
+                return GameObject.Instantiate(_WeaponMap.GetMapTile(randomNumber));
         }
 
         return null;

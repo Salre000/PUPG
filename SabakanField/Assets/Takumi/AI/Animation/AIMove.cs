@@ -20,6 +20,12 @@ public class AIMove : MonoBehaviour,BulletMove
     private bool rotateFlag=false;
 
     private float daleyTime = 0;
+
+    private bool isLife = true;
+
+    private Vector3 gameStartPosition = Vector3.zero;
+
+    public bool GetISLife() {  return isLife; } 
     GameObject flag ;
     public void SetFlagAngle(GameObject flag) { this.flag = flag; }
     enum ChengeAngleType
@@ -49,6 +55,7 @@ public class AIMove : MonoBehaviour,BulletMove
     private void Start()
     {
         animator = GetComponent<Animator>();
+        gameStartPosition=this.transform.position;
     }
 
     public void HitAction()
@@ -336,14 +343,19 @@ public class AIMove : MonoBehaviour,BulletMove
         hitObject = collision.gameObject;
 
         animator.SetBool("Back", true);
-
         nowMode = NowMode.Back;
 
         this.transform.LookAt(hitObject.transform);
 
         this.transform.eulerAngles=new Vector3( 0, this.transform.eulerAngles.y, 0);
 
-        Debug.Log(collision.gameObject.name);
+    }
+
+    public void Respawn() 
+    {
+
+        this.transform.position = gameStartPosition;
+
 
     }
 }
