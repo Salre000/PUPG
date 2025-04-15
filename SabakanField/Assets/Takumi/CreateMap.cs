@@ -19,6 +19,8 @@ public class CreateMap : MonoBehaviour
     [SerializeField] private MapTile _natureMap;
     [Header("弾が補充できるマップオブジェクトリスト")]
     [SerializeField] private MapTile _amoReChageMap;
+    [Header("武器が切り替えられるマップオブジェクトリスト")]
+    [SerializeField] private MapTile _WeaponMap;
     [Header("マップの原型のエクセルデータの名前が入っているオブジェクト")]
     [SerializeField] private MapPlanDataObject _planData;
     [Header("マップに配置するフラッグのモデルオブジェクト")]
@@ -31,6 +33,10 @@ public class CreateMap : MonoBehaviour
     [SerializeField] private GameObject _aiObject;
 
     private readonly string _PLAN_PASS = "MapPlanData/";
+
+    public GameObject GetFlag(int number) { return flag[number]; }
+
+    GameObject []flag=new GameObject[2];
 
     const int _MAX_SIZE = 6;
 
@@ -57,6 +63,8 @@ public class CreateMap : MonoBehaviour
     public void Awake()
     {
         _AIManager=GetComponent<AIManager>();
+
+        CreateMapManager.createMap = this;
 
         //地面と障害物を生成する関数
         CreateGraund();
@@ -152,8 +160,8 @@ public class CreateMap : MonoBehaviour
 
             case MapTileType.WeaponSpawn:
 
-                randomNumber = Random.Range(0, _amoReChageMap.mapTileMax);
-                return GameObject.Instantiate(_amoReChageMap.GetMapTile(randomNumber));
+                randomNumber = Random.Range(0, _WeaponMap.mapTileMax);
+                return GameObject.Instantiate(_WeaponMap.GetMapTile(randomNumber));
         }
 
         return null;
@@ -164,22 +172,20 @@ public class CreateMap : MonoBehaviour
 
     private void CreateFlag()
     {
-        GameObject PlayerFlagObject = GameObject.Instantiate(_flagObjectBase);
+        flag[0] = GameObject.Instantiate(_flagObjectBase);
 
-        PlayerFlagObject.transform.GetChild(1).gameObject.GetComponent<SkinnedMeshRenderer>().materials = new Material[1] { _flagMaterial[0] };
+        flag[0].transform.GetChild(1).gameObject.GetComponent<SkinnedMeshRenderer>().materials = new Material[1] { _flagMaterial[0] };
 
-        PlayerFlagObject.transform.position = _PLAYERFLAG_POSITION;
-        _AIManager.SetFlagObject(PlayerFlagObject, 0);
+        flag[0].transform.position = _PLAYERFLAG_POSITION;
 
-        GameObject enemyFlagObject = GameObject.Instantiate(_flagObjectBase);
+        _AIManager.SetFlagObject(flag[0], 0);
 
-        enemyFlagObject.transform.GetChild(1).gameObject.GetComponent<SkinnedMeshRenderer>().materials = new Material[1] { _flagMaterial[1] };
+        flag[1] = GameObject.Instantiate(_flagObjectBase);
 
-        enemyFlagObject.transform.position = _ENEMYFLAG_POSITION;
-        _AIManager.SetFlagObject(enemyFlagObject, 1);
+        flag[1].transform.GetChild(1).gameObject.GetComponent<SkinnedMeshRenderer>().materials = new Material[1] { _flagMaterial[1] };
 
-
-
+        flag[1].transform.position = _ENEMYFLAG_POSITION;
+        _AIManager.SetFlagObject(flag[1], 1);
 
     }
 
