@@ -124,14 +124,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1960812186749549144}
-  m_LocalRotation: {x: 0.07449815, y: -0, z: -0, w: 0.9972212}
-  m_LocalPosition: {x: 0, y: 0.61, z: 0.294}
+  m_LocalRotation: {x: 0.2575544, y: 0, z: 0, w: 0.9662638}
+  m_LocalPosition: {x: 0, y: 0.61, z: 0.544}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1960812188381377854}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 8.545, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 29.85, y: 0, z: 0}
 --- !u!20 &1960812186749549150
 Camera:
   m_ObjectHideFlags: 0
@@ -210,6 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 714ee7d023fa4f8498ab54e2113a8854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 1960812188381377850}
 --- !u!1 &1960812187074443669
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,8 +325,8 @@ GameObject:
   - component: {fileID: 2419397155271815377}
   - component: {fileID: 4365476522262855818}
   m_Layer: 0
-  m_Name: Capsule
-  m_TagString: Untagged
+  m_Name: Player
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -455,7 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40cb9ced204b8e64e876fcfa6297586c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localGravity: {x: 0, y: 100, z: 0}
+  localGravity: {x: 0, y: -30, z: 0}
 --- !u!114 &4365476522262855818
 MonoBehaviour:
   m_ObjectHideFlags: 0

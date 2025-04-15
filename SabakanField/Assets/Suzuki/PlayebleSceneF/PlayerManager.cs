@@ -4,11 +4,12 @@ using UnityEngine;
 
 public static class PlayerManager
 {
+    // e‚É“ü‚é’e‚ÌãŒÀ
     private const int _LIMIT_BULLET = 30;
     // ƒvƒŒƒCƒ„[‚Ìe‚É‚ß‚ç‚ê‚Ä‚¢‚é’e‚Ì”
     static int playerBulletMagazine = 30;
     // e‚É‚ß‚ç‚ê‚Ä‚¢‚é’e‚ğœ‚­AŠ—L‚µ‚Ä‚¢‚éc’e‚ÌÅ‘å”
-    static int bulletMagazin = 120;
+    static int bulletMagazin = 40;
 
     // Œ‚‚Á‚½•ª‚¾‚¯e‚©‚ç’e‚ğŒ¸‚ç‚·
     static public void PlayerBulletShot(int ammo = 1)
@@ -20,16 +21,15 @@ public static class PlayerManager
         if (bulletMagazin <= 0) return;
         // –³‘Ê‚È‚­’e‚ğ•â[‚·‚é
         int reloadBullet = 0;
-        if (bulletMagazin < 30)
+        reloadBullet = _LIMIT_BULLET - playerBulletMagazine;
+        bulletMagazin -= reloadBullet;
+        // c‚è‚Ì’e‚ª30–¢–‚Ìê‡
+        if(bulletMagazin < 0)
         {
-            reloadBullet = bulletMagazin;
+            reloadBullet+=bulletMagazin;
             bulletMagazin = 0;
         }
-        else
-        {
-            reloadBullet = _LIMIT_BULLET - playerBulletMagazine;
-            bulletMagazin -= reloadBullet;
-        }
+        // ƒŠƒ[ƒhŠ®—¹
         playerBulletMagazine += reloadBullet;
 
     }
