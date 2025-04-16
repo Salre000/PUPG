@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class AIMove : MonoBehaviour, BulletMove
@@ -53,7 +54,7 @@ public class AIMove : MonoBehaviour, BulletMove
     }
     [SerializeField] NowMode nowMode = NowMode.Wandering;
 
-    [SerializeField]NowMode nextMode = NowMode.Wandering;
+    [SerializeField] NowMode nextMode = NowMode.Wandering;
 
     [SerializeField] float nextMoveAngle = 0;
 
@@ -97,7 +98,6 @@ public class AIMove : MonoBehaviour, BulletMove
                 Wandering();
                 break;
             case NowMode.Shot:
-                Shot();
                 break;
             case NowMode.Back:
                 Back();
@@ -109,7 +109,18 @@ public class AIMove : MonoBehaviour, BulletMove
                 break;
         }
     }
-    public void EndShot() { nowMode = NowMode.Wandering; }
+    public void EndShot()
+    {
+        nowMode = NowMode.Wandering;
+    }
+
+    public void ReStart()
+    {
+        nowMode = NowMode.Wandering;
+        shotingFlag = false;
+
+        ResetAnimation();
+    }
 
     bool dashFlag = false;
     private void ChackDash()
@@ -128,6 +139,8 @@ public class AIMove : MonoBehaviour, BulletMove
 
     private void SearchEnemy()
     {
+        if (shotingFlag) return;
+
         List<GameObject> targets = TargetEnemysInAngle();
 
         if (targets.Count <= 0) return;
@@ -144,9 +157,9 @@ public class AIMove : MonoBehaviour, BulletMove
         List<GameObject> targets = new List<GameObject>();
 
 
-        for(int i = 0; i < targetObjcets.Count; i++) 
+        for (int i = 0; i < targetObjcets.Count; i++)
         {
-            Vector3 vec=targetObjcets[i].transform.position-this.transform.position;
+            Vector3 vec = targetObjcets[i].transform.position - this.transform.position;
             if (Vector3.Dot(this.transform.forward, vec) < 0.8) continue;
 
 
@@ -163,27 +176,27 @@ public class AIMove : MonoBehaviour, BulletMove
     }
 
     //éãäEì‡Ç…Ç¢ÇÈìGÇ…rayÇ™í ÇÈÇ©ÇîªífÇµÇƒäpìxÇì±Ç≠
-    private void TargetGetAngle(List<GameObject> targets)
+    private GameObject TargetGetAngle(List<GameObject> targets)
     {
-        GameObject hitObject=null;
+        GameObject hitObject = null;
 
         for (int i = 0; i < targets.Count; i++)
         {
             RaycastHit hit;
-            Vector3 startPosition=this.transform.position+this.transform.forward+RAYCAST_OFFSET[0];
+            Vector3 startPosition = this.transform.position + this.transform.forward + RAYCAST_OFFSET[0];
 
             Debug.DrawLine(startPosition, targets[i].transform.position, Color.yellow);
 
 
             Vector3 dir = targets[i].transform.position - this.transform.position;
-            if (Physics.Raycast(startPosition, dir, out hit)) 
+            if (Physics.Raycast(startPosition, dir, out hit))
             {
 
 
                 BulletMove bullet = hit.transform.GetComponentInParent<BulletMove>();
 
 
-                if (bullet==null) continue;
+                if (bullet == null) continue;
 
                 hitObject = hit.transform.gameObject;
 
@@ -193,48 +206,55 @@ public class AIMove : MonoBehaviour, BulletMove
 
 
         }
-        if (hitObject == null) return;
+        if (hitObject == null) return null;
 
-        hitObject.name = "ìñÇΩÇ¡ÇΩ";
 
         shotingFlag = true;
         Vector3 tragetDir = hitObject.transform.position - this.transform.position;
 
-        nextMoveAngle = Mathf.Atan2(tragetDir.x, tragetDir.z)*Mathf.Rad2Deg;
+        nextMoveAngle = Mathf.Atan2(tragetDir.x, tragetDir.z) * Mathf.Rad2Deg;
 
         nextMoveAngle += 360.0f;
         nextMoveAngle %= 360.0f;
 
         Vector3 Cross = Vector3.Cross(this.transform.forward, tragetDir);
 
-        if (Cross.y > 0) animator.SetBool("Left", true);
+        if (Cross.y < 0) animator.SetBool("Left", true);
         else animator.SetBool("Right", true);
         nowMode = NowMode.ChageAngle;
         nextMode = NowMode.Shot;
 
+        return hitObject;
+
     }
 
-    private bool shotingFlag = false;
-    private void Shot()
+    [SerializeField] private bool shotingFlag = false;
+    public void Shot()
     {
 
-        Vector3 startPos = this.transform.position + this.transform.forward / 10;
+        Vector3 startPos = this.transform.position + this.transform.forward / 10 + RAYCAST_OFFSET[0];
         RaycastHit hit;
 
-        if (Physics.Raycast(startPos + RAYCAST_OFFSET[0], this.transform.forward, out hit))
+        List<GameObject> targets = TargetEnemysInAngle();
+        shotingFlag = false;
+
+        if (targets.Count <= 0) return;
+
+        GameObject targetObject = TargetGetAngle(targets);
+        shotingFlag = false;
+        if (targetObject == null) return;
+
+        Vector3 Vec = targetObject.transform.position - this.transform.position;
+
+        Debug.DrawRay(startPos, Vec, Color.red, 1);
+
+        if (Physics.Raycast(startPos, Vec, out hit))
         {
-            BulletMove bulletMove = hit.transform.gameObject.GetComponentInParent<BulletMove>();
-            if (bulletMove != null && PlayerFaction() != bulletMove.PlayerFaction())
-            {
-                animator.SetTrigger("Shot");
-
-                BulletMoveFunction.RayHitTest(startPos + RAYCAST_OFFSET[0], this.transform.forward);
-
-
-                shotingFlag = false;
-                return;
-            }
+            GameObject ss = hit.transform.gameObject;
         }
+
+        BulletMoveFunction.RayHitTest(startPos, Vec);
+
     }
     private void Wandering()
     {
@@ -275,6 +295,7 @@ public class AIMove : MonoBehaviour, BulletMove
     //Ç±Ç±Ç≈AIÇÃäpìxÇ…éwå¸ê´ÇéùÇΩÇπÇÈïKóvÇ™Ç†ÇÈ
     private void ChangeAngle()
     {
+
         float angle = this.transform.eulerAngles.y;
         angle += 360.0f;
         angle %= 360.0f;
@@ -283,6 +304,9 @@ public class AIMove : MonoBehaviour, BulletMove
         ResetAnimation();
 
         nowMode = nextMode;
+
+        if (nowMode == NowMode.Shot) animator.SetTrigger("Shot");
+
 
     }
 
@@ -473,6 +497,8 @@ public class AIMove : MonoBehaviour, BulletMove
 
     public void OnCollisionEnter(Collision collision)
     {
+        if (shotingFlag) return;
+
         if (collision.transform.tag == "Floor") return;
 
         endPosition = this.transform.position + this.transform.forward;

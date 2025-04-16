@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7875732986536332465}
   - component: {fileID: 2769922286504558372}
   - component: {fileID: 6485601006212076213}
-  - component: {fileID: 6994594664726735440}
   m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
@@ -41,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100482425010265154}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &6485601006212076213
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -84,20 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6994594664726735440
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100482425010265154}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &472875968234651897
 GameObject:
   m_ObjectHideFlags: 0
@@ -2565,7 +2550,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nowMode: 0
+  nextMode: 0
   nextMoveAngle: 0
+  shotingFlag: 0
 --- !u!136 &3778221148621621480
 CapsuleCollider:
   m_ObjectHideFlags: 0
