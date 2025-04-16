@@ -9,7 +9,6 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     // UI管理
-
     public static UIManager Instance;
     // 青ゲージ
     private Image _playerSideGageImage;
@@ -18,12 +17,18 @@ public class UIManager : MonoBehaviour
     private StringBuilder _stringBuilder = new StringBuilder();
     // パーセント表示
     private const float _MAX_FLAG_GAGE = 1.0f;
-    // 母数の%を決める
+    // 何%でクリアかを決める
     private const float _PAERCENT = 10.0f;
-
+    // ゲージの値
     private float _count = 0.0f;
 
+    // 制限時間クラス
+    private TimeLimit _timeLimit;
+
+    
+
     private bool _DebugClearCheck = false;
+    private bool _DebugdefeatCheck = false;
 
 
     private void Awake()
@@ -36,6 +41,11 @@ public class UIManager : MonoBehaviour
         Initialize();
     }
 
+    private void Update()
+    {
+        Execute();
+    }
+
     private void Initialize()
     {
         _playerSideGageImage = GameObject.Find("PlayerSideGageImage").GetComponent<Image>();
@@ -44,6 +54,15 @@ public class UIManager : MonoBehaviour
         _stringBuilder.AppendFormat("{0:0.0}%", _count);
         _playerSideGagePaercentText = GameObject.Find("PercentText").GetComponent<TextMeshProUGUI>();
         _playerSideGagePaercentText.text = _stringBuilder.ToString();
+
+        _timeLimit = new TimeLimit();
+        _timeLimit.Initialize();
+
+    }
+
+    private void Execute()
+    {
+        _timeLimit.Execute();
     }
 
     public bool GageMaxCheck()
@@ -81,6 +100,9 @@ public class UIManager : MonoBehaviour
         _playerSideGagePaercentText.text =_stringBuilder.ToString();
     }
 
+
+
+    // デバッグ用クリア画面遷移チェック
     private void DebugGoClearSceneCheck()
     {
         if(!_DebugClearCheck)
