@@ -42,7 +42,7 @@ public class AIManager : MonoBehaviour
     {
         string[]kill = new string[killCount.Count];
         string[]death = new string[deathCount.Count];
-        for(int i = 1; i < AI_NUMBER * 2; i++) 
+        for(int i = 0; i < AI_NUMBER * 2; i++) 
         {
             kill[i] = killCount[i].ToString();
             death[i]=deathCount[i].ToString();
@@ -130,6 +130,8 @@ public class AIManager : MonoBehaviour
                 aIMove.SetPlayerFlag(flagObject[i]);
                 aIMove.SetID((i * 5) + j);
 
+                killCount.Add(0);
+                deathCount.Add(0);
 
 
                 if (i <= 0)
