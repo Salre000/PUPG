@@ -10,15 +10,18 @@ public class AIManager : MonoBehaviour
     List<AIMove> enemys = new List<AIMove>();
     List<bool> enemyLife = new List<bool>();
 
-    GameObject []flagObject=new GameObject[2];
-    [SerializeField] private Material []color=new Material[2];
+    GameObject[] flagObject = new GameObject[2];
+    [SerializeField] private Material[] color = new Material[2];
 
     [SerializeField] GameObject origenAI;
 
     private readonly int AI_NUMBER = 5;
 
+    GameObject player;
+
     public void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         AIUtility.aIManager = this;
     }
     public void FixedUpdate()
@@ -27,26 +30,42 @@ public class AIManager : MonoBehaviour
 
     }
 
-    public List<AIMove> GetRelativeEnemy(bool isEnemyTeam) 
+    public List<GameObject> GetRelativeEnemy(bool isEnemyTeam)
     {
-        if (isEnemyTeam) return players;
-        else return enemys;
+        int count;
+
+        if (isEnemyTeam) count = players.Count;
+        else count = enemys.Count;
+
+        List<GameObject> list = new List<GameObject>();
+
+        for (int i = 0; i < count; i++)
+        {
+            if (isEnemyTeam) list.Add(players[i].gameObject);
+            else list.Add(enemys[i].gameObject);
+
+        }
+
+        if(isEnemyTeam&&player!=null)list.Add(player);
+
+
+        return list;
 
     }
 
-    private void ScanAILife() 
+    private void ScanAILife()
     {
         playersLife.Clear();
-        players.Capacity= players.Capacity;
-        for(int i = 0; i < players.Count; i++) 
+        players.Capacity = players.Capacity;
+        for (int i = 0; i < players.Count; i++)
         {
             playersLife.Add(players[i].GetISLife());
 
         }
 
         enemyLife.Clear();
-        enemyLife.Capacity=enemys.Capacity;
-        for(int i = 0; i < enemys.Count; i++) 
+        enemyLife.Capacity = enemys.Capacity;
+        for (int i = 0; i < enemys.Count; i++)
         {
             enemyLife.Add(enemys[i].GetISLife());
 
@@ -55,28 +74,28 @@ public class AIManager : MonoBehaviour
 
     }
 
-    public void SetFlagObject(GameObject flagObject,int number) 
+    public void SetFlagObject(GameObject flagObject, int number)
     {
         this.flagObject[number] = flagObject;
     }
 
-    public void CreateAI() 
+    public void CreateAI()
     {
-        for(int i = 0; i < flagObject.Length; i++) 
+        for (int i = 0; i < flagObject.Length; i++)
         {
-            Vector3 vec= flagObject[(i+1)%2].transform.position - flagObject[i].transform.position;
+            Vector3 vec = flagObject[(i + 1) % 2].transform.position - flagObject[i].transform.position;
 
-            float angle = Mathf.Atan2(vec.x, vec.z)*Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(vec.x, vec.z) * Mathf.Rad2Deg;
 
             for (int j = 0; j < AI_NUMBER; j++)
             {
-                float createAngle = angle+(15*j)-30;
-                GameObject ai=GameObject.Instantiate(origenAI);
+                float createAngle = angle + (15 * j) - 30;
+                GameObject ai = GameObject.Instantiate(origenAI);
 
 
                 ai.transform.eulerAngles = new Vector3(0, createAngle, 0);
 
-                ai.transform.position = flagObject[i].transform.position + new Vector3(Mathf.Sin(createAngle*Mathf.Deg2Rad),0,Mathf.Cos(createAngle * Mathf.Deg2Rad));
+                ai.transform.position = flagObject[i].transform.position + new Vector3(Mathf.Sin(createAngle * Mathf.Deg2Rad), 0, Mathf.Cos(createAngle * Mathf.Deg2Rad));
 
                 AIMove aIMove = ai.GetComponent<AIMove>();
 
@@ -85,20 +104,20 @@ public class AIManager : MonoBehaviour
 
 
 
-                if (i <= 0) 
+                if (i <= 0)
                 {
                     ai.transform.GetChild(0).GetComponent<MeshRenderer>().material = color[0];
 
                     aIMove.SetPlayerFaction(() => false);
-                    players.Add(aIMove); 
-                
+                    players.Add(aIMove);
+
                 }
                 else
                 {
                     ai.transform.GetChild(0).GetComponent<MeshRenderer>().material = color[1];
 
                     aIMove.SetPlayerFaction(() => true);
-                    enemys.Add(aIMove); 
+                    enemys.Add(aIMove);
                 }
 
             }

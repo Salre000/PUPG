@@ -14,6 +14,7 @@ public class BulletReChage : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (player == null) return;
         if (Vector3.Distance(player.transform.position,this.transform.position)< renge)
         {
             BulletManager.SetMAXBulletMagazine();

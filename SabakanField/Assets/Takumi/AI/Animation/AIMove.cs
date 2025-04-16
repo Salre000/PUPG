@@ -152,7 +152,7 @@ public class AIMove : MonoBehaviour, BulletMove
     private List<GameObject> TargetEnemysInAngle()
     {
 
-        List<AIMove> targetObjcets = AIUtility.GetRelativeEnemy(PlayerFaction());
+        List<GameObject> targetObjcets = AIUtility.GetRelativeEnemy(PlayerFaction());
 
         List<GameObject> targets = new List<GameObject>();
 
@@ -497,7 +497,11 @@ public class AIMove : MonoBehaviour, BulletMove
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (shotingFlag) return;
+        if (shotingFlag && nowMode != NowMode.Shot) 
+        {
+            shotingFlag = false;
+            return;
+        }
 
         if (collision.transform.tag == "Floor") return;
 
@@ -520,7 +524,7 @@ public class AIMove : MonoBehaviour, BulletMove
 
         Vector3 vec = playerFlag.transform.position - gameStartPosition;
         float angle = Mathf.Atan2(vec.x, vec.z);
-        this.transform.position = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle)) + playerFlag.transform.position;
+        this.transform.position = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle))*10 + playerFlag.transform.position;
         isLife = true;
 
     }
