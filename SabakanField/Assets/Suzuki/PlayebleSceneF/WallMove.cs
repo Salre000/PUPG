@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallMove : MonoBehaviour,BulletMove
+public class WallMove : MonoBehaviour,CharacterInsterface
 {
     public void HitAction()
     {

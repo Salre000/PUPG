@@ -14,7 +14,7 @@ public static class BulletMoveFunction
         if (Physics.Raycast(startPosition, dir, out hit))
         {
 
-            BulletMove hitObject = hit.transform.gameObject.GetComponentInParent<BulletMove>();
+            CharacterInsterface hitObject = hit.transform.gameObject.GetComponentInParent<CharacterInsterface>();
 
 
             if (hitObject == null) return Vector3.zero;

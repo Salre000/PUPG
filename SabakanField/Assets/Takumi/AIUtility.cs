@@ -6,7 +6,7 @@ public static class AIUtility
 {
     public static  AIManager aIManager;
 
-    public static List<AIMove> GetRelativeEnemy(bool isPlayerTeam) 
+    public static List<GameObject> GetRelativeEnemy(bool isPlayerTeam) 
     {
         return aIManager.GetRelativeEnemy(isPlayerTeam);
     }
