@@ -6,16 +6,16 @@ using UnityEngine;
 
 public class TextAnim : MonoBehaviour
 {
-    // クリアテキストのための動きを実装
+    //  一文字ずつの動きを実装
     private TextMeshProUGUI _text;
     private StringBuilder _stringBuilder = new StringBuilder();
-    private string _winText = "Bule team Win!!";
+    private string _buleWinText = "Bule team Win!!";    // 青が勝ったとき
+    private string _defText = "Defeat";             // 負けた時
     private Color32 _buleWinColor= new Color32(43, 69, 221, 255);
     private Color32 _redWinColor= new Color32(221, 43, 48, 255);
     private Color32 _defaultColor=new Color32();
-    private string _defText = "Defeat";
-    // 待ち時間
-    private float _dileyTime = 0.05f;
+    // 次の文字への待ち時間
+    private float _dileyTime = 0.02f;
 
     // テキストのアニメーションがしたいだけならこれを使用
 
@@ -59,7 +59,7 @@ public class TextAnim : MonoBehaviour
         // 攻め側勝ったとき
         if (!UIManager.Instance.GetOverLimitTime())
         {
-            resultText = _winText;
+            resultText = _buleWinText;
             _text.color = _buleWinColor;
         }
         // 攻め側負けた時

@@ -7,7 +7,14 @@ public static class BulletManager
     // ƒvƒŒƒCƒ„[‚Ìe‚É‚ß‚ç‚ê‚Ä‚¢‚é’e‚Ì”
     static int playerBulletMagazine = 30;
     // e‚É‚ß‚ç‚ê‚Ä‚¢‚é’e‚ğœ‚­AŠ—L‚µ‚Ä‚¢‚éc’e‚ÌÅ‘å”
+    private const int _LIMIT_MAGAZIN = 120;
     static int bulletMagazin = 120;
+
+    static public void Initialize()
+    {
+        playerBulletMagazine=_LIMIT_BULLET;
+        bulletMagazin=_LIMIT_MAGAZIN;
+    }
 
     // Œ‚‚Á‚½•ª‚¾‚¯e‚©‚ç’e‚ğŒ¸‚ç‚·
     static public void PlayerBulletShot(int ammo = 1)
@@ -44,4 +51,5 @@ public static class BulletManager
     static public int GetBulletMagazine() { return bulletMagazin; }
 
     static public void SetMAXBulletMagazine(){bulletMagazin = 120;}
+    
 }

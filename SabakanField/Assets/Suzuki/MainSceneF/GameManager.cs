@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
         _finaleFlag = false;
         _flagGetCheck = false;
+        BulletManager.Initialize();
     }
 
     private void Update()
@@ -33,7 +34,7 @@ public class GameManager : MonoBehaviour
     public void GameClearCheck()
     {
         if(_finaleFlag) return;
-        SceneManager.LoadScene("ClearScene", LoadSceneMode.Additive);
+        GameSceneManager.LoadScene(GameSceneManager.clearSceneName, LoadSceneMode.Additive);
         _finaleFlag = true;
     }
 
@@ -43,7 +44,7 @@ public class GameManager : MonoBehaviour
         _time += Time.deltaTime;
         if (_time < 3.0f) return;
         _resultSceneFlag=true;
-        SceneManager.LoadScene("resultScene");
+        SceneManager.LoadScene(GameSceneManager.resultSceneName);
     }
 
     public void SetFlagRangeCheck(bool flag) { _flagGetCheck = flag; }
