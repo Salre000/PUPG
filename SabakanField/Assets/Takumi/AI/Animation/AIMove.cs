@@ -24,6 +24,9 @@ public class AIMove : MonoBehaviour, CharacterInsterface
 
     private bool isLife = true;
 
+    private int ID = -1;
+    public void SetID(int id) { ID= id; }
+
     private Vector3 gameStartPosition = Vector3.zero;
 
     private System.Func<bool> _PlayerFaction;
@@ -81,6 +84,8 @@ public class AIMove : MonoBehaviour, CharacterInsterface
         Debug.Log(this.gameObject.name + "ƒŒƒC‚É“–‚½‚Á‚½");
         animator.SetTrigger("Death");
         isLife = false;
+        AIUtility.AddDeathCount(ID);
+
     }
 
 

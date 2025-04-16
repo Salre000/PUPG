@@ -15,9 +15,12 @@ public class AIManager : MonoBehaviour
 
     [SerializeField] GameObject origenAI;
 
-    private readonly int AI_NUMBER = 5;
+    const int AI_NUMBER = 5;
 
     GameObject player;
+
+    private List<int> deathCount = new List<int>(AI_NUMBER * 2) { 0 };
+    private List<int> killCount = new List<int>(AI_NUMBER * 2) { 0 };
 
     public void Awake()
     {
@@ -29,6 +32,37 @@ public class AIManager : MonoBehaviour
         ScanAILife();
 
     }
+
+    public void AddDeathCount(int index) { deathCount[index]++; }
+    public void AdDKillCount(int index) { killCount[index]++; }
+
+    public Vector3 PlayerFlagPosition() {  return flagObject[0].transform.position; }  
+
+    public void DataSave(float time)
+    {
+        string[]kill = new string[killCount.Count];
+        string[]death = new string[deathCount.Count];
+        for(int i = 1; i < AI_NUMBER * 2; i++) 
+        {
+
+
+            kill[i] = killCount[i].ToString();
+            death[i]=deathCount[i].ToString();
+
+
+        }
+
+
+
+        DataSaveCSV.InGameDataSave(kill, death, time);
+
+
+
+
+    }
+
+
+
 
     public List<GameObject> GetRelativeEnemy(bool isEnemyTeam)
     {
@@ -46,7 +80,7 @@ public class AIManager : MonoBehaviour
 
         }
 
-        if(isEnemyTeam&&player!=null)list.Add(player);
+        if (isEnemyTeam && player != null) list.Add(player);
 
 
         return list;
@@ -81,14 +115,17 @@ public class AIManager : MonoBehaviour
 
     public void CreateAI()
     {
-        for (int i = 1; i < flagObject.Length; i++)
+        for (int i = 0; i < flagObject.Length; i++)
         {
+            
             Vector3 vec = flagObject[(i + 1) % 2].transform.position - flagObject[i].transform.position;
 
             float angle = Mathf.Atan2(vec.x, vec.z) * Mathf.Rad2Deg;
 
             for (int j = 0; j < AI_NUMBER; j++)
             {
+                if (i == 0 && j == 0) continue;
+
                 float createAngle = angle + (15 * j) - 30;
                 GameObject ai = GameObject.Instantiate(origenAI);
 
@@ -101,6 +138,7 @@ public class AIManager : MonoBehaviour
 
                 aIMove.SetFlagAngle(flagObject[(i + 1) % 2]);
                 aIMove.SetPlayerFlag(flagObject[i]);
+                aIMove.SetID((i * 5) + j);
 
 
 
