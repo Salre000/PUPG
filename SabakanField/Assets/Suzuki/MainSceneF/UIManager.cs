@@ -28,7 +28,6 @@ public class UIManager : MonoBehaviour
     
 
     private bool _DebugClearCheck = false;
-    private bool _DebugdefeatCheck = false;
 
 
     private void Awake()
