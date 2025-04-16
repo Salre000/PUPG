@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -9,11 +8,13 @@ public class TimeLimit:UIBase
     private TextMeshProUGUI _timeLimitText;
     private StringBuilder _stringBuilder = new StringBuilder();
     // ゲーム内で動作する制限時間
-    private float _time;                // 全体的な時間
+    private float _time;                // 全体の時間
     private float _timeLimit_s = 0.0f;  // 秒
     private float _timeLimit_m = 0.0f;  // 分
+    private bool _LimitFlag = false;
+    private bool _overTimeFlag = false;
     // 制限時間(固定値)
-    private readonly float _TIME_LIMIT = 300.0f;
+    private readonly float _TIME_LIMIT = 10.0f;
 
      public override void Initialize()
     {
@@ -35,13 +36,40 @@ public class TimeLimit:UIBase
     // 時間を減らしていく
     private void CountTimeLimit()
     {
+        if (!_overTimeFlag)
+            _time -= Time.deltaTime;
+        OverLimit();
+        if(GetOverLimit()) return;
         _stringBuilder.Clear();
-        _time-=Time.deltaTime;
-        Debug.Log(_time);
         _timeLimit_m = _time / 60.0f;
-        _timeLimit_s = 0.0f;
-        _stringBuilder.AppendFormat("{0:0}:", _timeLimit_m);
-        _stringBuilder.AppendFormat("{0:00}:", _timeLimit_s);
+        _timeLimit_s = _time%60.0f;
+        // 小数点切り捨てするためint変換
+        int result_m=Mathf.FloorToInt( _timeLimit_m );
+        int result_s = Mathf.FloorToInt(_timeLimit_s);
+        _stringBuilder.AppendFormat("{0}:", result_m);
+        _stringBuilder.AppendFormat("{0:00}", result_s);
         _timeLimitText.text = _stringBuilder.ToString();
     }
+
+    // 時間切れ
+    public void OverLimit()
+    {
+        if (_time < 0.0f)
+        {
+            _time = 0.0f;
+            if (!GameManager.Instance.GetFlagRangeCheck())
+            {
+                _overTimeFlag = true;
+                _LimitFlag = true;
+            }
+            return;
+        }
+        else
+        {
+
+        }
+    }
+
+    // 時間切れかどうか返す
+    public bool GetOverLimit(){ return _LimitFlag; }
 }

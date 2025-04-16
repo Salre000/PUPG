@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,14 +9,31 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
 
+    private bool _DebugOver = false;
+    private bool _flagGetCheck { get; set; } = false;
+
     private void Awake()
     {
         Instance = this;
     }
 
-    public void GameClearCheck(bool clearFlag)
+    private void Update()
     {
+        if (UIManager.Instance.GetOverLimitTime()&&!_DebugOver)
+        {
+            GameClearCheck();
+        }
+            
+    }
+
+    public void GameClearCheck()
+    {
+        if(_DebugOver) return;
+        SceneManager.LoadScene("ClearScene", LoadSceneMode.Additive);
+        _DebugOver = true;
 
     }
 
+    public void SetFlagRangeCheck(bool flag) { _flagGetCheck = flag; }
+    public bool GetFlagRangeCheck() { return _flagGetCheck; }
 }

@@ -106,7 +106,10 @@ public class UIManager : MonoBehaviour
     private void DebugGoClearSceneCheck()
     {
         if(!_DebugClearCheck)
-        SceneManager.LoadScene("ClearScene",LoadSceneMode.Additive);
+        GameManager.Instance.GameClearCheck();
         _DebugClearCheck=true;
     }
+
+    // éûä‘êÿÇÍÇ©Ç«Ç§Ç©ï‘Ç∑
+    public bool GetOverLimitTime() { return _timeLimit.GetOverLimit(); }
 }
