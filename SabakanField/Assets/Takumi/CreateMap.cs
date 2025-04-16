@@ -56,7 +56,7 @@ public class CreateMap : MonoBehaviour
         CreateMapManager.createMap = this;
 
         //地面と障害物を生成する関数
-       // CreateGraund();
+        CreateGraund();
 
         //フラッグの生成する関数
         CreateFlag();
@@ -184,10 +184,14 @@ public class CreateMap : MonoBehaviour
 
         int objectspece = 2;
 
+        GameObject wallAll = new GameObject();
+
+        wallAll.transform.name = "WallAll";
+
 
         for (int i = 0; i < objectRate * _MAX_SIZE; i++)
         {
-            GameObject wall = GameObject.Instantiate(_wallObject);
+            GameObject wall = GameObject.Instantiate(_wallObject, wallAll.transform);
             Vector3 position = Vector3.zero;
 
             position.x = -MAP_RETO / 2;
@@ -199,7 +203,7 @@ public class CreateMap : MonoBehaviour
             wall.transform.position = position;
 
 
-            wall = GameObject.Instantiate(_wallObject);
+            wall = GameObject.Instantiate(_wallObject, wallAll.transform);
             position = Vector3.zero;
 
             position.x = MAP_RETO * _MAX_SIZE - MAP_RETO / 2;
@@ -210,7 +214,7 @@ public class CreateMap : MonoBehaviour
 
             wall.transform.position = position;
 
-            wall = GameObject.Instantiate(_wallObject);
+            wall = GameObject.Instantiate(_wallObject, wallAll.transform);
             position = Vector3.zero;
 
             position.x = i * objectspece - 4;
@@ -222,7 +226,7 @@ public class CreateMap : MonoBehaviour
             wall.transform.position = position;
 
 
-            wall = GameObject.Instantiate(_wallObject);
+            wall = GameObject.Instantiate(_wallObject, wallAll.transform);
             position = Vector3.zero;
 
             position.x = i * objectspece - 4;

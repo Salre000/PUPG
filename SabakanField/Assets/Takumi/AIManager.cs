@@ -15,7 +15,7 @@ public class AIManager : MonoBehaviour
 
     [SerializeField] GameObject origenAI;
 
-    private readonly int AI_NUMBER = 1;
+    private readonly int AI_NUMBER = 5;
 
     public void Awake()
     {

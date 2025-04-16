@@ -16,6 +16,7 @@ public static class BulletMoveFunction
 
             BulletMove hitObject = hit.transform.gameObject.GetComponentInParent<BulletMove>();
 
+
             if (hitObject == null) return Vector3.zero;
 
             //自分と同じ陣営の場合はフレンドリーファイアの関数を呼ぶ
