@@ -20,4 +20,9 @@ public static class GameSceneManager
         SceneManager.LoadScene(sceneName,mode);
     }
 
+    public static void FadeOutLoadScene(string sceneName, LoadSceneMode mode,float time)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
 }
