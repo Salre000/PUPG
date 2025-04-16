@@ -81,7 +81,7 @@ public class AIManager : MonoBehaviour
 
     public void CreateAI()
     {
-        for (int i = 0; i < flagObject.Length; i++)
+        for (int i = 1; i < flagObject.Length; i++)
         {
             Vector3 vec = flagObject[(i + 1) % 2].transform.position - flagObject[i].transform.position;
 
