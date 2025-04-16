@@ -14,11 +14,11 @@ public static class DataSaveCSV
     {
         StreamWriter sw; 
 
-        sw = new StreamWriter(Application.dataPath + FILE_PASS, false);
+        sw = new StreamWriter(Application.dataPath + FILE_PASS, true);
 
         sw.Write(kill);
         sw.Write(death);
-        sw.Write(UIManager.Instance.GetTime());
+        sw.Write(UIManager.Instance.GetTime().ToString());
 
 
         sw.Close();
