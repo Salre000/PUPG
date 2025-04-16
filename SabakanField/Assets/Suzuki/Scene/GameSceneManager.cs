@@ -8,7 +8,7 @@ public static class GameSceneManager
 {
     public const string mainSceneName = "MainScene";
     public const string clearSceneName = "ClearScene";
-    public const string resultSceneName = "resultScene";
+    public const string resultSceneName = "ResultScene";
 
     public static void LoadScene(string sceneName)
     {
@@ -20,7 +20,7 @@ public static class GameSceneManager
         SceneManager.LoadScene(sceneName,mode);
     }
 
-    public static void FadeOutLoadScene(string sceneName, LoadSceneMode mode,float time)
+    public static void FadeOutLoadScene(string sceneName, LoadSceneMode mode)
     {
         SceneManager.LoadScene(sceneName);
     }
