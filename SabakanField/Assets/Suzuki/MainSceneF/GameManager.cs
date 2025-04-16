@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
         _time += Time.deltaTime;
         if (_time < 3.0f) return;
         _resultSceneFlag=true;
+        AIUtility.SaveData();
         SceneManager.LoadScene(GameSceneManager.resultSceneName);
     }
 

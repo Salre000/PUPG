@@ -38,27 +38,17 @@ public class AIManager : MonoBehaviour
 
     public Vector3 PlayerFlagPosition() {  return flagObject[0].transform.position; }  
 
-    public void DataSave(float time)
+    public void DataSave()
     {
         string[]kill = new string[killCount.Count];
         string[]death = new string[deathCount.Count];
         for(int i = 1; i < AI_NUMBER * 2; i++) 
         {
-
-
             kill[i] = killCount[i].ToString();
             death[i]=deathCount[i].ToString();
 
-
         }
-
-
-
-        DataSaveCSV.InGameDataSave(kill, death, time);
-
-
-
-
+        DataSaveCSV.InGameDataSave(kill, death);
     }
 
 

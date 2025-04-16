@@ -11,9 +11,9 @@ public static class AIUtility
         return aIManager.GetRelativeEnemy(isPlayerTeam);
     }
 
-    public static void SaveData(float time) 
+    public static void SaveData() 
     {
-        aIManager.DataSave(time);
+        aIManager.DataSave();
     }
 
     public static void AddKillCount(int index=0) 

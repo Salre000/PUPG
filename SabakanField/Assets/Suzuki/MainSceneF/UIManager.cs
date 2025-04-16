@@ -110,4 +110,5 @@ public class UIManager : MonoBehaviour
 
     // ŠÔØ‚ê‚©‚Ç‚¤‚©•Ô‚·
     public bool GetOverLimitTime() { return _timeLimit.GetOverLimit(); }
+    public float GetTime() { return _timeLimit.GetTime(); }
 }

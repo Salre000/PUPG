@@ -10,7 +10,7 @@ public static class DataSaveCSV
     private static readonly string FILE_PASS = "/Resources/InGameData/SaveData.csv";
 
 
-   public static void InGameDataSave(string []kill,string []death,float time)
+   public static void InGameDataSave(string []kill,string []death)
     {
         StreamWriter sw; 
 
@@ -18,7 +18,7 @@ public static class DataSaveCSV
 
         sw.Write(kill);
         sw.Write(death);
-        sw.Write(time);
+        sw.Write(UIManager.Instance.GetTime());
 
 
         sw.Close();

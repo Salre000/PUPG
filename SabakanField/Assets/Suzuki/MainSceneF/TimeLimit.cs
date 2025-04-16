@@ -61,6 +61,7 @@ public class TimeLimit:UIBase
             {
                 _overTimeFlag = true;
                 _LimitFlag = true;
+
             }
             return;
         }
@@ -72,4 +73,6 @@ public class TimeLimit:UIBase
 
     // ŠÔØ‚ê‚©‚Ç‚¤‚©•Ô‚·
     public bool GetOverLimit(){ return _LimitFlag; }
+    public float GetTime() { return _time; }
+
 }
