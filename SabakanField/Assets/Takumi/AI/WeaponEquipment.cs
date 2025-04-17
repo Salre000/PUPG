@@ -11,6 +11,16 @@ public class WeaponEquipment : MonoBehaviour
     {
 
 
+
+    }
+
+    public void FixedUpdate()
+    {
+        this.transform.position=rightHand.transform.position;
+
+        transform.LookAt(leftHand.transform);
+
+        this.transform.position -= this.transform.forward / 11;
     }
 
 }

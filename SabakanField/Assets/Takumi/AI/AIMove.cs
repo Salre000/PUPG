@@ -392,11 +392,9 @@ public class AIMove
         {
             case ChengeAngleType.Left:
                 AICharacterUtility.GetCharacterAI(ID).SetAnimatorBool("Left", true);
-                Debug.Log("Left");
                 break;
             case ChengeAngleType.Right:
                 AICharacterUtility.GetCharacterAI(ID).SetAnimatorBool("Right", true);
-                Debug.Log("Right");
                 break;
         }
 
