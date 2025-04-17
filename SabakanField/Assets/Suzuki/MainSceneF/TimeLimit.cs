@@ -16,6 +16,8 @@ public class TimeLimit:UIBase
     // êßå¿éûä‘(å≈íËíl)
     private readonly float _TIME_LIMIT = 10.0f;
 
+    private bool _DebugTimeStopFlag = false;
+
      public override void Initialize()
     {
         _stringBuilder.Clear();
@@ -26,10 +28,20 @@ public class TimeLimit:UIBase
         _stringBuilder.AppendFormat("{0:0}:", _timeLimit_m);
         _stringBuilder.AppendFormat("{0:00}:", _timeLimit_s);
         _timeLimitText.text = _stringBuilder.ToString();
+
+        _DebugTimeStopFlag = false;
     }
 
     public override void Execute()
     {
+        if(Input.GetKeyUp(KeyCode.T))
+        {
+            if(!_DebugTimeStopFlag)
+                _DebugTimeStopFlag=true;
+            else
+                _DebugTimeStopFlag=false;
+        }
+        if (_DebugTimeStopFlag) return;
         CountTimeLimit();
     }
 
