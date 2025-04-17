@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // プレイヤー復活
-public class PlayerRespawn:MonoBehaviour, CharacterInsterface
+public class PlayerRespawn : MonoBehaviour, CharacterInsterface, InvincibleInsterface
 {
     // リスポーン位置
     private Vector3 _respawnPosition;
+    // リスポーンまでの時間
     private float _respawnTime = 3.0f;
+    // リスポーンしたか検知するための時間把握
     private float _timeCount = 0.0f;
+    // 復活してからの無敵時間
+    private float _invincibleTime = 100.0f;
+    // 無敵かどうか
+    private bool _invincibleFlag = false;
 
     private void Start()
     {
-
         _respawnPosition = AIUtility.GetFlagPosition();
         _respawnPosition.y += 1.0f;
     }
@@ -20,6 +25,8 @@ public class PlayerRespawn:MonoBehaviour, CharacterInsterface
     private void Update()
     {
         RespawnTimeCount();
+        Debug.Log("プレイヤーの死亡判定は："+PlayerManager.IsPlayerDead());
+        Debug.Log("プレイヤーの無敵は："+ _invincibleFlag);
     }
 
     // 敵から攻撃を受けた時
@@ -27,7 +34,8 @@ public class PlayerRespawn:MonoBehaviour, CharacterInsterface
     {
         AIUtility.AddDeathCount();
         PlayerManager.SetIsPlayerDead(true);
-        RespawnManager.Instance.DelayRespawn(gameObject, _respawnPosition,_respawnTime);
+        RespawnManager.Instance.DelayRespawn(gameObject, _respawnPosition, _respawnTime);
+        _invincibleFlag=true;
     }
 
     // 復活完了
@@ -41,11 +49,26 @@ public class PlayerRespawn:MonoBehaviour, CharacterInsterface
     // 復活時間測定
     private void RespawnTimeCount()
     {
-        if(!PlayerManager.IsPlayerDead()) return;
+        if (!PlayerManager.IsPlayerDead()) return;
         _timeCount += Time.deltaTime;
         // ここが通るとリスポーンしたことがわかる
-        if( _timeCount >= _respawnTime)
+        if (_timeCount >= _respawnTime)
+        {
             RespawnComplete();
+            StartCoroutine(RespoawnInvincible());
+        }
     }
 
+    private IEnumerator RespoawnInvincible()
+    {
+        // 指定秒数分待機してから無敵解除(死亡判定も解除)
+        yield return new WaitForSeconds(_invincibleTime);
+        _invincibleFlag=false;
+    }
+
+    // 死んでる間と復活して1秒は無敵
+    public bool Invincible()
+    {
+        return _invincibleFlag;
+    }
 }
