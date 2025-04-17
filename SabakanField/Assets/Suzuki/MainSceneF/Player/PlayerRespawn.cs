@@ -12,7 +12,7 @@ public class PlayerRespawn : MonoBehaviour, CharacterInsterface, InvincibleInste
     // リスポーンしたか検知するための時間把握
     private float _timeCount = 0.0f;
     // 復活してからの無敵時間
-    private float _invincibleTime = 100.0f;
+    private float _invincibleTime = 2.0f;
     // 無敵かどうか
     private bool _invincibleFlag = false;
 
@@ -25,8 +25,6 @@ public class PlayerRespawn : MonoBehaviour, CharacterInsterface, InvincibleInste
     private void Update()
     {
         RespawnTimeCount();
-        Debug.Log("プレイヤーの死亡判定は："+PlayerManager.IsPlayerDead());
-        Debug.Log("プレイヤーの無敵は："+ _invincibleFlag);
     }
 
     // 敵から攻撃を受けた時

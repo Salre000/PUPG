@@ -4,18 +4,24 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField, Header("歩き状態の速度")]
     private float _walkSpeed = 4.0f;
-    [SerializeField]
+    [SerializeField,Header("走り状態の速度")]
     private float _dashSpeed = 7.5f;
-
+    // 現在の1秒あたりの移動速度
     private float _speed = 0.0f;
+
+    // 現在持っている銃
+    private GameObject _rifel;
+    // MainCamera
+    private Camera _camera;
+    // カメラのField of View制御の値
+    private float _fieldOfView;
 
     void Update()
     {
         if(PlayerManager.IsPlayerDead()) return;
             Movement();
-
     }
 
     private void Movement()
@@ -36,5 +42,25 @@ public class PlayerMove : MonoBehaviour
             _speed=_walkSpeed;
     }
 
+    private void Ads()
+    {
+        // 右クリックでADS
+        // true:切り替え false:長押し
+        if (OptionManager.Instance.GetAdsSetting())
+        {
+            if (Input.GetMouseButtonDown(1))
+            {
+
+            }
+        }
+        else
+        {
+            if (Input.GetMouseButton(1))
+            {
+
+            }
+        }
+
+    }
 
 }
