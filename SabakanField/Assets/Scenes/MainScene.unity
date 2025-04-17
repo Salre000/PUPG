@@ -437,6 +437,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1960812186749549150, guid: 9ba27d9658ea96647b80a768aefb518a, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 919
+      objectReference: {fileID: 0}
     - target: {fileID: 1960812188381377850, guid: 9ba27d9658ea96647b80a768aefb518a, type: 3}
       propertyPath: m_Name
       value: Player
@@ -487,7 +491,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2293841809427432543, guid: 9ba27d9658ea96647b80a768aefb518a, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 961
+      value: 897
       objectReference: {fileID: 0}
     - target: {fileID: 2351469895402441279, guid: 9ba27d9658ea96647b80a768aefb518a, type: 3}
       propertyPath: m_IsActive
