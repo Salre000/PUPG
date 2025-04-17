@@ -20,6 +20,7 @@ public class PlayerRespawn : MonoBehaviour, CharacterInsterface, InvincibleInste
     {
         _respawnPosition = AIUtility.GetFlagPosition();
         _respawnPosition.y += 1.0f;
+        transform.position = _respawnPosition;
     }
 
     private void Update()
