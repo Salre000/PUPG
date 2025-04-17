@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static AIMove;
 
-public class AI : MonoBehaviour, CharacterInsterface
+public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
 {
 
     AIMove move;
@@ -20,8 +20,8 @@ public class AI : MonoBehaviour, CharacterInsterface
     public AIMove.NowMode nextMode;
 
 
-    //
-
+    private bool invincible=false;
+    private float invincibleTime = 0;
 
     public void Initialization()
     {
@@ -44,6 +44,9 @@ public class AI : MonoBehaviour, CharacterInsterface
 
     public void FixedUpdate()
     {
+
+        InvincibleCount();
+
         nowMode = move.nowMode;
         nextMode = move.nextMode;
 
@@ -60,6 +63,7 @@ public class AI : MonoBehaviour, CharacterInsterface
     public void HitAction()
     {
         status.HitAction();
+        invincible=true;
 
     }
     public void SetFlag(GameObject game) { move.SetPlayerFlag(game); }
@@ -69,6 +73,24 @@ public class AI : MonoBehaviour, CharacterInsterface
     public void ReStart() {  move.ReStart(); }
     public void EndShot() {  move.EndShot(); }
     public void Shot() {  move.Shot(); }
-    public void Resurrect() {  move.Resurrect(); } 
+    public void Resurrect() {  move.Resurrect(); }
 
+    public bool Invincible()
+    {
+
+        return invincible;
+
+    }
+
+    private void InvincibleCount() 
+    {
+        if (!invincible) return;
+
+
+
+        invincibleTime += Time.deltaTime;
+        
+        if(invincibleTime>=1)invincible = false;
+
+    }
 }

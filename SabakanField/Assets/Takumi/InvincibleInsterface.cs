@@ -5,6 +5,7 @@ using UnityEngine;
 public interface InvincibleInsterface 
 {
 
+    //true
     public abstract bool Invincible();
 
 

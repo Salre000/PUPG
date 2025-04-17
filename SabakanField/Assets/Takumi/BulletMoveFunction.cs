@@ -16,6 +16,9 @@ public static class BulletMoveFunction
 
             CharacterInsterface hitObject = hit.transform.gameObject.GetComponentInParent<CharacterInsterface>();
 
+            InvincibleInsterface invincible=hit.transform.gameObject.GetComponent<InvincibleInsterface>();
+
+            if (!invincible.Invincible()) return Vector3.zero;
 
 
             if (hitObject == null) return Vector3.zero;
