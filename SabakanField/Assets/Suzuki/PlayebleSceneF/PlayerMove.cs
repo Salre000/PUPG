@@ -13,7 +13,8 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        Movement();
+        if(PlayerManager.IsPlayerDead()) return;
+            Movement();
 
     }
 

@@ -6,8 +6,11 @@ public static class PlayerManager
 {
     // プレイヤー関連
 
+    private static bool _isDead = false;
+
     // どのくらいの差でtrueにするかの値
     private const float _POSITION_MAGNITUDE = 5.0f;
+
 
     // プレイヤーが(敵の)旗の範囲内に存在するか
     static public bool PlayerInFlagRange(Vector3 position) 
@@ -25,5 +28,7 @@ public static class PlayerManager
         return false;
     }
 
+    public static bool IsPlayerDead() { return _isDead; }
+    public static void SetIsPlayerDead(bool flag) {  _isDead = flag; }
 
 }
