@@ -10,8 +10,6 @@ public class AIStatus
 
     private Animator animator;
 
-    private CapsuleCollider collider;
-
     GameObject thisGameObject;
 
     //ƒQ[ƒ€ŠJn‚ÉŒÄ‚ÔŠÖ”
@@ -20,8 +18,6 @@ public class AIStatus
 
         ID=AIUtility.GetID();
         thisGameObject = gameObject;
-
-        collider = thisGameObject.GetComponent<CapsuleCollider>();
         animator = thisGameObject.GetComponent<Animator>();
 
     }
@@ -33,7 +29,6 @@ public class AIStatus
         animator.SetTrigger("Death");
         isLife = false;
         AIUtility.AddDeathCount(ID);
-        collider.enabled = false;
 
     }
 

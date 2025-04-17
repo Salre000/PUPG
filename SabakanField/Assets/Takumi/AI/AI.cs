@@ -86,6 +86,7 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
     {
         if (!invincible) return;
 
+        if (!status.GetISLife()) return;
 
 
         invincibleTime += Time.deltaTime;
