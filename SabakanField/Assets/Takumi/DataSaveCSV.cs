@@ -7,8 +7,11 @@ using UnityEngine;
 public static class DataSaveCSV
 {
 
-    private static readonly string FILE_PASS = "/Resources/InGameData/SaveData.csv";
+    private static readonly string FILE_PASS = "/Resources/";
 
+    public const string FILE_NAME= "InGameData / SaveData";
+
+    private static readonly string FILR_EXTENSION = ".csv";
 
    public static void InGameDataSave(string []kill,string []death)
     {
@@ -16,7 +19,7 @@ public static class DataSaveCSV
         string Death = string.Join(",", death);
         StreamWriter sw; 
 
-        sw = new StreamWriter(Application.dataPath + FILE_PASS, false);
+        sw = new StreamWriter(Application.dataPath + FILE_PASS+ FILE_NAME+ FILR_EXTENSION, false);
 
         sw.WriteLine(Kill);
         

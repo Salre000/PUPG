@@ -124,6 +124,8 @@ public class AIManager : MonoBehaviour
 
                 ai.transform.position = flagObject[i].transform.position + new Vector3(Mathf.Sin(createAngle * Mathf.Deg2Rad), 0, Mathf.Cos(createAngle * Mathf.Deg2Rad));
 
+                ai.transform.name += ((i * 5) + j).ToString();
+
                 AIMove aIMove = ai.GetComponent<AIMove>();
 
                 aIMove.SetFlagAngle(flagObject[(i + 1) % 2]);

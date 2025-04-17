@@ -74,9 +74,11 @@ public class AIMove : MonoBehaviour, CharacterInsterface
         position.y = 0;
         this.transform.position = position;
         gameStartPosition = this.transform.position;
+        collider=GetComponent<CapsuleCollider>();
 
     }
 
+    private CapsuleCollider collider;
     public void HitAction()
     {
         if (!isLife) return;
@@ -85,6 +87,7 @@ public class AIMove : MonoBehaviour, CharacterInsterface
         animator.SetTrigger("Death");
         isLife = false;
         AIUtility.AddDeathCount(ID);
+        collider.enabled = false;
 
     }
 
@@ -258,7 +261,7 @@ public class AIMove : MonoBehaviour, CharacterInsterface
             GameObject ss = hit.transform.gameObject;
         }
 
-        BulletMoveFunction.RayHitTest(startPos, Vec);
+        BulletMoveFunction.RayHitTest(startPos, Vec,PlayerFaction(),ID);
 
     }
     private void Wandering()
@@ -523,7 +526,7 @@ public class AIMove : MonoBehaviour, CharacterInsterface
 
     }
 
-    public void Respawn()
+    public void Resurrect()
     {
         ResetAnimation();
 
@@ -531,6 +534,7 @@ public class AIMove : MonoBehaviour, CharacterInsterface
         float angle = Mathf.Atan2(vec.x, vec.z);
         this.transform.position = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle))*5 + playerFlag.transform.position;
         isLife = true;
+        collider.enabled = true;
 
     }
 
