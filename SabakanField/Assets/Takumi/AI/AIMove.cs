@@ -513,8 +513,13 @@ public class AIMove
 
         Vector3 vec = playerFlag.transform.position - gameStartPosition;
         float angle = Mathf.Atan2(vec.x, vec.z);
-        thisGameObject.transform.position = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle))*5 + playerFlag.transform.position;
-        
+        AICharacterUtility.GetCharacterAI(ID).SetAnimatorFloat("Speed", 0);
+        RespawnManager.Instance.DelayRespawn(thisGameObject,new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle)) * 5 + playerFlag.transform.position, 10, () => 
+        {
+
+        AICharacterUtility.GetCharacterAI(ID).SetAnimatorFloat("Speed", 1);
+        });
+
         AICharacterUtility.GetCharacterAI(ID).SetISLife(true);
 
     }

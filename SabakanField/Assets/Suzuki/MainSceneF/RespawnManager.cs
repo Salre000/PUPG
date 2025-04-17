@@ -29,16 +29,17 @@ public class RespawnManager : MonoBehaviour
     /// <param 復活させたいGameObject="character"></param>
     /// <param リスポーン地点="_respawnPosition"></param>
     /// <param 遅れさせる時間="resTime"></param>
-    public void DelayRespawn(GameObject character, Vector3 respawnPosition, float resTime)
+    public void DelayRespawn(GameObject character, Vector3 respawnPosition, float resTime,System.Action action=null)
     {
-        StartCoroutine(DelayRespawnCorotine(character, respawnPosition,resTime));
+        StartCoroutine(DelayRespawnCorotine(character, respawnPosition,resTime, action));
     }
     // 遅延復活実行処理
-    private IEnumerator DelayRespawnCorotine(GameObject character, Vector3 respawnPosition,float resTime)
+    private IEnumerator DelayRespawnCorotine(GameObject character, Vector3 respawnPosition,float resTime,System.Action action=null)
     {
         // 一時停止中でもしっかり待てるように
         yield return new WaitForSeconds(resTime);
         Respawn(character, respawnPosition);
+        if (action != null)action();
     }
 
 

@@ -51,5 +51,6 @@ public class AIStatus
 
     public void SetAnimatorTrigger(string name) {  animator.SetTrigger(name); } 
 
+    public void SetAnimatorFloat(string name,float speed) {  animator.SetFloat(name,speed); }
 
 }
