@@ -52,6 +52,7 @@ public class AIManager : MonoBehaviour
 
     public void DataSave()
     {
+        IDNumber = 0;
         string[]kill = new string[killCount.Count];
         string[]death = new string[deathCount.Count];
         for(int i = 0; i < AI_NUMBER * 2; i++) 

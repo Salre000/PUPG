@@ -17,6 +17,7 @@ public static class BulletMoveFunction
             CharacterInsterface hitObject = hit.transform.gameObject.GetComponentInParent<CharacterInsterface>();
 
 
+
             if (hitObject == null) return Vector3.zero;
 
             //自分と同じ陣営の場合はフレンドリーファイアの関数を呼ぶ
