@@ -6,6 +6,7 @@ public static class PlayerManager
 {
     // プレイヤー関連
 
+    // 死亡確認
     private static bool _isDead = false;
 
     // どのくらいの差でtrueにするかの値
