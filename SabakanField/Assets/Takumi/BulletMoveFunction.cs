@@ -22,7 +22,7 @@ public static class BulletMoveFunction
 
             if (invincible == null) Debug.Log(hit.transform.gameObject.name);
 
-            if (!invincible.Invincible()) return Vector3.zero;
+            if (invincible.Invincible()) return Vector3.zero;
 
 
 
