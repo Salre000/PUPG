@@ -18,10 +18,13 @@ public static class BulletMoveFunction
 
             InvincibleInsterface invincible=hit.transform.gameObject.GetComponent<InvincibleInsterface>();
 
+            if (hitObject == null) return Vector3.zero;
+
+            if (invincible == null) Debug.Log(hit.transform.gameObject.name);
+
             if (!invincible.Invincible()) return Vector3.zero;
 
 
-            if (hitObject == null) return Vector3.zero;
 
             //自分と同じ陣営の場合はフレンドリーファイアの関数を呼ぶ
             if (hitObject.PlayerFaction()== playerFaction) hitObject.HitActionFriendlyFire();
