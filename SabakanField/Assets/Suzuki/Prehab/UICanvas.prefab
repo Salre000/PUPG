@@ -2119,17 +2119,17 @@ Canvas:
   m_GameObject: {fileID: 3524435813591143681}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_RenderMode: 1
+  m_Camera: {fileID: 4000733061367426484, guid: 37836ea1261615f4796337ab22584eee, type: 3}
+  m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -917366445
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &3524435813591143683
 MonoBehaviour:

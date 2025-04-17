@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
         _finaleFlag = false;
         _flagGetCheck = false;
         BulletManager.Initialize();
+        PlayerManager.SetIsPlayerDead(false);
     }
 
     private void Update()

@@ -12,8 +12,8 @@ public static class BulletManager
 
     static public void Initialize()
     {
-        playerBulletMagazine=_LIMIT_BULLET;
-        bulletMagazin=_LIMIT_MAGAZIN;
+        playerBulletMagazine = _LIMIT_BULLET;
+        bulletMagazin = _LIMIT_MAGAZIN;
     }
 
     // Œ‚‚Á‚½•ª‚¾‚¯e‚©‚ç’e‚ğŒ¸‚ç‚·
@@ -50,6 +50,9 @@ public static class BulletManager
     static public int GetPlayerBulletMagazine() { return playerBulletMagazine; }
     static public int GetBulletMagazine() { return bulletMagazin; }
 
-    static public void SetMAXBulletMagazine(){bulletMagazin = 120;}
-    
+    // e‚Æ’e‚Ì•â[
+    static public void ResetMagazine() { playerBulletMagazine = _LIMIT_BULLET; bulletMagazin = _LIMIT_MAGAZIN; }
+    // ’e‚Ì•â[
+    static public void SetMAXBulletMagazine() { bulletMagazin = _LIMIT_MAGAZIN; }
+
 }
