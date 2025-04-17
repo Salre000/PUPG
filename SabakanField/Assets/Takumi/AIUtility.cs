@@ -27,4 +27,10 @@ public static class AIUtility
     }
     public static Vector3 GetFlagPosition() { return aIManager.PlayerFlagPosition(); }
 
+    public static List<int> GetKillCount() {  return aIManager.GetKillCount(); }
+    public static List <int> GetDeathCount() { return aIManager.GetDeathCount(); }
+
+
+    public static int GetID() {return aIManager.GetID();}
+
 }

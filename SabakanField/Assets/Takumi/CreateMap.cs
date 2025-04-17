@@ -51,7 +51,7 @@ public class CreateMap : MonoBehaviour
 
     public void Awake()
     {
-        _AIManager=GetComponent<AIManager>();
+        AIUtility.aIManager=_AIManager=GetComponent<AIManager>();
 
         CreateMapManager.createMap = this;
 

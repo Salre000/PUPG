@@ -4,8 +4,16 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
-public class AIMove : MonoBehaviour, CharacterInsterface
+public class AIMove
 {
+    private GameObject thisGameObject;
+
+    public void SetThisGameObject(GameObject thisGameObject) 
+    { this.thisGameObject = thisGameObject; }
+
+    private int ID;
+    public void SetID(int getID) { ID = getID; } 
+
     private readonly Vector3[] RAYCAST_OFFSET =
         {
          new Vector3(0, 1f, 0),
@@ -16,16 +24,11 @@ public class AIMove : MonoBehaviour, CharacterInsterface
 
     private readonly float AngleRange = 5;
 
-    private Animator animator;
 
     private bool rotateFlag = false;
 
     private float daleyTime = 0;
 
-    private bool isLife = true;
-
-    private int ID = -1;
-    public void SetID(int id) { ID= id; }
 
     private Vector3 gameStartPosition = Vector3.zero;
 
@@ -34,7 +37,6 @@ public class AIMove : MonoBehaviour, CharacterInsterface
 
     public bool PlayerFaction() { return _PlayerFaction(); }
 
-    public bool GetISLife() { return isLife; }
     GameObject flag;
     GameObject playerFlag;
     public void SetFlagAngle(GameObject flag) { this.flag = flag; }
@@ -46,7 +48,7 @@ public class AIMove : MonoBehaviour, CharacterInsterface
         None
     }
 
-    enum NowMode
+    public enum NowMode
     {
         Wandering,
         Shot,
@@ -55,46 +57,32 @@ public class AIMove : MonoBehaviour, CharacterInsterface
         ChageAngle
 
     }
-    [SerializeField] NowMode nowMode = NowMode.Wandering;
+    [SerializeField]public NowMode nowMode = NowMode.Wandering;
 
-    [SerializeField] NowMode nextMode = NowMode.Wandering;
+    [SerializeField]public  NowMode nextMode = NowMode.Wandering;
 
     [SerializeField] float nextMoveAngle = 0;
 
     private readonly float _EPSILON = 5.0f;
 
-    //é©ï™ÇÃÉtÉâÉbÉNÇ∆ÇÃãóó£Ç™Ç±ÇÍà»â∫ÇæÇ¡ÇΩÇÁëñÇ¡Çƒå¸Ç©Ç§
     private float DashRange = 0;
 
 
-    private void Start()
+    public void Start()
     {
-        animator = GetComponent<Animator>();
-        Vector3 position = this.transform.position;
+        Vector3 position = thisGameObject.transform.position;
         position.y = 0;
-        this.transform.position = position;
-        gameStartPosition = this.transform.position;
-        collider=GetComponent<CapsuleCollider>();
+        thisGameObject.transform.position = position;
+        gameStartPosition = thisGameObject.transform.position;
 
-    }
-
-    private CapsuleCollider collider;
-    public void HitAction()
-    {
-        if (!isLife) return;
-
-        Debug.Log(this.gameObject.name + "ÉåÉCÇ…ìñÇΩÇ¡ÇΩ");
-        animator.SetTrigger("Death");
-        isLife = false;
-        AIUtility.AddDeathCount(ID);
-        collider.enabled = false;
 
     }
 
 
-    private void FixedUpdate()
+
+    public void FixedUpdate()
     {
-        if (!isLife) return;
+        if (!AICharacterUtility.GetCharacterAI(ID).GetISLife()) return;
 
         ChackDash();
 
@@ -133,15 +121,7 @@ public class AIMove : MonoBehaviour, CharacterInsterface
     bool dashFlag = false;
     private void ChackDash()
     {
-
-        if (Vector3.Distance(playerFlag.transform.position, this.transform.position) < DashRange && !dashFlag)
-        {
-            //ÉAÉjÉÅÅ[ÉVÉáÉìÇÉ_ÉbÉVÉÖÇ…ïœÇ¶ÇÈ
-        }
-        else if (dashFlag)
-        {
-            //ÉAÉjÉÅÅ[ÉVÉáÉìÇÇ‰Ç¡Ç≠ÇËÇ…ïœÇ¶ÇÈ
-        }
+       
 
     }
 
@@ -156,7 +136,7 @@ public class AIMove : MonoBehaviour, CharacterInsterface
         TargetGetAngle(targets);
 
     }
-    //Ç±ÇÃAIÇÃéãäEì‡Ç…ìGÇÕÇ¢ÇÈÇÃÇ©ÇîªífÇ∑ÇÈä÷êî
+    //ÔøΩÔøΩÔøΩÔøΩAIÔøΩÃéÔøΩÔøΩEÔøΩÔøΩÔøΩ…ìGÔøΩÕÇÔøΩÔøΩÔøΩÃÇÔøΩÔøΩîªífÔøΩÔøΩÔøΩÔøΩ÷êÔøΩ
     private List<GameObject> TargetEnemysInAngle()
     {
 
@@ -167,8 +147,8 @@ public class AIMove : MonoBehaviour, CharacterInsterface
 
         for (int i = 0; i < targetObjcets.Count; i++)
         {
-            Vector3 vec = targetObjcets[i].transform.position - this.transform.position;
-            if (Vector3.Dot(this.transform.forward, vec) < 0.8) continue;
+            Vector3 vec = targetObjcets[i].transform.position - thisGameObject.transform.position;
+            if (Vector3.Dot(thisGameObject.transform.forward, vec) < 0.8) continue;
 
 
 
@@ -183,7 +163,7 @@ public class AIMove : MonoBehaviour, CharacterInsterface
 
     }
 
-    //éãäEì‡Ç…Ç¢ÇÈìGÇ…rayÇ™í ÇÈÇ©ÇîªífÇµÇƒäpìxÇì±Ç≠
+    //ÔøΩÔøΩÔøΩEÔøΩÔøΩÔøΩ…ÇÔøΩÔøΩÔøΩGÔøΩÔøΩrayÔøΩÔøΩÔøΩ ÇÈÇ©ÔøΩîªífÔøΩÔøΩÔøΩƒäpÔøΩxÔøΩì±ÇÔøΩ
     private GameObject TargetGetAngle(List<GameObject> targets)
     {
         GameObject hitObject = null;
@@ -191,12 +171,12 @@ public class AIMove : MonoBehaviour, CharacterInsterface
         for (int i = 0; i < targets.Count; i++)
         {
             RaycastHit hit;
-            Vector3 startPosition = this.transform.position + this.transform.forward + RAYCAST_OFFSET[0];
+            Vector3 startPosition = thisGameObject.transform.position + thisGameObject.transform.forward + RAYCAST_OFFSET[0];
 
             Debug.DrawLine(startPosition, targets[i].transform.position, Color.yellow);
 
 
-            Vector3 dir = targets[i].transform.position - this.transform.position;
+            Vector3 dir = targets[i].transform.position - thisGameObject.transform.position;
             if (Physics.Raycast(startPosition, dir, out hit))
             {
 
@@ -218,17 +198,18 @@ public class AIMove : MonoBehaviour, CharacterInsterface
 
 
         shotingFlag = true;
-        Vector3 tragetDir = hitObject.transform.position - this.transform.position;
+        Vector3 tragetDir = hitObject.transform.position - thisGameObject.transform.position;
 
         nextMoveAngle = Mathf.Atan2(tragetDir.x, tragetDir.z) * Mathf.Rad2Deg;
 
         nextMoveAngle += 360.0f;
         nextMoveAngle %= 360.0f;
 
-        Vector3 Cross = Vector3.Cross(this.transform.forward, tragetDir);
+        Vector3 Cross = Vector3.Cross(thisGameObject.transform.forward, tragetDir);
 
-        if (Cross.y < 0) animator.SetBool("Left", true);
-        else animator.SetBool("Right", true);
+        if (Cross.y < 0) 
+            AICharacterUtility.GetCharacterAI(ID).SetAnimatorBool("Left", true);
+        else AICharacterUtility.GetCharacterAI(ID).SetAnimatorBool("Right", true);
         nowMode = NowMode.ChageAngle;
         nextMode = NowMode.Shot;
 
@@ -240,7 +221,7 @@ public class AIMove : MonoBehaviour, CharacterInsterface
     public void Shot()
     {
 
-        Vector3 startPos = this.transform.position + this.transform.forward / 10 + RAYCAST_OFFSET[0];
+        Vector3 startPos = thisGameObject.transform.position + thisGameObject.transform.forward / 10 + RAYCAST_OFFSET[0];
         RaycastHit hit;
 
         List<GameObject> targets = TargetEnemysInAngle();
@@ -252,7 +233,7 @@ public class AIMove : MonoBehaviour, CharacterInsterface
         shotingFlag = false;
         if (targetObject == null) return;
 
-        Vector3 Vec = targetObject.transform.position - this.transform.position;
+        Vector3 Vec = targetObject.transform.position - thisGameObject.transform.position;
 
         Debug.DrawRay(startPos, Vec, Color.red, 1);
 
@@ -269,22 +250,22 @@ public class AIMove : MonoBehaviour, CharacterInsterface
 
         if (rotateFlag) daleyTime += Time.deltaTime;
 
-        Vector3 startPos = this.transform.position + this.transform.forward / 10;
+        Vector3 startPos = thisGameObject.transform.position + thisGameObject.transform.forward / 10;
 
         for (int i = 0; i < RAYCAST_OFFSET.Length; i++)
         {
-            Debug.DrawRay(startPos + RAYCAST_OFFSET[i], this.transform.forward * AngleRange);
+            Debug.DrawRay(startPos + RAYCAST_OFFSET[i], thisGameObject.transform.forward * AngleRange);
 
             RaycastHit hit;
 
-            if (Physics.Raycast(startPos + RAYCAST_OFFSET[i], this.transform.forward, out hit))
+            if (Physics.Raycast(startPos + RAYCAST_OFFSET[i], thisGameObject.transform.forward, out hit))
             {
 
-                if (Vector3.Distance(this.transform.position, hit.point) > AngleRange) continue;
+                if (Vector3.Distance(thisGameObject.transform.position, hit.point) > AngleRange) continue;
 
 
 
-                //âÒì]íÜÇæÇ¡ÇΩÇÁâΩÇ‡ÇµÇ»Ç¢
+                //ÔøΩÔøΩ]ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÁâΩÔøΩÔøΩÔøΩÔøΩÔøΩ»ÇÔøΩ
                 if (rotateFlag) return;
 
                 rotateFlag = true;
@@ -300,11 +281,11 @@ public class AIMove : MonoBehaviour, CharacterInsterface
 
     }
 
-    //Ç±Ç±Ç≈AIÇÃäpìxÇ…éwå¸ê´ÇéùÇΩÇπÇÈïKóvÇ™Ç†ÇÈ
+    //ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩAIÔøΩÃäpÔøΩxÔøΩ…éwÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩKÔøΩvÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
     private void ChangeAngle()
     {
 
-        float angle = this.transform.eulerAngles.y;
+        float angle = thisGameObject.transform.eulerAngles.y;
         angle += 360.0f;
         angle %= 360.0f;
 
@@ -313,17 +294,17 @@ public class AIMove : MonoBehaviour, CharacterInsterface
 
         nowMode = nextMode;
 
-        if (nowMode == NowMode.Shot) animator.SetTrigger("Shot");
+        if (nowMode == NowMode.Shot) AICharacterUtility.GetCharacterAI(ID).SetAnimatorTrigger("Shot");
 
 
     }
 
-    //ÉåÉCÇ…âΩÇ‡ìñÇΩÇÁÇ»Ç©Ç¡ÇΩÇ∆Ç´ÇÃèàóù
+    //ÔøΩÔøΩÔøΩCÔøΩ…âÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ»ÇÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ∆ÇÔøΩÔøΩÃèÔøΩÔøΩÔøΩ
     private void ResetAnimation()
     {
-        animator.SetBool("Left", false);
-        animator.SetBool("Right", false);
-        animator.SetBool("Back", false);
+        AICharacterUtility.GetCharacterAI(ID).SetAnimatorBool("Left", false);
+        AICharacterUtility.GetCharacterAI(ID).SetAnimatorBool("Right", false);
+        AICharacterUtility.GetCharacterAI(ID).SetAnimatorBool("Back", false);
         rotateFlag = false;
         daleyTime = 0;
     }
@@ -332,12 +313,12 @@ public class AIMove : MonoBehaviour, CharacterInsterface
 
     private bool ChengeAngle(Vector3 startPos, int heightNumber, GameObject tragetObject)
     {
-        //åªç›ÇÃäpìx
-        float nowAngle = Mathf.Atan2(this.transform.forward.x, this.transform.forward.z) * Mathf.Rad2Deg;
+        //ÔøΩÔøΩÔøΩ›ÇÃäpÔøΩx
+        float nowAngle = Mathf.Atan2(thisGameObject.transform.forward.x, thisGameObject.transform.forward.z) * Mathf.Rad2Deg;
 
         ChengeAngleType angleType = ChengeAngleType.None;
 
-        //ïœçXÇµÇΩäpìxÇÃó 
+        //ÔøΩœçXÔøΩÔøΩÔøΩÔøΩÔøΩpÔøΩxÔøΩÃóÔøΩ
         float angleVec = 0;
 
         Vector3 rayAngle = Vector3.zero;
@@ -347,14 +328,14 @@ public class AIMove : MonoBehaviour, CharacterInsterface
 
             RaycastHit hit;
 
-            //ç∂ï˚å¸ÇÃï˚å¸ÉxÉNÉgÉã
+            //ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÃïÔøΩÔøΩÔøΩÔøΩxÔøΩNÔøΩgÔøΩÔøΩ
             rayAngle.x = Mathf.Sin((nowAngle + angleVec) * Mathf.Deg2Rad);
             rayAngle.z = Mathf.Cos((nowAngle + angleVec) * Mathf.Deg2Rad);
 
-            //ç∂ï˚å¸ÇÃÉåÉC
+            //ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÃÉÔøΩÔøΩC
             if (Physics.Raycast(startPos + RAYCAST_OFFSET[heightNumber], rayAngle, out hit))
             {
-                if (Vector3.Distance(this.transform.position, hit.point) > ChengeAngleRange)
+                if (Vector3.Distance(thisGameObject.transform.position, hit.point) > ChengeAngleRange)
                 {
                     if (tragetObject != hit.transform.gameObject)
                         angleType = ChengeAngleType.Right;
@@ -366,15 +347,15 @@ public class AIMove : MonoBehaviour, CharacterInsterface
 
             }
 
-            //âEï˚å¸ÇÃï˚å¸ÉxÉNÉgÉã
+            //ÔøΩEÔøΩÔøΩÔøΩÔøΩÔøΩÃïÔøΩÔøΩÔøΩÔøΩxÔøΩNÔøΩgÔøΩÔøΩ
             rayAngle.x = Mathf.Sin((nowAngle - angleVec) * Mathf.Deg2Rad);
             rayAngle.z = Mathf.Cos((nowAngle - angleVec) * Mathf.Deg2Rad);
 
 
-            //âEï˚å¸ÇÃÉåÉC
+            //ÔøΩEÔøΩÔøΩÔøΩÔøΩÔøΩÃÉÔøΩÔøΩC
             if (Physics.Raycast(startPos + RAYCAST_OFFSET[heightNumber], rayAngle, out hit))
             {
-                if (Vector3.Distance(this.transform.position, hit.point) > ChengeAngleRange)
+                if (Vector3.Distance(thisGameObject.transform.position, hit.point) > ChengeAngleRange)
                 {
                     if (tragetObject != hit.transform.gameObject)
                         angleType = ChengeAngleType.Left;
@@ -393,7 +374,7 @@ public class AIMove : MonoBehaviour, CharacterInsterface
                 angleType = ChengeAngleType.Left;
                 break;
             }
-            //ïœçXÇ∑ÇÈï˚å¸Ç™åàÇ‹Ç¡ÇΩÇÁ
+            //ÔøΩœçXÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ‹ÇÔøΩÔøΩÔøΩÔøΩÔøΩ
             if (angleType != ChengeAngleType.None) break;
         }
 
@@ -410,11 +391,11 @@ public class AIMove : MonoBehaviour, CharacterInsterface
         switch (chenge)
         {
             case ChengeAngleType.Left:
-                animator.SetBool("Left", true);
+                AICharacterUtility.GetCharacterAI(ID).SetAnimatorBool("Left", true);
                 Debug.Log("Left");
                 break;
             case ChengeAngleType.Right:
-                animator.SetBool("Right", true);
+                AICharacterUtility.GetCharacterAI(ID).SetAnimatorBool("Right", true);
                 Debug.Log("Right");
                 break;
         }
@@ -425,7 +406,7 @@ public class AIMove : MonoBehaviour, CharacterInsterface
     private GameObject hitObject;
     private void Back()
     {
-        if (Vector3.Distance(hitObject.transform.position, this.transform.position) > AngleRange) return;
+        if (Vector3.Distance(hitObject.transform.position, thisGameObject.transform.position) > AngleRange) return;
 
         ResetAnimation();
 
@@ -434,12 +415,12 @@ public class AIMove : MonoBehaviour, CharacterInsterface
 
         nowMode = NowMode.ChageAngle;
 
-        Vector3 vec = flag.transform.position - this.transform.position;
-        //åªç›ÇÃäpìx
+        Vector3 vec = flag.transform.position - thisGameObject.transform.position;
+        //ÔøΩÔøΩÔøΩ›ÇÃäpÔøΩx
         float nowAngle = Mathf.Atan2(vec.x, vec.z) * Mathf.Rad2Deg;
 
 
-        //ïœçXÇµÇΩäpìxÇÃó 
+        //ÔøΩœçXÔøΩÔøΩÔøΩÔøΩÔøΩpÔøΩxÔøΩÃóÔøΩ
         float angleVec = 0;
 
         Vector3 rayAngle = Vector3.zero;
@@ -451,29 +432,29 @@ public class AIMove : MonoBehaviour, CharacterInsterface
 
             RaycastHit hit;
 
-            //ç∂ï˚å¸ÇÃï˚å¸ÉxÉNÉgÉã
+            //ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÃïÔøΩÔøΩÔøΩÔøΩxÔøΩNÔøΩgÔøΩÔøΩ
             rayAngle.x = Mathf.Sin((nowAngle + angleVec) * Mathf.Deg2Rad);
             rayAngle.z = Mathf.Cos((nowAngle + angleVec) * Mathf.Deg2Rad);
 
-            //ç∂ï˚å¸ÇÃÉåÉC
-            if (Physics.Raycast(this.transform.position + RAYCAST_OFFSET[0], rayAngle, out hit))
+            //ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÃÉÔøΩÔøΩC
+            if (Physics.Raycast(thisGameObject.transform.position + RAYCAST_OFFSET[0], rayAngle, out hit))
             {
-                if (Vector3.Distance(this.transform.position, hit.point) > ChengeAngleRange)
+                if (Vector3.Distance(thisGameObject.transform.position, hit.point) > ChengeAngleRange)
                 {
                     if (hitObject != hit.transform.gameObject)
                         nextMoveAngle = nowAngle + angleVec;
                 }
             }
 
-            //âEï˚å¸ÇÃï˚å¸ÉxÉNÉgÉã
+            //ÔøΩEÔøΩÔøΩÔøΩÔøΩÔøΩÃïÔøΩÔøΩÔøΩÔøΩxÔøΩNÔøΩgÔøΩÔøΩ
             rayAngle.x = Mathf.Sin((nowAngle - angleVec) * Mathf.Deg2Rad);
             rayAngle.z = Mathf.Cos((nowAngle - angleVec) * Mathf.Deg2Rad);
 
 
-            //âEï˚å¸ÇÃÉåÉC
-            if (Physics.Raycast(this.transform.position + RAYCAST_OFFSET[0], rayAngle, out hit))
+            //ÔøΩEÔøΩÔøΩÔøΩÔøΩÔøΩÃÉÔøΩÔøΩC
+            if (Physics.Raycast(thisGameObject.transform.position + RAYCAST_OFFSET[0], rayAngle, out hit))
             {
-                if (Vector3.Distance(this.transform.position, hit.point) > ChengeAngleRange)
+                if (Vector3.Distance(thisGameObject.transform.position, hit.point) > ChengeAngleRange)
                 {
                     if (hitObject != hit.transform.gameObject)
                         nextMoveAngle = nowAngle - angleVec;
@@ -486,7 +467,7 @@ public class AIMove : MonoBehaviour, CharacterInsterface
                 nextMoveAngle = 0;
                 break;
             }
-            //ïœçXÇ∑ÇÈï˚å¸Ç™åàÇ‹Ç¡ÇΩÇÁ
+            //ÔøΩœçXÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ‹ÇÔøΩÔøΩÔøΩÔøΩÔøΩ
             if (nextMoveAngle != 0) break;
         }
 
@@ -503,7 +484,7 @@ public class AIMove : MonoBehaviour, CharacterInsterface
 
     Vector3 endPosition = Vector3.zero;
 
-    public void OnCollisionEnter(Collision collision)
+    public void HitObject(Collision collision)
     {
         if (shotingFlag && nowMode != NowMode.Shot) 
         {
@@ -513,16 +494,16 @@ public class AIMove : MonoBehaviour, CharacterInsterface
 
         if (collision.transform.tag == "Floor") return;
 
-        endPosition = this.transform.position + this.transform.forward;
+        endPosition = thisGameObject.transform.position + thisGameObject.transform.forward;
 
         hitObject = collision.gameObject;
 
-        animator.SetBool("Back", true);
+        AICharacterUtility.GetCharacterAI(ID).SetAnimatorBool("Back", true);
         nowMode = NowMode.Back;
 
-        this.transform.LookAt(hitObject.transform);
+        thisGameObject.transform.LookAt(hitObject.transform);
 
-        this.transform.eulerAngles = new Vector3(0, this.transform.eulerAngles.y, 0);
+        thisGameObject.transform.eulerAngles = new Vector3(0, thisGameObject.transform.eulerAngles.y, 0);
 
     }
 
@@ -532,15 +513,15 @@ public class AIMove : MonoBehaviour, CharacterInsterface
 
         Vector3 vec = playerFlag.transform.position - gameStartPosition;
         float angle = Mathf.Atan2(vec.x, vec.z);
-        this.transform.position = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle))*5 + playerFlag.transform.position;
-        isLife = true;
-        collider.enabled = true;
+        thisGameObject.transform.position = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle))*5 + playerFlag.transform.position;
+        
+        AICharacterUtility.GetCharacterAI(ID).SetISLife(true);
 
     }
 
     public void GroundSet()
     {
-        Vector3 position = this.transform.position;
+        Vector3 position = thisGameObject.transform.position;
         position.y = 0;
     }
 }

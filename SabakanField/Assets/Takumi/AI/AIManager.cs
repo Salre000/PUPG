@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class AIManager : MonoBehaviour
 {
-    List<AIMove> players = new List<AIMove>();
+    List<AI> players = new List<AI>();
     List<bool> playersLife = new List<bool>();
-    List<AIMove> enemys = new List<AIMove>();
+    List<AI> enemys = new List<AI>();
     List<bool> enemyLife = new List<bool>();
 
     GameObject[] flagObject = new GameObject[2];
@@ -19,13 +19,18 @@ public class AIManager : MonoBehaviour
 
     GameObject player;
 
-    private List<int> deathCount = new List<int>(AI_NUMBER * 2) { 0 };
-    private List<int> killCount = new List<int>(AI_NUMBER * 2) { 0 };
+    private  List<int> deathCount = new List<int>(AI_NUMBER * 2) { 0 };
+    private  List<int> killCount = new List<int>(AI_NUMBER * 2) { 0 };
+
+    private int IDNumber = 0;
+
+    public List<int> GetKillCount() {  return killCount; }
+    public List<int>GetDeathCount() { return deathCount; }
 
     public void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        AIUtility.aIManager = this;
+
     }
     public void FixedUpdate()
     {
@@ -35,6 +40,13 @@ public class AIManager : MonoBehaviour
 
     public void AddDeathCount(int index) { deathCount[index]++; }
     public void AdDKillCount(int index) { killCount[index]++; }
+
+    public int GetID()
+    {
+        int number = IDNumber;
+        IDNumber++; 
+        return number;
+    }
 
     public Vector3 PlayerFlagPosition() {  return flagObject[0].transform.position; }  
 
@@ -83,7 +95,7 @@ public class AIManager : MonoBehaviour
         players.Capacity = players.Capacity;
         for (int i = 0; i < players.Count; i++)
         {
-            playersLife.Add(players[i].GetISLife());
+            playersLife.Add(AICharacterUtility.GetCharacterAI(i).GetISLife());
 
         }
 
@@ -91,7 +103,7 @@ public class AIManager : MonoBehaviour
         enemyLife.Capacity = enemys.Capacity;
         for (int i = 0; i < enemys.Count; i++)
         {
-            enemyLife.Add(enemys[i].GetISLife());
+            enemyLife.Add(AICharacterUtility.GetCharacterAI(i).GetISLife());
 
         }
 
@@ -105,6 +117,16 @@ public class AIManager : MonoBehaviour
 
     public void CreateAI()
     {
+
+        killCount.Clear();
+        deathCount.Clear();
+        killCount.Add(0);
+        deathCount.Add(0);
+
+
+
+
+
         for (int i = 0; i < flagObject.Length; i++)
         {
             
@@ -126,11 +148,12 @@ public class AIManager : MonoBehaviour
 
                 ai.transform.name += ((i * 5) + j).ToString();
 
-                AIMove aIMove = ai.GetComponent<AIMove>();
+                AI aIMove = ai.GetComponent<AI>();
 
-                aIMove.SetFlagAngle(flagObject[(i + 1) % 2]);
-                aIMove.SetPlayerFlag(flagObject[i]);
-                aIMove.SetID((i * 5) + j);
+                aIMove.Initialization();
+
+                aIMove.SetEnemyFlag(flagObject[(i + 1) % 2]);
+                aIMove.SetFlag(flagObject[i]);
 
                 killCount.Add(0);
                 deathCount.Add(0);

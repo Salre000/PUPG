@@ -27,6 +27,7 @@ public static class DataSaveCSV
 
         sw.Write(UIManager.Instance.GetTime().ToString());
 
+        sw.Flush();
 
         sw.Close();
 
