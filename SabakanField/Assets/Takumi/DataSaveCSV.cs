@@ -12,12 +12,16 @@ public static class DataSaveCSV
 
    public static void InGameDataSave(string []kill,string []death)
     {
+        string Kill =string.Join(",", kill);
+        string Death = string.Join(",", death);
         StreamWriter sw; 
 
-        sw = new StreamWriter(Application.dataPath + FILE_PASS, true);
+        sw = new StreamWriter(Application.dataPath + FILE_PASS, false);
 
-        sw.Write(kill);
-        sw.Write(death);
+        sw.WriteLine(Kill);
+        
+        sw.WriteLine(Death);
+
         sw.Write(UIManager.Instance.GetTime().ToString());
 
 
