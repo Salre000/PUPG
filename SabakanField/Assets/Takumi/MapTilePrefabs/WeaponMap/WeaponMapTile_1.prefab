@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 8432328404846012923}
   - component: {fileID: 6390778350307880881}
   - component: {fileID: 1780667938948415826}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WeaponMapTile_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,6 +222,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'Sniper Rifel '
       objectReference: {fileID: 0}
+    - target: {fileID: 8360218140025613808, guid: 1026b8d41fe11a046827ddb2303d51ad, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 9173452792615974730, guid: 1026b8d41fe11a046827ddb2303d51ad, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -300,6 +304,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GlassTank
       objectReference: {fileID: 0}
+    - target: {fileID: 1589909508595142, guid: 9c497fb69241f2244b41ccc375bc8606, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1874928956802572, guid: 9c497fb69241f2244b41ccc375bc8606, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4302838756563234, guid: 9c497fb69241f2244b41ccc375bc8606, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -359,6 +371,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1589909508595142, guid: 9c497fb69241f2244b41ccc375bc8606, type: 3}
   m_PrefabInstance: {fileID: 8994961015098001120}
   m_PrefabAsset: {fileID: 0}
+--- !u!64 &4810584574194947746
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8994008832201677606}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300002, guid: fb6989b4255414a4aab2d30dc686555b, type: 3}
 --- !u!114 &3577419384848123954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,20 +411,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 2926759614367870442}
   _reCastTime: 10
---- !u!64 &4810584574194947746
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8994008832201677606}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: fb6989b4255414a4aab2d30dc686555b, type: 3}
 --- !u!4 &8997009026054823874 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4302838756563234, guid: 9c497fb69241f2244b41ccc375bc8606, type: 3}
