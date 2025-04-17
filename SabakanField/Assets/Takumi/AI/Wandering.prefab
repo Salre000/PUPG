@@ -2573,6 +2573,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8401323367022948225}
     m_Modifications:
+    - target: {fileID: 5251616231877753071, guid: 1026b8d41fe11a046827ddb2303d51ad, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 7793185537194749393, guid: b75c529d0f7a33640903644a1858ce59, type: 3}
     - target: {fileID: 8360218140025613808, guid: 1026b8d41fe11a046827ddb2303d51ad, type: 3}
       propertyPath: m_Name
       value: 'Sniper Rifel '
