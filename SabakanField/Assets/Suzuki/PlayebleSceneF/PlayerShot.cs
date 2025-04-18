@@ -30,6 +30,13 @@ public class PlayerShot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // ポーズ画面が有効になっているとき撃たない
+        // リコイルをポーズ連打で無しにするのを防ぐためRecoilを中でも実行させとく
+        if (UIManager.Instance.IsPause())
+        {
+            Recoil();
+            return;
+        }
         if (Input.GetMouseButtonDown(0))
         {
             Shot();

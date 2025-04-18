@@ -22,6 +22,8 @@ public class LookCamera : MonoBehaviour
     }
     void Update()
     {
+        // ポーズを開いているときはマウスで視点移動させない
+        if (UIManager.Instance.IsPause()) return;
         MouseCameraRotation();
     }
 
