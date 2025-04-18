@@ -6,7 +6,6 @@ public class OptionManager : MonoBehaviour
 {
     // オプション設定シングルトン
     public static OptionManager Instance;
-
     // adsする場合切り替えか長押しか true:切り替え false:長押し
     private bool _adsSetting = false;
 

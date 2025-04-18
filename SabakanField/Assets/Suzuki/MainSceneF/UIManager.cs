@@ -20,14 +20,17 @@ public class UIManager : MonoBehaviour
     private const float _PAERCENT = 10.0f;
     // ゲージの値
     private float _count = 0.0f;
-
     // 制限時間クラス
     private TimeLimit _timeLimit;
+    // ポーズクラス
+    private PauseWindow _pauseWindow;
 
-    
 
-    private bool _DebugClearCheck = false;
+    // ポーズ画面を開く閉じる
+    private bool _isPause = false;
 
+    // ゲージ100%でくりあしたか
+    private bool _ClearCheckFlag = false;
 
     private void Awake()
     {
@@ -46,6 +49,7 @@ public class UIManager : MonoBehaviour
 
     private void Initialize()
     {
+
         _playerSideGageImage = GameObject.Find("PlayerSideGageImage").GetComponent<Image>();
         _playerSideGageImage.fillAmount = 0.0f;
         _stringBuilder.Clear();
@@ -53,14 +57,19 @@ public class UIManager : MonoBehaviour
         _playerSideGagePaercentText = GameObject.Find("PercentText").GetComponent<TextMeshProUGUI>();
         _playerSideGagePaercentText.text = _stringBuilder.ToString();
 
+        // クラス群
         _timeLimit = new TimeLimit();
         _timeLimit.Initialize();
+        _pauseWindow = new PauseWindow();
+        _pauseWindow.Initialize();
 
     }
 
+    // クラスの実行処理
     private void Execute()
     {
         _timeLimit.Execute();
+        _pauseWindow.Execute();
     }
 
     public bool GageMaxCheck()
@@ -70,7 +79,7 @@ public class UIManager : MonoBehaviour
         if (_count >= _MAX_FLAG_GAGE)
         {
             _count = _MAX_FLAG_GAGE;
-            DebugGoClearSceneCheck();
+            CheckClearScene();
             return true;
         }
 
@@ -80,11 +89,10 @@ public class UIManager : MonoBehaviour
     // 占領ゲージの上昇
     public void FlagCountGage(float count)
     {
-        if (GageMaxCheck())
-            return;
+        // ゲージが100%もしくはデス状態は増えないようにする
+        if (GageMaxCheck() || PlayerManager.IsPlayerDead()) return;
         _count = count / _PAERCENT;
         // ゲージの上昇
-
         _playerSideGageImage.fillAmount = _count;
     }
 
@@ -95,20 +103,24 @@ public class UIManager : MonoBehaviour
         _stringBuilder.Clear();
         float count = _count * _PAERCENT;
         _stringBuilder.AppendFormat("{0:0.0}%", count);
-        _playerSideGagePaercentText.text =_stringBuilder.ToString();
+        _playerSideGagePaercentText.text = _stringBuilder.ToString();
     }
 
-
-
-    // デバッグ用クリア画面遷移チェック
-    private void DebugGoClearSceneCheck()
+    // クリア画面遷移チェック
+    private void CheckClearScene()
     {
-        if(!_DebugClearCheck)
-        GameManager.Instance.GameClearCheck();
-        _DebugClearCheck=true;
+        if (!_ClearCheckFlag)
+            GameManager.Instance.GameClearCheck();
+        _ClearCheckFlag = true;
     }
+
+
 
     // 時間切れかどうか返す
     public bool GetOverLimitTime() { return _timeLimit.GetOverLimit(); }
     public float GetTime() { return _timeLimit.GetTime(); }
+    // ポーズ画面を開く閉じる
+    public void SetPauseWindow() { if (_isPause) _isPause = false; else _isPause = true; }
+    // ポーズ画面開閉状態チェック
+    public bool IsPause() { return _isPause; }
 }

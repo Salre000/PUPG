@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour
+public class PlayerOperation : MonoBehaviour
 {
     [SerializeField, Header("歩き状態の速度")]
     private float _walkSpeed = 4.0f;
@@ -42,6 +42,9 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        // デバック自滅
+        if(Input.GetKeyUp(KeyCode.K)) PlayerManager.SetIsPlayerDead(true);
+
         if (PlayerManager.IsPlayerDead()) return;
         Movement();
         Ads();
