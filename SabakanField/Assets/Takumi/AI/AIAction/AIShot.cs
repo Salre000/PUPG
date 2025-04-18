@@ -16,21 +16,28 @@ public class AIShot
     GameObject ganObject;
     public void SetGanObject(GameObject gameObject) {  ganObject = gameObject; }
 
+    private readonly float RANDOM_ANGLE = 45;
+
     public void Shot()
     {
 
         Vector3 startPos = ganObject.transform.position + ganObject.transform.forward;
+        
+        //デバッグ用
+        Debug.DrawLine(startPos,startPos+(new Vector3()*10));
+        Debug.DrawLine(startPos,startPos+(new Vector3()*10));
+
+
+
         RaycastHit hit;
 
         List<GameObject> targets =AICharacterFunction.TargetEnemysInAngle(ganObject, AICharacterUtility.GetPlayerFaction(ID));
-        //AICharacterUtility.SetShotFlag(ID,false);
 
         if (targets.Count <= 0) return;
 
         GameObject targetObject = AICharacterFunction.TargetGetAngle
             (targets,ID,thisGameObject, startPos);
 
-        //AICharacterUtility.SetShotFlag(ID,false);
         if (targetObject == null) return;
 
         Vector3 Vec = (targetObject.transform.position+Vector3.up) - startPos;
@@ -42,7 +49,7 @@ public class AIShot
             GameObject ss = hit.transform.gameObject;
         }
 
-        Vector3 endPos= BulletMoveFunction.RayHitTest(startPos, Vec,AICharacterUtility.GetPlayerFaction(ID), ID);
+        BulletMoveFunction.RayHitTest(startPos, Vec,AICharacterUtility.GetPlayerFaction(ID), ID);
 
 
     }
