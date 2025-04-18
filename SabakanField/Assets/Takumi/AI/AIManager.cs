@@ -15,7 +15,7 @@ public class AIManager : MonoBehaviour
 
     [SerializeField] GameObject origenAI;
 
-    const int AI_NUMBER = 2;
+    const int AI_NUMBER = 5;
 
     GameObject player;
 
@@ -26,6 +26,10 @@ public class AIManager : MonoBehaviour
 
     public List<int> GetKillCount() { return killCount; }
     public List<int> GetDeathCount() { return deathCount; }
+
+    public List<bool> GetPlayersLife() { return playersLife; }
+    public List<bool> GetEnemyLife() { return enemyLife; }
+
 
     public void Awake()
     {

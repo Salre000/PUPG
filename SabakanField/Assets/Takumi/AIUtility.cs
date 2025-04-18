@@ -33,4 +33,7 @@ public static class AIUtility
 
     public static int GetID() {return aIManager.GetID();}
 
+    public static List<bool> GetPlayersLife() {  return aIManager.GetPlayersLife(); }
+    public static List<bool> GetEnemysLife() {return aIManager.GetEnemyLife(); }
+
 }
