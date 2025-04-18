@@ -170,7 +170,6 @@ public class AIMove
 
         for (int i = 0; i < RAYCAST_OFFSET.Length; i++)
         {
-            Debug.DrawRay(startPos + RAYCAST_OFFSET[i], thisGameObject.transform.forward * AngleRange);
 
             RaycastHit hit;
 
@@ -433,9 +432,9 @@ public class AIMove
         {
 
         AICharacterUtility.GetCharacterAI(ID).SetAnimatorFloat("Speed", 1);
+        AICharacterUtility.GetCharacterAI(ID).SetISLife(true);
         });
 
-        AICharacterUtility.GetCharacterAI(ID).SetISLife(true);
 
     }
 
