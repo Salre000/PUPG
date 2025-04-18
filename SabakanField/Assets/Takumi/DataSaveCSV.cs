@@ -9,7 +9,7 @@ public static class DataSaveCSV
 
     private static readonly string FILE_PASS = "/Resources/";
 
-    public const string FILE_NAME= "InGameData / SaveData";
+    public const string FILE_NAME= "InGameData /SaveData";
 
     private static readonly string FILR_EXTENSION = ".csv";
 
