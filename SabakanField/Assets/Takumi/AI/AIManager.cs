@@ -15,7 +15,7 @@ public class AIManager : MonoBehaviour
 
     [SerializeField] GameObject origenAI;
 
-    const int AI_NUMBER = 5;
+    const int AI_NUMBER = 2;
 
     GameObject player;
 
