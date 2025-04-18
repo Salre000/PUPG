@@ -35,9 +35,6 @@ public class PlayerOperation : MonoBehaviour
         _rifelPosition = _rifel.transform.localPosition;
         _resetRifelX = _rifel.transform.localPosition.x;
         _resetView = _camera.fieldOfView;
-
-
-
     }
 
     void Update()
@@ -45,6 +42,9 @@ public class PlayerOperation : MonoBehaviour
         // デバック自滅
         if(Input.GetKeyUp(KeyCode.K)) PlayerManager.SetIsPlayerDead(true);
 
+        // ポーズを開いているとき移動できないようにする
+        if (UIManager.Instance.IsPause()) return;
+        // 死んでいるとき
         if (PlayerManager.IsPlayerDead()) return;
         Movement();
         Ads();
