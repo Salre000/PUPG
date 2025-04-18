@@ -14,7 +14,7 @@ public class TestRay : MonoBehaviour
     void Update()
     {
         
-        Debug.DrawRay(transform.position, transform.forward);
+        Debug.DrawRay(transform.position, transform.forward*10,Color.blue);
 
     }
 }
