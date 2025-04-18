@@ -5,9 +5,9 @@ using UnityEngine;
 public class LookCamera : MonoBehaviour
 {
     [SerializeField]
-    private float _deadzoneX = 0.1f;
+    private float _deadzoneX = 0;
     [SerializeField]
-    private float _deadzoneY = 0.1f;
+    private float _deadzoneY = 0;
     [SerializeField]
     private GameObject _player;
 
@@ -30,16 +30,16 @@ public class LookCamera : MonoBehaviour
         //マウスカーソルで左右視点+横回転
         float mouseCameraX = Input.GetAxis("Mouse X");
         recoilNum = mouseCameraX;
-        if (Mathf.Abs(mouseCameraX) > _deadzoneX) 
+        if (Mathf.Abs(mouseCameraX) >= _deadzoneX) 
         {
             _player.transform.RotateAround(_player.transform.position, Vector3.up, mouseCameraX); 
 
         }
-        float mauseCameraY = Input.GetAxis("Mouse Y");
+        float mouseCameraY = Input.GetAxis("Mouse Y");
         // 
-        if (Mathf.Abs(mauseCameraY) > _deadzoneY)
+        if (Mathf.Abs(mouseCameraY) >= _deadzoneY)
         {
-            transform.RotateAround(transform.position, Vector3.right, -mauseCameraY);
+            transform.RotateAround(transform.position, Vector3.right, -mouseCameraY);
         }
         LookLimit();
         Quaternion quate = transform.rotation;
