@@ -16,17 +16,10 @@ public class AIShot
     GameObject ganObject;
     public void SetGanObject(GameObject gameObject) {  ganObject = gameObject; }
 
-    private readonly float RANDOM_ANGLE = 45;
-
     public void Shot()
     {
 
         Vector3 startPos = ganObject.transform.position + ganObject.transform.forward;
-        
-        //デバッグ用
-        Debug.DrawLine(startPos,startPos+(new Vector3()*10));
-        Debug.DrawLine(startPos,startPos+(new Vector3()*10));
-
 
 
         RaycastHit hit;
@@ -40,19 +33,39 @@ public class AIShot
 
         if (targetObject == null) return;
 
-        Vector3 Vec = (targetObject.transform.position+Vector3.up) - startPos;
+        Vector3 Vec = (targetObject.transform.position) - startPos;
 
-        Debug.DrawRay(startPos, Vec, Color.red, 1);
+        float angle = Mathf.Atan2(Vec.x, Vec.z);
 
-        if (Physics.Raycast(startPos, Vec, out hit))
-        {
-            GameObject ss = hit.transform.gameObject;
-        }
+        angle += GetRandomAngle();
+
+        Vec = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle));
+
+
+        //弾の軌道の可視化
+        //Debug.DrawRay(startPos, Vec*1000, Color.red, 1000);
 
         BulletMoveFunction.RayHitTest(startPos, Vec,AICharacterUtility.GetPlayerFaction(ID), ID);
 
 
     }
+    float GetRandomAngle()
+    {
 
+        float angle = 0;
+        for (int i = 0; i < 5; i++)
+        {
+
+            angle -= UnityEngine.Random.Range(0, 5);
+            angle += UnityEngine.Random.Range(0, 5);
+        }
+
+
+        Debug.Log(angle);
+
+        return angle * Mathf.Deg2Rad;
+
+
+    }
 
 }

@@ -57,7 +57,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.83025825
+      - time: 0.92020535
         functionName: Resurrect
         data: 
         objectReferenceParameter: {instanceID: 0}

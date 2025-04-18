@@ -40,14 +40,11 @@ public static class AICharacterFunction
         for (int i = 0; i < targets.Count; i++)
         {
             RaycastHit hit;
-            Debug.DrawLine(startPos, targets[i].transform.position, Color.yellow);
 
 
             Vector3 dir = targets[i].transform.position - thisGameObject.transform.position;
             if (Physics.Raycast(startPos, dir, out hit))
             {
-                //デバッグ用
-                Debug.DrawLine(startPos, hit.point, Color.cyan);
 
 
                 CharacterInsterface bullet = hit.transform.GetComponentInParent<CharacterInsterface>();
