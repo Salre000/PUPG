@@ -19,13 +19,13 @@ public class AIManager : MonoBehaviour
 
     GameObject player;
 
-    private  List<int> deathCount = new List<int>(AI_NUMBER * 2) { 0 };
-    private  List<int> killCount = new List<int>(AI_NUMBER * 2) { 0 };
+    private List<int> deathCount = new List<int>(AI_NUMBER * 2) { 0 };
+    private List<int> killCount = new List<int>(AI_NUMBER * 2) { 0 };
 
     private int IDNumber = 0;
 
-    public List<int> GetKillCount() {  return killCount; }
-    public List<int>GetDeathCount() { return deathCount; }
+    public List<int> GetKillCount() { return killCount; }
+    public List<int> GetDeathCount() { return deathCount; }
 
     public void Awake()
     {
@@ -44,23 +44,23 @@ public class AIManager : MonoBehaviour
     public int GetID()
     {
         int number = IDNumber;
-        IDNumber++; 
+        IDNumber++;
         return number;
     }
 
-    public Vector3 PlayerFlagPosition() {  return flagObject[0].transform.position; }  
+    public Vector3 PlayerFlagPosition() { return flagObject[0].transform.position; }
 
     public void DataSave()
     {
         IDNumber = 0;
         AICharacterUtility.ClearCharacterAI();
 
-        string[]kill = new string[killCount.Count];
-        string[]death = new string[deathCount.Count];
-        for(int i = 0; i < AI_NUMBER * 2; i++) 
+        string[] kill = new string[killCount.Count];
+        string[] death = new string[deathCount.Count];
+        for (int i = 0; i < AI_NUMBER * 2; i++)
         {
             kill[i] = killCount[i].ToString();
-            death[i]=deathCount[i].ToString();
+            death[i] = deathCount[i].ToString();
 
         }
         DataSaveCSV.InGameDataSave(kill, death);
@@ -80,12 +80,19 @@ public class AIManager : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            if (isEnemyTeam) list.Add(players[i].gameObject);
-            else list.Add(enemys[i].gameObject);
-
+            if (isEnemyTeam)
+            {
+                if (!players[i].GetStatus().GetISLife()) continue;
+                list.Add(players[i].gameObject);
+            }
+            else
+            {
+                if (!enemys[i].GetStatus().GetISLife()) continue;
+                list.Add(enemys[i].gameObject);
+            }
         }
 
-        if (isEnemyTeam && player != null) list.Add(player);
+        if (isEnemyTeam && player != null&&!PlayerManager.IsPlayerDead()) list.Add(player);
 
 
         return list;
@@ -132,7 +139,7 @@ public class AIManager : MonoBehaviour
 
         for (int i = 0; i < flagObject.Length; i++)
         {
-            
+
             Vector3 vec = flagObject[(i + 1) % 2].transform.position - flagObject[i].transform.position;
 
             float angle = Mathf.Atan2(vec.x, vec.z) * Mathf.Rad2Deg;

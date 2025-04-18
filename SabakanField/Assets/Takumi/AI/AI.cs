@@ -6,9 +6,14 @@ using static AIMove;
 public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
 {
 
+    [SerializeField]private GameObject gunObject;
+
     AIMove move;
 
     AIStatus status;
+    public AIStatus GetStatus() {  return status; }
+
+    AIShot shot;
 
     private System.Func<bool> _PlayerFaction;
     public void SetPlayerFaction(System.Func<bool> playerFaction) { _PlayerFaction = playerFaction; }
@@ -19,26 +24,32 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
     public AIMove.NowMode nowMode;
     public AIMove.NowMode nextMode;
 
+    public bool shotShotFlag;
+    public bool moveShotFlag;
+    //
 
     private bool invincible=false;
     private float invincibleTime = 0;
 
     public void Initialization()
     {
+        AICharacterUtility.AddAI(this);
 
         move=new AIMove();
         status=new AIStatus();
+        shot=new AIShot();
 
+        shot.SetGameObject(this.gameObject);
+        shot.SetGanObject(gunObject);
         status.Start(this.gameObject);
         move.SetThisGameObject(this.gameObject);
 
+
+
         move.Start();
 
-        AICharacterUtility.AddAI(status);
-
+        shot.SetID(status.GetID());
         move.SetID(status.GetID());
-
-        move.SetPlayerFaction(PlayerFaction);
 
     }
 
@@ -49,6 +60,8 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
 
         nowMode = move.nowMode;
         nextMode = move.nextMode;
+        shotShotFlag = shot.shotingFlag;
+        moveShotFlag=move.shotingFlag;
 
         move.FixedUpdate();
 
@@ -69,10 +82,12 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
     public void SetFlag(GameObject game) { move.SetPlayerFlag(game); }
     public void SetEnemyFlag(GameObject flag) { move.SetFlagAngle(flag); }
 
+    public void SetShotFlag(bool flag) {  move.SetShotFlag(flag);shot.SetShotFlag(flag); }
+
 
     public void ReStart() {  move.ReStart(); }
     public void EndShot() {  move.EndShot(); }
-    public void Shot() {  move.Shot(); }
+    public void Shot() {  shot.Shot(); }
     public void Resurrect() {  move.Resurrect(); }
 
     public bool Invincible()
@@ -94,4 +109,6 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
         if(invincibleTime>=1)invincible = false;
 
     }
+
+
 }

@@ -32,11 +32,6 @@ public class AIMove
 
     private Vector3 gameStartPosition = Vector3.zero;
 
-    private System.Func<bool> _PlayerFaction;
-    public void SetPlayerFaction(System.Func<bool> playerFaction) { _PlayerFaction = playerFaction; }
-
-    public bool PlayerFaction() { return _PlayerFaction(); }
-
     GameObject flag;
     GameObject playerFlag;
     public void SetFlagAngle(GameObject flag) { this.flag = flag; }
@@ -108,12 +103,14 @@ public class AIMove
     public void EndShot()
     {
         nowMode = NowMode.Wandering;
+        AICharacterUtility.SetShotFlag(ID, false);
+
     }
 
     public void ReStart()
     {
         nowMode = NowMode.Wandering;
-        shotingFlag = false;
+        AICharacterUtility.SetShotFlag(ID, false);
 
         ResetAnimation();
     }
@@ -129,75 +126,20 @@ public class AIMove
     {
         if (shotingFlag) return;
 
-        List<GameObject> targets = TargetEnemysInAngle();
+        List<GameObject> targets =AICharacterFunction.TargetEnemysInAngle(thisGameObject,AICharacterUtility.GetPlayerFaction(ID));
 
         if (targets.Count <= 0) return;
 
-        TargetGetAngle(targets);
+        Vector3 startPos = thisGameObject.transform.position + RAYCAST_OFFSET[0] + thisGameObject.transform.forward;
 
-    }
-    //����AI�̎��E���ɓG�͂���̂��𔻒f����֐�
-    private List<GameObject> TargetEnemysInAngle()
-    {
+        GameObject hitObject= AICharacterFunction.TargetGetAngle(targets,ID,thisGameObject, startPos);
 
-        List<GameObject> targetObjcets = AIUtility.GetRelativeEnemy(PlayerFaction());
+        if (hitObject == null) return;
 
-        List<GameObject> targets = new List<GameObject>();
+        thisGameObject.GetComponent<AI>();
 
+        AICharacterUtility.SetShotFlag(ID, true);
 
-        for (int i = 0; i < targetObjcets.Count; i++)
-        {
-            Vector3 vec = targetObjcets[i].transform.position - thisGameObject.transform.position;
-            if (Vector3.Dot(thisGameObject.transform.forward, vec) < 0.8) continue;
-
-
-
-            targets.Add(targetObjcets[i].gameObject);
-
-        }
-
-
-        return targets;
-
-
-
-    }
-
-    //���E���ɂ���G��ray���ʂ邩�𔻒f���Ċp�x�𓱂�
-    private GameObject TargetGetAngle(List<GameObject> targets)
-    {
-        GameObject hitObject = null;
-
-        for (int i = 0; i < targets.Count; i++)
-        {
-            RaycastHit hit;
-            Vector3 startPosition = thisGameObject.transform.position + thisGameObject.transform.forward + RAYCAST_OFFSET[0];
-
-            Debug.DrawLine(startPosition, targets[i].transform.position, Color.yellow);
-
-
-            Vector3 dir = targets[i].transform.position - thisGameObject.transform.position;
-            if (Physics.Raycast(startPosition, dir, out hit))
-            {
-
-
-                CharacterInsterface bullet = hit.transform.GetComponentInParent<CharacterInsterface>();
-
-
-                if (bullet == null) continue;
-
-                hitObject = hit.transform.gameObject;
-
-
-
-            }
-
-
-        }
-        if (hitObject == null) return null;
-
-
-        shotingFlag = true;
         Vector3 tragetDir = hitObject.transform.position - thisGameObject.transform.position;
 
         nextMoveAngle = Mathf.Atan2(tragetDir.x, tragetDir.z) * Mathf.Rad2Deg;
@@ -207,44 +149,18 @@ public class AIMove
 
         Vector3 Cross = Vector3.Cross(thisGameObject.transform.forward, tragetDir);
 
-        if (Cross.y < 0) 
+        if (Cross.y < 0)
             AICharacterUtility.GetCharacterAI(ID).SetAnimatorBool("Left", true);
         else AICharacterUtility.GetCharacterAI(ID).SetAnimatorBool("Right", true);
         nowMode = NowMode.ChageAngle;
         nextMode = NowMode.Shot;
 
-        return hitObject;
 
     }
 
-    [SerializeField] private bool shotingFlag = false;
-    public void Shot()
-    {
+    [SerializeField] public bool shotingFlag = false;
+    public void SetShotFlag(bool flag) {  shotingFlag = flag; }
 
-        Vector3 startPos = thisGameObject.transform.position + thisGameObject.transform.forward / 10 + RAYCAST_OFFSET[0];
-        RaycastHit hit;
-
-        List<GameObject> targets = TargetEnemysInAngle();
-        shotingFlag = false;
-
-        if (targets.Count <= 0) return;
-
-        GameObject targetObject = TargetGetAngle(targets);
-        shotingFlag = false;
-        if (targetObject == null) return;
-
-        Vector3 Vec = targetObject.transform.position - thisGameObject.transform.position;
-
-        Debug.DrawRay(startPos, Vec, Color.red, 1);
-
-        if (Physics.Raycast(startPos, Vec, out hit))
-        {
-            GameObject ss = hit.transform.gameObject;
-        }
-
-        BulletMoveFunction.RayHitTest(startPos, Vec,PlayerFaction(),ID);
-
-    }
     private void Wandering()
     {
 
@@ -294,7 +210,8 @@ public class AIMove
 
         nowMode = nextMode;
 
-        if (nowMode == NowMode.Shot) AICharacterUtility.GetCharacterAI(ID).SetAnimatorTrigger("Shot");
+        if (nowMode == NowMode.Shot)
+            AICharacterUtility.GetCharacterAI(ID).SetAnimatorTrigger("Shot");
 
 
     }
@@ -486,7 +403,7 @@ public class AIMove
     {
         if (shotingFlag && nowMode != NowMode.Shot) 
         {
-            shotingFlag = false;
+            AICharacterUtility.SetShotFlag(ID, false);
             return;
         }
 
