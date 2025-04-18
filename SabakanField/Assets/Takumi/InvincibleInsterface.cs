@@ -6,7 +6,7 @@ public interface InvincibleInsterface
 {
 
     //true
-    public abstract bool Invincible();
+    public abstract bool GetInvincibleFlag();
 
 
 }

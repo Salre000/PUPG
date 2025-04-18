@@ -90,7 +90,7 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
     public void Shot() {  shot.Shot(); }
     public void Resurrect() {  move.Resurrect(); }
 
-    public bool Invincible()
+    public bool GetInvincibleFlag()
     {
 
         return invincible;

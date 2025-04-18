@@ -25,6 +25,10 @@ public class PlayerRespawn : MonoBehaviour, CharacterInsterface, InvincibleInste
 
     private void Update()
     {
+        // ƒfƒoƒbƒO–³“G
+        if (Input.GetKeyDown(KeyCode.M))
+            if (_invincibleFlag) _invincibleFlag = false; else _invincibleFlag = true;
+
         RespawnTimeCount();
     }
 
@@ -34,7 +38,7 @@ public class PlayerRespawn : MonoBehaviour, CharacterInsterface, InvincibleInste
         AIUtility.AddDeathCount();
         PlayerManager.SetIsPlayerDead(true);
         RespawnManager.Instance.DelayRespawn(gameObject, _respawnPosition, _respawnTime);
-        _invincibleFlag=true;
+        _invincibleFlag = true;
     }
 
     // •œŠˆŠ®—¹
@@ -62,12 +66,9 @@ public class PlayerRespawn : MonoBehaviour, CharacterInsterface, InvincibleInste
     {
         // w’è•b”•ª‘Ò‹@‚µ‚Ä‚©‚ç–³“G‰ğœ(€–S”»’è‚à‰ğœ)
         yield return new WaitForSeconds(_invincibleTime);
-        _invincibleFlag=false;
+        _invincibleFlag = false;
     }
 
     // €‚ñ‚Å‚éŠÔ‚Æ•œŠˆ‚µ‚Ä1•b‚Í–³“G
-    public bool Invincible()
-    {
-        return _invincibleFlag;
-    }
+    public bool GetInvincibleFlag() { return _invincibleFlag; }
 }
