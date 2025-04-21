@@ -5,6 +5,15 @@ using UnityEngine;
 public static class BulletMoveFunction 
 {
 
+    private static GameObject enemyPaint;
+    private static GameObject playerPaint;
+
+    public static void SetPaint(GameObject enemy,GameObject player) 
+    {
+        enemyPaint = enemy;
+        playerPaint = player;
+    }
+
     //射撃の処理の関数・当たった対象にインターフェースクラスが付いている事が前提
     static public Vector3 RayHitTest(Vector3 startPosition, Vector3 dir,bool playerFaction=true,int ID=0)
     {
