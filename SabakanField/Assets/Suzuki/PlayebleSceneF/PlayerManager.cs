@@ -10,8 +10,6 @@ public static class PlayerManager
     private static bool _isDead = false;
     // どのくらいの差でtrueにするかの値
     private const float _POSITION_MAGNITUDE = 5.0f;
-    // 右クリ検知
-    private static bool _isAds = false;
 
     // プレイヤーが(敵の)旗の範囲内に存在するか
     static public bool PlayerInFlagRange(Vector3 position) 
@@ -31,7 +29,5 @@ public static class PlayerManager
 
     public static bool IsPlayerDead() { return _isDead; }
     public static void SetIsPlayerDead(bool flag) {  _isDead = flag; }
-    public static bool IsAds() { return _isAds; }
-    public static void SetIsAds(bool flag) {  _isAds = flag; }
 
 }

@@ -57,7 +57,7 @@ public class TextAnim : MonoBehaviour
 
 
         // U‚ß‘¤Ÿ‚Á‚½‚Æ‚«
-        if (!UIManager.Instance.GetOverLimitTime())
+        if (!UIManager.Instance.GetOverTime())
         {
             resultText = _buleWinText;
             _text.color = _buleWinColor;

@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class OptionManager : MonoBehaviour
 {
     // オプション設定シングルトン
     public static OptionManager Instance;
-    // adsする場合切り替えか長押しか true:切り替え false:長押し
-    private bool _adsSetting = false;
+    // ADSする場合切り替えか長押しか true:切り替え false:長押し
+    private bool _adsType = false;
 
     private void Awake()
     {
@@ -17,13 +18,7 @@ public class OptionManager : MonoBehaviour
             Destroy(this);
     }
 
-    // adsする場合切り替えか長押しか設定
-    private void AdsSwitchSetting()
-    {
-        if(_adsSetting) _adsSetting=false;
-        else _adsSetting=true;
-    }
-
-
-    public bool GetAdsSetting() { return _adsSetting; }
+    // ADS方法
+    public void ChangeAdsType() { if (_adsType) _adsType = false; else _adsType = true; }
+    public bool GetAdsType() { return _adsType; }
 }

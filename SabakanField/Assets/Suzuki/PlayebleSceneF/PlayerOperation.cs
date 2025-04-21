@@ -25,6 +25,8 @@ public class PlayerOperation : MonoBehaviour
     // リセット値
     // 銃のADSしてないときの位置
     private float _resetRifelX;
+    // 切り替え式ADSの時用フラグ
+    private bool _isAds = false;
     // メインカメラのADSしてないときの位置
     private float _resetView;
 
@@ -72,37 +74,49 @@ public class PlayerOperation : MonoBehaviour
     {
         // 右クリックでADS
         // true:切り替え false:長押し
-        if (OptionManager.Instance.GetAdsSetting())
+        if (OptionManager.Instance.GetAdsType())
         {
             if (Input.GetMouseButtonDown(1))
             {
-
+                if(_isAds) _isAds = false;
+                else _isAds = true;
             }
+            if (_isAds)
+                AdsNow();
+            else
+                AdsReset();
         }
         else
         {
             if (Input.GetMouseButton(1))
-            {
-                // 銃を真正面に
-                _rifelPosition.x = 0;
-                _rifel.transform.localPosition = _rifelPosition;
-
-                // カメラをズーム
-                _fieldOfView = _FIELD_OF_VIEW;
-                _camera.fieldOfView = _fieldOfView;
-            }
+                AdsNow();
             else
-            {
-                // 銃を元の位置に
-                _rifelPosition.x = _resetRifelX;
-                _rifel.transform.localPosition = _rifelPosition;
-
-                // カメラズームを元の値に
-                _fieldOfView = _resetView;
-                _camera.fieldOfView = _fieldOfView;
-            }
+                AdsReset();
+            _isAds = false;
         }
 
+    }
+
+    private void AdsNow()
+    {
+        // 銃を真正面に
+        _rifelPosition.x = 0;
+        _rifel.transform.localPosition = _rifelPosition;
+
+        // カメラをズーム
+        _fieldOfView = _FIELD_OF_VIEW;
+        _camera.fieldOfView = _fieldOfView;
+    }
+
+    private void AdsReset()
+    {
+        // 銃を元の位置に
+        _rifelPosition.x = _resetRifelX;
+        _rifel.transform.localPosition = _rifelPosition;
+
+        // カメラズームを元の値に
+        _fieldOfView = _resetView;
+        _camera.fieldOfView = _fieldOfView;
     }
 
 }

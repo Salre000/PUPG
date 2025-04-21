@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
     private PauseWindow _pauseWindow;
 
 
+
     // ポーズ画面を開く閉じる
     private bool _isPause = false;
 
@@ -89,8 +90,6 @@ public class UIManager : MonoBehaviour
     // 占領ゲージの上昇
     public void FlagCountGage(float count)
     {
-        // ゲージが100%もしくはデス状態は増えないようにする
-        if (GageMaxCheck() || PlayerManager.IsPlayerDead()) return;
         _count = count / _PAERCENT;
         // ゲージの上昇
         _playerSideGageImage.fillAmount = _count;
@@ -117,10 +116,11 @@ public class UIManager : MonoBehaviour
 
 
     // 時間切れかどうか返す
-    public bool GetOverLimitTime() { return _timeLimit.GetOverLimit(); }
+    public bool GetOverTime() { return _timeLimit.GetOverTime(); }
     public float GetTime() { return _timeLimit.GetTime(); }
     // ポーズ画面を開く閉じる
-    public void SetPauseWindow() { if (_isPause) _isPause = false; else _isPause = true; }
+    public void ChangePauseWindow() { if (_isPause) _isPause = false; else _isPause = true; }
     // ポーズ画面開閉状態チェック
     public bool IsPause() { return _isPause; }
+
 }

@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (UIManager.Instance.GetOverLimitTime()&&!_finaleFlag)
+        if (UIManager.Instance.GetOverTime()&&!_finaleFlag)
         {
             GameClearCheck();
         }
