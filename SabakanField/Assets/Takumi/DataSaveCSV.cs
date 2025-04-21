@@ -1,18 +1,15 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using static UnityEditor.ObjectChangeEventStream;
 //データをCSVに保存するクラス
 public static class DataSaveCSV
 {
 
     private static readonly string FILE_PASS = "/Resources/";
 
-    public const string FILE_NAME_KD = "InGameData /SaveData";
-    public const string FILE_NAME_OPTION = "OptionData/OptionData";
+    public const string FILE_NAME_KD = "SaveData";
+    public const string FILE_NAME_OPTION = "OptionData";
 
     private static readonly string FILR_EXTENSION = ".csv";
 
@@ -28,8 +25,8 @@ public static class DataSaveCSV
         builder.Append(FILE_PASS);
         builder.Append(FILE_NAME_KD);
         builder.Append(FILR_EXTENSION);
-
-        sw = new StreamWriter(builder.ToString(), false);
+        sw = new StreamWriter(Application.dataPath + FILE_PASS + FILE_NAME_KD + FILR_EXTENSION, false);
+        //sw = new StreamWriter(builder.ToString(), false);
 
         sw.WriteLine(Kill);
 

@@ -57,6 +57,8 @@ public class CreateMap : MonoBehaviour
 
     public void Awake()
     {
+
+
         AIUtility.aIManager=_AIManager=GetComponent<AIManager>();
 
         CreateMapManager.createMap = this;
@@ -89,6 +91,7 @@ public class CreateMap : MonoBehaviour
         builder.Clear();
         builder.Append(_PLAN_PASS);
         builder.Append(_planData.GetMapTileName(0));
+
 
         //繋げたファイルパスを使いファイルのロードを行う
         TextAsset textAsset = Resources.Load<TextAsset>(builder.ToString());
