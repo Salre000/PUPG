@@ -11,7 +11,6 @@ public class TimeLimit:UIBase
     private float _time;                // 全体の時間
     private float _timeLimit_s = 0.0f;  // 秒
     private float _timeLimit_m = 0.0f;  // 分
-    private bool _LimitFlag = false;
     private bool _overTimeFlag = false;
     // 制限時間(固定値)
     private readonly float _TIME_LIMIT = 10.0f;
@@ -51,7 +50,7 @@ public class TimeLimit:UIBase
         if (!_overTimeFlag)
             _time -= Time.deltaTime;
         OverLimit();
-        if(GetOverLimit()) return;
+        if(GetOverTime()) return;
         _stringBuilder.Clear();
         _timeLimit_m = _time / 60.0f;
         _timeLimit_s = _time%60.0f;
@@ -72,8 +71,6 @@ public class TimeLimit:UIBase
             if (!GameManager.Instance.GetFlagRangeCheck())
             {
                 _overTimeFlag = true;
-                _LimitFlag = true;
-
             }
             return;
         }
@@ -83,8 +80,8 @@ public class TimeLimit:UIBase
         }
     }
 
-    // 時間切れかどうか返す
-    public bool GetOverLimit(){ return _LimitFlag; }
+    // _オーバータイムかどうか返す
+    public bool GetOverTime(){ return _overTimeFlag; }
     public float GetTime() { return _time; }
 
 }
