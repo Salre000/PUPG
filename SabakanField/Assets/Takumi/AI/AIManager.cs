@@ -36,14 +36,18 @@ public class AIManager : MonoBehaviour
     private List<int> deathCount = new List<int>(AI_NUMBER * 2) { 0 };
     private List<int> killCount = new List<int>(AI_NUMBER * 2) { 0 };
 
-    private int IDNumber = 0;
-
     public List<int> GetKillCount() { return killCount; }
     public List<int> GetDeathCount() { return deathCount; }
+
+    public void AddDeathCount(int index) { deathCount[index]++; }
+    public void AdDKillCount(int index) { killCount[index]++; }
+
 
     public List<bool> GetPlayersLife() { return playersLife; }
     public List<bool> GetEnemyLife() { return enemyLife; }
 
+
+    private int IDNumber = 0;
 
     public void Awake()
     {
@@ -55,10 +59,6 @@ public class AIManager : MonoBehaviour
         ScanAILife();
 
     }
-
-    public void AddDeathCount(int index) { deathCount[index]++; }
-    public void AdDKillCount(int index) { killCount[index]++; }
-
     public int GetID()
     {
         int number = IDNumber;

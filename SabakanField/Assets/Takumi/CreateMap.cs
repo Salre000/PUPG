@@ -61,6 +61,8 @@ public class CreateMap : MonoBehaviour
 
         CreateMapManager.createMap = this;
 
+        DataSaveCSV.OptionDataSave(false, 1.0f, 1.0f);
+
         //’n–Ê‚ÆáŠQ•¨‚ğ¶¬‚·‚éŠÖ”
         CreateGraund();
 
