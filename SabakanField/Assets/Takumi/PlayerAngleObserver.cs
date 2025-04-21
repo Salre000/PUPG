@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//プレイヤーの角度を参照して自分の角度も変更をするクラス
 public class PlayerAngleObserver : MonoBehaviour
 {
     [SerializeField] Transform player;

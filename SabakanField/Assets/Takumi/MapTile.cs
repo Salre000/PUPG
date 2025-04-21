@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(fileName = "MapTile", menuName = "ScriptableObjects/MapTile")]
+//マップチップのまとめるためのスプリクタブルオブジェクトクラス
 public class MapTile : ScriptableObject
 {
 

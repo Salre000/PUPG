@@ -17,7 +17,7 @@ public class AILifeShow : MonoBehaviour
             if (plyaers.transform.GetChild(i) == null) continue;
 
             if (plauers[i]) plyaers.transform.GetChild(i).gameObject.GetComponent<Image>().color = Color.white;
-            else plyaers.transform.GetChild(i).gameObject.GetComponent<Image>().color = Color.white;
+            else plyaers.transform.GetChild(i).gameObject.GetComponent<Image>().color = Color.gray;
 
         }
 
@@ -29,7 +29,7 @@ public class AILifeShow : MonoBehaviour
             if (Enemys.transform.GetChild(i) == null) continue;
 
             if (enemys[i]) Enemys.transform.GetChild(i).gameObject.GetComponent<Image>().color = Color.white;
-            else Enemys.transform.GetChild(i).gameObject.GetComponent<Image>().color = Color.white;
+            else Enemys.transform.GetChild(i).gameObject.GetComponent<Image>().color = Color.gray;
 
         }
 

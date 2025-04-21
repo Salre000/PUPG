@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
-
+//データをCSVに保存するクラス
 public static class DataSaveCSV
 {
 
