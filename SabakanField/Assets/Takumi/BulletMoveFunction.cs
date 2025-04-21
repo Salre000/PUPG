@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public static class BulletMoveFunction 
@@ -22,6 +23,7 @@ public static class BulletMoveFunction
 
         if (Physics.Raycast(startPosition, dir, out hit))
         {
+            SetPaintObject(hit.point,hit.normal,dir.normalized);
 
             CharacterInsterface hitObject = hit.transform.gameObject.GetComponentInParent<CharacterInsterface>();
 
@@ -47,6 +49,24 @@ public static class BulletMoveFunction
         }
 
         return Vector3.zero;
+    }
+
+    private static void SetPaintObject(Vector3 pos, Vector3 normal,Vector3 normalVec)
+    {
+        Debug.Log("’e‚ª“–‚Á‚½‚Æ‚«‚Ì•Ç‚ÌŠp“x"+normal);
+
+        GameObject paintObject = GameObject.Instantiate(enemyPaint);
+
+        
+
+        Vector3 angle = Vector3.zero;
+
+        angle.x = normal.z * 90;
+        angle.z = normal.x * -90;
+
+        paintObject.transform.eulerAngles = angle;
+        paintObject.transform.position = pos- normalVec/100.0f;
+
     }
 
 }
