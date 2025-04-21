@@ -16,11 +16,13 @@ public class PauseWindow : UIBase
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             WindowCheck();
-            Instance.SetPauseWindow();
+            Instance.ChangePauseWindow();
         }
         if (!Instance.IsPause())
         {
             _pausePanel.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+
             return;
         }
         OpenWindow();
@@ -58,7 +60,7 @@ public class PauseWindow : UIBase
     {
         // マウスカーソルを非表示にしてポーズ画面を閉じる
         Cursor.lockState = CursorLockMode.Locked;
-        Instance.SetPauseWindow();
+        Instance.ChangePauseWindow();
     }
     // やめるボタンが押されたとき
     public void PushEndGame()

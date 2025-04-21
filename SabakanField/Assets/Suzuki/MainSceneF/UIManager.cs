@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
     private PauseWindow _pauseWindow;
 
 
+
     // ポーズ画面を開く閉じる
     private bool _isPause = false;
 
@@ -118,7 +119,8 @@ public class UIManager : MonoBehaviour
     public bool GetOverTime() { return _timeLimit.GetOverTime(); }
     public float GetTime() { return _timeLimit.GetTime(); }
     // ポーズ画面を開く閉じる
-    public void SetPauseWindow() { if (_isPause) _isPause = false; else _isPause = true; }
+    public void ChangePauseWindow() { if (_isPause) _isPause = false; else _isPause = true; }
     // ポーズ画面開閉状態チェック
     public bool IsPause() { return _isPause; }
+
 }

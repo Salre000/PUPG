@@ -6567,7 +6567,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1588839751288770602}
   m_Layer: 0
-  m_Name: Etc
+  m_Name: AdsType
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7527,6 +7527,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8360686004556303039}
   - component: {fileID: 9025882500781404870}
+  - component: {fileID: 1950759478071223941}
   m_Layer: 5
   m_Name: AdsToggle
   m_TagString: Untagged
@@ -7603,7 +7604,19 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 1
+  m_IsOn: 0
+--- !u!114 &1950759478071223941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7357187829473213522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93aebf0d93f44f240b30bf5d4b748fa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7457774249959435793
 GameObject:
   m_ObjectHideFlags: 0
@@ -7774,8 +7787,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9, y: -0.5}
-  m_SizeDelta: {x: -28, y: -3}
+  m_AnchoredPosition: {x: 21.6486, y: -0.5}
+  m_SizeDelta: {x: -2.7027, y: -3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7834748412941765607
 CanvasRenderer:
@@ -7807,10 +7820,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 4f9d21777f5a09e4dbf48c9887539bea, type: 3}
-    m_FontSize: 14
+    m_FontSize: 17
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
