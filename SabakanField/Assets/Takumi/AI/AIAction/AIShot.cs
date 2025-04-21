@@ -21,9 +21,6 @@ public class AIShot
 
         Vector3 startPos = ganObject.transform.position + ganObject.transform.forward;
 
-
-        RaycastHit hit;
-
         List<GameObject> targets =AICharacterFunction.TargetEnemysInAngle(ganObject, AICharacterUtility.GetPlayerFaction(ID));
 
         if (targets.Count <= 0) return;
@@ -59,9 +56,6 @@ public class AIShot
             angle -= UnityEngine.Random.Range(0, 5);
             angle += UnityEngine.Random.Range(0, 5);
         }
-
-
-        //Debug.Log(angle);
 
         return angle * Mathf.Deg2Rad;
 

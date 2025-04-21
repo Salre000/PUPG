@@ -5,31 +5,49 @@ using UnityEngine;
 
 public class AIManager : MonoBehaviour
 {
-    List<AI> players = new List<AI>();
-    List<bool> playersLife = new List<bool>();
-    List<AI> enemys = new List<AI>();
-    List<bool> enemyLife = new List<bool>();
 
+    //プレイヤーの味方のAIのリスト
+    List<AI> players = new List<AI>();
+
+    //プレイヤーの味方のAIの生存状況のリスト
+    [SerializeField] List<bool> playersLife = new List<bool>();
+
+    //敵のAIのリスト
+    List<AI> enemys = new List<AI>();
+
+    //敵のAI生存状況状況
+    [SerializeField]List<bool> enemyLife = new List<bool>();
+
+    //フラッグのオブジェクトの配列
     GameObject[] flagObject = new GameObject[2];
+
+    //フラッグのオブジェクトの色を変更するマテリアルの配列
     [SerializeField] private Material[] color = new Material[2];
 
+    //AIのオリジナルオブジェクト
     [SerializeField] GameObject origenAI;
 
+    //1つの陣営のAIの数（プレイヤー側は-１）
     const int AI_NUMBER = 5;
 
+    //プレイヤーの格納先
     GameObject player;
 
     private List<int> deathCount = new List<int>(AI_NUMBER * 2) { 0 };
     private List<int> killCount = new List<int>(AI_NUMBER * 2) { 0 };
 
-    private int IDNumber = 0;
-
     public List<int> GetKillCount() { return killCount; }
     public List<int> GetDeathCount() { return deathCount; }
+
+    public void AddDeathCount(int index) { deathCount[index]++; }
+    public void AdDKillCount(int index) { killCount[index]++; }
+
 
     public List<bool> GetPlayersLife() { return playersLife; }
     public List<bool> GetEnemyLife() { return enemyLife; }
 
+
+    private int IDNumber = 0;
 
     public void Awake()
     {
@@ -41,10 +59,6 @@ public class AIManager : MonoBehaviour
         ScanAILife();
 
     }
-
-    public void AddDeathCount(int index) { deathCount[index]++; }
-    public void AdDKillCount(int index) { killCount[index]++; }
-
     public int GetID()
     {
         int number = IDNumber;
@@ -117,7 +131,7 @@ public class AIManager : MonoBehaviour
         enemyLife.Capacity = enemys.Capacity;
         for (int i = 0; i < enemys.Count; i++)
         {
-            enemyLife.Add(AICharacterUtility.GetCharacterAI(i).GetISLife());
+            enemyLife.Add(AICharacterUtility.GetCharacterAI(i+4).GetISLife());
 
         }
 

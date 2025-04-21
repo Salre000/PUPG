@@ -60,8 +60,6 @@ public class AIMove
 
     private readonly float _EPSILON = 5.0f;
 
-    private float DashRange = 0;
-
 
     public void Start()
     {
@@ -114,8 +112,6 @@ public class AIMove
 
         ResetAnimation();
     }
-
-    bool dashFlag = false;
     private void ChackDash()
     {
        

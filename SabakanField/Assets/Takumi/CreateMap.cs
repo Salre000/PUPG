@@ -6,7 +6,7 @@ using System.Text;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
-
+//マップの生成を行うクラス
 public class CreateMap : MonoBehaviour
 {
     [SerializeField, Header("近接戦闘のマップオブジェクトリスト")]private MapTile _CQBMap;
@@ -21,18 +21,24 @@ public class CreateMap : MonoBehaviour
     [SerializeField, Header("マップの範囲外と区切る壁のプレハブ")]private GameObject _wallObject;
     [SerializeField,Header("AIのプレハブベース")]private GameObject _aiObject;
 
+    //マップの生成のデータの参照先のパス
     private readonly string _PLAN_PASS = "MapPlanData/";
 
+    //敵または味方のフラックオブジェクトを返す
     public GameObject GetFlag(int number) { return flag[number]; }
-
+    //フラックのオブジェクト配列
     GameObject []flag=new GameObject[2];
 
+    //マップの一辺のマップチップ数
     const int _MAX_SIZE = 6;
 
+    //マップの高さ
     const float _MAP_HEIGHT = 0.2f;
+
+    //マップチップのサイズ
     const int MAP_RETO = 10;
 
-
+    //敵と味方のフラッグの座標
     private readonly Vector3 _ENEMYFLAG_POSITION = new Vector3((MAP_RETO * _MAX_SIZE) - (MAP_RETO+ (MAP_RETO / 2)), _MAP_HEIGHT, (MAP_RETO * _MAX_SIZE) - (MAP_RETO + (MAP_RETO / 2)));
     private readonly Vector3 _PLAYERFLAG_POSITION = new Vector3((MAP_RETO / 2), _MAP_HEIGHT, (MAP_RETO / 2));
 
@@ -51,9 +57,13 @@ public class CreateMap : MonoBehaviour
 
     public void Awake()
     {
+
+
         AIUtility.aIManager=_AIManager=GetComponent<AIManager>();
 
         CreateMapManager.createMap = this;
+
+        DataSaveCSV.OptionDataSave(false, 1.0f, 1.0f);
 
         //地面と障害物を生成する関数
         CreateGraund();
@@ -76,14 +86,14 @@ public class CreateMap : MonoBehaviour
         //CSVファイルの行数を格納
         int height = 0;
 
+        //ファイルパスとファイルの名前を繋げる
         StringBuilder builder = new StringBuilder();
-
         builder.Clear();
-
         builder.Append(_PLAN_PASS);
         builder.Append(_planData.GetMapTileName(0));
 
 
+        //繋げたファイルパスを使いファイルのロードを行う
         TextAsset textAsset = Resources.Load<TextAsset>(builder.ToString());
 
         //読み込んだテキストをString型にして格納
@@ -97,7 +107,10 @@ public class CreateMap : MonoBehaviour
             height++; // 行数加算
         }
 
+        //マップを1つのオブジェクトの子構造にするためのオブジェクト
+        GameObject maptileAll = new GameObject("MapTileAll");
 
+        //int配列に変換したマップデータを使いマップチップを割り当てする
         for (int x = 0; x < _MAX_SIZE; x++)
         {
             for (int z = 0; z < _MAX_SIZE; z++)
@@ -106,6 +119,8 @@ public class CreateMap : MonoBehaviour
                 int MapTypeNumber = int.Parse(csvDatas[x][z]);
 
                 GameObject mapTile = GetRandomMapTile((MapTileType)MapTypeNumber);
+
+                mapTile.transform.parent = maptileAll.transform;
 
                 mapTile.transform.localPosition = new Vector3(x * MAP_RETO, 0, z * MAP_RETO);
 
@@ -120,6 +135,7 @@ public class CreateMap : MonoBehaviour
 
     }
     
+    //列挙体にあった種類のマップチップをランダムに生成
     private GameObject GetRandomMapTile(MapTileType mapType)
     {
 
@@ -158,7 +174,7 @@ public class CreateMap : MonoBehaviour
 
 
     }
-
+    //フラッグを生成して座標とカラーを変更する関数
     private void CreateFlag()
     {
         flag[0] = GameObject.Instantiate(_flagObjectBase);
@@ -178,6 +194,7 @@ public class CreateMap : MonoBehaviour
 
     }
 
+    //マップの外周を囲むように壁を生成する関数
     private void CreateMapWall()
     {
         int objectRate = 5;
@@ -186,9 +203,11 @@ public class CreateMap : MonoBehaviour
 
         GameObject wallAll = new GameObject();
 
+        //壁を1つのオブジェクトの子構造にするためのオブジェクト
         wallAll.transform.name = "WallAll";
 
 
+        //一辺の長さと壁一枚の長さを使い壁を一面貼るループ
         for (int i = 0; i < objectRate * _MAX_SIZE; i++)
         {
             GameObject wall = GameObject.Instantiate(_wallObject, wallAll.transform);
@@ -236,29 +255,6 @@ public class CreateMap : MonoBehaviour
             wall.transform.eulerAngles = new Vector3(0, 0, 0);
 
             wall.transform.position = position;
-
-
         }
-
-
-
-
-
     }
-
-
-    private void CreateAI(Vector3 pos)
-    {
-        GameObject ai = GameObject.Instantiate(_aiObject);
-
-        ai.transform.position = pos;
-
-        ai.transform.eulerAngles = new Vector3(0, Random.Range(0,360), 0);
-
-
-
-    }
-
-
-
 }

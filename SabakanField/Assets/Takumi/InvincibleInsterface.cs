@@ -5,7 +5,7 @@ using UnityEngine;
 public interface InvincibleInsterface 
 {
 
-    //true
+    //true‚Å–³“G
     public abstract bool GetInvincibleFlag();
 
 
