@@ -644,6 +644,8 @@ GameObject:
   - component: {fileID: 2019509842}
   - component: {fileID: 2019509841}
   - component: {fileID: 2019509843}
+  - component: {fileID: 2019509844}
+  - component: {fileID: 2019509845}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -688,6 +690,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8018b5e32ca44d8438816005ae834cab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2019509844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2019509840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 886e7207f7b48974593b993e50d75a5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2019509845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2019509840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e955e8aa6cc178b45800c126ad12408e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2022766056

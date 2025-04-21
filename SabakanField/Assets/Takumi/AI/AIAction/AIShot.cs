@@ -61,7 +61,7 @@ public class AIShot
         }
 
 
-        Debug.Log(angle);
+        //Debug.Log(angle);
 
         return angle * Mathf.Deg2Rad;
 

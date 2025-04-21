@@ -53,7 +53,7 @@ public static class BulletMoveFunction
 
     private static void SetPaintObject(Vector3 pos, Vector3 normal,Vector3 normalVec)
     {
-        Debug.Log("’e‚ª“–‚Á‚½‚Æ‚«‚Ì•Ç‚ÌŠp“x"+normal);
+        //Debug.Log("’e‚ª“–‚Á‚½‚Æ‚«‚Ì•Ç‚ÌŠp“x"+normal);
 
         GameObject paintObject = GameObject.Instantiate(enemyPaint);
 
