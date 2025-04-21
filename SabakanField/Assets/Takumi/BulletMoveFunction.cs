@@ -23,15 +23,15 @@ public static class BulletMoveFunction
 
         if (Physics.Raycast(startPosition, dir, out hit))
         {
-            SetPaintObject(hit.point,hit.normal,dir.normalized);
+          
+
 
             CharacterInsterface hitObject = hit.transform.gameObject.GetComponentInParent<CharacterInsterface>();
 
             InvincibleInsterface invincible=hit.transform.gameObject.GetComponent<InvincibleInsterface>();
 
-            if (hitObject == null) return Vector3.zero;
 
-            if (invincible == null) Debug.Log(hit.transform.gameObject.name);
+            if(hitObject==null||invincible==null) SetPaintObject(hit.point, hit.normal, dir.normalized);
 
             if (invincible.GetInvincibleFlag()) return Vector3.zero;
 
@@ -66,6 +66,7 @@ public static class BulletMoveFunction
 
         paintObject.transform.eulerAngles = angle;
         paintObject.transform.position = pos- normalVec/100.0f;
+
 
     }
 
