@@ -32,7 +32,6 @@ public class PauseWindow : UIBase
     public override void Initialize()
     {
         _pausePanel = GameObject.Find("PausePanel").gameObject;
-        _pausePanel.SetActive(false);
     }
 
     // ポーズ画面が開かれる
