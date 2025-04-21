@@ -56,12 +56,14 @@ public class PauseWindow : UIBase
     // 閉じるボタンが押されたとき
     public void PushClosed()
     {
+        // マウスカーソルを非表示にしてポーズ画面を閉じる
         Cursor.lockState = CursorLockMode.Locked;
         Instance.SetPauseWindow();
     }
     // やめるボタンが押されたとき
     public void PushEndGame()
     {
-
+        // ゲームを終了
+        Application.Quit();
     }
 }
