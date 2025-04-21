@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1286035276165655404}
   - component: {fileID: 6998024189932050910}
   - component: {fileID: 2603607347155837493}
-  - component: {fileID: 8903167838502756924}
+  - component: {fileID: 8794086499499996166}
   m_Layer: 0
   m_Name: MapWall
   m_TagString: Untagged
@@ -85,8 +85,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8903167838502756924
-BoxCollider:
+--- !u!64 &8794086499499996166
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -95,9 +95,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &5751124148255934644
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,8 +110,8 @@ GameObject:
   - component: {fileID: 2580082683397058432}
   - component: {fileID: 1467104207851977558}
   - component: {fileID: 6069895779130693541}
-  - component: {fileID: 6849879687663242292}
   - component: {fileID: 1263478366916815882}
+  - component: {fileID: 1192794291943366031}
   m_Layer: 6
   m_Name: WallMiniMap
   m_TagString: Untagged
@@ -183,19 +184,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6849879687663242292
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5751124148255934644}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1263478366916815882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,3 +202,17 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!64 &1192794291943366031
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5751124148255934644}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
