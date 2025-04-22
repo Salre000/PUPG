@@ -122,16 +122,16 @@ public class CreateOptionData : EditorWindow
         builder.Append("private  static  string  _filePass=Application.dataPath;");
         builder.AppendLine();
 
-        builder.Append("private  static  string  _classname=CreateOptionData.ClassName;");
+        builder.Append("private  static  string  _classname=Const.ClassName;");
         builder.AppendLine();
 
-        builder.Append("private  static  string  _classExpansion=CreateOptionData.ClassExpansion;");
+        builder.Append("private  static  string  _classExpansion=Const.ClassExpansion;");
         builder.AppendLine();
 
-        builder.Append("private  static  string  _scvName=CreateOptionData.CSVName;");
+        builder.Append("private  static  string  _scvName=Const.CSVName;");
         builder.AppendLine();
 
-        builder.Append("private  static  string  _FilePassReso=CreateOptionData.FilePass;");
+        builder.Append("private  static  string  _FilePassReso=Const.FilePass;");
         builder.AppendLine();
 
         builder.AppendLine();
