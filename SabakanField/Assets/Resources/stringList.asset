@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7366a12958e71384d85b45623c647440, type: 3}
   m_Name: stringList
   m_EditorClassIdentifier: 
-  objects: []
+  objects:
+  - Sensitivity
+  type: 00000000
