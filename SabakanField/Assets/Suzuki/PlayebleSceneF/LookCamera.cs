@@ -20,6 +20,7 @@ public class LookCamera : MonoBehaviour
     private readonly float _LOOKUPLIMIT = -0.7f;
     // 感度
     private float _normalSensitivity = 0.5f;
+    private float _adsSensitivity = 0.5f;
 
     private void Awake()
     {
@@ -33,9 +34,10 @@ public class LookCamera : MonoBehaviour
             SettingSensitivity();
             return;
         }
-        if(!PlayerManager.IsAds())
+        if (!PlayerManager.IsAds())
             MouseCameraRotation();
-        else { }
+        else
+            AdsMouseCameraRotation();
 
     }
 
@@ -48,11 +50,36 @@ public class LookCamera : MonoBehaviour
         recoilNum = value;
         if (Mathf.Abs(mouseCameraX) >= _deadzoneX)
         {
-            _player.transform.RotateAround(_player.transform.position, Vector3.up, mouseCameraX);
+            _player.transform.RotateAround(_player.transform.position, Vector3.up, value);
 
         }
         mouseCameraY = Input.GetAxis("Mouse Y");
         value = mouseCameraY * _normalSensitivity;
+        if (Mathf.Abs(mouseCameraY) >= _deadzoneY)
+        {
+            transform.RotateAround(transform.position, Vector3.right, -value);
+        }
+        LookLimit();
+        Quaternion quate = transform.rotation;
+        quate.y = 0f;
+        quate.z = 0f;
+        transform.localRotation = quate;
+    }
+
+    // ADS視点
+    private void AdsMouseCameraRotation()
+    {
+        //マウスカーソルで左右視点+横回転
+        mouseCameraX = Input.GetAxis("Mouse X");
+        float value = mouseCameraX * _adsSensitivity;
+        recoilNum = value;
+        if (Mathf.Abs(mouseCameraX) >= _deadzoneX)
+        {
+            _player.transform.RotateAround(_player.transform.position, Vector3.up, value);
+
+        }
+        mouseCameraY = Input.GetAxis("Mouse Y");
+        value = mouseCameraY * _adsSensitivity;
         if (Mathf.Abs(mouseCameraY) >= _deadzoneY)
         {
             transform.RotateAround(transform.position, Vector3.right, -value);
@@ -86,6 +113,7 @@ public class LookCamera : MonoBehaviour
     private void SettingSensitivity()
     {
         _normalSensitivity = OptionManager.Instance.GetNormalSensitivity();
+        _adsSensitivity = OptionManager.Instance.GetAdsSensitivity();
     }
 
 }

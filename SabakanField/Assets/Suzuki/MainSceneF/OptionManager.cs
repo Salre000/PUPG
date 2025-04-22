@@ -30,6 +30,7 @@ public class OptionManager : MonoBehaviour
     {
         _adsTypeSetting.Initialize();
         _sensitivitySetting.Initialize();
+        OptionDataClass.GetOptionData();
     }
 
     private void Update()
