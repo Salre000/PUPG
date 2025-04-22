@@ -10,7 +10,8 @@ public class OptionManager : MonoBehaviour
     // ADS‚·‚éê‡Ø‚è‘Ö‚¦‚©’·‰Ÿ‚µ‚© true:Ø‚è‘Ö‚¦ false:’·‰Ÿ‚µ
     private bool _adsType = false;
     // Š´“xİ’è
-    private float _normalSensivity=0.5f;
+    private float _normalSensitivity=0.5f;
+    private float _adsSensitivity = 0.5f;
 
     AdsTypeSetting _adsTypeSetting=new AdsTypeSetting();
     SensitivitySetting _sensitivitySetting=new SensitivitySetting();
@@ -42,6 +43,8 @@ public class OptionManager : MonoBehaviour
     public void ChangeAdsType() { if (_adsType) _adsType = false; else _adsType = true; }
     public bool GetAdsType() { return _adsType; }
     // Š´“xİ’è
-    public void SetNormalSensivity(float value) { _normalSensivity = value; }
-    public float GetNormalSensivity() {  return _normalSensivity; }
+    public void SetNormalSensitivity(float value) { _normalSensitivity = value; }
+    public float GetNormalSensitivity() {  return _normalSensitivity; }
+    public void SetAdsSensitivity(float value) { _adsSensitivity = value; }
+    public float GetAdsSensitivity() {  return _adsSensitivity; }
 }

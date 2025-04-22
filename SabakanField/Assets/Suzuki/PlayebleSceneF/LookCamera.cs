@@ -12,10 +12,13 @@ public class LookCamera : MonoBehaviour
     private GameObject _player;
 
     static public float recoilNum = 0.0f;
-
+    // 視点移動
+    float mouseCameraX = 0.0f;
+    float mouseCameraY = 0.0f;
+    // 限界値の設定値
     private readonly float _LOOKDOWNLIMIT = 0.7f;
     private readonly float _LOOKUPLIMIT = -0.7f;
-
+    // 感度
     private float _normalSensitivity = 0.5f;
 
     private void Awake()
@@ -36,19 +39,19 @@ public class LookCamera : MonoBehaviour
     private void MouseCameraRotation()
     {
         //マウスカーソルで左右視点+横回転
-        float mouseCameraX = Input.GetAxis("Mouse X");
-        recoilNum = mouseCameraX;
-        mouseCameraX = mouseCameraX * _normalSensitivity;
+        mouseCameraX = Input.GetAxis("Mouse X");
+        float value = mouseCameraX * _normalSensitivity;
+        recoilNum = value;
         if (Mathf.Abs(mouseCameraX) >= _deadzoneX)
         {
             _player.transform.RotateAround(_player.transform.position, Vector3.up, mouseCameraX);
 
         }
-        float mouseCameraY = Input.GetAxis("Mouse Y");
-        mouseCameraY = mouseCameraY * _normalSensitivity;
+        mouseCameraY = Input.GetAxis("Mouse Y");
+        value = mouseCameraY * _normalSensitivity;
         if (Mathf.Abs(mouseCameraY) >= _deadzoneY)
         {
-            transform.RotateAround(transform.position, Vector3.right, -mouseCameraY);
+            transform.RotateAround(transform.position, Vector3.right, -value);
         }
         LookLimit();
         Quaternion quate = transform.rotation;
@@ -57,6 +60,7 @@ public class LookCamera : MonoBehaviour
         transform.localRotation = quate;
     }
 
+    // 上下向く時の限界値
     private void LookLimit()
     {
         if (transform.localRotation.x > _LOOKDOWNLIMIT)
@@ -73,9 +77,10 @@ public class LookCamera : MonoBehaviour
         }
     }
 
+    // 感度設定の紐づけ
     private void SettingSensitivity()
     {
-        _normalSensitivity = OptionManager.Instance.GetNormalSensivity();
+        _normalSensitivity = OptionManager.Instance.GetNormalSensitivity();
     }
 
 }

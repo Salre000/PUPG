@@ -9378,7 +9378,7 @@ GameObject:
   - component: {fileID: 2123033653416714305}
   - component: {fileID: 323118458122072533}
   m_Layer: 5
-  m_Name: AdsSensivityField
+  m_Name: AdsSensitivityField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

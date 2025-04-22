@@ -94,7 +94,7 @@ public class PlayerOperation : MonoBehaviour
                 AdsReset();
             _isAds = false;
         }
-
+        PlayerManager.SetIsAds(_isAds);
     }
 
     private void AdsNow()
