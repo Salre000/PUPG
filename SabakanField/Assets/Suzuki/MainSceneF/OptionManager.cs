@@ -28,7 +28,8 @@ public class OptionManager : MonoBehaviour
 
     private void Initialize()
     {
-        OptionDataClass.GetOptionData();
+        StartOption start= new StartOption();
+        //OptionDataClass.GetOptionData();
         SetNormalSensitivity(OptionDataClass.GetNormalSensitivity());
         SetAdsSensitivity(OptionDataClass.GetAdsSensitivity());
         _adsTypeSetting.Initialize();
