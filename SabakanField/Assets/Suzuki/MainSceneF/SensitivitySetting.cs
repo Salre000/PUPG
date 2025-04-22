@@ -47,6 +47,10 @@ public class SensitivitySetting : UIBase
         // 入力完了時に発火するよう設定
         _normalSensiInput.onEndEdit.AddListener(addListener => NormalSensiInputFieldSetting());
         _adsSensiInput.onEndEdit.AddListener(addListener => AdsSensiInputFieldSetting());
+
+        // 見た目数値の再設定
+        NormalSensiSliderSetting();
+        AdsSensiSliderSetting();
     }
 
     // 通常 スライダーでの変更

@@ -27,6 +27,8 @@ public class PlayerOperation : MonoBehaviour
     private float _resetRifelX;
     // 切り替え式ADSの時用フラグ
     private bool _isAdsType = false;
+    // ADS中か判定フラグ
+    private bool _isAds = false;
     // メインカメラのADSしてないときの位置
     private float _resetView;
 
@@ -94,11 +96,12 @@ public class PlayerOperation : MonoBehaviour
                 AdsReset();
             _isAdsType = false;
         }
-
+        PlayerManager.SetIsAds(_isAds);
     }
 
     private void AdsNow()
     {
+        _isAds = true;
         // 銃を真正面に
         _rifelPosition.x = 0;
         _rifel.transform.localPosition = _rifelPosition;
@@ -110,6 +113,7 @@ public class PlayerOperation : MonoBehaviour
 
     private void AdsReset()
     {
+        _isAds = false;
         // 銃を元の位置に
         _rifelPosition.x = _resetRifelX;
         _rifel.transform.localPosition = _rifelPosition;

@@ -3,20 +3,28 @@ using System.IO;
 using System.Collections.Generic;
 public static class OptionDataClass{
 
-private  static  float  _Sensitivity;
-public  static  float  GetSensitivity(){return _Sensitivity;}private  static  string  _filePass=Application.dataPath;
-private  static  string  _classname= Const.ClassName;
-private  static  string  _classExpansion= Const.ClassExpansion;
-private  static  string  _scvName= Const.CSVName;
-private  static  string  _FilePassReso= Const.FilePass;
+private  static  float  _NormalSensitivity;
+public  static  float  GetNormalSensitivity(){return _NormalSensitivity;}
+private  static  float  _AdsSensitivity;
+public  static  float  GetAdsSensitivity(){return _AdsSensitivity;}
+private  static  bool  _AdsType;
+public  static  bool  GetAdsType(){return _AdsType;}private  static  string  _filePass=Application.dataPath;
+private  static  string  _classname=Const.ClassName;
+private  static  string  _classExpansion=Const.ClassExpansion;
+private  static  string  _scvName=Const.CSVName;
+private  static  string  _FilePassReso=Const.FilePass;
 
-public static void OptionDataSave(float SetSensitivity){
+public static void OptionDataSave(float SetNormalSensitivity,float SetAdsSensitivity,bool SetAdsType){
 
-_Sensitivity=SetSensitivity;
+_NormalSensitivity=SetNormalSensitivity;
+_AdsSensitivity=SetAdsSensitivity;
+_AdsType=SetAdsType;
 StreamWriter swSave;
 swSave = new StreamWriter(_filePass+_FilePassReso+_scvName+_classExpansion,false);
 
-swSave.WriteLine(_Sensitivity);swSave.Flush();
+swSave.WriteLine(_NormalSensitivity);
+swSave.WriteLine(_AdsSensitivity);
+swSave.WriteLine(_AdsType);swSave.Flush();
 swSave.Close();
 }
 public static void GetOptionData(){
@@ -31,10 +39,14 @@ csvDatas.Add(line.Split(','));
 height++;
 }
 
-_Sensitivity=float.Parse(csvDatas[0][0]);
+_NormalSensitivity=float.Parse(csvDatas[0][0]);
+_AdsSensitivity=float.Parse(csvDatas[1][0]);
+_AdsType=bool.Parse(csvDatas[2][0]);
 }
 public static void Initialization(){
 
-_Sensitivity=0;
+_NormalSensitivity=0.5f;
+_AdsSensitivity=0.5f;
+_AdsType=false;
 }
 }
