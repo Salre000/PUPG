@@ -57,7 +57,7 @@ public class AIManager : MonoBehaviour
     public void FixedUpdate()
     {
         ScanAILife();
-
+        Debug();
     }
     public int GetID()
     {
@@ -211,6 +211,19 @@ public class AIManager : MonoBehaviour
 
     }
 
+
+    private void Debug() 
+    {
+        if (Input.GetKey(KeyCode.Alpha0)) players[0].gameObject.GetComponent<CharacterInsterface>().HitAction();
+        if (Input.GetKey(KeyCode.Alpha1)) players[1].gameObject.GetComponent<CharacterInsterface>().HitAction();
+        if (Input.GetKey(KeyCode.Alpha2)) players[2].gameObject.GetComponent<CharacterInsterface>().HitAction();
+        if (Input.GetKey(KeyCode.Alpha3)) players[3].gameObject.GetComponent<CharacterInsterface>().HitAction();
+        if (Input.GetKey(KeyCode.Alpha4)) enemys[0].gameObject.GetComponent<CharacterInsterface>().HitAction();
+        if (Input.GetKey(KeyCode.Alpha5)) enemys[1].gameObject.GetComponent<CharacterInsterface>().HitAction();
+        if (Input.GetKey(KeyCode.Alpha6)) enemys[2].gameObject.GetComponent<CharacterInsterface>().HitAction();
+        if (Input.GetKey(KeyCode.Alpha7)) enemys[3].gameObject.GetComponent<CharacterInsterface>().HitAction();
+        if (Input.GetKey(KeyCode.Alpha8)) enemys[4].gameObject.GetComponent<CharacterInsterface>().HitAction();
+    }
 
 
 
