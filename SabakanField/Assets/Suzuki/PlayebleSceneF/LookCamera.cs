@@ -26,6 +26,11 @@ public class LookCamera : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
+    private void Start()
+    {
+        SettingSensitivity();
+
+    }
     void Update()
     {
         // ポーズを開いているときはマウスで視点移動させない
