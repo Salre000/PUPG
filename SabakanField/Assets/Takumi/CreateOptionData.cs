@@ -23,14 +23,15 @@ public class CreateOptionData : EditorWindow
     static void CreateGUI()
     {
 
-        var window = ScriptableObject.CreateInstance<CreateOptionData>();
+        This = ScriptableObject.CreateInstance<CreateOptionData>();
 
         optionName = Resources.Load<StringList>("stringList").objects;
         optiontype = Resources.Load<StringList>("stringList").type;
 
-        window.Show();
+        This.Show();
 
     }
+    static CreateOptionData This; 
     static List<string> optionName = new List<string>();
     static List<int> optiontype = new List<int>();
     private string _text;
@@ -41,18 +42,24 @@ public class CreateOptionData : EditorWindow
         if (GUILayout.Button("åàíË"))
         {
             CreateCS();
-
+            This.Close();
         }
 
         // selecting sheets
 
-        EditorGUILayout.LabelField("sheet settings");
+        EditorGUILayout.LabelField("CreateOption");
         EditorGUILayout.BeginVertical("box");
 
         if (GUILayout.Button("í«â¡"))
         {
             optionName.Add("");
             optiontype.Add((int)Type.Float);
+
+        }       
+        if (GUILayout.Button("àÍî‘â∫ÇçÌèú"))
+        {
+            optionName.RemoveAt(optionName.Count-1); ;
+            optiontype.RemoveAt(optiontype.Count-1);
 
         }
         GUILayout.EndVertical();
