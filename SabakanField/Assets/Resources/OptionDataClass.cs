@@ -5,10 +5,10 @@ public static class OptionDataClass{
 
 private  static  float  _Sensitivity;
 public  static  float  GetSensitivity(){return _Sensitivity;}private  static  string  _filePass=Application.dataPath;
-private  static  string  _classname=CreateOptionData.ClassName;
-private  static  string  _classExpansion=CreateOptionData.ClassExpansion;
-private  static  string  _scvName=CreateOptionData.CSVName;
-private  static  string  _FilePassReso=CreateOptionData.FilePass;
+private  static  string  _classname= Const.ClassName;
+private  static  string  _classExpansion= Const.ClassExpansion;
+private  static  string  _scvName= Const.CSVName;
+private  static  string  _FilePassReso= Const.FilePass;
 
 public static void OptionDataSave(float SetSensitivity){
 

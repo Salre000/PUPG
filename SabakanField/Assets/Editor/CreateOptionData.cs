@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class CreateOptionData : EditorWindow
@@ -14,10 +12,6 @@ public class CreateOptionData : EditorWindow
         Bool
     }
 
-    public static string ClassName = "/Resources/OptionDataClass";
-    public static string FilePass = "/Resources/";
-    public static string CSVName = "OptionDataCSV";
-    public static string ClassExpansion = ".csv";
 
     [MenuItem("Assets/CreateOptiton")]
     static void CreateGUI()
