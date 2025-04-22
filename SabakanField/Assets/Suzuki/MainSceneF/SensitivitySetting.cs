@@ -22,17 +22,17 @@ public class SensitivitySetting : UIBase
         // スライダーの変更
         if (_normalSensiValue != _normalSensi.value)
             NormalSensiSliderSetting();
-        // テキストからの変更
-        if (_stringBuilder.ToString() != _normalSensiInput.text)
-            NormalSensiInputFieldSetting();
-
     }
 
     public override void Initialize()
     {
+        _stringBuilder.Clear();
         _normalSensi = GameObject.Find("SensitivitySlider").GetComponent<Slider>();
         _normalSensiInput = GameObject.Find("SensitivityInputField").GetComponent<TMP_InputField>();
         _stringBuilder.Append(_normalSensiValue);
+
+        // 入力完了時に発火するよう設定
+        _normalSensiInput.onEndEdit.AddListener(addListener=>NormalSensiInputFieldSetting());
     }
 
     // スライダーでの変更
@@ -41,29 +41,28 @@ public class SensitivitySetting : UIBase
         _stringBuilder.Clear();
         _normalSensiValue = _normalSensi.value;
         OptionManager.Instance.SetNormalSensivity(_normalSensiValue);
-        _stringBuilder.Append(_normalSensiValue);
+        _stringBuilder.AppendFormat("{0:F2}",_normalSensiValue);
         _normalSensiInput.text = _stringBuilder.ToString();
     }
 
     // 入力フィールドでの変更
     private void NormalSensiInputFieldSetting()
     {
+        float tryValue = 0.0f;
+        if (!float.TryParse(_normalSensiInput.text, out tryValue)) return;
         _stringBuilder.Clear();
-        if (!float.TryParse(_normalSensiInput.text,out _normalSensiValue))
-        {
-            // 数字以外の入力、エラー要因
-            //_stringBuilder.Append(_normalSensiValue);
-            //_normalSensiInput.text = _stringBuilder.ToString();
-            //return;
-        }
+        _normalSensiValue = tryValue;
 
+        // 感度上限オーバー対策
         if (_normalSensiValue >= _NORMAL_SENSI_MAX)
-        {
             _normalSensiValue = _NORMAL_SENSI_MAX;
-        }
+
+        // 感度を反映
         OptionManager.Instance.SetNormalSensivity(_normalSensiValue);
-        _stringBuilder.Append(_normalSensiValue);
+        // テキストに小数第二位まで表示
+        _stringBuilder.AppendFormat("{0:F2}",_normalSensiValue);
         _normalSensiInput.text = _stringBuilder.ToString();
+        // スライダーに反映
         _normalSensi.value = _normalSensiValue;
     }
 }

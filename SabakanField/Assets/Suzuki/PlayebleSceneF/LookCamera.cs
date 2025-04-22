@@ -16,6 +16,8 @@ public class LookCamera : MonoBehaviour
     private readonly float _LOOKDOWNLIMIT = 0.7f;
     private readonly float _LOOKUPLIMIT = -0.7f;
 
+    private float _normalSensitivity = 0.5f;
+
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -23,7 +25,11 @@ public class LookCamera : MonoBehaviour
     void Update()
     {
         // ポーズを開いているときはマウスで視点移動させない
-        if (UIManager.Instance.IsPause()) return;
+        if (UIManager.Instance.IsPause())
+        {
+            SettingSensitivity();
+            return;
+        }
         MouseCameraRotation();
     }
 
@@ -32,13 +38,14 @@ public class LookCamera : MonoBehaviour
         //マウスカーソルで左右視点+横回転
         float mouseCameraX = Input.GetAxis("Mouse X");
         recoilNum = mouseCameraX;
-        if (Mathf.Abs(mouseCameraX) >= _deadzoneX) 
+        mouseCameraX = mouseCameraX * _normalSensitivity;
+        if (Mathf.Abs(mouseCameraX) >= _deadzoneX)
         {
-            _player.transform.RotateAround(_player.transform.position, Vector3.up, mouseCameraX); 
+            _player.transform.RotateAround(_player.transform.position, Vector3.up, mouseCameraX);
 
         }
         float mouseCameraY = Input.GetAxis("Mouse Y");
-        // 
+        mouseCameraY = mouseCameraY * _normalSensitivity;
         if (Mathf.Abs(mouseCameraY) >= _deadzoneY)
         {
             transform.RotateAround(transform.position, Vector3.right, -mouseCameraY);
@@ -54,7 +61,7 @@ public class LookCamera : MonoBehaviour
     {
         if (transform.localRotation.x > _LOOKDOWNLIMIT)
         {
-            Quaternion quate=transform.localRotation;
+            Quaternion quate = transform.localRotation;
             quate.x = _LOOKDOWNLIMIT;
             transform.localRotation = quate;
         }
@@ -64,6 +71,11 @@ public class LookCamera : MonoBehaviour
             quate.x = _LOOKUPLIMIT;
             transform.localRotation = quate;
         }
+    }
+
+    private void SettingSensitivity()
+    {
+        _normalSensitivity = OptionManager.Instance.GetNormalSensivity();
     }
 
 }
