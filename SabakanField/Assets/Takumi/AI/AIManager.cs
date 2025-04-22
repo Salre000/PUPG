@@ -51,7 +51,6 @@ public class AIManager : MonoBehaviour
 
     public void Awake()
     {
-        OptionDataClass.OptionDataSave(2, 2, 2, 2);
         float s = OptionDataClass.Gettest2();
         player = GameObject.FindGameObjectWithTag("Player");
 

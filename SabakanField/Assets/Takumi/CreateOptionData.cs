@@ -94,7 +94,6 @@ public class CreateOptionData : EditorWindow
 
         string filePass = builder.ToString();
         sw = new StreamWriter(filePass, false);
-        //sw = new StreamWriter(builder.ToString(), false);
 
         builder.Clear();
 
