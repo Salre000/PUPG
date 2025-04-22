@@ -31,9 +31,9 @@ public class OptionManager : MonoBehaviour
         OptionDataClass.GetOptionData();
         SetNormalSensitivity(OptionDataClass.GetNormalSensitivity());
         SetAdsSensitivity(OptionDataClass.GetAdsSensitivity());
+        _adsType = OptionDataClass.GetAdsType();
         _adsTypeSetting.Initialize();
         _sensitivitySetting.Initialize();
-        _adsType = OptionDataClass.GetAdsType();
     }
 
     private void Update()
