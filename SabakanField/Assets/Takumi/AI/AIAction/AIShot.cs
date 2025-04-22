@@ -38,10 +38,6 @@ public class AIShot
 
         Vec = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle));
 
-
-        //’e‚Ì‹O“¹‚Ì‰ÂŽ‹‰»
-        //Debug.DrawRay(startPos, Vec*1000, Color.red, 1000);
-
         BulletMoveFunction.RayHitTest(startPos, Vec,AICharacterUtility.GetPlayerFaction(ID), ID);
 
 

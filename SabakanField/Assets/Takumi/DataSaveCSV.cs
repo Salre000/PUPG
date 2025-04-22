@@ -9,7 +9,6 @@ public static class DataSaveCSV
     private static readonly string FILE_PASS = "/Resources/";
 
     public const string FILE_NAME_KD = "SaveData";
-    public const string FILE_NAME_OPTION = "OptionData";
 
     private static readonly string FILR_EXTENSION = ".csv";
 
@@ -40,69 +39,4 @@ public static class DataSaveCSV
 
     }
 
-    public static void OptionDataSave(bool adsFlag,float BGM,float MASTER,float seVolume, float sensitivity,float adsSensitivity)
-    {
-        StreamWriter sw;
-
-        sw = new StreamWriter(Application.dataPath + FILE_PASS + FILE_NAME_OPTION + FILR_EXTENSION, false);
-
-        sw.WriteLine(MASTER.ToString());
-        sw.WriteLine(BGM.ToString());
-        sw.WriteLine(seVolume.ToString());
-        sw.WriteLine(sensitivity.ToString());
-        sw.WriteLine(adsSensitivity.ToString());
-        sw.WriteLine(adsFlag.ToString());
-        sw.Flush();
-        sw.Close();
-
-    }
-
-    public static void GetOptionData(ref bool adsFlag, ref float bgmVolume, ref float masterVolume,
-        ref float seVolume, ref float sensitivity, ref float adsSensitivity)
-    {
-        //読み込んだCSVファイルを格納
-        List<string[]> csvDatas = new List<string[]>();
-        //CSVファイルの行数を格納
-        int height = 0;
-
-        //ファイルパスとファイルの名前を繋げる
-        StringBuilder builder = new StringBuilder();
-        builder.Clear();
-        builder.Append(Application.dataPath);
-        builder.Append(FILE_PASS);
-        builder.Append(FILE_NAME_OPTION);
-
-        //繋げたファイルパスを使いファイルのロードを行う
-        TextAsset textAsset = Resources.Load<TextAsset>(builder.ToString());
-        //読み込んだテキストをString型にして格納
-        StringReader reader = new StringReader(textAsset.text);
-
-        while (reader.Peek() > -1)
-        {
-            string line = reader.ReadLine();
-            // ,で区切ってCSVに格納
-            csvDatas.Add(line.Split(','));
-            height++; // 行数加算
-        }
-        //csvDataの中にデータが格納されている
-
-        //全体の音量のフラグをcsvの情報を元に上書き
-        masterVolume = float.Parse(csvDatas[0][0]);
-        
-        //BGMの音量をcsvの情報を元に上書き
-        bgmVolume = float.Parse(csvDatas[1][0]);
-        //SEの音量をcsvの情報を元に上書き
-        seVolume = float.Parse(csvDatas[2][0]);
-
-        //感度の情報を元に上書き
-        sensitivity = float.Parse(csvDatas[3][0]);
-        //ADS時の感度をcsvの情報を元に上書き
-        adsSensitivity = float.Parse(csvDatas[4][0]);
-
-
-        //ADSにの方法のフラグをcsvの情報を元に上書き
-        adsFlag = bool.Parse(csvDatas[5][0]);
-
-
-    }
 }
