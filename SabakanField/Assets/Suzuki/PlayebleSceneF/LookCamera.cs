@@ -39,6 +39,7 @@ public class LookCamera : MonoBehaviour
         else
             AdsMouseCameraRotation();
 
+
     }
 
     // ’Êí‹“_

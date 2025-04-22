@@ -13,8 +13,5 @@ MonoBehaviour:
   m_Name: stringList
   m_EditorClassIdentifier: 
   objects:
-  - test1
-  - test2
-  - test3
-  - test4
-  type: 00000000000000000000000000000000
+  - Sensitivity
+  type: 00000000
