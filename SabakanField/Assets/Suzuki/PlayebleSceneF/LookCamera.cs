@@ -33,9 +33,13 @@ public class LookCamera : MonoBehaviour
             SettingSensitivity();
             return;
         }
-        MouseCameraRotation();
+        if(!PlayerManager.IsAds())
+            MouseCameraRotation();
+        else { }
+
     }
 
+    // 通常視点
     private void MouseCameraRotation()
     {
         //マウスカーソルで左右視点+横回転
@@ -59,6 +63,7 @@ public class LookCamera : MonoBehaviour
         quate.z = 0f;
         transform.localRotation = quate;
     }
+
 
     // 上下向く時の限界値
     private void LookLimit()
