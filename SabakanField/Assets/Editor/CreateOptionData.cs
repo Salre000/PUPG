@@ -236,7 +236,7 @@ public class CreateOptionData : EditorWindow
             }
             else
             {
-                builder.AppendFormat("_{0}=0;", optionName[i]);
+                builder.AppendFormat("_{0}=0.5f;", optionName[i]);
 
             }
         }
