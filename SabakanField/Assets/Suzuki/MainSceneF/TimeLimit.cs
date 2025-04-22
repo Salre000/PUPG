@@ -15,6 +15,9 @@ public class TimeLimit:UIBase
     // 制限時間(固定値)
     private readonly float _TIME_LIMIT = 10.0f;
 
+    /// <summary>
+    /// デバッグコマンド
+    /// </summary>
     private bool _DebugTimeStopFlag = false;
 
      public override void Initialize()
