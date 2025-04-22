@@ -118,8 +118,17 @@ public class UIManager : MonoBehaviour
     // 時間切れかどうか返す
     public bool GetOverTime() { return _timeLimit.GetOverTime(); }
     public float GetTime() { return _timeLimit.GetTime(); }
-    // ポーズ画面を開く閉じる
-    public void ChangePauseWindow() { if (_isPause) _isPause = false; else _isPause = true; }
+    // ポーズ画面を開く閉じる&オプションデータの保存
+    public void ChangePauseWindow()
+    {
+        if (_isPause)
+        {
+            _isPause = false;
+            OptionManager.Instance.SaveOptionData();
+        }
+        else
+            _isPause = true;
+    }
     // ポーズ画面開閉状態チェック
     public bool IsPause() { return _isPause; }
 
