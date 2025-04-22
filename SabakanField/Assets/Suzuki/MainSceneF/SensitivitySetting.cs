@@ -49,6 +49,8 @@ public class SensitivitySetting : UIBase
         _adsSensiInput.onEndEdit.AddListener(addListener => AdsSensiInputFieldSetting());
 
         // Œ©‚½–Ú”’l‚ÌÄİ’è
+        _normalSensi.value = OptionManager.Instance.GetNormalSensitivity();
+        _adsSensi.value = OptionManager.Instance.GetAdsSensitivity();
         NormalSensiSliderSetting();
         AdsSensiSliderSetting();
     }
