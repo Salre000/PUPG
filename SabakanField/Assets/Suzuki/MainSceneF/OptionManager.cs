@@ -9,6 +9,11 @@ public class OptionManager : MonoBehaviour
     public static OptionManager Instance;
     // ADS‚·‚éê‡Ø‚è‘Ö‚¦‚©’·‰Ÿ‚µ‚© true:Ø‚è‘Ö‚¦ false:’·‰Ÿ‚µ
     private bool _adsType = false;
+    // Š´“xİ’è
+    private float _normalSensivity=0.5f;
+
+    AdsTypeSetting _adsTypeSetting=new AdsTypeSetting();
+    SensitivitySetting _sensitivitySetting=new SensitivitySetting();
 
     private void Awake()
     {
@@ -16,9 +21,27 @@ public class OptionManager : MonoBehaviour
             Instance = this;
         else
             Destroy(this);
+
+        Initialize();
+    }
+
+    private void Initialize()
+    {
+        _adsTypeSetting.Initialize();
+        _sensitivitySetting.Initialize();
+    }
+
+    private void Update()
+    {
+        if(!UIManager.Instance.IsPause()) return;
+
+        _sensitivitySetting.Execute();
     }
 
     // ADS•û–@
     public void ChangeAdsType() { if (_adsType) _adsType = false; else _adsType = true; }
     public bool GetAdsType() { return _adsType; }
+    // Š´“xİ’è
+    public void SetNormalSensivity(float value) { _normalSensivity = value; }
+    public float GetNormalSensivity() {  return _normalSensivity; }
 }
