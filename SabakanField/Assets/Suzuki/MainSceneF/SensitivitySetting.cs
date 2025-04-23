@@ -12,15 +12,15 @@ public class SensitivitySetting : UIBase
     // ’Êí‚ÌŠ´“x
     private Slider _normalSensi;
     private TMP_InputField _normalSensiInput;
-    private float _normalSensiValue = 0.5f;
+    private float _normalSensiValue = 2.5f;
     // ADS‚ÌŠ´“x
     private Slider _adsSensi;
     private TMP_InputField _adsSensiInput;
-    private float _adsSensiValue = 0.5f;
+    private float _adsSensiValue = 2.5f;
     private StringBuilder _stringBuilder = new StringBuilder();
 
     // Š´“xãŒÀ
-    private const float _SENSI_MAX = 1.0f;
+    private const float _SENSI_MAX = 5.0f;
 
     public override void Execute()
     {
