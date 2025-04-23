@@ -7,3 +7,4 @@ public class StringList : ScriptableObject
     public List<string> objects = new List<string>();   
     public List<int> type = new List<int>();
 }
+
