@@ -7,7 +7,7 @@ public class FlagGetPlayer : MonoBehaviour
     // Œ»İ‰½%‚©
     private float _count = 0.0f;
     // 1•b“–‚½‚è‰½%‘‚â‚·‚©
-    private float _countSpeed = 1.0f;
+    private float _countSpeed = 5.0f;
     // Šø‚Ì”ÍˆÍ“à‚É‚¢‚é‚©
     private bool _flagCheck = false;
 

@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour
     // パーセント表示
     private const float _MAX_FLAG_GAGE = 1.0f;
     // 何%でクリアかを決める
-    private const float _PAERCENT = 10.0f;
+    private const float _PAERCENT = 100.0f;
     // ゲージの値
     private float _count = 0.0f;
     // 制限時間クラス

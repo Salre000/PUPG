@@ -7,11 +7,11 @@ public class StartOption
 
     public static StartOption instance;
 
-    public void Awake()
+    public StartOption()
     {
         if (instance != null) return;
-        if(instance==null)
-         instance = this;
+
+        if(instance==null)instance = this;
 
         OptionDataClass.GetOptionData();
 

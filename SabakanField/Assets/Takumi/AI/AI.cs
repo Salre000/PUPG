@@ -61,10 +61,12 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
 
         InvincibleCount();
 
+        //  デバッグ用
         nowMode = move.nowMode;
         nextMode = move.nextMode;
         shotShotFlag = shot.shotingFlag;
         moveShotFlag=move.shotingFlag;
+        //
 
         move.FixedUpdate();
 

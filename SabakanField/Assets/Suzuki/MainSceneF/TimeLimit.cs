@@ -13,7 +13,7 @@ public class TimeLimit:UIBase
     private float _timeLimit_m = 0.0f;  // 分
     private bool _overTimeFlag = false;
     // 制限時間(固定値)
-    private readonly float _TIME_LIMIT = 10.0f;
+    private readonly float _TIME_LIMIT = 100.0f;
 
     /// <summary>
     /// デバッグコマンド
