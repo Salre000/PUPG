@@ -12,18 +12,35 @@ public static class GanObject
         constancyGun = Resources.Load<ObjectList>("ConstancyGun");
         extraGan = Resources.Load<ObjectList>("ExtraGun");
 
-
     }
 
+    //ロードアウト武器の列挙体
     public enum ConstancyGanType
     {
+        /// <summary>
+        /// <see SL_8="アサルト"/>
+        /// </summary>
         SL_8,
+        /// <summary>
+        /// <see Classic="ハンドガン"/>
+        /// </summary>
         Classic,
+        /// <summary>
+        /// <see Stechkin="リボルバー"/>
+        /// </summary>
         Stechkin,
+        /// <summary>
+        /// <see FAR_EYE="スナイパー"/>
+        /// </summary>
         FAR_EYE,
+        /// <summary>
+        /// <see EyeOfHorus="ショットガン"/>
+        /// </summary>
         EyeOfHorus,
+        //最大値
         Max
     }
+    //強武器の列挙体
     public enum ExtraGunType
     {
         Dominator,
