@@ -17,25 +17,15 @@ public static class GanObject
     //ロードアウト武器の列挙体
     public enum ConstancyGanType
     {
-        /// <summary>
-        /// <see SL_8="アサルト"/>
-        /// </summary>
+        /// <summary><see SL_8="アサルトライフル"/> </summary>
         SL_8,
-        /// <summary>
-        /// <see Classic="ハンドガン"/>
-        /// </summary>
+        /// <summary><see Classic="ハンドガン"/> </summary>
         Classic,
-        /// <summary>
-        /// <see Stechkin="リボルバー"/>
-        /// </summary>
+        /// <summary><see Stechkin="リボルバー"/> </summary>
         Stechkin,
-        /// <summary>
-        /// <see FAR_EYE="スナイパー"/>
-        /// </summary>
+        /// <summary><see FAR_EYE="スナイパーライフル"/> </summary>
         FAR_EYE,
-        /// <summary>
-        /// <see EyeOfHorus="ショットガン"/>
-        /// </summary>
+        /// <summary><see EyeOfHorus="ショットガン"/> </summary>
         EyeOfHorus,
         //最大値
         Max
