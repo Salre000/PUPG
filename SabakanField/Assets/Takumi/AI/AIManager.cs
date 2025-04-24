@@ -18,7 +18,7 @@ public class AIManager : MonoBehaviour
     List<AI> enemys = new List<AI>();
 
     //敵のAI生存状況状況
-    [SerializeField]List<bool> enemyLife = new List<bool>();
+    [SerializeField] List<bool> enemyLife = new List<bool>();
 
     //フラッグのオブジェクトの配列
     GameObject[] flagObject = new GameObject[2];
@@ -116,7 +116,7 @@ public class AIManager : MonoBehaviour
             }
         }
 
-        if (isEnemyTeam && player != null&&!PlayerManager.IsPlayerDead()) list.Add(player);
+        if (isEnemyTeam && player != null && !PlayerManager.IsPlayerDead()) list.Add(player);
 
 
         return list;
@@ -137,7 +137,7 @@ public class AIManager : MonoBehaviour
         enemyLife.Capacity = enemys.Capacity;
         for (int i = 0; i < enemys.Count; i++)
         {
-            enemyLife.Add(AICharacterUtility.GetCharacterAI(i+4).GetISLife());
+            enemyLife.Add(AICharacterUtility.GetCharacterAI(i + 4).GetISLife());
 
         }
 
@@ -175,6 +175,7 @@ public class AIManager : MonoBehaviour
 
                 float createAngle = angle + (15 * j) - 30;
                 GameObject ai = GameObject.Instantiate(origenAI);
+                RaandomGan(ai);
 
 
                 ai.transform.eulerAngles = new Vector3(0, createAngle, 0);
@@ -182,12 +183,10 @@ public class AIManager : MonoBehaviour
                 ai.transform.position = flagObject[i].transform.position + new Vector3(Mathf.Sin(createAngle * Mathf.Deg2Rad), 0, Mathf.Cos(createAngle * Mathf.Deg2Rad));
 
                 ai.transform.name += ((i * 5) + j).ToString();
-
-                RaandomGan(ai);
-
                 AI Ai = ai.GetComponent<AI>();
 
-                Ai.Initialization();
+
+
 
                 Ai.SetEnemyFlag(flagObject[(i + 1) % 2]);
                 Ai.SetFlag(flagObject[i]);
@@ -221,7 +220,7 @@ public class AIManager : MonoBehaviour
     }
 
 
-    private void Debug() 
+    private void Debug()
     {
         if (Input.GetKey(KeyCode.Alpha0)) players[0].gameObject.GetComponent<CharacterInsterface>().HitAction();
         if (Input.GetKey(KeyCode.Alpha1)) players[1].gameObject.GetComponent<CharacterInsterface>().HitAction();
@@ -234,44 +233,61 @@ public class AIManager : MonoBehaviour
         if (Input.GetKey(KeyCode.Alpha8)) enemys[4].gameObject.GetComponent<CharacterInsterface>().HitAction();
     }
 
-    private void RaandomGan(GameObject ai) 
+    private void RaandomGan(GameObject ai)
     {
-        GanObject.ConstancyGanType type = (ConstancyGanType)Random.Range(0, (int)GanObject.ConstancyGanType.Max-1);
+        GanObject.ConstancyGanType type = (ConstancyGanType)Random.Range(0, (int)GanObject.ConstancyGanType.Max - 1);
         Animator animator = ai.GetComponent<Animator>();
+        int randomRenge = 0;
+        GameObject gan = GameObject.Instantiate(GanObject.constancyGun.objects[(int)type]);
+        AI aI = ai.GetComponent<AI>();
+
+        aI.SetGanObject(gan);
+        aI.Initialization();
+
 
         switch (type)
         {
             case ConstancyGanType.SL_8:
+                ai.GetComponent<AI>().GetStatus().SetAnimatorFloat("MoveSpped", 1);
+                ai.GetComponent<AI>().GetStatus().SetAnimatorFloat("ShotSpped", 2);
+                randomRenge = 5;
                 break;
             case ConstancyGanType.Classic:
                 animator.runtimeAnimatorController = HandGanType;
-
+                ai.GetComponent<AI>().GetStatus().SetAnimatorFloat("MoveSpped", 1.1f);
+                ai.GetComponent<AI>().GetStatus().SetAnimatorFloat("ShotSpped", 3);
+                randomRenge = 7;
 
                 break;
             case ConstancyGanType.Stechkin:
                 animator.runtimeAnimatorController = HandGanType;
-
+                ai.GetComponent<AI>().GetStatus().SetAnimatorFloat("MoveSpped", 1);
+                ai.GetComponent<AI>().GetStatus().SetAnimatorFloat("ShotSpped", 0.5f);
+                randomRenge = 3;
 
                 break;
             case ConstancyGanType.FAR_EYE:
+                ai.GetComponent<AI>().GetStatus().SetAnimatorFloat("MoveSpped", 0.5f);
+                ai.GetComponent<AI>().GetStatus().SetAnimatorFloat("ShotSpped", 0.3f);
+                randomRenge = 0;
                 break;
             case ConstancyGanType.EyeOfHorus:
+                ai.GetComponent<AI>().GetStatus().SetAnimatorFloat("MoveSpped", 0.8f);
+                ai.GetComponent<AI>().GetStatus().SetAnimatorFloat("ShotSpped", 0.8f);
+                randomRenge = 10;
                 break;
         }
 
-        GameObject gan =GameObject.Instantiate( GanObject.constancyGun.objects[(int)type]);
 
         gan.transform.parent = ai.transform;
 
         WeaponEquipment weapon = gan.AddComponent<WeaponEquipment>();
 
-        AI aI = ai.GetComponent<AI>();
 
         weapon.SetLefthand(aI.GetLeftHand());
         weapon.SetRighthand(aI.GetRightHand());
 
-        aI.SetGanObject(gan);
-
+        aI.SetRandomRenge(randomRenge);
 
 
     }

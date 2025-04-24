@@ -16,7 +16,7 @@ public class AIShot
     GameObject ganObject;
     public void SetGanObject(GameObject gameObject) {  ganObject = gameObject; }
 
-    public void Shot()
+    public void Shot(float range)
     {
 
         Vector3 startPos = ganObject.transform.position + ganObject.transform.forward;
@@ -34,9 +34,11 @@ public class AIShot
 
         float angle = Mathf.Atan2(Vec.x, Vec.z);
 
-        angle +=BulletManager.GetRandomAngle();
+        angle +=BulletManager.GetRandomAngle(range, range);
 
         Vec = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle));
+
+        Debug.DrawRay(startPos, Vec,Color.white,2);
 
         BulletMoveFunction.RayHitTest(startPos, Vec,AICharacterUtility.GetPlayerFaction(ID), ID);
 

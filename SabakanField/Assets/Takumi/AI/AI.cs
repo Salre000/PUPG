@@ -38,6 +38,9 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
     public bool moveShotFlag;
     //
 
+    private float randomRenge = 5;
+    public void SetRandomRenge(float renge) {  randomRenge = renge; }
+
     private bool invincible=false;
     private float invincibleTime = 0;
 
@@ -101,7 +104,7 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
 
     public void ReStart() {  move.ReStart(); }
     public void EndShot() {  move.EndShot(); }
-    public void Shot() {  shot.Shot(); }
+    public void Shot() {  shot.Shot(randomRenge); }
     public void Resurrect() { move.Resurrect(() => {capsuleCollider.enabled = true; }); }
 
     public bool GetInvincibleFlag()
