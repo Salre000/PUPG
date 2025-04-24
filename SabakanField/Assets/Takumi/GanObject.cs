@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class GanObject 
+public static class GanObject
 {
-  private static ObjectList constancyGun;
-  private static ObjectList extraGan;
+    public static ObjectList constancyGun;
+    public static ObjectList extraGan;
 
-    public static void LoodGameObject() 
+    public static void LoodGameObject()
     {
         constancyGun = Resources.Load<ObjectList>("ConstancyGun");
         extraGan = Resources.Load<ObjectList>("ExtraGun");
@@ -15,7 +15,7 @@ public static class GanObject
 
     }
 
-    public enum ConstancyGanType 
+    public enum ConstancyGanType
     {
         SL_8,
         Classic,
