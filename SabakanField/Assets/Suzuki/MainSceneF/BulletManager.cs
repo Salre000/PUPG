@@ -4,6 +4,7 @@ using UnityEngine;
 public static class BulletManager
 {
     // ’eŠÖ˜A
+
     // e‚É“ü‚é’e‚ÌãŒÀ
     private const int _LIMIT_BULLET = 30;
     // ƒvƒŒƒCƒ„[‚Ìe‚É‚ß‚ç‚ê‚Ä‚¢‚é’e‚Ì”
