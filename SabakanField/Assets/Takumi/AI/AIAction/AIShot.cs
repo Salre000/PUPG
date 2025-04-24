@@ -34,26 +34,11 @@ public class AIShot
 
         float angle = Mathf.Atan2(Vec.x, Vec.z);
 
-        angle += GetRandomAngle();
+        angle +=BulletManager.GetRandomAngle();
 
         Vec = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle));
 
         BulletMoveFunction.RayHitTest(startPos, Vec,AICharacterUtility.GetPlayerFaction(ID), ID);
-
-
-    }
-    float GetRandomAngle()
-    {
-
-        float angle = 0;
-        for (int i = 0; i < 5; i++)
-        {
-
-            angle -= UnityEngine.Random.Range(0, 5);
-            angle += UnityEngine.Random.Range(0, 5);
-        }
-
-        return angle * Mathf.Deg2Rad;
 
 
     }

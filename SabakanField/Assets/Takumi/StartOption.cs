@@ -14,6 +14,7 @@ public class StartOption
         if(instance==null)instance = this;
 
         OptionDataClass.GetOptionData();
+        GanObject.LoodGameObject();
 
     }
 }
