@@ -1,4 +1,6 @@
 
+using UnityEngine;
+
 public static class BulletManager
 {
     // ’eŠÖ˜A
@@ -54,5 +56,21 @@ public static class BulletManager
     static public void ResetMagazine() { playerBulletMagazine = _LIMIT_BULLET; bulletMagazin = _LIMIT_MAGAZIN; }
     // ’e‚Ì•â[
     static public void SetMAXBulletMagazine() { bulletMagazin = _LIMIT_MAGAZIN; }
+
+
+    ///ƒ‰ƒ“ƒ_ƒ€‚É¶¬‚µ‚½’l‚ğƒ‰ƒWƒAƒ“Šp‚Æ‚µ‚Ä•Ô‚·ŠÖ”i‚O‚ÉŠñ‚é‚±‚Æ‚ª‘½‚­‚È‚éj
+    static public float GetRandomAngle(float times = 5, float random = 5)
+    {
+
+        float angle = 0;
+
+        for (int i = 0; i < times; i++)
+        {
+
+            angle -= UnityEngine.Random.Range(0, random);
+            angle += UnityEngine.Random.Range(0, random);
+        }
+        return angle *Mathf.Deg2Rad;
+    }
 
 }
