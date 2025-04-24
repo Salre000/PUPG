@@ -26,6 +26,10 @@ public static class PlayerManager
             return true;
         }
 
+        ////
+        GameObject gan = GanObject.constancyGun.objects[(int)GanObject.ConstancyGanType.SL_8];
+
+        ////
         return false;
     }
 

@@ -8,7 +8,8 @@ public class OptionManager : MonoBehaviour
     // オプション設定シングルトン
     public static OptionManager Instance;
     // ADSする場合切り替えか長押しか true:切り替え false:長押し
-    private bool _adsType = false;
+    private bool _adsType = false;  
+
     // 感度設定
     private float _normalSensitivity/* = 0.5f*/;
     private float _adsSensitivity/* = 0.5f*/;

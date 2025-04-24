@@ -24,6 +24,8 @@ public class UIManager : MonoBehaviour
     private TimeLimit _timeLimit;
     // ポーズクラス
     private PauseWindow _pauseWindow;
+    // 生存クラス
+    private SurvivalStatus _survivalStatus;
 
 
 
@@ -63,6 +65,8 @@ public class UIManager : MonoBehaviour
         _timeLimit.Initialize();
         _pauseWindow = new PauseWindow();
         _pauseWindow.Initialize();
+        _survivalStatus=new SurvivalStatus();
+        _survivalStatus.Initialize();
 
     }
 
@@ -71,6 +75,7 @@ public class UIManager : MonoBehaviour
     {
         _timeLimit.Execute();
         _pauseWindow.Execute();
+        _survivalStatus.Execute();
     }
 
     public bool GageMaxCheck()
