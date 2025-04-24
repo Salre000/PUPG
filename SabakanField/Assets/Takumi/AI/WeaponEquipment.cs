@@ -5,7 +5,9 @@ using UnityEngine;
 public class WeaponEquipment : MonoBehaviour
 {
     [SerializeField] GameObject leftHand;
+    public void SetLefthand(GameObject left) { leftHand = left; }
     [SerializeField] GameObject rightHand;
+    public void SetRighthand(GameObject right) { rightHand = right; }
 
     public void SetWeaponPosition() 
     {

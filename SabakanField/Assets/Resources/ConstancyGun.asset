@@ -20,7 +20,7 @@ MonoBehaviour:
   - EyeOfHorus
   objects:
   - {fileID: 1045225505860587398, guid: d63edecd885b9ff42930e1acd28d6f88, type: 3}
-  - {fileID: 4194208187736086968, guid: 675261f6c0ca9ba4fa8591b67a39021f, type: 3}
+  - {fileID: 4168433871889688932, guid: bf66fd5d731978a449f5bd8d31ca694a, type: 3}
   - {fileID: 1982559505645326312, guid: 52b6e8d0052a54f449f7afe1987ae6a5, type: 3}
   - {fileID: 5438839914091562044, guid: 07ee6dd6034222c4d9b86a4aef4000a9, type: 3}
   - {fileID: 6754274659312352025, guid: fc4edf6c8cceedc43ae376c984963bf6, type: 3}

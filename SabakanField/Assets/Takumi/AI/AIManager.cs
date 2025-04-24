@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UnityEditor.Animations;
 using UnityEngine;
+using static GanObject;
 
 public class AIManager : MonoBehaviour
 {
@@ -26,6 +28,10 @@ public class AIManager : MonoBehaviour
 
     //AIのオリジナルオブジェクト
     [SerializeField] GameObject origenAI;
+
+
+    [SerializeField, Header("ハンドガンの銃オーバライドのアニメーション")] AnimatorOverrideController HandGanType;
+
 
     //1つの陣営のAIの数（プレイヤー側は-１）
     const int AI_NUMBER = 5;
@@ -145,6 +151,7 @@ public class AIManager : MonoBehaviour
 
     public void CreateAI()
     {
+        GanObject.LoodGameObject();
 
         killCount.Clear();
         deathCount.Clear();
@@ -176,12 +183,14 @@ public class AIManager : MonoBehaviour
 
                 ai.transform.name += ((i * 5) + j).ToString();
 
-                AI aIMove = ai.GetComponent<AI>();
+                RaandomGan(ai);
 
-                aIMove.Initialization();
+                AI Ai = ai.GetComponent<AI>();
 
-                aIMove.SetEnemyFlag(flagObject[(i + 1) % 2]);
-                aIMove.SetFlag(flagObject[i]);
+                Ai.Initialization();
+
+                Ai.SetEnemyFlag(flagObject[(i + 1) % 2]);
+                Ai.SetFlag(flagObject[i]);
 
                 killCount.Add(0);
                 deathCount.Add(0);
@@ -191,16 +200,16 @@ public class AIManager : MonoBehaviour
                 {
                     ai.transform.GetChild(0).GetComponent<MeshRenderer>().material = color[0];
 
-                    aIMove.SetPlayerFaction(() => false);
-                    players.Add(aIMove);
+                    Ai.SetPlayerFaction(() => false);
+                    players.Add(Ai);
 
                 }
                 else
                 {
                     ai.transform.GetChild(0).GetComponent<MeshRenderer>().material = color[1];
 
-                    aIMove.SetPlayerFaction(() => true);
-                    enemys.Add(aIMove);
+                    Ai.SetPlayerFaction(() => true);
+                    enemys.Add(Ai);
                 }
 
             }
@@ -225,6 +234,47 @@ public class AIManager : MonoBehaviour
         if (Input.GetKey(KeyCode.Alpha8)) enemys[4].gameObject.GetComponent<CharacterInsterface>().HitAction();
     }
 
+    private void RaandomGan(GameObject ai) 
+    {
+        GanObject.ConstancyGanType type = (ConstancyGanType)Random.Range(0, (int)GanObject.ConstancyGanType.Max-1);
+        Animator animator = ai.GetComponent<Animator>();
+
+        switch (type)
+        {
+            case ConstancyGanType.SL_8:
+                break;
+            case ConstancyGanType.Classic:
+                animator.runtimeAnimatorController = HandGanType;
+
+
+                break;
+            case ConstancyGanType.Stechkin:
+                animator.runtimeAnimatorController = HandGanType;
+
+
+                break;
+            case ConstancyGanType.FAR_EYE:
+                break;
+            case ConstancyGanType.EyeOfHorus:
+                break;
+        }
+
+        GameObject gan =GameObject.Instantiate( GanObject.constancyGun.objects[(int)type]);
+
+        gan.transform.parent = ai.transform;
+
+        WeaponEquipment weapon = gan.AddComponent<WeaponEquipment>();
+
+        AI aI = ai.GetComponent<AI>();
+
+        weapon.SetLefthand(aI.GetLeftHand());
+        weapon.SetRighthand(aI.GetRightHand());
+
+        aI.SetGanObject(gan);
+
+
+
+    }
 
 
 }

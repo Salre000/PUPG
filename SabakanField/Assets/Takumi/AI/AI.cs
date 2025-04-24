@@ -8,6 +8,14 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
 
     [SerializeField]private GameObject gunObject;
 
+    public void SetGanObject(GameObject gameObject) {  gunObject = gameObject; }
+
+    [SerializeField] private GameObject leftHand;
+    public GameObject GetLeftHand() { return leftHand; }
+
+    [SerializeField] private GameObject rightHand;
+    public GameObject GetRightHand() { return rightHand; }
+
     private CapsuleCollider capsuleCollider;
 
     AIMove move;
@@ -75,6 +83,7 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
 
     public void OnCollisionEnter(Collision collision)
     {
+        if (!status.GetISLife()) return;
         move.HitObject(collision);
     }
 
@@ -93,7 +102,7 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
     public void ReStart() {  move.ReStart(); }
     public void EndShot() {  move.EndShot(); }
     public void Shot() {  shot.Shot(); }
-    public void Resurrect() {  move.Resurrect(); capsuleCollider.enabled = true; }
+    public void Resurrect() { move.Resurrect(() => {capsuleCollider.enabled = true; }); }
 
     public bool GetInvincibleFlag()
     {

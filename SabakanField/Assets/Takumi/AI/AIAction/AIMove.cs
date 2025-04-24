@@ -417,19 +417,20 @@ public class AIMove
 
     }
 
-    public void Resurrect()
+    public void Resurrect(System.Action action)
     {
         ResetAnimation();
 
         Vector3 vec = playerFlag.transform.position - gameStartPosition;
         float angle = Mathf.Atan2(vec.x, vec.z);
-        AICharacterUtility.GetCharacterAI(ID).SetAnimatorFloat("Speed", 0);
+        AICharacterUtility.GetCharacterAI(ID).SetAnimatorFloat("DeathSpped", 0);
         Vector3 pos = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle)) * 5 + playerFlag.transform.position;
         RespawnManager.Instance.DelayRespawn(thisGameObject, pos,UnityEngine.Random.Range(6,15), () => 
         {
 
-        AICharacterUtility.GetCharacterAI(ID).SetAnimatorFloat("Speed", 1);
+        AICharacterUtility.GetCharacterAI(ID).SetAnimatorFloat("DeathSpped", 1);
         AICharacterUtility.GetCharacterAI(ID).SetISLife(true);
+            action();
         });
 
 

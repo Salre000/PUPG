@@ -446,6 +446,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 35476c8527235264193fdf697835aafb, type: 2}
   - {fileID: 2100000, guid: e8ff6c361574bc247b44df15c4405935, type: 2}
   origenAI: {fileID: 9213432157738317115, guid: 68e37ce96f23a3d4c957b00b1b8ba1a2, type: 3}
+  HandGanType: {fileID: 22100000, guid: 7b0dca7cef786a247afdd2e44853035f, type: 2}
 --- !u!114 &1584106596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,7 +484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObject: {fileID: 8006089762777656808, guid: ea2831a0a24e3394ca16867a0c428b45, type: 3}
-  enemyObject: {fileID: 8006089762777656808, guid: ea2831a0a24e3394ca16867a0c428b45, type: 3}
+  enemyObject: {fileID: 8006089762777656808, guid: 7f73026d84393d849943129179cd2a1c, type: 3}
 --- !u!1001 &1607371873
 PrefabInstance:
   m_ObjectHideFlags: 0
