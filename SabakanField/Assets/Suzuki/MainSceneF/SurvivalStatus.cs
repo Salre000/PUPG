@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class SurvivalStatus : UIBase
 {
+    // —¼ƒ`[ƒ€¶‘¶ó‹µUI
+
     private List<bool> _blueTeamStatus = new List<bool>();
     private List<Image> _blueTeamImage = new List<Image>();
     private List<bool> _redTeamStatus = new List<bool>();

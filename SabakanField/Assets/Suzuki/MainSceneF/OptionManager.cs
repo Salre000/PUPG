@@ -11,8 +11,8 @@ public class OptionManager : MonoBehaviour
     private bool _adsType = false;  
 
     // ä¥ìxê›íË
-    private float _normalSensitivity/* = 0.5f*/;
-    private float _adsSensitivity/* = 0.5f*/;
+    private float _normalSensitivity = 0.5f;
+    private float _adsSensitivity = 0.5f;
 
     AdsTypeSetting _adsTypeSetting = new AdsTypeSetting();
     SensitivitySetting _sensitivitySetting = new SensitivitySetting();
@@ -30,7 +30,6 @@ public class OptionManager : MonoBehaviour
     private void Initialize()
     {
         StartOption start= new StartOption();
-        //OptionDataClass.GetOptionData();
         SetNormalSensitivity(OptionDataClass.GetNormalSensitivity());
         SetAdsSensitivity(OptionDataClass.GetAdsSensitivity());
         _adsType = OptionDataClass.GetAdsType();
