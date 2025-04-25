@@ -245,6 +245,8 @@ public class AIManager : MonoBehaviour
         aI.Initialization();
 
 
+        aI.SetBullet(GanObject.GanBulletCount[(int)type]);
+
         switch (type)
         {
             case ConstancyGanType.SL_8:

@@ -44,6 +44,14 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
     private bool invincible=false;
     private float invincibleTime = 0;
 
+    private int _maxBullet = -1;
+    //デバッグ用
+    [SerializeField]private int emainingBullet = -1;
+
+    private void ReLood() { emainingBullet = _maxBullet; }
+    public void SetBullet(int max) 
+    { _maxBullet = max; ReLood(); }
+
     public void Initialization()
     {
         AICharacterUtility.AddAI(this);
@@ -71,7 +79,7 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
     {
 
         InvincibleCount();
-
+        MagazineChaeck();
         //  デバッグ用
         nowMode = move.nowMode;
         nextMode = move.nextMode;
@@ -104,9 +112,9 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
 
     public void ReStart() {  move.ReStart(); }
     public void EndShot() {  move.EndShot(); }
-    public void Shot() {  shot.Shot(randomRenge); }
+    public void Shot() {  shot.Shot(randomRenge); emainingBullet--; }
     public void Resurrect() { move.Resurrect(() => {capsuleCollider.enabled = true; }); }
-
+    public void ReLoodAnime() { ReLood(); }
     public bool GetInvincibleFlag()
     {
 
@@ -127,5 +135,14 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
 
     }
 
+    private void MagazineChaeck() 
+    {
+        if (emainingBullet > 0) return;
+        if (!status.GetISLife()) return;
+
+        status.SetAnimatorTrigger("ReLood");
+
+
+    }
 
 }
