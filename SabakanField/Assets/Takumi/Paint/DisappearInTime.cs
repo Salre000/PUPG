@@ -8,10 +8,10 @@ public class DisappearInTime : MonoBehaviour
     public void SetLimitTime(float time) {  _LIMIT_TIME = time; }
 
     System.Func<bool> end2Action=()=>true;
-    public void SetEndAction(System.Func<bool> Func) {  end2Action = Func; }
+    public void SetEndFancs(System.Func<bool> Func) {  end2Action = Func; }
 
     System.Action endAction;
-    public void SetEndFunc(System.Action Action) { endAction = Action; }
+    public void SetEndActions(System.Action Action) { endAction = Action; }
     public void FixedUpdate()
     {
         _timeCount += Time.deltaTime;
@@ -19,10 +19,10 @@ public class DisappearInTime : MonoBehaviour
         if (_timeCount < _LIMIT_TIME || !end2Action())
         {
 
-            //endAction();
             return;
         }
-            
+        endAction();
+
 
         _timeCount = 0;
 

@@ -43,7 +43,14 @@ public class AIShot
 
         Debug.DrawRay(startPos, Vec,Color.white,2);
 
-        SoundManager.StartSound(startPos, SoundManager.GetShotSound(ganType));
+        SoundManager.StartSound(startPos, SoundManager.GetShotSound(ganType),
+            () =>
+            {
+                Vector3 pos = startPos;
+                pos.y = 0;
+                SoundManager.StartSound(pos, SoundManager.GetShotAddSound(3));
+            }
+            );
         BulletMoveFunction.RayHitTest(startPos, Vec,AICharacterUtility.GetPlayerFaction(ID), ID);
 
 

@@ -11,15 +11,17 @@ public static class SoundManager
 
     private static List<AudioSource> SoundSource=new List<AudioSource>(50);
 
-    public static void StartSound(Vector3 pos,AudioClip clip) 
+    public static void StartSound(Vector3 pos,AudioClip clip,System.Action addAction=null) 
     {
         AudioSource audioSource = GetAudioSource();
 
         audioSource.gameObject.transform.position = pos;
-        audioSource.gameObject.GetComponent<DisappearInTime>().SetEndAction(() => !audioSource.isPlaying);
+        audioSource.gameObject.GetComponent<DisappearInTime>().SetEndFancs(() => !audioSource.isPlaying);
         audioSource.PlayOneShot(clip);
 
+        if (addAction == null) return;
 
+        audioSource.gameObject.GetComponent<DisappearInTime>().SetEndActions(() => addAction());
 
     }
     private static AudioSource GetAudioSource() 
