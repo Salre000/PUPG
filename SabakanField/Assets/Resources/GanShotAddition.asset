@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9b5f6633db036d4f8560fcb0c6ddd3a, type: 3}
+  m_Name: GanShotAddition
+  m_EditorClassIdentifier: 
+  SoundLists:
+  - {fileID: 8300000, guid: 6f0e3e96af440c643a782401d52a731d, type: 3}
+  - {fileID: 8300000, guid: eae7136d08fff8647aacb7064c5c6314, type: 3}
+  - {fileID: 8300000, guid: 594e132edb8157e4b8f80e4ff89cd1c3, type: 3}
+  - {fileID: 8300000, guid: 12ceba718da1c8b4a936f68adc176aad, type: 3}

@@ -152,6 +152,7 @@ public class AIManager : MonoBehaviour
     public void CreateAI()
     {
         GanObject.LoodGameObject();
+        SoundManager.Initialize();
 
         killCount.Clear();
         deathCount.Clear();
@@ -172,9 +173,9 @@ public class AIManager : MonoBehaviour
             for (int j = 0; j < AI_NUMBER; j++)
             {
                 if (i == 0 && j == 0) continue;
+                GameObject ai = GameObject.Instantiate(origenAI);
 
                 float createAngle = angle + (15 * j) - 30;
-                GameObject ai = GameObject.Instantiate(origenAI);
                 RaandomGan(ai);
 
 
@@ -238,13 +239,15 @@ public class AIManager : MonoBehaviour
         GanObject.ConstancyGanType type = (ConstancyGanType)Random.Range(0, (int)GanObject.ConstancyGanType.Max - 1);
         Animator animator = ai.GetComponent<Animator>();
         int randomRenge = 0;
+
         GameObject gan = GameObject.Instantiate(GanObject.constancyGun.objects[(int)type]);
+
         AI aI = ai.GetComponent<AI>();
 
         aI.SetGanObject(gan);
         aI.Initialization();
 
-
+        aI.GetIShot().SetGanType(type);
         aI.SetBullet(GanObject.GanBulletCount[(int)type]);
 
         switch (type)

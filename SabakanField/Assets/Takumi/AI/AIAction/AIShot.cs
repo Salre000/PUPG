@@ -16,6 +16,9 @@ public class AIShot
     GameObject ganObject;
     public void SetGanObject(GameObject gameObject) {  ganObject = gameObject; }
 
+    GanObject.ConstancyGanType ganType;
+
+    public void SetGanType(GanObject.ConstancyGanType type) {  ganType = type; }
     public void Shot(float range)
     {
 
@@ -40,6 +43,7 @@ public class AIShot
 
         Debug.DrawRay(startPos, Vec,Color.white,2);
 
+        SoundManager.StartSound(startPos, SoundManager.GetShotSound(ganType));
         BulletMoveFunction.RayHitTest(startPos, Vec,AICharacterUtility.GetPlayerFaction(ID), ID);
 
 

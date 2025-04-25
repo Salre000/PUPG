@@ -24,6 +24,7 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
     public AIStatus GetStatus() {  return status; }
 
     AIShot shot;
+    public AIShot GetIShot() { return shot; }
 
     private System.Func<bool> _PlayerFaction;
     public void SetPlayerFaction(System.Func<bool> playerFaction) { _PlayerFaction = playerFaction; }
