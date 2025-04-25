@@ -112,9 +112,9 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
 
     public void ReStart() {  move.ReStart(); }
     public void EndShot() {  move.EndShot(); }
-    public void Shot() {  shot.Shot(randomRenge); emainingBullet--; }
-    public void Resurrect() { move.Resurrect(() => {capsuleCollider.enabled = true; }); }
-    public void ReLoodAnime() { ReLood(); }
+    public void Shot() { shot.Shot(randomRenge); emainingBullet--; }
+    public void Resurrect() { move.Resurrect(() => {capsuleCollider.enabled = true;ReLood(); }); }
+    public void ReLoodAnime() { ReLood(); nowReLood = false; }
     public bool GetInvincibleFlag()
     {
 
@@ -134,14 +134,14 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
         if(invincibleTime>=1)invincible = false;
 
     }
-
+    private bool nowReLood = false;
     private void MagazineChaeck() 
     {
         if (emainingBullet > 0) return;
         if (!status.GetISLife()) return;
-
+        if (nowReLood) return;
         status.SetAnimatorTrigger("ReLood");
-
+        nowReLood = true;
 
     }
 

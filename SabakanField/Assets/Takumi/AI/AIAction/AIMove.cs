@@ -411,7 +411,7 @@ public class AIMove
         AICharacterUtility.GetCharacterAI(ID).SetAnimatorBool("Back", true);
         nowMode = NowMode.Back;
 
-        thisGameObject.transform.LookAt(hitObject.transform);
+        //thisGameObject.transform.LookAt(hitObject.transform);
 
         thisGameObject.transform.eulerAngles = new Vector3(0, thisGameObject.transform.eulerAngles.y, 0);
 
