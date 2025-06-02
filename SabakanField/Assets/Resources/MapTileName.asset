@@ -13,4 +13,10 @@ MonoBehaviour:
   m_Name: MapTileName
   m_EditorClassIdentifier: 
   _mapPlanDataName:
-  - MapPlanData_1
+  - normalMAP
+  - CQCMAP
+  - WeaponsMAP
+  _mapPlanDataEX:
+  - "\u4E00\u756A\u57FA\u790E\u7684\u306A\u30DE\u30C3\u30D7"
+  - "\u30DE\u30C3\u30D7\u30C1\u30C3\u30D7\u306E\u5168\u3066\u304CCQC\u30A8\u30EA\u30A2\u306E\u30DE\u30C3\u30D7"
+  - "\u5F37\u6B66\u5668\u3092\u62FE\u3044\u6613\u3044\u30DE\u30C3\u30D7"

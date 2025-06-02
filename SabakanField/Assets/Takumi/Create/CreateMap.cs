@@ -9,17 +9,17 @@ using UnityEngine.Rendering;
 //マップの生成を行うクラス
 public class CreateMap : MonoBehaviour
 {
-    [SerializeField, Header("近接戦闘のマップオブジェクトリスト")]private MapTile _CQBMap;
-    [SerializeField, Header("陣地の近くのマップオブジェクトリスト")]private MapTile _flagAreaMap;
-    [SerializeField, Header("壁の多いのマップオブジェクトリスト")]private MapTile _wallMap;
-    [SerializeField, Header("障害物の少ないのマップオブジェクトリスト")]private MapTile _natureMap;
-    [SerializeField, Header("弾が補充できるマップオブジェクトリスト")]private MapTile _amoReChageMap;
-    [SerializeField, Header("武器が切り替えられるマップオブジェクトリスト")]private MapTile _WeaponMap;
-    [SerializeField, Header("マップの原型のエクセルデータの名前が入っているオブジェクト")]private MapPlanDataObject _planData;
-    [SerializeField, Header("マップに配置するフラッグのモデルオブジェクト")]private GameObject _flagObjectBase;
-    [SerializeField, Header("フラッグのマテリアル、プレイヤー、エネミーの順番")]private Material[] _flagMaterial = new Material[2];
-    [SerializeField, Header("マップの範囲外と区切る壁のプレハブ")]private GameObject _wallObject;
-    [SerializeField,Header("AIのプレハブベース")]private GameObject _aiObject;
+    [SerializeField, Header("近接戦闘のマップオブジェクトリスト")] private MapTile _CQBMap;
+    [SerializeField, Header("陣地の近くのマップオブジェクトリスト")] private MapTile _flagAreaMap;
+    [SerializeField, Header("壁の多いのマップオブジェクトリスト")] private MapTile _wallMap;
+    [SerializeField, Header("障害物の少ないのマップオブジェクトリスト")] private MapTile _natureMap;
+    [SerializeField, Header("弾が補充できるマップオブジェクトリスト")] private MapTile _amoReChageMap;
+    [SerializeField, Header("武器が切り替えられるマップオブジェクトリスト")] private MapTile _WeaponMap;
+    [SerializeField, Header("マップの原型のエクセルデータの名前が入っているオブジェクト")] private MapPlanDataObject _planData;
+    [SerializeField, Header("マップに配置するフラッグのモデルオブジェクト")] private GameObject _flagObjectBase;
+    [SerializeField, Header("フラッグのマテリアル、プレイヤー、エネミーの順番")] private Material[] _flagMaterial = new Material[2];
+    [SerializeField, Header("マップの範囲外と区切る壁のプレハブ")] private GameObject _wallObject;
+    [SerializeField, Header("AIのプレハブベース")] private GameObject _aiObject;
 
     //マップの生成のデータの参照先のパス
     private readonly string _PLAN_PASS = "MapPlanData/";
@@ -27,10 +27,15 @@ public class CreateMap : MonoBehaviour
     //敵または味方のフラックオブジェクトを返す
     public GameObject GetFlag(int number) { return flag[number]; }
     //フラックのオブジェクト配列
-    GameObject []flag=new GameObject[2];
+    GameObject[] flag = new GameObject[2];
 
     //マップの一辺のマップチップ数
-    const int _MAX_SIZE = 6;
+    [SerializeField] int _MAX_SIZE_X = 6;
+    [SerializeField] int _MAX_SIZE_Y = 6;
+
+    public int MAXSIZE = -1;
+
+    public Vector2 MapSize=Vector2.zero;
 
     //マップの高さ
     const float _MAP_HEIGHT = 0.2f;
@@ -39,9 +44,9 @@ public class CreateMap : MonoBehaviour
     const int MAP_RETO = 10;
 
     //敵と味方のフラッグの座標
-    private readonly Vector3 _ENEMYFLAG_POSITION = new Vector3((MAP_RETO * _MAX_SIZE) - (MAP_RETO+ (MAP_RETO / 2)), _MAP_HEIGHT, (MAP_RETO * _MAX_SIZE) - (MAP_RETO + (MAP_RETO / 2)));
-    private readonly Vector3 _PLAYERFLAG_POSITION = new Vector3((MAP_RETO / 2), _MAP_HEIGHT, (MAP_RETO / 2));
-
+    private Vector3 _ENEMYFLAG_POSITION;
+    private Vector3 _PLAYERFLAG_POSITION;
+    
     //  マップの種類の列挙体
     enum MapTileType
     {
@@ -57,9 +62,16 @@ public class CreateMap : MonoBehaviour
 
     public void Awake()
     {
+        MAXSIZE = Mathf.Min(_MAX_SIZE_X, _MAX_SIZE_Y);
+        MapSize.x = _MAX_SIZE_X;
+        MapSize.y = _MAX_SIZE_Y;
 
+        _ENEMYFLAG_POSITION = new Vector3((MAP_RETO * _MAX_SIZE_X) - (MAP_RETO + (MAP_RETO / 2)), _MAP_HEIGHT, (MAP_RETO * _MAX_SIZE_Y) - (MAP_RETO + (MAP_RETO / 2)));
+        _PLAYERFLAG_POSITION = new Vector3((MAP_RETO / 2), _MAP_HEIGHT, (MAP_RETO / 2));
 
-        AIUtility.aIManager=_AIManager=GetComponent<AIManager>();
+        //  マップの種類の列挙体
+
+        AIUtility.aIManager = _AIManager = GetComponent<AIManager>();
 
         CreateMapManager.createMap = this;
 
@@ -76,6 +88,10 @@ public class CreateMap : MonoBehaviour
         _AIManager.CreateAI();
 
     }
+
+    public void Start()
+    {
+    }
     private void CreateGraund()
     {
         //読み込んだCSVファイルを格納
@@ -88,7 +104,7 @@ public class CreateMap : MonoBehaviour
         StringBuilder builder = new StringBuilder();
         builder.Clear();
         builder.Append(_PLAN_PASS);
-        builder.Append(_planData.GetMapTileName(0));
+        builder.Append(_planData.GetMapTileName((int)MapTypeEnum.MapType._CQCMAP));
 
 
         //繋げたファイルパスを使いファイルのロードを行う
@@ -109,9 +125,9 @@ public class CreateMap : MonoBehaviour
         GameObject maptileAll = new GameObject("MapTileAll");
 
         //int配列に変換したマップデータを使いマップチップを割り当てする
-        for (int x = 0; x < _MAX_SIZE; x++)
+        for (int x = 0; x < _MAX_SIZE_X; x++)
         {
-            for (int z = 0; z < _MAX_SIZE; z++)
+            for (int z = 0; z < _MAX_SIZE_Y; z++)
             {
 
                 int MapTypeNumber = int.Parse(csvDatas[x][z]);
@@ -132,7 +148,7 @@ public class CreateMap : MonoBehaviour
 
 
     }
-    
+
     //列挙体にあった種類のマップチップをランダムに生成
     private GameObject GetRandomMapTile(MapTileType mapType)
     {
@@ -203,10 +219,7 @@ public class CreateMap : MonoBehaviour
 
         //壁を1つのオブジェクトの子構造にするためのオブジェクト
         wallAll.transform.name = "WallAll";
-
-
-        //一辺の長さと壁一枚の長さを使い壁を一面貼るループ
-        for (int i = 0; i < objectRate * _MAX_SIZE; i++)
+        for (int i = 0; i < objectRate * _MAX_SIZE_Y; i++)
         {
             GameObject wall = GameObject.Instantiate(_wallObject, wallAll.transform);
             Vector3 position = Vector3.zero;
@@ -223,7 +236,7 @@ public class CreateMap : MonoBehaviour
             wall = GameObject.Instantiate(_wallObject, wallAll.transform);
             position = Vector3.zero;
 
-            position.x = MAP_RETO * _MAX_SIZE - MAP_RETO / 2;
+            position.x = MAP_RETO * _MAX_SIZE_X - MAP_RETO / 2;
             position.y = 1.5f;
             position.z = i * objectspece - 4;
 
@@ -231,17 +244,15 @@ public class CreateMap : MonoBehaviour
 
             wall.transform.position = position;
 
-            wall = GameObject.Instantiate(_wallObject, wallAll.transform);
-            position = Vector3.zero;
 
-            position.x = i * objectspece - 4;
-            position.y = 1.5f;
-            position.z = MAP_RETO * _MAX_SIZE - MAP_RETO / 2;
+        }
 
-            wall.transform.eulerAngles = new Vector3(0, 0, 0);
+        //一辺の長さと壁一枚の長さを使い壁を一面貼るループ
+        for (int i = 0; i < objectRate * _MAX_SIZE_X; i++)
+        {
+            GameObject wall = GameObject.Instantiate(_wallObject, wallAll.transform);
 
-            wall.transform.position = position;
-
+            Vector3 position = Vector3.zero;
 
             wall = GameObject.Instantiate(_wallObject, wallAll.transform);
             position = Vector3.zero;
@@ -253,6 +264,18 @@ public class CreateMap : MonoBehaviour
             wall.transform.eulerAngles = new Vector3(0, 0, 0);
 
             wall.transform.position = position;
+            wall = GameObject.Instantiate(_wallObject, wallAll.transform);
+            position = Vector3.zero;
+
+            position.x = i * objectspece - 4;
+            position.y = 1.5f;
+            position.z = MAP_RETO * _MAX_SIZE_Y - MAP_RETO / 2;
+
+            wall.transform.eulerAngles = new Vector3(0, 0, 0);
+
+            wall.transform.position = position;
+
+
         }
     }
 }

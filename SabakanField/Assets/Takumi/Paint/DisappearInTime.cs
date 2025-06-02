@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 //時間経過で見えなくなるオブジェクトのクラス
@@ -21,7 +22,8 @@ public class DisappearInTime : MonoBehaviour
 
             return;
         }
-        endAction();
+
+        if(endAction!=null)endAction();
 
 
         _timeCount = 0;
