@@ -41,7 +41,7 @@ public class AIShot
 
         Vec = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle));
 
-        Debug.DrawRay(startPos, Vec,Color.white,2);
+        Debug.DrawRay(startPos, Vec*30,Color.white,2);
 
         SoundManager.StartSound(startPos, SoundManager.GetShotSound(ganType),
             () =>

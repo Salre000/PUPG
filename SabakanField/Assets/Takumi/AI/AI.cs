@@ -29,7 +29,7 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
     private System.Func<bool> _PlayerFaction;
     public void SetPlayerFaction(System.Func<bool> playerFaction) { _PlayerFaction = playerFaction; }
 
-    public bool PlayerFaction() { return _PlayerFaction(); }
+    public bool PlayerFaction() { return GameModes.mode != PublicEnum.GameMode.deathmatch ? _PlayerFaction() : false; }
 
     //デバッグ用
     public AIMove.NowMode nowMode;
@@ -93,9 +93,10 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
 
     }
 
-    public void OnCollisionEnter(Collision collision)
+    public void OnCollisionStay(Collision collision)
     {
         if (!status.GetISLife()) return;
+        
         move.HitObject(collision);
     }
 

@@ -100,6 +100,7 @@ public class AIMove
     }
     public void EndShot()
     {
+        Debug.Log("射撃終了");
         nowMode = NowMode.Wandering;
         AICharacterUtility.SetShotFlag(ID, false);
 
@@ -326,6 +327,8 @@ public class AIMove
         nowMode = NowMode.ChageAngle;
 
         Vector3 vec = flag.transform.position - thisGameObject.transform.position;
+        if (GameModes.mode == PublicEnum.GameMode.deathmatch) 
+            vec=new Vector3(25,0,25) - thisGameObject.transform.position;
         //���݂̊p�x
         float nowAngle = Mathf.Atan2(vec.x, vec.z) * Mathf.Rad2Deg;
 
@@ -398,7 +401,7 @@ public class AIMove
     {
         if (shotingFlag && nowMode != NowMode.Shot) 
         {
-            AICharacterUtility.SetShotFlag(ID, false);
+            //AICharacterUtility.SetShotFlag(ID, false);
             return;
         }
 
@@ -425,6 +428,29 @@ public class AIMove
         float angle = Mathf.Atan2(vec.x, vec.z);
         AICharacterUtility.GetCharacterAI(ID).SetAnimatorFloat("DeathSpped", 0);
         Vector3 pos = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle)) * 5 + playerFlag.transform.position;
+
+        int mapMax = CreateMapManager.GetMAPMAXSIZE() * 5-1;
+
+        Vector2 mapReta = CreateMapManager.GetMapRate();
+
+        if (GameModes.mode == PublicEnum.GameMode.deathmatch) 
+        {
+
+            pos = new Vector3((mapReta.x*10-10)/2, 0, (mapReta.y * 10 - 10) / 2);
+
+            angle = UnityEngine.Random.Range(0, 360);
+
+            thisGameObject.transform.eulerAngles = new Vector3(0, angle+180, 0);
+
+            angle *= Mathf.Deg2Rad;
+
+            pos += new Vector3(Mathf.Sin(angle) * mapMax, 0, Mathf.Cos(angle)* mapMax);
+
+
+
+
+        }
+        
         RespawnManager.Instance.DelayRespawn(thisGameObject, pos,UnityEngine.Random.Range(6,15), () => 
         {
 

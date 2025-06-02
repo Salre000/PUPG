@@ -2586,6 +2586,7 @@ MonoBehaviour:
   nextMode: 0
   shotShotFlag: 0
   moveShotFlag: 0
+  emainingBullet: -1
 --- !u!114 &718079359229577416
 MonoBehaviour:
   m_ObjectHideFlags: 0

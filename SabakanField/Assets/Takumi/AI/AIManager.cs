@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
-using UnityEditor.Animations;
 using UnityEngine;
 using static GanObject;
 
@@ -118,6 +117,21 @@ public class AIManager : MonoBehaviour
 
         if (isEnemyTeam && player != null && !PlayerManager.IsPlayerDead()) list.Add(player);
 
+        if (GameModes.mode == PublicEnum.GameMode.deathmatch)
+        {
+            list.Clear();
+            for (int i = 0; i < enemys.Count; i++)
+            {
+                if (!enemys[i].GetStatus().GetISLife()) continue;
+                list.Add(enemys[i].gameObject);
+            }
+            for (int i = 0; i < players.Count; i++)
+            {
+                if (!players[i].GetStatus().GetISLife()) continue;
+                list.Add(players[i].gameObject);
+            }
+            list.Add(player);
+        }
 
         return list;
 
@@ -182,7 +196,24 @@ public class AIManager : MonoBehaviour
                 ai.transform.eulerAngles = new Vector3(0, createAngle, 0);
 
                 ai.transform.position = flagObject[i].transform.position + new Vector3(Mathf.Sin(createAngle * Mathf.Deg2Rad), 0, Mathf.Cos(createAngle * Mathf.Deg2Rad));
+                if (GameModes.mode == PublicEnum.GameMode.deathmatch)
+                {
 
+                    int mapMax = CreateMapManager.GetMAPMAXSIZE() * 5 - 1;
+
+                    Vector2 mapReta = CreateMapManager.GetMapRate();
+
+
+                    createAngle = 36 * ((i * 5) + j);
+                    ai.transform.eulerAngles = new Vector3(0, createAngle + 180, 0);
+
+                    ai.transform.position = new Vector3(Mathf.Sin(createAngle) * mapMax, 0, Mathf.Cos(createAngle) * mapMax);
+
+                    ai.transform.position += new Vector3((mapReta.x * 10 - 10) / 2, 0, (mapReta.y*10 - 10) / 2);
+
+
+
+                }
                 ai.transform.name += ((i * 5) + j).ToString();
                 AI Ai = ai.GetComponent<AI>();
 
