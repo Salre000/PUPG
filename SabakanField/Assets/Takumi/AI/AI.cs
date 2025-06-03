@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static AIMove;
+using static GanObject;
 
 public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
 {
@@ -55,6 +56,7 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
 
     public void Initialization()
     {
+
         AICharacterUtility.AddAI(this);
 
         move=new AIMove();

@@ -24,3 +24,23 @@ MonoBehaviour:
   - {fileID: 1982559505645326312, guid: 52b6e8d0052a54f449f7afe1987ae6a5, type: 3}
   - {fileID: 5438839914091562044, guid: 07ee6dd6034222c4d9b86a4aef4000a9, type: 3}
   - {fileID: 6754274659312352025, guid: fc4edf6c8cceedc43ae376c984963bf6, type: 3}
+  reloadTime:
+  - 1
+  - 0.5
+  - 0.8
+  - 1.5
+  - 1.2
+  "\uFF4DagazineBulletCount": 1e0000000c000000060000000500000008000000
+  ALLBulletCount: d20000003c0000001e0000001900000018000000
+  renge:
+  - 10
+  - 10
+  - 10
+  - 10
+  - 10
+  Explanation:
+  - "\u8AAC\u660E\u306F\u5F8C\u3067\u66F8\u304F"
+  - "\u8AAC\u660E\u306F\u5F8C\u3067\u66F8\u304F"
+  - "\u8AAC\u660E\u306F\u5F8C\u3067\u66F8\u304F"
+  - "\u8AAC\u660E\u306F\u5F8C\u3067\u66F8\u304F"
+  - "\u8AAC\u660E\u306F\u5F8C\u3067\u66F8\u304F"
