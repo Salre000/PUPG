@@ -35,7 +35,7 @@ public class ObserverSoundList : AssetPostprocessor
         StringBuilder builder = new StringBuilder();
         builder.Clear();
         builder.Append(Application.dataPath);
-        builder.Append("/Resources/SoundEnum");
+        builder.Append("/Resources/EnumFile/SoundEnum");
         builder.Append(".cs");
 
         StreamWriter sw;

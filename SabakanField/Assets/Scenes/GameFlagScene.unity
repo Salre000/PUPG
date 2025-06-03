@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &30713755 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6494786067548385475, guid: 787a4d500f6239746928b9d0c0fbfde6, type: 3}
+  m_PrefabInstance: {fileID: 1607371873}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &211289021
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,6 +412,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e8ff6c361574bc247b44df15c4405935, type: 2}
   _wallObject: {fileID: 2781940646285111054, guid: 09a76d33d83d1ec4ba12ceccd8fab23e, type: 3}
   _aiObject: {fileID: 9213432157738317115, guid: 68e37ce96f23a3d4c957b00b1b8ba1a2, type: 3}
+  _MAX_SIZE_X: 6
+  _MAX_SIZE_Y: 6
+  MAXSIZE: -1
+  MapSize: {x: 0, y: 0}
 --- !u!4 &1584106593
 Transform:
   m_ObjectHideFlags: 0
@@ -740,6 +755,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6494786067548385475, guid: 787a4d500f6239746928b9d0c0fbfde6, type: 3}
+      propertyPath: m_Value
+      value: 63.8
+      objectReference: {fileID: 0}
     - target: {fileID: 8452426758237680860, guid: 787a4d500f6239746928b9d0c0fbfde6, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -760,6 +779,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8848979571615674260, guid: 787a4d500f6239746928b9d0c0fbfde6, type: 3}
+      propertyPath: bGMSlider
+      value: 
+      objectReference: {fileID: 30713755}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 787a4d500f6239746928b9d0c0fbfde6, type: 3}
 --- !u!1 &2019509840
