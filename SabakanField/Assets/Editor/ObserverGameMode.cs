@@ -33,7 +33,7 @@ public class ObserverGameMode : AssetPostprocessor
         StringBuilder builder = new StringBuilder();
         builder.Clear();
         builder.Append(Application.dataPath);
-        builder.Append("/Resources/MAPEnum");
+        builder.Append("/Resources/EnumFile/MAPEnum");
         builder.Append(".cs");
 
         StreamWriter sw;

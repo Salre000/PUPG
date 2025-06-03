@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public static class SoundManager
 {
@@ -45,6 +46,8 @@ public static class SoundManager
         ShotAddList = Resources.Load<SoundList>("GanShotAddition");
         InGameSoundList = Resources.Load<SoundList>("SoundList");
 
+        AudioMixer audioMixer = Resources.Load<AudioMixer>("AudioMixer");
+
         GameObject parentObject = new GameObject("SoundParent");
 
         for(int i = 0; i < SoundSource.Capacity; i++) 
@@ -53,6 +56,8 @@ public static class SoundManager
             soundSource.transform.parent = parentObject.transform;
 
             AudioSource sound = soundSource.AddComponent<AudioSource>();
+
+            sound.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Master")[2];
 
             sound.spatialBlend = 1;
 
