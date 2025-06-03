@@ -31,8 +31,8 @@ public static class GanObject
         Max
     }
 
-    public static int[] GanBulletCount ={25,12,6,5,4}; 
-    public static int[] ExtraGunBulletCount = {255,400/5,3}; 
+    public static int[] GanBulletCount = { 25, 12, 6, 5, 4 };
+    public static int[] ExtraGunBulletCount = { 255, 400 / 5, 3 };
 
     //‹­•Ší‚Ì—ñ‹“‘Ì
     public enum ExtraGunType
