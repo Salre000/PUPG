@@ -51,6 +51,24 @@ public class AIManager : MonoBehaviour
     public List<bool> GetPlayersLife() { return playersLife; }
     public List<bool> GetEnemyLife() { return enemyLife; }
 
+    public List<GameObject> GetchracterALL() 
+    {
+        List<GameObject> list = new List<GameObject>();
+
+        list.Add(player);
+
+        for (int i=0;i< players.Count;i++) 
+        {
+            list.Add(players[i].gameObject);
+        }
+        for (int i=0;i< enemys.Count;i++) 
+        {
+            list.Add(enemys[i].gameObject);
+        }
+
+        return list;
+
+    }
 
     private int IDNumber = 0;
 

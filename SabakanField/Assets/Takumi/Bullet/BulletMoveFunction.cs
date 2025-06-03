@@ -31,6 +31,10 @@ public static class BulletMoveFunction
             //当たった対象に無敵の関数を内包したインターフェースクラスが付いている場合取得
             InvincibleInsterface invincible = hit.transform.gameObject.GetComponent<InvincibleInsterface>();
 
+
+            MIssSoundPlay(new Ray(startPosition, dir), ID);
+
+
             //先の二つのインターフェースクラスが両方取得出来たかを判定
             if (hitObject == null && invincible == null) { SetPaintObject(hit.point, hit.normal, dir.normalized, playerFaction); return Vector3.zero; }
 
@@ -81,6 +85,9 @@ public static class BulletMoveFunction
                 //当たった対象に無敵の関数を内包したインターフェースクラスが付いている場合取得
                 InvincibleInsterface invincible = hit.transform.gameObject.GetComponent<InvincibleInsterface>();
 
+
+                MIssSoundPlay(new Ray(startPosition, dir), ID);
+
                 //先の二つのインターフェースクラスが両方取得出来たかを判定
                 if (hitObject == null && invincible == null) { SetPaintObject(hit.point, hit.normal, dir.normalized, playerFaction); continue; }
 
@@ -124,6 +131,41 @@ public static class BulletMoveFunction
         paintObject.transform.position = pos - normalVec / 100.0f;
 
 
+    }
+
+    //弾が近くを通った敵に音をならす
+    private static void MIssSoundPlay(Ray ray, int ID) 
+    {
+
+
+        List<GameObject> list = AIUtility.GetChracterALL();
+
+        for (int j = 0; j < list.Count; j++)
+        {
+            //音を聞く必要の無いAIは無視する
+            if (j != 0) continue;
+
+            //射撃した本人には聞こえないように
+            if (j == ID) continue;
+
+            //近くを通ったかどうかの判定
+            if (DistanceToLine(ray, list[j].transform.position) > 2) continue;
+
+            //音をならす
+            //現在のプレイ人数は1人の為プレイヤーだけで良いが複数人になったら変更がいる
+
+            SoundManager.StartSound(list[j].transform.position
+                , SoundManager.GetInGameSoundList(SoundEnum.SoundEnumType._bulletSoundMissShot));
+
+
+
+        }
+
+    }
+
+    public static float DistanceToLine(Ray ray, Vector3 point)
+    {
+        return Vector3.Cross(ray.direction, point - ray.origin).magnitude;
     }
 
 }

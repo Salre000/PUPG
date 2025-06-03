@@ -3,7 +3,7 @@ using System.Text;
 using UnityEditor;
 using UnityEngine;
 
-public class ObserverAchievement : AssetPostprocessor
+public class ObserverGameMode : AssetPostprocessor
 {
     private static readonly string filePath = "Assets/Resources/";
     private static readonly string filePath2 = "MapTileName";

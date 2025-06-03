@@ -7,9 +7,13 @@ public static class SoundManager
     private static SoundList ShotList;
     public static AudioClip GetShotSound(GanObject.ConstancyGanType type) { return ShotList.SoundLists[(int)type]; }
     private static SoundList ShotAddList;
+
+    private static SoundList InGameSoundList;
     public static AudioClip GetShotAddSound(int ID) { return ShotAddList.SoundLists[ID]; }
 
     private static List<AudioSource> SoundSource=new List<AudioSource>(50);
+
+    public static AudioClip GetInGameSoundList(SoundEnum.SoundEnumType type) { return InGameSoundList.SoundLists[(int)type]; }
 
     public static void StartSound(Vector3 pos,AudioClip clip,System.Action addAction=null) 
     {
@@ -39,6 +43,7 @@ public static class SoundManager
     {
         ShotList = Resources.Load<SoundList>("GanShot");
         ShotAddList = Resources.Load<SoundList>("GanShotAddition");
+        InGameSoundList = Resources.Load<SoundList>("SoundList");
 
         GameObject parentObject = new GameObject("SoundParent");
 

@@ -11,6 +11,7 @@ public static class AIUtility
         return aIManager.GetRelativeEnemy(isPlayerTeam);
     }
 
+    public static List<GameObject> GetChracterALL() { return aIManager.GetchracterALL(); }
     public static void SaveData() 
     {
         aIManager.DataSave();
