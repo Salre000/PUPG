@@ -4,8 +4,18 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Floor
-  - UI
+  - Wall
+  - Metal
+  - Blood
+  - Dirt
+  - Concrete
+  - ExplosiveBarrel
+  - Target
+  - GasTank
+  - Metal (Static)
+  - Wood (Static)
+  - Dirt (Static)
+  - Wood
   layers:
   - Default
   - TransparentFX
@@ -13,10 +23,16 @@ TagManager:
   - 
   - Water
   - UI
-  - MiniMap
-  - Player
+  - 
+  - 
+  - Wall
+  - First Person View
   - Character
-  - Object
+  - Post Processing
+  - Post Processing Weapon
+  - Post Processing Scope
+  - Invisible Wall
+  - Projectile
   - 
   - 
   - 
@@ -27,12 +43,6 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - SRAlice
   - 
   - 
   - 
@@ -42,10 +52,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: UI
-    uniqueID: 3377600851
-    locked: 0
-  - name: Player
-    uniqueID: 1370790267
     locked: 0
