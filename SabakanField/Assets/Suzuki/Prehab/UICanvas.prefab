@@ -2295,7 +2295,7 @@ GameObject:
   - component: {fileID: 8754273390614266549}
   - component: {fileID: 8207598768253204680}
   m_Layer: 5
-  m_Name: VolumeInputField
+  m_Name: SEVolumeInputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3994,7 +3994,7 @@ GameObject:
   - component: {fileID: 3016735518472839996}
   - component: {fileID: 9005097790952626660}
   m_Layer: 5
-  m_Name: VolumeSlider
+  m_Name: SEVolumeSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6375,7 +6375,7 @@ GameObject:
   - component: {fileID: 947365425263420622}
   - component: {fileID: 6494786067548385475}
   m_Layer: 5
-  m_Name: VolumeSlider
+  m_Name: BGMVolumeSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8110,7 +8110,7 @@ GameObject:
   - component: {fileID: 8003184653762233677}
   - component: {fileID: 5019039555086664335}
   m_Layer: 5
-  m_Name: VolumeInputField
+  m_Name: MasterVolumeInputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8782,7 +8782,7 @@ GameObject:
   - component: {fileID: 2018348130293778994}
   - component: {fileID: 9151127809763786904}
   m_Layer: 5
-  m_Name: VolumeInputField
+  m_Name: BGMVolumeInputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9112,7 +9112,7 @@ GameObject:
   - component: {fileID: 7799076740656466197}
   - component: {fileID: 1695444964272545143}
   m_Layer: 5
-  m_Name: VolumeSlider
+  m_Name: MasterVolumeSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

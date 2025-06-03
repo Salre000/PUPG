@@ -11,11 +11,18 @@ public class OptionManager : MonoBehaviour
     private bool _adsType = false;  
 
     // 感度設定
-    private float _normalSensitivity = 0.5f;
+    [SerializeField]private float _normalSensitivity = 0.5f;
     private float _adsSensitivity = 0.5f;
+
+    // 感度設定
+    private int _masterValue = 0;
+    private int _bgmValue = 0;
+    private int _seValue = 0;
+
 
     AdsTypeSetting _adsTypeSetting = new AdsTypeSetting();
     SensitivitySetting _sensitivitySetting = new SensitivitySetting();
+    VolumeSetting _volueSetting = new VolumeSetting();
 
     private void Awake()
     {
@@ -35,12 +42,14 @@ public class OptionManager : MonoBehaviour
         _adsType = OptionDataClass.GetAdsType();
         _adsTypeSetting.Initialize();
         _sensitivitySetting.Initialize();
+        _volueSetting.Initialize();
     }
 
     private void Update()
     {
         if (!UIManager.Instance.IsPause()) return;
         _sensitivitySetting.Execute();
+        _volueSetting.Execute();
     }
 
     // ADS方法
@@ -51,13 +60,26 @@ public class OptionManager : MonoBehaviour
     public float GetNormalSensitivity() { return _normalSensitivity; }
     public void SetAdsSensitivity(float value) { _adsSensitivity = value; }
     public float GetAdsSensitivity() { return _adsSensitivity; }
+    //音量設定
+    public void SetMasterVolume(int value) { _masterValue = value; }
+    public int GetMasterVolume() { return _masterValue; }
+
+    public void SetBGMVolume(int value) { _bgmValue = value; }
+    public int GetBGMVolume() { return _bgmValue; }
+
+    public void SetSEVolume(int value) { _seValue = value; }
+    public int GetSEVolume() { return _seValue; }
+
     // オプション設定のデータ保存
     public void SaveOptionData()
     {
         OptionDataClass.OptionDataSave(
             GetNormalSensitivity(),
             GetAdsSensitivity(),
-            GetAdsType()
+            GetAdsType(),
+            GetMasterVolume(),
+            GetBGMVolume(),
+            GetSEVolume()
             );
     }
 

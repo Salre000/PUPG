@@ -13,27 +13,16 @@ public class SliderVolume : MonoBehaviour
 
     private void Start()
     {
+        audioMixer.SetFloat("Master_Volume", OptionManager.Instance.GetMasterVolume() - 80);
+        audioMixer.SetFloat("BGM_Volume", OptionManager.Instance.GetBGMVolume() - 80);
+        audioMixer.SetFloat("SE_Volume", OptionManager.Instance.GetSEVolume() - 80);
 
-        audioMixer.GetFloat("BGM_Volume", out float bgmVolume);
-        bgmVolume += 100;
-        bgmVolume *= 0.8f;
-        bGMSlider.value = bgmVolume;
-        audioMixer.GetFloat("SE_Volume", out float seVolume);
-        seVolume += 100;
-        seVolume *= 0.8f;
-
-        sESlider.value = seVolume;
-        audioMixer.GetFloat("Master_Volume", out float masterVolume);
-        masterVolume += 100;
-        masterVolume *= 0.8f;
-
-        masterSlider.value = masterVolume;
     }
 
     public void SetBGM(float volume)
     {
-        //bGMSlider.value = volume;
 
+        
         volume -= 80;
 
 
@@ -44,20 +33,14 @@ public class SliderVolume : MonoBehaviour
 
     public void SetSE(float volume)
     {
-        sESlider.value = volume;
-
         volume -= 80;
-        volume *= 0.8f;
 
 
         audioMixer.SetFloat("SE_Volume", volume);
     }
     public void SetMaster(float volume)
     {
-        masterSlider.value = volume;
-
         volume -= 80;
-        volume *= 0.8f;
 
 
         audioMixer.SetFloat("Master_Volume", volume);

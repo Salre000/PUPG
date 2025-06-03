@@ -13,5 +13,10 @@ MonoBehaviour:
   m_Name: stringList
   m_EditorClassIdentifier: 
   objects:
-  - Sensitivity
-  type: 00000000
+  - NormalSensitivity
+  - AdsSensitivity
+  - AdsType
+  - MasterVolume
+  - BGMVolume
+  - SEVolume
+  type: 000000000000000001000000020000000200000002000000

@@ -40,6 +40,7 @@ public class PauseButtonsSystem : MonoBehaviour
     public void PushClosed()
     {
         _pauseWindow.PushClosed();
+
     }
     // ‚â‚ß‚éƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚Æ‚«
     public void PushEndGame()
