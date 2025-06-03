@@ -9,7 +9,8 @@ public class CreateOptionData : EditorWindow
     public enum Type
     {
         Float,
-        Bool
+        Bool,
+        Int
     }
 
 
@@ -234,9 +235,14 @@ public class CreateOptionData : EditorWindow
             {
                 builder.AppendFormat("_{0}=false;", optionName[i]);
             }
-            else
+            else if ((Type)(optiontype[i])==Type.Float)
             {
                 builder.AppendFormat("_{0}=0.5f;", optionName[i]);
+
+            }
+            else 
+            {
+                builder.AppendFormat("_{0}=0;", optionName[i]);
 
             }
         }
@@ -258,6 +264,7 @@ public class CreateOptionData : EditorWindow
         {
             case 0: return "float";
             case 1: return "bool";
+            case 2: return "int";
         }
         return null;
     }
