@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,7 +37,8 @@ public class LoadoutSetting : MonoBehaviour
             _weponButton[i] = gameObject.transform.GetChild(0).GetComponent<Button>();
 
             // 通常武器のobjectsに入ってるものの上からを入れていく
-            _weponButton[i].onClick.AddListener(() => WeponIndex(GetGameObject(i)));
+            int index = i;
+            _weponButton[i].onClick.AddListener(() => WeponIndex(index));
             _weponImage[i] = gameObject.transform.GetChild(1).GetComponent<RawImage>();
             _weponImage[i].texture = _weponRawTexture[i];
             if (i == 0) continue;
@@ -48,14 +50,10 @@ public class LoadoutSetting : MonoBehaviour
         }
     }
 
-    private GameObject GetGameObject(int i)
+    private void WeponIndex(int index)
     {
+        Instantiate(constancyGun.objects[index], _weponInventory);
         _player.SetActive(true);
-        return Instantiate(constancyGun.objects[0], _weponInventory);
-    }
-
-    private void WeponIndex(GameObject gameObject)
-    {
         _loadoutCamera.SetActive(false);
         // ロードアウトを閉じる
         _loadoutCanvas.SetActive(false);

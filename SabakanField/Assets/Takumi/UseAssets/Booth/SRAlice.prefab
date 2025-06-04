@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3014838869009694682}
   - component: {fileID: 3039923472151722674}
   - component: {fileID: 2340595472835745264}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Scope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2294536807261468785}
   - component: {fileID: 8683720673954111944}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Stand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 8849021109743346160}
   - component: {fileID: 5117208153689594282}
   - component: {fileID: 8010826635261566511}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Grip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 936682633149799612}
   - component: {fileID: 7789601963499780559}
   - component: {fileID: 5445130068215633577}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Stock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 8709710987035872146}
   - component: {fileID: 1294477388473069130}
   - component: {fileID: 7108643228110255758}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -427,7 +427,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2538383671883474919}
   - component: {fileID: 799232785741676436}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BoltHandle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -511,7 +511,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5080206905124972099}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SRAlice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -553,7 +553,7 @@ GameObject:
   - component: {fileID: 8332980616662640154}
   - component: {fileID: 3616564975871608721}
   - component: {fileID: 8544934114739726828}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -636,7 +636,7 @@ GameObject:
   - component: {fileID: 311752402867878112}
   - component: {fileID: 6638235723047877729}
   - component: {fileID: 690241354947188463}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Magazine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -719,7 +719,7 @@ GameObject:
   - component: {fileID: 3929669941241632647}
   - component: {fileID: 6016966090362314973}
   - component: {fileID: 8127339781106273995}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Mount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
