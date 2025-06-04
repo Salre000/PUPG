@@ -6,13 +6,16 @@ using UnityEngine.UIElements;
 public static class BulletMoveFunction
 {
 
-    private static PaintObjectPool enemyPaintObjectPool;
-    private static PaintObjectPool playerPaintObjectPool;
-    public static void SetPaint(GameObject enemy, GameObject player)
+    private static ObjectPool enemyPaintObjectPool;
+    private static ObjectPool playerPaintObjectPool;
+
+    private static ObjectPool aliceBulletObject;
+    public static void SetPaint(GameObject enemy, GameObject player, GameObject Alice)
     {
         //弾が当ったときに出すプレハブのオブジェクト
-        enemyPaintObjectPool = new PaintObjectPool(enemy, 50, "ParentEnemyPaint");
-        playerPaintObjectPool = new PaintObjectPool(player, 50, "ParentPlayerPaint");
+        enemyPaintObjectPool = new ObjectPool(enemy, 50, "ParentEnemyPaint");
+        playerPaintObjectPool = new ObjectPool(player, 50, "ParentPlayerPaint");
+        aliceBulletObject = new ObjectPool(Alice, 10, "Alicepaint");
     }
 
     //射撃の処理の関数・当たった対象にインターフェースクラスが付いている事が前提
@@ -68,9 +71,9 @@ public static class BulletMoveFunction
         {
             dir = LoodAngle;
             RaycastHit hit;
-            dir.y += i/70.0f;
+            dir.y += i / 70.0f;
 
-            float angle = Mathf.Atan2(dir.x, dir.z)+BulletManager.GetRandomAngle(SHOTGAN_PELLET_COUNT/2, SHOTGAN_PELLET_COUNT/2);
+            float angle = Mathf.Atan2(dir.x, dir.z) + BulletManager.GetRandomAngle(SHOTGAN_PELLET_COUNT / 2, SHOTGAN_PELLET_COUNT / 2);
 
             dir = new Vector3(Mathf.Sin(angle), dir.y, Mathf.Cos(angle));
 
@@ -111,11 +114,76 @@ public static class BulletMoveFunction
         }
         return Vector3.zero;
     }
+
+    private const int PENETRARIONCOUNT = 4;
+    //アリスの弾の挙動
+    static public Vector3 AliceRayHitTest(Vector3 startPosition, Vector3 dir, bool playerFaction = true, int ID = 0)
+    {
+        RaycastHit hit;
+
+        for (int i = 0; i < PENETRARIONCOUNT; i++)
+        {
+            if (Physics.Raycast(startPosition, dir, out hit))
+            {
+
+                Debug.DrawLine(startPosition, hit.point, Color.red,10);
+
+
+                //当たった対象にrayが当ったときの関数を内包したインターフェースクラスが付いている場合取得
+                CharacterInsterface hitObject = hit.transform.gameObject.GetComponentInParent<CharacterInsterface>();
+
+                //当たった対象に無敵の関数を内包したインターフェースクラスが付いている場合取得
+                InvincibleInsterface invincible = hit.transform.gameObject.GetComponentInParent<InvincibleInsterface>();
+
+
+                MIssSoundPlay(new Ray(startPosition, dir), ID);
+
+
+                //先の二つのインターフェースクラスが両方取得出来たかを判定
+                if (hitObject == null && invincible == null)
+                {
+                    SetAlphaObject(hit.point, hit.normal, dir.normalized);
+
+                    startPosition = hit.point + dir.normalized/10.0f; ;
+
+                }
+                else
+                {
+                    //当たった対象が無敵なのかを判定
+                    if (invincible.GetInvincibleFlag()) return Vector3.zero;
+
+
+
+                    //自分と同じ陣営の場合はフレンドリーファイアの関数を呼ぶ
+                    if (hitObject.PlayerFaction() == playerFaction) hitObject.HitActionFriendlyFire();
+
+                    //自分と違う陣営の場合は弾が当った時の処理を呼ぶ
+                    else hitObject.HitAction();
+
+                    //指定のIDのキャラクターのキルカウントを増やす
+                    AIUtility.AddKillCount(ID);
+
+                    return Vector3.zero;
+                }
+
+            }
+            else
+            {
+                new GameObject("最終地点").transform.position = startPosition;
+                return Vector3.zero;
+            }
+
+
+        }
+        return Vector3.zero;
+    }
+
+
     private static void SetPaintObject(Vector3 pos, Vector3 normal, Vector3 normalVec, bool playerFaction)
     {
         GameObject paintObject;
-        if (playerFaction) paintObject = playerPaintObjectPool.GetpaintObject();
-        else paintObject = enemyPaintObjectPool.GetpaintObject();
+        if (playerFaction) paintObject = playerPaintObjectPool.GetObject();
+        else paintObject = enemyPaintObjectPool.GetObject();
 
         //ペイントのプレハブを生成
 
@@ -132,9 +200,29 @@ public static class BulletMoveFunction
 
 
     }
+    private static void SetAlphaObject(Vector3 pos, Vector3 normal, Vector3 normalVec)
+    {
+        GameObject paintObject;
+
+        //透過オブジェクトのプレハブを生成
+        paintObject = aliceBulletObject.GetObject();
+
+
+
+        //rayが当たった法線を角度に変更
+        Vector3 angle = Vector3.zero;
+        angle.x = normal.z * 90;
+        angle.z = normal.x * -90;
+        paintObject.transform.eulerAngles = angle;
+
+        //壁に埋まらないように少しだけ手前に出す
+        paintObject.transform.position = pos - normalVec / 50.0f;
+
+
+    }
 
     //弾が近くを通った敵に音をならす
-    private static void MIssSoundPlay(Ray ray, int ID) 
+    private static void MIssSoundPlay(Ray ray, int ID)
     {
 
 
