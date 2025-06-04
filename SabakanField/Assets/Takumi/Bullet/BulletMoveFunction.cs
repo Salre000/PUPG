@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 using UnityEngine.UIElements;
 
 public static class BulletMoveFunction
@@ -39,7 +40,7 @@ public static class BulletMoveFunction
 
 
             //先の二つのインターフェースクラスが両方取得出来たかを判定
-            if (hitObject == null && invincible == null) { SetPaintObject(hit.point, hit.normal, dir.normalized, playerFaction); return Vector3.zero; }
+            if (hitObject == null && invincible == null) { SetPaintObject(hit.point,dir.normalized, playerFaction); return Vector3.zero; }
 
             //当たった対象が無敵なのかを判定
             if (invincible.GetInvincibleFlag()) return Vector3.zero;
@@ -59,6 +60,39 @@ public static class BulletMoveFunction
         }
 
         return Vector3.zero;
+    }
+    static public void RayHitTestMaterial
+        (Collision target, GameObject thisObject, Vector3 startPosition, Vector3 dir,
+        bool playerFaction = true, int ID = 0)
+    {
+
+        MIssSoundPlay(new Ray(startPosition, dir), ID);
+
+        //当たった対象にrayが当ったときの関数を内包したインターフェースクラスが付いている場合取得
+        CharacterInsterface hitObject = target.transform.gameObject.GetComponentInParent<CharacterInsterface>();
+
+        //当たった対象に無敵の関数を内包したインターフェースクラスが付いている場合取得
+        InvincibleInsterface invincible = target.transform.gameObject.GetComponent<InvincibleInsterface>();
+
+        //先の二つのインターフェースクラスが両方取得出来たかを判定
+        if (hitObject == null && invincible == null)
+        {
+            SetPaintObject(thisObject.transform.position,dir.normalized, playerFaction);
+        }
+
+        //当たった対象が無敵なのかを判定
+        if (invincible.GetInvincibleFlag()) return;
+
+
+
+        //自分と同じ陣営の場合はフレンドリーファイアの関数を呼ぶ
+        if (hitObject.PlayerFaction() == playerFaction) hitObject.HitActionFriendlyFire();
+
+        //自分と違う陣営の場合は弾が当った時の処理を呼ぶ
+        else hitObject.HitAction();
+
+        //指定のIDのキャラクターのキルカウントを増やす
+        AIUtility.AddKillCount(ID);
     }
     private const int SHOTGAN_PELLET_COUNT = 8;
 
@@ -92,7 +126,7 @@ public static class BulletMoveFunction
                 MIssSoundPlay(new Ray(startPosition, dir), ID);
 
                 //先の二つのインターフェースクラスが両方取得出来たかを判定
-                if (hitObject == null && invincible == null) { SetPaintObject(hit.point, hit.normal, dir.normalized, playerFaction); continue; }
+                if (hitObject == null && invincible == null) { SetPaintObject(hit.point,dir.normalized, playerFaction); continue; }
 
                 //当たった対象が無敵なのかを判定
                 if (invincible.GetInvincibleFlag()) continue;
@@ -126,7 +160,7 @@ public static class BulletMoveFunction
             if (Physics.Raycast(startPosition, dir, out hit))
             {
 
-                Debug.DrawLine(startPosition, hit.point, Color.red,10);
+                Debug.DrawLine(startPosition, hit.point, Color.red, 10);
 
 
                 //当たった対象にrayが当ったときの関数を内包したインターフェースクラスが付いている場合取得
@@ -144,7 +178,7 @@ public static class BulletMoveFunction
                 {
                     SetAlphaObject(hit.point, hit.normal, dir.normalized);
 
-                    startPosition = hit.point + dir.normalized/10.0f; ;
+                    startPosition = hit.point + dir.normalized / 10.0f; ;
 
                 }
                 else
@@ -179,7 +213,7 @@ public static class BulletMoveFunction
     }
 
 
-    private static void SetPaintObject(Vector3 pos, Vector3 normal, Vector3 normalVec, bool playerFaction)
+    private static void SetPaintObject(Vector3 pos,Vector3 normalVec, bool playerFaction)
     {
         GameObject paintObject;
         if (playerFaction) paintObject = playerPaintObjectPool.GetObject();
@@ -191,8 +225,6 @@ public static class BulletMoveFunction
 
         //rayが当たった法線を角度に変更
         Vector3 angle = Vector3.zero;
-        angle.x = normal.z * 90;
-        angle.z = normal.x * -90;
         paintObject.transform.eulerAngles = angle;
 
         //壁に埋まらないように少しだけ手前に出す
