@@ -147,7 +147,9 @@ namespace InfimaGames.LowPolyShooterPack
 		/// <summary>
 		/// True if the game cursor is locked! Used when pressing "Escape" to allow developers to more easily access the editor.
 		/// </summary>
+		 
 		private bool cursorLocked;
+
 
 		#endregion
 
@@ -172,7 +174,9 @@ namespace InfimaGames.LowPolyShooterPack
 			#region Lock Cursor
 
 			//Always make sure that our cursor is locked when the game starts!
-			cursorLocked = true;
+			PauseButtonsSystem.instance.GetPauseWindow().SetAction(() => cursorLocked = !cursorLocked);
+
+            cursorLocked = true;
 			//Update the cursor's state.
 			UpdateCursorState();
 
@@ -196,8 +200,11 @@ namespace InfimaGames.LowPolyShooterPack
 			//Cache a reference to the overlay layer's index.
 			layerOverlay = characterAnimator.GetLayerIndex("Layer Overlay");
 		}
-
-		protected override void Update()
+        private void OnDestroy() 
+		{
+            Cursor.lockState = CursorLockMode.None;
+        }
+        protected override void Update()
 		{
 			//Match Aim.
 			aiming = holdingButtonAim && CanAim();
@@ -514,13 +521,13 @@ namespace InfimaGames.LowPolyShooterPack
 		/// <returns></returns>
 		private bool CanAim()
 		{
-			//Block.
-			if (holstered || inspecting)
-				return false;
+			////Block.
+			//if (holstered || inspecting)
+			//	return false;
 
-			//Block.
-			if (reloading || holstering)
-				return false;
+			////Block.
+			//if (reloading || holstering)
+			//	return false;
 			
 			//Return.
 			return true;
@@ -763,8 +770,8 @@ namespace InfimaGames.LowPolyShooterPack
 				case {phase: InputActionPhase.Performed}:
 					//Toggle the cursor locked value.
 					cursorLocked = !cursorLocked;
-					//Update the cursor's state.
-					UpdateCursorState();
+                    //Update the cursor's state.
+                    UpdateCursorState();
 					break;
 			}
 		}

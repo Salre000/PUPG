@@ -8,7 +8,10 @@ public class PauseWindow : UIBase
 {
     // ポーズ画面
     private GameObject _pausePanel;
+    public Character character;
 
+    System.Action Action;
+    public void SetAction(System.Action action) { Action = action; }
     // 実行UpDate
     public override void Execute()
     {
@@ -21,7 +24,7 @@ public class PauseWindow : UIBase
         if (!Instance.IsPause())
         {
             _pausePanel.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.lockState = CursorLockMode.Locked;
 
             return;
         }
@@ -60,6 +63,7 @@ public class PauseWindow : UIBase
         // マウスカーソルを非表示にしてポーズ画面を閉じる
         Cursor.lockState = CursorLockMode.Locked;
         Instance.ChangePauseWindow();
+        Action();
     }
     // やめるボタンが押されたとき
     public void PushEndGame()
