@@ -63,7 +63,7 @@ public static void Initialization(){
 _NormalSensitivity=0.5f;
 _AdsSensitivity=0.5f;
 _AdsType=false;
-_MasterVolume=0;
+_MasterVolume=100;
 _BGMVolume=0;
 _SEVolume=0;
 }

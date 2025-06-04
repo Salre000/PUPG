@@ -11,11 +11,11 @@ public class OptionManager : MonoBehaviour
     private bool _adsType = false;  
 
     // ä¥ìxê›íË
-    [SerializeField]private float _normalSensitivity = 0.5f;
+    private float _normalSensitivity = 0.5f;
     private float _adsSensitivity = 0.5f;
 
     // ä¥ìxê›íË
-    private int _masterValue = 0;
+    [SerializeField] private int _masterValue = 0;
     private int _bgmValue = 0;
     private int _seValue = 0;
 
@@ -39,6 +39,9 @@ public class OptionManager : MonoBehaviour
         StartOption start= new StartOption();
         SetNormalSensitivity(OptionDataClass.GetNormalSensitivity());
         SetAdsSensitivity(OptionDataClass.GetAdsSensitivity());
+        SetMasterVolume(OptionDataClass.GetMasterVolume());
+        SetBGMVolume(OptionDataClass.GetBGMVolume());
+        SetSEVolume(OptionDataClass.GetSEVolume());
         _adsType = OptionDataClass.GetAdsType();
         _adsTypeSetting.Initialize();
         _sensitivitySetting.Initialize();
