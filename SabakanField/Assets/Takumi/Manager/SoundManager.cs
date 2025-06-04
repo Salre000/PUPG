@@ -49,8 +49,9 @@ public static class SoundManager
         AudioMixer audioMixer = Resources.Load<AudioMixer>("AudioMixer");
 
         GameObject parentObject = new GameObject("SoundParent");
+        SoundSource.Clear();
 
-        for(int i = 0; i < SoundSource.Capacity; i++) 
+        for (int i = 0; i < 50; i++) 
         {
             GameObject soundSource = new GameObject("SoundObject");
             soundSource.transform.parent = parentObject.transform;

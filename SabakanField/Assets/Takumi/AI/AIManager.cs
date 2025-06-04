@@ -186,6 +186,7 @@ public class AIManager : MonoBehaviour
     public void CreateAI()
     {
         GanObject.LoodGameObject();
+
         SoundManager.Initialize();
 
         killCount.Clear();
