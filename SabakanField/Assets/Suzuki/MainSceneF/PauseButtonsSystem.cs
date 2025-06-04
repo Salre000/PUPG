@@ -5,8 +5,11 @@ using UnityEngine.UI;
 
 public class PauseButtonsSystem : MonoBehaviour
 {
+    public static PauseButtonsSystem instance;
     // ポーズクラスに実装されているボタンの効果を使う
     private PauseWindow _pauseWindow;
+
+
 
     private GameObject _settingPanel;
     private Button _settingButton;
@@ -14,6 +17,7 @@ public class PauseButtonsSystem : MonoBehaviour
     private Button _gameCloseButton;
     private void Awake()
     {
+        instance = this;
         _pauseWindow = new PauseWindow();
         _settingPanel=GameObject.Find("SettingMode").gameObject;
         _settingButton=GameObject.Find("SettingButton").GetComponent<Button>();
@@ -47,4 +51,5 @@ public class PauseButtonsSystem : MonoBehaviour
     {
         _pauseWindow.PushEndGame();
     }
+    public PauseWindow GetPauseWindow() { return _pauseWindow; }
 }

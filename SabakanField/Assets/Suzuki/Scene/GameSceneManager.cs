@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 public static class GameSceneManager
 {
     // ƒV[ƒ“‚Ì–¼‘O
-    public const string mainSceneName = "MainScene";
+    public const string titleSceneName = "TitleScene";
+    public const string flagSceneName = "GameFlagScene";
     public const string clearSceneName = "ClearScene";
     public const string resultSceneName = "ResultScene";
 
