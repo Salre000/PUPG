@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PaintObjectPool 
+public class ObjectPool 
 {
     private readonly int PREFAB_COUNT;
 
@@ -12,7 +12,7 @@ public class PaintObjectPool
     private List<GameObject> paintList = new List<GameObject>(50);
 
     //現在使用していないオブジェクトを渡す関数
-    public GameObject GetpaintObject() 
+    public GameObject GetObject() 
     {
         for(int i = 0; i < paintList.Count; i++) 
         {
@@ -27,7 +27,7 @@ public class PaintObjectPool
         return null;
     }
 
-    public PaintObjectPool(GameObject prefab, int prefabCount = 20,string name= "parentObject") 
+    public ObjectPool(GameObject prefab, int prefabCount = 20,string name= "parentObject") 
     {
         paintObjectOrigen = prefab;
 

@@ -6,9 +6,9 @@ public class BulletHitObject : MonoBehaviour
 {
     [SerializeField] GameObject playerObject;
     [SerializeField] GameObject enemyObject;
-
+    [SerializeField] GameObject aliceObject;
     public void Awake()
     {
-        BulletMoveFunction.SetPaint(enemyObject, playerObject);
+        BulletMoveFunction.SetPaint(enemyObject, playerObject, aliceObject);
     }
 }
