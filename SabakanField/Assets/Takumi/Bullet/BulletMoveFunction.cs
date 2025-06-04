@@ -77,7 +77,9 @@ public static class BulletMoveFunction
         //先の二つのインターフェースクラスが両方取得出来たかを判定
         if (hitObject == null && invincible == null)
         {
-            SetPaintObject(thisObject.transform.position,dir.normalized, playerFaction);
+            //SetPaintObject(thisObject.transform.position,dir.normalized, playerFaction);
+
+            return;
         }
 
         //当たった対象が無敵なのかを判定

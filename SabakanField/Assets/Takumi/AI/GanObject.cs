@@ -6,12 +6,13 @@ public static class GanObject
 {
     public static ObjectList constancyGun;
     public static ObjectList extraGan;
+    public static ObjectList enemyConstancyGan;
 
     public static void LoodGameObject()
     {
         constancyGun = Resources.Load<ObjectList>("ConstancyGun");
         extraGan = Resources.Load<ObjectList>("ExtraGun");
-
+        enemyConstancyGan= Resources.Load<ObjectList>("EnemyConstancyGun");
     }
 
     //ロードアウト武器の列挙体

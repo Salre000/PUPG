@@ -155,9 +155,12 @@ public class Projectile : MonoBehaviour {
 			//Destroy bullet object
 			Destroy(gameObject);
 		}
-	}
 
-	private IEnumerator DestroyTimer () 
+        Destroy(gameObject);
+
+    }
+
+    private IEnumerator DestroyTimer () 
 	{
 		//Wait random time based on min and max values
 		yield return new WaitForSeconds

@@ -79,6 +79,8 @@ public class AIManager : MonoBehaviour
     }
     public void FixedUpdate()
     {
+        if(player==null) player = GameObject.FindGameObjectWithTag("Player");
+
         ScanAILife();
         Debug();
     }
@@ -289,7 +291,7 @@ public class AIManager : MonoBehaviour
         Animator animator = ai.GetComponent<Animator>();
         int randomRenge = 0;
 
-        GameObject gan = GameObject.Instantiate(GanObject.constancyGun.objects[(int)type]);
+        GameObject gan = GameObject.Instantiate(GanObject.enemyConstancyGan.objects[0]);
 
         AI aI = ai.GetComponent<AI>();
 
@@ -299,7 +301,7 @@ public class AIManager : MonoBehaviour
         aI.GetIShot().SetGanType(type);
         aI.SetBullet(GanObject.GanBulletCount[(int)type]);
 
-        switch (type)
+        switch (ConstancyGanType.SL_8)
         {
             case ConstancyGanType.SL_8:
                 ai.GetComponent<AI>().GetStatus().SetAnimatorFloat("MoveSpped", 1);

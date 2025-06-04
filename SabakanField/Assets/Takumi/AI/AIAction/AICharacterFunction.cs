@@ -15,7 +15,8 @@ public static class AICharacterFunction
 
         for (int i = 0; i < targetObjcets.Count; i++)
         {
-            Vector3 vec = targetObjcets[i].transform.position - thisGameObject.transform.position;
+            Vector3 vec = targetObjcets[i].transform.position;
+            vec-= thisGameObject.transform.position;
             if (Vector3.Dot(thisGameObject.transform.forward, vec) < 0.8) continue;
 
 

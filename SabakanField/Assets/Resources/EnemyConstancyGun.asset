@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c74a118598057c4b896ae97e7fcbe85, type: 3}
+  m_Name: EnemyConstancyGun
+  m_EditorClassIdentifier: 
+  objectName:
+  - SL-8
+  - Classic
+  - Stechkin
+  - FAR EYE
+  - EyeOfHorus
+  objects:
+  - {fileID: 1045225505860587398, guid: 265446487ca725e4f813c125990e7a2d, type: 3}
+  - {fileID: 4168433871889688932, guid: 381cbbf9f5d23364380bc7d99be3afb6, type: 3}
+  - {fileID: 1982559505645326312, guid: 96c48d794445e554b96f9aaea4737ad6, type: 3}
+  - {fileID: 5438839914091562044, guid: 71bd016795db8c141be6afcc257b7840, type: 3}
+  - {fileID: 6754274659312352025, guid: 981a0b925aa8bd24b8af6efbac81c81d, type: 3}
+  reloadTime:
+  - 1
+  - 0.5
+  - 0.8
+  - 1.5
+  - 1.2
+  "\uFF4DagazineBulletCount": 1e0000000c000000060000000500000008000000
+  ALLBulletCount: d20000003c0000001e0000001900000018000000
+  renge:
+  - 10
+  - 10
+  - 10
+  - 10
+  - 10
+  Explanation:
+  - "\u8AAC\u660E\u306F\u5F8C\u3067\u66F8\u304F"
+  - "\u8AAC\u660E\u306F\u5F8C\u3067\u66F8\u304F"
+  - "\u8AAC\u660E\u306F\u5F8C\u3067\u66F8\u304F"
+  - "\u8AAC\u660E\u306F\u5F8C\u3067\u66F8\u304F"
+  - "\u8AAC\u660E\u306F\u5F8C\u3067\u66F8\u304F"
