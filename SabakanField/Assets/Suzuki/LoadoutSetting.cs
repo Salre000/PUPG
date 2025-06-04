@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static GanObject;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class LoadoutSetting : MonoBehaviour
 {

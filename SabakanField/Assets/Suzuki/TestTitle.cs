@@ -2,19 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class TestTitle : MonoBehaviour
 {
-    private Button _button;
+    private UnityEngine.UI.Button _button;
 
     private void Awake()
     {
-        _button = GetComponent<Button>();
+        UnityEngine.Cursor.visible = true;
+
+        _button = GetComponent<UnityEngine.UI.Button>();
         _button.onClick.AddListener(() => OnButton());
     }
 
-    private void OnButton()
+    public void OnButton()
     {
-        GameSceneManager.LoadScene(GameSceneManager.flagSceneName);
+        //GameSceneManager.LoadScene(GameSceneManager.flagSceneName);
+        SceneManager.LoadScene(1);
     }
 }

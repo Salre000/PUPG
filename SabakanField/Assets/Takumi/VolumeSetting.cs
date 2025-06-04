@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,7 +22,7 @@ public class VolumeSetting : UIBase
     private TMP_InputField _seSliderInput;
     private float _seSliderValue = 2.5f;
 
-
+    
 
     private StringBuilder _stringBuilder = new StringBuilder();
 
@@ -37,6 +38,8 @@ public class VolumeSetting : UIBase
             BGMSliderSliderSetting();
         if (_seSliderValue != _seSlider.value)
             SESliderSliderSetting();
+        
+        
     }
 
     public override void Initialize()
