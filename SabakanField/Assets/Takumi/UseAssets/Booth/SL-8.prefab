@@ -269,12 +269,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   automatic: 1
-  projectileImpulse: 400
+  projectileImpulse: 100
   roundsPerMinutes: 500
   mask:
     serializedVersion: 2
     m_Bits: 1
-  maximumDistance: 500
+  maximumDistance: 100
   socketEjection: {fileID: 0}
   prefabCasing: {fileID: 1492315059354262, guid: c638dfae3f3edf843b2614dae230a771,
     type: 3}
