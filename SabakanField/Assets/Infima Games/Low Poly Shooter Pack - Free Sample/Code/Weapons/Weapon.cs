@@ -14,7 +14,7 @@ namespace InfimaGames.LowPolyShooterPack
         [Header("Firing")]
 
         [Tooltip("Is this weapon automatic? If yes, then holding down the firing button will continuously fire.")]
-        [SerializeField] 
+        [SerializeField,Header("セミorフル")] 
         private bool automatic;
         
         [Tooltip("How fast the projectiles are."),Header("マズルフラッシュの調整")]
