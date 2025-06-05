@@ -4,6 +4,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using UnityEngine;
 //データをCSVに保存するクラス
+[System.Serializable]
+
 public static class KillData
 {
 
