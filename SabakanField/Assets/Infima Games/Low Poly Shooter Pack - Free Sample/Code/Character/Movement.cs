@@ -133,16 +133,21 @@ namespace InfimaGames.LowPolyShooterPack
 			
         protected override void FixedUpdate()
         {
+            //Unground.
+            grounded = false;
+
+            if ((PlayerManager.IsPlayerDead())) return;
+            
             //Move.
             MoveCharacter();
             
-            //Unground.
-            grounded = false;
         }
 
         /// Moves the camera to the character, processes jumping and plays sounds every frame.
         protected override  void Update()
         {
+            if ((PlayerManager.IsPlayerDead())) return;
+
             //Get the equipped weapon!
             equippedWeapon = playerCharacter.GetInventory().GetEquipped();
             

@@ -245,7 +245,7 @@ namespace InfimaGames.LowPolyShooterPack
             // 歩き撃ち
             else if (playerCharacter.IsWalking())
             {
-                float random = Random.Range(-15.0f, 15.0f);
+                float random = Random.Range(-150.0f, 150.0f);
                 rotation = Quaternion.LookRotation(playerCamera.forward * 1000.0f - muzzleSocket.position * random);
 
             }
