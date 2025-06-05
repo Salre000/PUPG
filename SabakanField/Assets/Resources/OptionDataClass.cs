@@ -1,70 +1,63 @@
 using UnityEngine;
 using System.IO;
-using System.Collections.Generic;
+using System.Collections.Generic;using System.Runtime.Serialization.Formatters.Binary;
+[System.Serializable]
+public class OptionData{
+public float _NormalSensitivity;
+public float _AdsSensitivity;
+public bool _AdsType;
+public int _MasterVolume;
+public int _BGMVolume;
+public int _SEVolume;
+}
 public static class OptionDataClass{
-
-private  static  float  _NormalSensitivity;
-public  static  float  GetNormalSensitivity(){return _NormalSensitivity;}
-private  static  float  _AdsSensitivity;
-public  static  float  GetAdsSensitivity(){return _AdsSensitivity;}
-private  static  bool  _AdsType;
-public  static  bool  GetAdsType(){return _AdsType;}
-private  static  int  _MasterVolume;
-public  static  int  GetMasterVolume(){return _MasterVolume;}
-private  static  int  _BGMVolume;
-public  static  int  GetBGMVolume(){return _BGMVolume;}
-private  static  int  _SEVolume;
-public  static  int  GetSEVolume(){return _SEVolume;}private  static  string  _filePass=Application.dataPath;
+public static OptionData option;
+public  static  float  GetNormalSensitivity(){return option._NormalSensitivity;}
+public  static  float  GetAdsSensitivity(){return option._AdsSensitivity;}
+public  static  bool  GetAdsType(){return option._AdsType;}
+public  static  int  GetMasterVolume(){return option._MasterVolume;}
+public  static  int  GetBGMVolume(){return option._BGMVolume;}
+public  static  int  GetSEVolume(){return option._SEVolume;}private  static  string  _filePass=Application.dataPath;
 private  static  string  _classname=Const.ClassName;
-private  static  string  _classExpansion=Const.ClassExpansion;
+private  static  string  _classExpansion=".txt";
 private  static  string  _scvName=Const.CSVName;
 private  static  string  _FilePassReso=Const.FilePass;
 
 public static void OptionDataSave(float SetNormalSensitivity,float SetAdsSensitivity,bool SetAdsType,int SetMasterVolume,int SetBGMVolume,int SetSEVolume){
 
-_NormalSensitivity=SetNormalSensitivity;
-_AdsSensitivity=SetAdsSensitivity;
-_AdsType=SetAdsType;
-_MasterVolume=SetMasterVolume;
-_BGMVolume=SetBGMVolume;
-_SEVolume=SetSEVolume;
-StreamWriter swSave;
-swSave = new StreamWriter(_filePass+_FilePassReso+_scvName+_classExpansion,false);
-
-swSave.WriteLine(_NormalSensitivity);
-swSave.WriteLine(_AdsSensitivity);
-swSave.WriteLine(_AdsType);
-swSave.WriteLine(_MasterVolume);
-swSave.WriteLine(_BGMVolume);
-swSave.WriteLine(_SEVolume);swSave.Flush();
-swSave.Close();
+option._NormalSensitivity=SetNormalSensitivity;
+option._AdsSensitivity=SetAdsSensitivity;
+option._AdsType=SetAdsType;
+option._MasterVolume=SetMasterVolume;
+option._BGMVolume=SetBGMVolume;
+option._SEVolume=SetSEVolume;
+BinaryFormatter formatter = new BinaryFormatter();
+string path = _filePass + _FilePassReso + _scvName+ _classExpansion;
+ FileStream stream = new FileStream(path, FileMode.OpenOrCreate);
+ OptionData data =option;
+ formatter.Serialize(stream, data);
+ stream.Close();
 }
 public static void GetOptionData(){
-List<string[]> csvDatas = new List<string[]>();
-int height = 0;
-TextAsset textAsset = Resources.Load<TextAsset>(_scvName);
-if(textAsset==null){Initialization();return;}
-StringReader reader = new StringReader(textAsset.text);
-while (reader.Peek() > -1){
-string line = reader.ReadLine();
-csvDatas.Add(line.Split(','));
-height++;
+string path = _filePass + _FilePassReso + _scvName + _classExpansion;
+if (File.Exists(path)){
+BinaryFormatter formatter = new BinaryFormatter();
+ FileStream stream = new FileStream(path, FileMode.Open);
+OptionData data = formatter.Deserialize(stream) as OptionData;
+option = data;
+ stream.Close();}
+else{
+ option = new OptionData();
+Initialization();
 }
-
-_NormalSensitivity=float.Parse(csvDatas[0][0]);
-_AdsSensitivity=float.Parse(csvDatas[1][0]);
-_AdsType=bool.Parse(csvDatas[2][0]);
-_MasterVolume=int.Parse(csvDatas[3][0]);
-_BGMVolume=int.Parse(csvDatas[4][0]);
-_SEVolume=int.Parse(csvDatas[5][0]);
 }
 public static void Initialization(){
 
-_NormalSensitivity=0.5f;
-_AdsSensitivity=0.5f;
-_AdsType=false;
-_MasterVolume=100;
-_BGMVolume=0;
-_SEVolume=0;
+option._NormalSensitivity=0.5f;
+option._AdsSensitivity=0.5f;
+option._AdsType=false;
+option._MasterVolume=0;
+option._BGMVolume=0;
+option._SEVolume=0;
 }
 }
