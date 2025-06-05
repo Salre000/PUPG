@@ -24,8 +24,11 @@ public static class KillData
     }
     public static KIllCount InGameDataLoad()
     {
-        BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.dataPath + FILE_PASS + FILE_NAME_KD + FILR_EXTENSION;
+        if (!File.Exists(path))return new KIllCount();
+        
+
+            BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(path, FileMode.Open);
         KIllCount data = formatter.Deserialize(stream) as KIllCount;
         stream.Close();

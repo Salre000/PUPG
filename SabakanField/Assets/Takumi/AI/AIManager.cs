@@ -345,5 +345,4 @@ public class KIllCount
 
     public List<int> deathCount = new List<int>(AIManager.AI_NUMBER * 2) { 0 };
     public List<int> killCount = new List<int>(AIManager.AI_NUMBER * 2) { 0 };
-
 }
