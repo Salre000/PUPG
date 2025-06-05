@@ -106,7 +106,7 @@ namespace InfimaGames.LowPolyShooterPack
         /// Returns the weapon's attachment manager component.
         /// </summary>
         public abstract WeaponAttachmentManagerBehaviour GetAttachmentManager();
-        
+
         #endregion
 
         #region METHODS
@@ -115,6 +115,7 @@ namespace InfimaGames.LowPolyShooterPack
         /// Fires the weapon.
         /// </summary>
         /// <param name="spreadMultiplier">Value to multiply the weapon's spread by. Very helpful to account for aimed spread multipliers.</param>
+        // 武器のスプレッドに乗じる値。照準拡散倍率を考慮するのに非常に役立つ。
         public abstract void Fire(float spreadMultiplier = 1.0f);
         /// <summary>
         /// Reloads the weapon.

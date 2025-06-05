@@ -48,6 +48,9 @@ namespace InfimaGames.LowPolyShooterPack
 
 		#region FIELDS
 
+		// 歩き状態か否か
+		private bool walking;
+
 		/// <summary>
 		/// True if the character is aiming.
 		/// </summary>
@@ -216,6 +219,10 @@ namespace InfimaGames.LowPolyShooterPack
 			aiming = holdingButtonAim && CanAim();
 			//Match Run.
 			running = holdingButtonRun && CanRun();
+			walking = !running;
+			// 歩いてなかったらwalkもfalse
+			if(transform.GetComponent<Rigidbody>().velocity.magnitude<0.1f)
+				walking = false;
 
 			//Holding the firing button.
 			if (holdingButtonFire)
@@ -223,7 +230,7 @@ namespace InfimaGames.LowPolyShooterPack
 				//Check.
 				if (CanPlayAnimationFire() && equippedWeapon.HasAmmunition() && equippedWeapon.IsAutomatic())
 				{
-					//Has fire rate passed.
+					//Has fire rate passed. 発射レート
 					if (Time.time - lastShotTime > 60.0f / equippedWeapon.GetRateOfFire())
 						Fire();
 				}	
@@ -261,8 +268,9 @@ namespace InfimaGames.LowPolyShooterPack
 		
 		public override bool IsCrosshairVisible() => !aiming && !holstered;
 		public override bool IsRunning() => running;
-		
-		public override bool IsAiming() => aiming;
+        public override bool IsWalking()=>walking;
+
+        public override bool IsAiming() => aiming;
 		public override bool IsCursorLocked() => cursorLocked;
 		
 		public override bool IsTutorialTextVisible() => tutorialTextVisible;
@@ -310,13 +318,16 @@ namespace InfimaGames.LowPolyShooterPack
 		/// </summary>
 		private void Fire()
 		{
-			//Save the shot time, so we can calculate the fire rate correctly.
-			lastShotTime = Time.time;
-			//Fire the weapon! Make sure that we also pass the scope's spread multiplier if we're aiming.
-			equippedWeapon.Fire();
+            //Save the shot time, so we can calculate the fire rate correctly.
+            // 発射時間を保存しておけば、発射レートを正しく計算できる
+            lastShotTime = Time.time;
+            //Fire the weapon! Make sure that we also pass the scope's spread multiplier if we're aiming.
+            // 武器を発射する！照準が合っていれば、スコープの拡散倍率もパスしていることを確認してください。
+            equippedWeapon.Fire();
 
-			//Play firing animation.
-			const string stateName = "Fire";
+            //Play firing animation.
+            // 発射アニメーションを再生する
+            const string stateName = "Fire";
 			characterAnimator.CrossFade(stateName, 0.05f, layerOverlay, 0);
 		}
 

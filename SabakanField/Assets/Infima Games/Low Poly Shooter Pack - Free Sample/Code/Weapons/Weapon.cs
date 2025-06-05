@@ -83,6 +83,8 @@ namespace InfimaGames.LowPolyShooterPack
         [SerializeField]
         private AudioClip audioClipFireEmpty;
 
+        private CharacterBehaviour playerCharacter;
+
         #endregion
 
         #region FIELDS
@@ -145,6 +147,9 @@ namespace InfimaGames.LowPolyShooterPack
             characterBehaviour = gameModeService.GetPlayerCharacter();
             //Cache the world camera. We use this in line traces.
             playerCamera = characterBehaviour.GetCameraWorld().transform;
+
+            //Get Player Character.
+            playerCharacter = ServiceLocator.Current.Get<IGameModeService>().GetPlayerCharacter();
         }
         protected override void Start()
         {
@@ -218,23 +223,50 @@ namespace InfimaGames.LowPolyShooterPack
             const string stateName = "Fire";
             animator.Play(stateName, 0, 0.0f);
             //Reduce ammunition! We just shot, so we need to get rid of one!
+            // 弾薬を減らす！さっき撃ったばかりだから、1発減らさないと！
             ammunitionCurrent = Mathf.Clamp(ammunitionCurrent - 1, 0, magazineBehaviour.GetAmmunitionTotal());
 
             //Play all muzzle effects.
             muzzleBehaviour.Effect();
-            
+
             //Determine the rotation that we want to shoot our projectile in.
+            // 弾丸を発射する角度を決める。
+            // この時歩き撃ちをしていたならば弾をぶらす
+
             Quaternion rotation = Quaternion.LookRotation(playerCamera.forward * 1000.0f - muzzleSocket.position);
-            
+
+            // 走り撃ち(Shift)
+            if (playerCharacter.IsRunning())
+            {
+                float random = Random.Range(-25.0f, 25.0f);
+                rotation = Quaternion.LookRotation(playerCamera.forward * 1000.0f- muzzleSocket.position* random);
+
+            }
+            // 歩き撃ち
+            else if (playerCharacter.IsWalking())
+            {
+                float random = Random.Range(-15.0f, 15.0f);
+                rotation = Quaternion.LookRotation(playerCamera.forward * 1000.0f - muzzleSocket.position * random);
+
+            }
+
+
             //If there's something blocking, then we can aim directly at that thing, which will result in more accurate shooting.
+            // 遮るものがあれば、それを直接狙えば、より正確な射撃が可能になる。
             if (Physics.Raycast(new Ray(playerCamera.position, playerCamera.forward),
                 out RaycastHit hit, maximumDistance, mask))
                 rotation = Quaternion.LookRotation(hit.point - muzzleSocket.position);
-                
+
             //Spawn projectile from the projectile spawn point.
+            // 発射体スポーンポイントから発射体をスポーンする。
+            // 薬莢のこと
             GameObject projectile = Instantiate(prefabProjectile, muzzleSocket.position, rotation);
             //Add velocity to the projectile.
-            projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * projectileImpulse;   
+            // 弾丸に速度を加える。
+            projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * projectileImpulse;
+
+
+
         }
 
         public override void FillAmmunition(int amount)
