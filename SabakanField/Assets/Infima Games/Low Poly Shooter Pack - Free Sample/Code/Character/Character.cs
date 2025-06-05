@@ -150,15 +150,18 @@ namespace InfimaGames.LowPolyShooterPack
 		 
 		private bool cursorLocked;
 
+        // true：切り替え false：長押し
+		private bool _isAdsType;
+        bool _isAds = false;
 
-		#endregion
+        #endregion
 
-		#region CONSTANTS
+        #region CONSTANTS
 
-		/// <summary>
-		/// Aiming Alpha Value.
-		/// </summary>
-		private static readonly int HashAimingAlpha = Animator.StringToHash("Aiming");
+        /// <summary>
+        /// Aiming Alpha Value.
+        /// </summary>
+        private static readonly int HashAimingAlpha = Animator.StringToHash("Aiming");
 
 		/// <summary>
 		/// Hashed "Movement".
@@ -173,8 +176,11 @@ namespace InfimaGames.LowPolyShooterPack
 		{
 			#region Lock Cursor
 
-			//Always make sure that our cursor is locked when the game starts!
-			PauseButtonsSystem.instance.GetPauseWindow().SetAction(() => cursorLocked = !cursorLocked);
+			_isAdsType=OptionManager.Instance.GetAdsType();
+			_isAds = false;
+
+            //Always make sure that our cursor is locked when the game starts!
+            PauseButtonsSystem.instance.GetPauseWindow().SetAction(() => cursorLocked = !cursorLocked);
 
             cursorLocked = true;
 			//Update the cursor's state.
@@ -521,14 +527,16 @@ namespace InfimaGames.LowPolyShooterPack
 		/// <returns></returns>
 		private bool CanAim()
 		{
-			////Block.
-			//if (holstered || inspecting)
-			//	return false;
+			// ここがtrueで通るならADSができる状態ということになる
 
-			////Block.
-			//if (reloading || holstering)
-			//	return false;
-			
+			//Block.
+			if (holstered || inspecting)
+				return false;
+
+			//Block.
+			if (reloading || holstering)
+				return false;
+
 			//Return.
 			return true;
 		}
@@ -665,17 +673,48 @@ namespace InfimaGames.LowPolyShooterPack
 				return;
 
 			//Switch.
-			switch (context.phase)
+			// ここで右クリが押されていたらADSをする
+			_isAdsType=OptionManager.Instance.GetAdsType();
+			// true：切り替え false：長押し
+			if (_isAdsType)
 			{
-				case InputActionPhase.Started:
-					//Started.
-					holdingButtonAim = true;
-					break;
-				case InputActionPhase.Canceled:
-					//Canceled.
-					holdingButtonAim = false;
-					break;
+				switch (context.phase)
+				{
+					// 押してるとき
+					case InputActionPhase.Started:
+
+						if(_isAds) return;
+
+						//Started.
+						holdingButtonAim = !holdingButtonAim/*true*/;
+						_isAds = true;
+						break;
+					// 離しているとき
+					case InputActionPhase.Canceled:
+						//Canceled.
+						_isAds=false;
+						//holdingButtonAim = false;
+						break;
+				}
 			}
+            else
+            {
+                switch (context.phase)
+                {
+                    // 押してるとき
+                    case InputActionPhase.Started:
+                        //Started.
+                        holdingButtonAim = true;
+                        break;
+                    // 離しているとき
+                    case InputActionPhase.Canceled:
+                        //Canceled.
+                        holdingButtonAim = false;
+                        break;
+                }
+            }
+
+            
 		}
 
 		/// <summary>
