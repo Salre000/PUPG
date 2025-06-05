@@ -33,19 +33,17 @@ public class AIManager : MonoBehaviour
 
 
     //1‚Â‚Ìw‰c‚ÌAI‚Ì”iƒvƒŒƒCƒ„[‘¤‚Í-‚Pj
-    const int AI_NUMBER = 5;
+    public const int AI_NUMBER = 5;
 
     //ƒvƒŒƒCƒ„[‚ÌŠi”[æ
     GameObject player;
+    KIllCount kIll;
 
-    private List<int> deathCount = new List<int>(AI_NUMBER * 2) { 0 };
-    private List<int> killCount = new List<int>(AI_NUMBER * 2) { 0 };
+    public List<int> GetKillCount() { return kIll.killCount; }
+    public List<int> GetDeathCount() { return kIll.deathCount; }
 
-    public List<int> GetKillCount() { return killCount; }
-    public List<int> GetDeathCount() { return deathCount; }
-
-    public void AddDeathCount(int index) { deathCount[index]++; }
-    public void AdDKillCount(int index) { killCount[index]++; }
+    public void AddDeathCount(int index) { kIll.deathCount[index]++; }
+    public void AdDKillCount(int index) { kIll.killCount[index]++; }
 
 
     public List<bool> GetPlayersLife() { return playersLife; }
@@ -95,18 +93,7 @@ public class AIManager : MonoBehaviour
 
     public void DataSave()
     {
-        IDNumber = 0;
-        AICharacterUtility.ClearCharacterAI();
-
-        string[] kill = new string[killCount.Count];
-        string[] death = new string[deathCount.Count];
-        for (int i = 0; i < AI_NUMBER * 2; i++)
-        {
-            kill[i] = killCount[i].ToString();
-            death[i] = deathCount[i].ToString();
-
-        }
-        DataSaveCSV.InGameDataSave(kill, death);
+        KillData.InGameDataSave(kIll);
     }
 
 
@@ -189,10 +176,10 @@ public class AIManager : MonoBehaviour
 
         SoundManager.Initialize();
 
-        killCount.Clear();
-        deathCount.Clear();
-        killCount.Add(0);
-        deathCount.Add(0);
+        kIll.killCount.Clear();
+        kIll.deathCount.Clear();
+        kIll.killCount.Add(0);
+        kIll.deathCount.Add(0);
 
 
 
@@ -244,8 +231,8 @@ public class AIManager : MonoBehaviour
                 Ai.SetEnemyFlag(flagObject[(i + 1) % 2]);
                 Ai.SetFlag(flagObject[i]);
 
-                killCount.Add(0);
-                deathCount.Add(0);
+                kIll.killCount.Add(0);
+                kIll.deathCount.Add(0);
 
 
                 if (i <= 0)
@@ -350,4 +337,12 @@ public class AIManager : MonoBehaviour
     }
 
 
+}
+
+
+public class KIllCount 
+{
+
+    public List<int> deathCount = new List<int>(AIManager.AI_NUMBER * 2) { 0 };
+    public List<int> killCount = new List<int>(AIManager.AI_NUMBER * 2) { 0 };
 }
