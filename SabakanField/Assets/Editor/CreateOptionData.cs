@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
@@ -34,7 +35,7 @@ public class CreateOptionData : EditorWindow
     private void OnGUI()
     {
 
-        if (GUILayout.Button("Œˆ’è"))
+        if (GUILayout.Button("æ±ºå®š"))
         {
             CreateCS();
             This.Close();
@@ -45,13 +46,13 @@ public class CreateOptionData : EditorWindow
         EditorGUILayout.LabelField("CreateOption");
         EditorGUILayout.BeginVertical("box");
 
-        if (GUILayout.Button("’Ç‰Á"))
+        if (GUILayout.Button("ä¸€ç•ªæœ€å¾Œã«è¿½åŠ "))
         {
             optionName.Add("");
             optiontype.Add((int)Type.Float);
 
         }       
-        if (GUILayout.Button("ˆê”Ô‰º‚ğíœ"))
+        if (GUILayout.Button("ä¸€ç•ªæœ€å¾Œã‚’æ¶ˆã™"))
         {
             optionName.RemoveAt(optionName.Count-1); ;
             optiontype.RemoveAt(optiontype.Count-1);
@@ -64,7 +65,7 @@ public class CreateOptionData : EditorWindow
             GUILayout.BeginVertical();
 
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("ƒIƒvƒVƒ‡ƒ“‚Ì€–Ú–¼");
+            EditorGUILayout.LabelField("ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã®é …ç›®å");
             EditorGUILayout.EndHorizontal();
             GUILayout.EndVertical();
 
@@ -104,20 +105,42 @@ public class CreateOptionData : EditorWindow
         builder.Append("using System.IO;");
         builder.AppendLine();
         builder.Append("using System.Collections.Generic;");
-        builder.AppendLine();
-        builder.Append("public static class OptionDataClass{");
+        builder.Append("using System.Runtime.Serialization.Formatters.Binary;");
         builder.AppendLine();
 
         int size = optionName.Count;
 
+        //ï¿½Nï¿½ï¿½ï¿½Xï¿½ğ¶ï¿½
+        builder.Append("[System.Serializable]");
+        builder.AppendLine();
+        builder.Append("public class OptionData{");
+        builder.AppendLine();
+
+
+        for (int i = 0; i < size; i++)
+        {
+
+            builder.Append("public ");
+            builder.AppendFormat("{0} ", GetType(optiontype[i]));
+            builder.AppendFormat("_{0};", optionName[i]);
+            builder.AppendLine();
+
+        }
+        builder.Append("}");
+            builder.AppendLine();
+
+
+        builder.Append("public static class OptionDataClass{");
+        builder.AppendLine();
+
+        builder.Append("public static OptionData option;");
+
         for (int i = 0; i < size; i++)
         {
             builder.AppendLine();
-            builder.AppendFormat("private  static  {0}  _{1};", GetType(optiontype[i]), optionName[i]);
-            builder.AppendLine();
             builder.AppendFormat("public  static  {0}  Get{1}()", GetType(optiontype[i]), optionName[i]);
             builder.Append("{");
-            builder.AppendFormat("return _{0}", optionName[i]);
+            builder.AppendFormat("return option._{0}", optionName[i]);
             builder.Append(";}");
         }
         builder.Append("private  static  string  _filePass=Application.dataPath;");
@@ -126,7 +149,7 @@ public class CreateOptionData : EditorWindow
         builder.Append("private  static  string  _classname=Const.ClassName;");
         builder.AppendLine();
 
-        builder.Append("private  static  string  _classExpansion=Const.ClassExpansion;");
+        builder.Append("private  static  string  _classExpansion=\".txt\";");
         builder.AppendLine();
 
         builder.Append("private  static  string  _scvName=Const.CSVName;");
@@ -154,32 +177,24 @@ public class CreateOptionData : EditorWindow
         {
 
             builder.AppendLine();
-            builder.AppendFormat("_{0}=Set{0};", optionName[i]);
+            builder.AppendFormat("option._{0}=Set{0};", optionName[i]);
 
         }
 
         builder.AppendLine();
-
-
-        builder.Append("StreamWriter swSave;");
+        builder.Append("BinaryFormatter formatter = new BinaryFormatter();");
         builder.AppendLine();
-
-        builder.Append("swSave = new StreamWriter(_filePass+_FilePassReso+_scvName+_classExpansion,false);");
+        builder.Append("string path = _filePass + _FilePassReso + _scvName+ _classExpansion;");
         builder.AppendLine();
-
-        for (int i = 0; i < size; i++)
-        {
-            builder.AppendLine();
-
-            builder.AppendFormat("swSave.WriteLine(_{0});", optionName[i].ToString());
-
-        }
-    
-
-
-        builder.Append("swSave.Flush();");
+        builder.Append(" FileStream stream = new FileStream(path, FileMode.OpenOrCreate);");
         builder.AppendLine();
-        builder.Append("swSave.Close();");
+        builder.Append(" OptionData data =option;");
+        builder.AppendLine();
+        builder.Append(" formatter.Serialize(stream, data);");
+        builder.AppendLine();
+        builder.Append(" stream.Close();");
+
+
         builder.AppendLine();
         builder.Append("}");
         builder.AppendLine();
@@ -188,41 +203,41 @@ public class CreateOptionData : EditorWindow
         builder.Append("public static void GetOptionData(){");
 
         builder.AppendLine();
-
-        builder.Append("List<string[]> csvDatas = new List<string[]>();");
-        builder.AppendLine();
-        builder.Append("int height = 0;");
-        builder.AppendLine();
-
-
-        builder.Append("TextAsset textAsset = Resources.Load<TextAsset>(_scvName);");
+        builder.Append("string path = _filePass + _FilePassReso + _scvName + _classExpansion;");
 
         builder.AppendLine();
+        builder.Append("if (File.Exists(path)){");
 
-        builder.Append("if(textAsset==null){Initialization();");
-        builder.Append("return;}");
         builder.AppendLine();
-        builder.Append("StringReader reader = new StringReader(textAsset.text);");
+        builder.Append("BinaryFormatter formatter = new BinaryFormatter();");
+
         builder.AppendLine();
-        builder.Append("while (reader.Peek() > -1){");
+        builder.Append(" FileStream stream = new FileStream(path, FileMode.Open);");
+
+
         builder.AppendLine();
-        builder.Append("string line = reader.ReadLine();");
+        builder.Append("OptionData data = formatter.Deserialize(stream) as OptionData;");
+
         builder.AppendLine();
-        builder.Append("csvDatas.Add(line.Split(','));");
+        builder.Append("option = data;");
+
         builder.AppendLine();
-        builder.Append("height++;");
+        builder.Append(" stream.Close();}");
+
+
+        builder.AppendLine();
+        builder.Append("else{");
+
+        builder.AppendLine();
+        builder.Append(" option = new OptionData();");
+
+        builder.AppendLine();
+        builder.Append("Initialization();");
+
         builder.AppendLine();
         builder.Append("}");
         builder.AppendLine();
-        for (int i = 0; i < size; i++)
-        {
-            builder.AppendLine();
 
-            builder.AppendFormat("_{0}={1}.Parse(csvDatas[{2}][0]);", optionName[i], GetType(optiontype[i]), i.ToString());
-
-        }
-
-        builder.AppendLine();
         builder.Append("}");
         builder.AppendLine();
 
@@ -233,16 +248,16 @@ public class CreateOptionData : EditorWindow
             builder.AppendLine();
             if ((Type)optiontype[i] == Type.Bool)
             {
-                builder.AppendFormat("_{0}=false;", optionName[i]);
+                builder.AppendFormat("option._{0}=false;", optionName[i]);
             }
             else if ((Type)(optiontype[i])==Type.Float)
             {
-                builder.AppendFormat("_{0}=0.5f;", optionName[i]);
+                builder.AppendFormat("option._{0}=0.5f;", optionName[i]);
 
             }
             else 
             {
-                builder.AppendFormat("_{0}=0;", optionName[i]);
+                builder.AppendFormat("option._{0}=0;", optionName[i]);
 
             }
         }
