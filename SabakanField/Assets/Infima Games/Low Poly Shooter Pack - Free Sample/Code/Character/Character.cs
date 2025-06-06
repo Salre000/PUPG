@@ -22,13 +22,20 @@ namespace InfimaGames.LowPolyShooterPack
 		[SerializeField]
 		private InventoryBehaviour inventory;
 
-		[Header("Cameras")]
+        [Tooltip("InventoryObject.")]
+        [SerializeField]
+        private GameObject inventoryObject;
+
+        [Header("Cameras")]
 
 		[Tooltip("Normal Camera.")]
 		[SerializeField]
 		private Camera cameraWorld;
+        [Tooltip("カメラSoketObject")]
+        [SerializeField]
+        private GameObject soketCameraObject;
 
-		[Header("Animation")]
+        [Header("Animation")]
 
 		[Tooltip("Determines how smooth the locomotion blendspace is.")]
 		[SerializeField]
@@ -47,6 +54,8 @@ namespace InfimaGames.LowPolyShooterPack
 		#endregion
 
 		#region FIELDS
+
+		private GameObject weponScope=null;
 
 		// 歩き状態か否か
 		private bool walking;
@@ -182,8 +191,21 @@ namespace InfimaGames.LowPolyShooterPack
 			_isAdsType=OptionManager.Instance.GetAdsType();
 			_isAds = false;
 
-            //Always make sure that our cursor is locked when the game starts!
-            PauseButtonsSystem.instance.GetPauseWindow().SetAction(() => cursorLocked = !cursorLocked);
+            GameObject wepon=inventoryObject.transform.GetChild(0).gameObject;
+			if (wepon != null)
+			{
+				GameObject gameObject = wepon.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
+
+                if (gameObject.transform.childCount>=1)
+				{
+					weponScope = gameObject.transform.GetChild(0).gameObject;
+					weponScope.gameObject.SetActive(false);
+
+				}
+			}
+
+			//Always make sure that our cursor is locked when the game starts!
+			PauseButtonsSystem.instance.GetPauseWindow().SetAction(() => cursorLocked = !cursorLocked);
 
             cursorLocked = true;
 			//Update the cursor's state.
@@ -238,8 +260,15 @@ namespace InfimaGames.LowPolyShooterPack
 				}	
 			}
 
-			//Update Animator.
-			UpdateAnimator();
+            if (reloading)
+            {
+                holdingButtonAim = false;
+                _isAds = false;
+            }
+            ScopeMode(holdingButtonAim);
+
+            //Update Animator.
+            UpdateAnimator();
 		}
 
 		protected override void LateUpdate()
@@ -727,8 +756,17 @@ namespace InfimaGames.LowPolyShooterPack
                 }
             }
 
-            
+
 		}
+
+		private void ScopeMode(bool _isAdsAim)
+		{
+			// スコープがないならreturn
+			if (weponScope == null) return;
+            soketCameraObject.SetActive(!_isAdsAim);
+            weponScope.SetActive(_isAdsAim);
+            
+        }
 
 		/// <summary>
 		/// Holster.

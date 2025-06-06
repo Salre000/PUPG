@@ -944,7 +944,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 8195332293463410009}
+  inventoryObject: {fileID: 8195332293463410011}
   cameraWorld: {fileID: 916095938892669238}
+  soketCameraObject: {fileID: 2050141834808786961}
   dampTimeLocomotion: 0.1
   dampTimeAiming: 0.3
   characterAnimator: {fileID: 3320314160785962872}
@@ -9757,7 +9759,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 6041315293858548562}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 8195332293463410011}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d3c368290cc3e914ab3a0cf540de2166, type: 3}
@@ -9766,6 +9768,12 @@ MonoBehaviour:
 --- !u!4 &8195332293463410010 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2480563158121336328, guid: 9482e0a2ae6a92742bbe72e00f29f763,
+    type: 3}
+  m_PrefabInstance: {fileID: 6041315293858548562}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8195332293463410011 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2480563158121336329, guid: 9482e0a2ae6a92742bbe72e00f29f763,
     type: 3}
   m_PrefabInstance: {fileID: 6041315293858548562}
   m_PrefabAsset: {fileID: 0}
