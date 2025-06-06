@@ -233,7 +233,7 @@ namespace InfimaGames.LowPolyShooterPack
             // 弾丸を発射する角度を決める。
             // この時歩き撃ちをしていたならば弾をぶらす
 
-            Quaternion rotation = Quaternion.LookRotation(playerCamera.forward * 1000.0f - muzzleSocket.position);
+            Quaternion rotation;
 
             // 走り撃ち(Shift)
             if (playerCharacter.IsRunning())
@@ -245,17 +245,20 @@ namespace InfimaGames.LowPolyShooterPack
             // 歩き撃ち
             else if (playerCharacter.IsWalking())
             {
-                float random = Random.Range(-150.0f, 150.0f);
-                rotation = Quaternion.LookRotation(playerCamera.forward * 1000.0f - muzzleSocket.position * random);
-
+                float random = Random.Range(-15.0f, 15.0f);
+                rotation = Quaternion.LookRotation(playerCamera.forward * 1000.0f - (muzzleSocket.position * random));
+            }
+            else
+            {
+                rotation = Quaternion.LookRotation(playerCamera.forward * 1000.0f - muzzleSocket.position);
             }
 
 
             //If there's something blocking, then we can aim directly at that thing, which will result in more accurate shooting.
             // 遮るものがあれば、それを直接狙えば、より正確な射撃が可能になる。
-            if (Physics.Raycast(new Ray(playerCamera.position, playerCamera.forward),
-                out RaycastHit hit, maximumDistance, mask))
-                rotation = Quaternion.LookRotation(hit.point - muzzleSocket.position);
+            //if (Physics.Raycast(new Ray(playerCamera.position, playerCamera.forward),
+            //    out RaycastHit hit, maximumDistance, mask))
+            //    rotation = Quaternion.LookRotation(hit.point - muzzleSocket.position);
 
             //Spawn projectile from the projectile spawn point.
             // 発射体スポーンポイントから発射体をスポーンする。
