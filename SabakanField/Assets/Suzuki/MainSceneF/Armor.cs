@@ -7,9 +7,9 @@ public class Armor : MonoBehaviour
     // アーマーを持っていたら一度攻撃を防ぐようにする
 
     // アーマーを装着した時の音、初めから装着している場合は鳴らさない
-    [SerializeField, Header("アーマーを装着した時の音")] private AudioSource _getArmorSound;
+    [SerializeField, Header("アーマーを装着した時の音")] private AudioClip _getArmorSound;
     // アーマーが無くなった時の音
-    [SerializeField, Header("アーマーが無くなった時の音")] private AudioSource _armorBreakSound;
+    [SerializeField, Header("アーマーが無くなった時の音")] private AudioClip _armorBreakSound;
     // アーマーを現在装着しているか
     [SerializeField] private bool _isArmor = false;
 

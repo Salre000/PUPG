@@ -55,8 +55,6 @@ namespace InfimaGames.LowPolyShooterPack
 
 		#region FIELDS
 
-		private GameObject weponScope=null;
-
 		// 歩き状態か否か
 		private bool walking;
 
@@ -191,19 +189,6 @@ namespace InfimaGames.LowPolyShooterPack
 			_isAdsType=OptionManager.Instance.GetAdsType();
 			_isAds = false;
 
-            GameObject wepon=inventoryObject.transform.GetChild(0).gameObject;
-			if (wepon != null)
-			{
-				GameObject gameObject = wepon.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
-
-                if (gameObject.transform.childCount>=1)
-				{
-					weponScope = gameObject.transform.GetChild(0).gameObject;
-					weponScope.gameObject.SetActive(false);
-
-				}
-			}
-
 			//Always make sure that our cursor is locked when the game starts!
 			PauseButtonsSystem.instance.GetPauseWindow().SetAction(() => cursorLocked = !cursorLocked);
 
@@ -239,6 +224,13 @@ namespace InfimaGames.LowPolyShooterPack
 		{
 			if(PlayerManager.GetIsPlayerDead())return;
 
+			// 武器を拾ったら
+			if (PlayerManager.GetIsPicWepon())
+			{
+				inventory.Init();
+				PlayerManager.SetIsPicWepon(false);
+			}
+
 			//Match Aim.
 			aiming = holdingButtonAim && CanAim();
 			//Match Run.
@@ -265,7 +257,7 @@ namespace InfimaGames.LowPolyShooterPack
                 holdingButtonAim = false;
                 _isAds = false;
             }
-            ScopeMode(holdingButtonAim);
+			PlayerManager.SetIsHoldingAds(holdingButtonAim);
 
             //Update Animator.
             UpdateAnimator();
@@ -759,15 +751,6 @@ namespace InfimaGames.LowPolyShooterPack
 
 		}
 
-		private void ScopeMode(bool _isAdsAim)
-		{
-			// スコープがないならreturn
-			if (weponScope == null) return;
-            soketCameraObject.SetActive(!_isAdsAim);
-            weponScope.SetActive(_isAdsAim);
-            
-        }
-
 		/// <summary>
 		/// Holster.
 		/// </summary>
@@ -819,6 +802,7 @@ namespace InfimaGames.LowPolyShooterPack
 		}
 		/// <summary>
 		/// Next Inventory Weapon.
+		/// 武器切り替え
 		/// </summary>
 		public void OnTryInventoryNext(InputAction.CallbackContext context)
 		{
