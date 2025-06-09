@@ -48,7 +48,7 @@ public class SurvivalStatus : UIBase
     {
         // BlueTeam‚ÌAI‚Ì¶‘¶ó‹µ‚ª•Ô‚³‚ê‚é
         _blueTeamStatus = AIUtility.GetPlayersLife();
-        if (PlayerManager.IsPlayerDead())
+        if (PlayerManager.GetIsPlayerDead())
             _blueTeamImage[0].color = _deadColor;
         else
             _blueTeamImage[0].color = _blueTeamColor;

@@ -35,6 +35,11 @@ public class PlayerRespawn : MonoBehaviour, CharacterInsterface, InvincibleInste
     // “G‚©‚çUŒ‚‚ðŽó‚¯‚½Žž
     public void HitAction()
     {
+        if (PlayerManager.GetIsArmor())
+        {
+            PlayerManager.SetIsArmor(false);
+            return;
+        }
         AIUtility.AddDeathCount();
         PlayerManager.SetIsPlayerDead(true);
         RespawnManager.Instance.DelayRespawn(gameObject, _respawnPosition, _respawnTime);
@@ -52,7 +57,7 @@ public class PlayerRespawn : MonoBehaviour, CharacterInsterface, InvincibleInste
     // •œŠˆŽžŠÔ‘ª’è
     private void RespawnTimeCount()
     {
-        if (!PlayerManager.IsPlayerDead()) return;
+        if (!PlayerManager.GetIsPlayerDead()) return;
         _timeCount += Time.deltaTime;
         // ‚±‚±‚ª’Ê‚é‚ÆƒŠƒXƒ|[ƒ“‚µ‚½‚±‚Æ‚ª‚í‚©‚é
         if (_timeCount >= _respawnTime)

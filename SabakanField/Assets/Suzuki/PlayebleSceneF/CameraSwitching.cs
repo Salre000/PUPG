@@ -41,7 +41,7 @@ public class CameraSwitching : MonoBehaviour
 
     private void PlayerIsDeadCamera()
     {
-        if (!PlayerManager.IsPlayerDead())
+        if (!PlayerManager.GetIsPlayerDead())
         {
             if (_mainCamera.activeSelf) return;
             _mainCamera.SetActive(true);

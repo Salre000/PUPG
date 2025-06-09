@@ -39,7 +39,7 @@ public class LookCamera : MonoBehaviour
             SettingSensitivity();
             return;
         }
-        if (!PlayerManager.IsAds())
+        if (!PlayerManager.GetIsAds())
             MouseCameraRotation();
         else
             AdsMouseCameraRotation();

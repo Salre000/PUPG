@@ -12,6 +12,8 @@ public static class PlayerManager
     private const float _POSITION_MAGNITUDE = 5.0f;
     // ADS中か
     private static bool _isAds = false;
+    // アーマーを装着しているか
+    private static bool _isArmor=false;
 
     // プレイヤーが(敵の)旗の範囲内に存在するか
     static public bool PlayerInFlagRange(Vector3 position) 
@@ -33,10 +35,12 @@ public static class PlayerManager
         return false;
     }
 
-    public static bool IsPlayerDead() { return _isDead; }
+    public static bool GetIsPlayerDead() { return _isDead; }
     public static void SetIsPlayerDead(bool flag) {  _isDead = flag; }
 
-    public static bool IsAds() { return _isAds; }
+    public static bool GetIsAds() { return _isAds; }
     public static void SetIsAds(bool flag) { _isAds = flag; }
+    public static bool GetIsArmor() { return _isArmor; }
+    public static void SetIsArmor(bool flag) { _isArmor = flag; }
 
 }

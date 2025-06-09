@@ -49,7 +49,7 @@ public class PlayerOperation : MonoBehaviour
         // ポーズを開いているとき移動できないようにする
         if (UIManager.Instance.IsPause()) return;
         // 死んでいるとき
-        if (PlayerManager.IsPlayerDead()) return;
+        if (PlayerManager.GetIsPlayerDead()) return;
         Movement();
         Ads();
     }

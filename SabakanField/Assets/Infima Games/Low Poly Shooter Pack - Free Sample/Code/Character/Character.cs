@@ -237,7 +237,7 @@ namespace InfimaGames.LowPolyShooterPack
         }
         protected override void Update()
 		{
-			if(PlayerManager.IsPlayerDead())return;
+			if(PlayerManager.GetIsPlayerDead())return;
 
 			//Match Aim.
 			aiming = holdingButtonAim && CanAim();

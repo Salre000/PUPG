@@ -122,7 +122,7 @@ public class AIManager : MonoBehaviour
             }
         }
 
-        if (isEnemyTeam && player != null && !PlayerManager.IsPlayerDead()) list.Add(player);
+        if (isEnemyTeam && player != null && !PlayerManager.GetIsPlayerDead()) list.Add(player);
 
         if (GameModes.mode == PublicEnum.GameMode.deathmatch)
         {

@@ -26,7 +26,7 @@ public class FlagGetPlayer : MonoBehaviour
         // ゲージが100%もしくはデス状態は増えないようにする
         if (UIManager.Instance.GetOverTime() ||
             UIManager.Instance.GageMaxCheck()||
-            PlayerManager.IsPlayerDead()) return;
+            PlayerManager.GetIsPlayerDead()) return;
         _flagCheck = true;
         _count += _countSpeed * Time.deltaTime;
         UIManager.Instance.FlagCountGage(_count);
