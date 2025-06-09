@@ -27,7 +27,7 @@ public class PickUpWepon : MonoBehaviour
         {
             _equipmentWepon = _inventory.transform.GetChild(0).gameObject;
             Instantiate(_picWepon, _inventory.transform);
-            Destroy(_equipmentWepon, 1.0f);
+            Destroy(_equipmentWepon, 0.5f);
             _playerCamera.SetActive(true);
             PlayerManager.SetIsPicWepon(true);
         }

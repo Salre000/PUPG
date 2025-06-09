@@ -146,7 +146,8 @@ namespace InfimaGames.LowPolyShooterPack
             //Get Attachment Manager.
             attachmentManager = GetComponent<WeaponAttachmentManagerBehaviour>();
 
-            _playerCamera = GameObject.Find("SOCKET_Camera").gameObject;
+            // カメラが非アクティブだと取得できないので親から数珠繋ぎで取得
+            _playerCamera = GameObject.Find("head").transform.GetChild(0).gameObject;
 
             //Cache the game mode service. We only need this right here, but we'll cache it in case we ever need it again.
             gameModeService = ServiceLocator.Current.Get<IGameModeService>();
