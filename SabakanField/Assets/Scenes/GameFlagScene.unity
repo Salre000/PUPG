@@ -226,6 +226,12 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!1 &680888114 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2050141834808786961, guid: 19eadcf8fbed56b4da77ca94c1b4145f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1852388677}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &710680334 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8195332293463410010, guid: 19eadcf8fbed56b4da77ca94c1b4145f,
@@ -375,7 +381,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inventory: {fileID: 2124891713}
-  _picWepon: {fileID: 5438839914091562044, guid: 07ee6dd6034222c4d9b86a4aef4000a9,
+  _playerCamera: {fileID: 680888114}
+  _picWepon: {fileID: 4168433871889688932, guid: bf66fd5d731978a449f5bd8d31ca694a,
     type: 3}
 --- !u!1 &1584106591
 GameObject:

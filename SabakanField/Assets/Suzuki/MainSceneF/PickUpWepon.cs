@@ -8,24 +8,27 @@ public class PickUpWepon : MonoBehaviour
 
     // プレイヤーインベントリー
     [SerializeField] private GameObject _inventory = null;
+    // プレイヤーカメラ
+    [SerializeField] private GameObject _playerCamera = null;
     // 今持ってるもの
-    GameObject _equipmentWepon=null;
+    GameObject _equipmentWepon = null;
     // 拾うもの
-    [SerializeField]GameObject _picWepon=null;
+    [SerializeField] GameObject _picWepon = null;
 
     // Start is called before the first frame update
     void Start()
     {
-        _equipmentWepon=_inventory.transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        if(Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            Instantiate(_picWepon,_inventory.transform);
-            Destroy(_equipmentWepon);
+            _equipmentWepon = _inventory.transform.GetChild(0).gameObject;
+            Instantiate(_picWepon, _inventory.transform);
+            Destroy(_equipmentWepon, 1.0f);
+            _playerCamera.SetActive(true);
             PlayerManager.SetIsPicWepon(true);
         }
     }

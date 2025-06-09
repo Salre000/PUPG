@@ -220,19 +220,46 @@ namespace InfimaGames.LowPolyShooterPack
 		{
             Cursor.lockState = CursorLockMode.None;
         }
-        protected override void Update()
+		// 武器拾ったら
+		private void Wepowepon()
 		{
-			if(PlayerManager.GetIsPlayerDead())return;
-
 			// 武器を拾ったら
 			if (PlayerManager.GetIsPicWepon())
 			{
 				inventory.Init();
 				PlayerManager.SetIsPicWepon(false);
+				holdingButtonAim = false;
+				_isAds = false;
+				PlayerManager.SetIsAds(false);
+				PlayerManager.SetIsHoldingAds(false);
 			}
+			else return;
+				//Get the index increment direction for our inventory using the scroll wheel direction. If we're not
+				//actually using one, then just increment by one.
+				float scrollValue = -1;
+			//Get the next index to switch to.
+			int indexNext = scrollValue > 0 ? inventory.GetNextIndex() : inventory.GetLastIndex();
+			//Get the current weapon's index.
+			int indexCurrent = inventory.GetEquippedIndex();
 
-			//Match Aim.
-			aiming = holdingButtonAim && CanAim();
+			//Make sure we're allowed to change, and also that we're not using the same index, otherwise weird things happen!
+			if (CanChangeWeapon() && (indexCurrent != indexNext))
+				StartCoroutine(nameof(Equip), indexNext);
+		}
+        protected override void Update()
+		{
+			if(PlayerManager.GetIsPlayerDead())return;
+
+			Wepowepon();
+			// 武器を拾ったら
+			//if (PlayerManager.GetIsPicWepon())
+   //         {
+   //             inventory.Init();
+   //             PlayerManager.SetIsPicWepon(false);
+   //         }
+
+            //Match Aim.
+            aiming = holdingButtonAim && CanAim();
 			//Match Run.
 			running = holdingButtonRun && CanRun();
 			walking = !running;
@@ -806,33 +833,33 @@ namespace InfimaGames.LowPolyShooterPack
 		/// </summary>
 		public void OnTryInventoryNext(InputAction.CallbackContext context)
 		{
-			//Block while the cursor is unlocked.
-			if (!cursorLocked)
-				return;
+			////Block while the cursor is unlocked.
+			//if (!cursorLocked)
+			//	return;
 			
-			//Null Check.
-			if (inventory == null)
-				return;
+			////Null Check.
+			//if (inventory == null)
+			//	return;
 			
-			//Switch.
-			switch (context)
-			{
-				//Performed.
-				case {phase: InputActionPhase.Performed}:
-					//Get the index increment direction for our inventory using the scroll wheel direction. If we're not
-					//actually using one, then just increment by one.
-					float scrollValue = context.valueType.IsEquivalentTo(typeof(Vector2)) ? Mathf.Sign(context.ReadValue<Vector2>().y) : 1.0f;
+			////Switch.
+			//switch (context)
+			//{
+			//	//Performed.
+			//	case {phase: InputActionPhase.Performed}:
+			//		//Get the index increment direction for our inventory using the scroll wheel direction. If we're not
+			//		//actually using one, then just increment by one.
+			//		float scrollValue = context.valueType.IsEquivalentTo(typeof(Vector2)) ? Mathf.Sign(context.ReadValue<Vector2>().y) : 1.0f;
 					
-					//Get the next index to switch to.
-					int indexNext = scrollValue > 0 ? inventory.GetNextIndex() : inventory.GetLastIndex();
-					//Get the current weapon's index.
-					int indexCurrent = inventory.GetEquippedIndex();
+			//		//Get the next index to switch to.
+			//		int indexNext = scrollValue > 0 ? inventory.GetNextIndex() : inventory.GetLastIndex();
+			//		//Get the current weapon's index.
+			//		int indexCurrent = inventory.GetEquippedIndex();
 					
-					//Make sure we're allowed to change, and also that we're not using the same index, otherwise weird things happen!
-					if (CanChangeWeapon() && (indexCurrent != indexNext))
-						StartCoroutine(nameof(Equip), indexNext);
-					break;
-			}
+			//		//Make sure we're allowed to change, and also that we're not using the same index, otherwise weird things happen!
+			//		if (CanChangeWeapon() && (indexCurrent != indexNext))
+			//			StartCoroutine(nameof(Equip), indexNext);
+			//		break;
+			//}
 		}
 		
 		public void OnLockCursor(InputAction.CallbackContext context)
