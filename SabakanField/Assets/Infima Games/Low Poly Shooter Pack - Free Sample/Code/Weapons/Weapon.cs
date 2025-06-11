@@ -266,6 +266,7 @@ namespace InfimaGames.LowPolyShooterPack
             else
             {
                 rotation = Quaternion.LookRotation(playerCamera.forward * 1000.0f - muzzleSocket.position);
+                Debug.Log(playerCamera.forward);
             }
 
 
