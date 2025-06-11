@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     public void GameClearCheck()
     {
         if(_finaleFlag) return;
-        GameSceneManager.LoadScene(GameSceneManager.clearSceneName, LoadSceneMode.Additive);
+        GameSceneManager.LoadScene(GameSceneManager.clearScene, LoadSceneMode.Additive);
         _finaleFlag = true;
     }
 
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
         if (_time < 3.0f) return;
         _resultSceneFlag=true;
         AIUtility.SaveData();
-        SceneManager.LoadScene(GameSceneManager.resultSceneName);
+        SceneManager.LoadScene(GameSceneManager.resultScene);
     }
 
     public void SetFlagRangeCheck(bool flag) { _flagGetCheck = flag; }
