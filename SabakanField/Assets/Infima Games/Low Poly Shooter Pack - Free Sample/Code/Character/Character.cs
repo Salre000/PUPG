@@ -283,12 +283,14 @@ namespace InfimaGames.LowPolyShooterPack
             Vector3 vector3 = Vector3.zero;
             if (holdingButtonAim)
             {
+                vector3.y = 0.008f;
                 vector3.z = 0.25f;
                 cameraWorld.transform.localPosition = Vector3.Lerp(cameraWorld.transform.localPosition,
                                                                     vector3, 0.1f);
             }
             else
             {
+                vector3.y = 0.0f;
                 vector3.z = 0.0f;
                 cameraWorld.transform.localPosition = Vector3.Lerp(cameraWorld.transform.localPosition,
                                                                     vector3, 0.1f);
