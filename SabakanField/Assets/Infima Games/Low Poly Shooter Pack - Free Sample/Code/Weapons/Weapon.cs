@@ -289,19 +289,26 @@ namespace InfimaGames.LowPolyShooterPack
 
         private void ScopeMode()
         {
-            if (weponScope == null) return;
+            if (weponScope == null)
+            {
+                return;
+            }
             bool holding = PlayerManager.GetIsHoldingAds();
-
             if (adsDirayTime >= 0.3f)
             {
                 _playerCamera.SetActive(!holding);
                 weponScope.SetActive(holding);
+                PlayerManager.SetIsScope(true);
             }
             if (holding)
             {
                 adsDirayTime += Time.deltaTime;
             }
-            else adsDirayTime = 0.0f;
+            else
+            {
+                PlayerManager.SetIsScope(false);
+                adsDirayTime = 0.0f; 
+            }
         }
 
         public override void FillAmmunition(int amount)
