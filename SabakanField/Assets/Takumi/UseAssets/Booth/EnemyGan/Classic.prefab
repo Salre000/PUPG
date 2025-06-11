@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4451083018910646212}
   - component: {fileID: 7650207221018781044}
   - component: {fileID: 5495311059151117593}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: P_LPSP_WEP_Flash(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4821,7 +4821,7 @@ GameObject:
   - component: {fileID: 1220379532966506227}
   - component: {fileID: 1118896901958881997}
   - component: {fileID: 3480310185463119072}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: P_LPSP_WEP_Flash(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9629,7 +9629,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7084925759667957091}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SOCKET_Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9661,7 +9661,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7936469006643614372}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SOCKET_Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9699,7 +9699,7 @@ GameObject:
   m_Component:
   - component: {fileID: 611240142278199918}
   - component: {fileID: 4976293708105595642}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: P_LPSP_WEP_Flash_Light(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9793,7 +9793,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8947004353856242327}
   - component: {fileID: 8921131911941059186}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: P_LPSP_WEP_Flash_Light(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9890,7 +9890,7 @@ GameObject:
   - component: {fileID: 4894125837840339394}
   - component: {fileID: 539248761345037444}
   - component: {fileID: -3476769124157802951}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Classic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9986,6 +9986,7 @@ MonoBehaviour:
   audioClipReloadEmpty: {fileID: 8300000, guid: 1fe5c2e1733f354428fe88c1a7cbafe4,
     type: 3}
   audioClipFireEmpty: {fileID: 8300000, guid: 0c187ee2790c74c4e9985aa1ee1a12d5, type: 3}
+  weponScope: {fileID: 0}
 --- !u!114 &-3476769124157802951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10007,7 +10008,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6950519779860525938}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: P_LPSP_WEP_ATT_Muzzles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10040,7 +10041,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6066605861315962089}
   - component: {fileID: 7768385165919797462}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: P_LPSP_WEP_Flash_Light(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10136,7 +10137,7 @@ GameObject:
   - component: {fileID: 1331528631895453132}
   - component: {fileID: 3214926685282668867}
   - component: {fileID: 6485271353243624871}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: AFL_45_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10233,7 +10234,7 @@ GameObject:
   - component: {fileID: 8390146936194437928}
   - component: {fileID: 8636776043908364972}
   - component: {fileID: 153560353374282507}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: AFL_45
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10314,7 +10315,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 22786324728033578}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: RotetoObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10351,7 +10352,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3716979235822771144}
   - component: {fileID: 7007829875044826877}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: P_LPSP_WEP_ATT_Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10438,7 +10439,7 @@ GameObject:
   - component: {fileID: 3078267094261814868}
   - component: {fileID: 7000747691747552321}
   - component: {fileID: 5435949314719792469}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: P_LPSP_WEP_Flash(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
