@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Weapons : MonoBehaviour
 {
-    GameObject mainCamera;
+    [SerializeField] GameObject mainCamera;
     [SerializeField] GameObject weapon;
+    [SerializeField] GameObject player;
+    [SerializeField] List<GameObject>weapons;
 
+    int ID = 0;
 
     [SerializeField, Header("ˆê“xŽæ“¾‚³‚ê‚Ä‚©‚ç‚à‚¤ˆê“xŽæ“¾‚Å‚«‚é‚æ‚¤‚É‚È‚é‚Ü‚Å‚ÌŽžŠÔ")] float _reCastTime = 10;
 
@@ -16,11 +19,24 @@ public class Weapons : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mainCamera = Camera.main.gameObject;
+        mainCamera = GameObject.Find("MainCamera");
+        player = GameObject.Find("Player");
+
+        ID = Random.Range(0, 3);
+
+        for(int i = 0; i < weapons.Count; i++) 
+        {
+            if (i == ID) continue;
+            weapons[i].SetActive(false);
+        }
+
     }
 
     private void FixedUpdate()
     {
+        if(mainCamera==null) mainCamera = GameObject.Find("MainCamera");
+        if(player==null)player = GameObject.Find("Player");
+
         bool returnFlag = false;
         for (int i = 0; i < TimeTask.Count; i++)
         {
@@ -47,13 +63,17 @@ public class Weapons : MonoBehaviour
     {
         RaycastHit hit;
 
+        if (mainCamera == null) return;
+
         if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit))
         {
             if (hit.transform.gameObject != this.gameObject) return;
 
             if (!Input.GetKeyDown(KeyCode.E)) return;
 
-            Debug.Log("•Ší‚ð“üŽè‚µ‚½");
+            Debug.Log(GanObject.extraGan.objects[ID]+"DDD");
+            player.GetComponent<PickUpWepon>().SetPicWepan(GanObject.extraGan.objects[ID]);
+
             GetWeapon();
             TimeTask.Add(Smaller);
 

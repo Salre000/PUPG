@@ -382,8 +382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inventory: {fileID: 2124891713}
   _playerCamera: {fileID: 680888114}
-  _picWepon: {fileID: 5438839914091562044, guid: 07ee6dd6034222c4d9b86a4aef4000a9,
-    type: 3}
+  _picWepon: {fileID: 0}
 --- !u!1 &1584106591
 GameObject:
   m_ObjectHideFlags: 0

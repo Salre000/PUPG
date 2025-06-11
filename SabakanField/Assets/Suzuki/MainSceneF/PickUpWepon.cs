@@ -15,6 +15,7 @@ public class PickUpWepon : MonoBehaviour
     // èEÇ§Ç‡ÇÃ
     [SerializeField] GameObject _picWepon = null;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,13 +24,16 @@ public class PickUpWepon : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (_picWepon!=null)
         {
             _equipmentWepon = _inventory.transform.GetChild(0).gameObject;
             Instantiate(_picWepon, _inventory.transform);
             Destroy(_equipmentWepon, 0.5f);
             _playerCamera.SetActive(true);
             PlayerManager.SetIsPicWepon(true);
+            _picWepon = null;
         }
     }
+
+    public void SetPicWepan(GameObject picObject) { _picWepon = picObject; }
 }
