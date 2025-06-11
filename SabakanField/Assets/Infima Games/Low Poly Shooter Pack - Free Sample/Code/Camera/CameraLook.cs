@@ -10,12 +10,16 @@ namespace InfimaGames.LowPolyShooterPack
     public class CameraLook : MonoBehaviour
     {
         #region FIELDS SERIALIZED
-        
+
         [Header("Settings")]
-        
+
         [Tooltip("Sensitivity when looking around.")]
         [SerializeField]
         private Vector2 sensitivity = new Vector2(1, 1);
+        [SerializeField]
+        private Vector2 adsSensitivity = new Vector2(1, 1);
+        [SerializeField]
+        private Vector2 scopeSensitivity = new Vector2(1, 1);
 
         [Tooltip("Minimum and maximum up/down rotation angle the camera can have.")]
         [SerializeField]
@@ -28,11 +32,11 @@ namespace InfimaGames.LowPolyShooterPack
         [Tooltip("The speed at which the look rotation is interpolated.")]
         [SerializeField]
         private float interpolationSpeed = 25.0f;
-        
+
         #endregion
-        
+
         #region FIELDS
-        
+
         /// <summary>
         /// Player Character.
         /// </summary>
@@ -52,7 +56,7 @@ namespace InfimaGames.LowPolyShooterPack
         private Quaternion rotationCamera;
 
         #endregion
-        
+
         #region UNITY
 
         private void Awake()
@@ -74,17 +78,29 @@ namespace InfimaGames.LowPolyShooterPack
             //Frame Input. The Input to add this frame!
             Vector2 frameInput = playerCharacter.IsCursorLocked() ? playerCharacter.GetInputLook() : default;
             //Sensitivity.
-            frameInput *= sensitivity;
+            sensitivity.x = OptionManager.Instance.GetNormalSensitivity();
+            sensitivity.y = OptionManager.Instance.GetNormalSensitivity();
+            adsSensitivity.x = OptionManager.Instance.GetAdsSensitivity();
+            adsSensitivity.y = OptionManager.Instance.GetAdsSensitivity();
+            scopeSensitivity.x=0.1f;
+            scopeSensitivity.y=0.1f;
+            if (PlayerManager.GetIsHoldingAds())
+                frameInput *= adsSensitivity;
+            else
+                frameInput *= sensitivity;
+
+            if (PlayerManager.GetIsScope())
+                frameInput *= scopeSensitivity;
 
             //Yaw.
             Quaternion rotationYaw = Quaternion.Euler(0.0f, frameInput.x, 0.0f);
             //Pitch.
             Quaternion rotationPitch = Quaternion.Euler(-frameInput.y, 0.0f, 0.0f);
-            
+
             //Save rotation. We use this for smooth rotation.
             rotationCamera *= rotationPitch;
             rotationCharacter *= rotationYaw;
-            
+
             //Local Rotation.
             Quaternion localRotation = transform.localRotation;
 
@@ -106,7 +122,7 @@ namespace InfimaGames.LowPolyShooterPack
                 //Rotate character.
                 playerCharacterRigidbody.MoveRotation(playerCharacterRigidbody.rotation * rotationYaw);
             }
-            
+
             //Set.
             transform.localRotation = localRotation;
         }

@@ -172,6 +172,7 @@ public class AIManager : MonoBehaviour
 
     public void CreateAI()
     {
+        return;
         AICharacterUtility.ResetAI();
 
         GanObject.LoodGameObject();

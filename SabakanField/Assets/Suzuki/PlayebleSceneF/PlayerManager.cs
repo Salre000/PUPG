@@ -14,6 +14,8 @@ public static class PlayerManager
     private static bool _isAds = false;
     // ADS中か
     private static bool _isHoldingAds = false;
+    // スコープでADS中か
+    private static bool _isScope = false;
     // アーマーを装着しているか
     private static bool _isArmor=false;
     // 武器を拾ったらtrue
@@ -46,6 +48,8 @@ public static class PlayerManager
     public static void SetIsAds(bool flag) { _isAds = flag; }
     public static bool GetIsHoldingAds() { return _isHoldingAds; }
     public static void SetIsHoldingAds(bool flag) { _isHoldingAds = flag; }
+    public static bool GetIsScope() { return _isScope; }
+    public static void SetIsScope(bool flag) { _isScope = flag; }
     public static bool GetIsArmor() { return _isArmor; }
     public static void SetIsArmor(bool flag) { _isArmor = flag; }
     public static bool GetIsPicWepon() { return _isPicWepon; }

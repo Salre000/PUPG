@@ -60,6 +60,8 @@ public class SensitivitySetting : UIBase
     {
         _stringBuilder.Clear();
         _normalSensiValue = _normalSensi.value;
+        if (_normalSensiValue <= 0.01f)
+            _normalSensiValue = 0.01f;
         OptionManager.Instance.SetNormalSensitivity(_normalSensiValue);
         _stringBuilder.AppendFormat("{0:F2}", _normalSensiValue);
         _normalSensiInput.text = _stringBuilder.ToString();
@@ -73,9 +75,11 @@ public class SensitivitySetting : UIBase
         _stringBuilder.Clear();
         _normalSensiValue = tryValue;
 
-        // 感度上限オーバー対策
+        // 感度上限下限オーバー対策
         if (_normalSensiValue >= _SENSI_MAX)
             _normalSensiValue = _SENSI_MAX;
+        else if (_normalSensiValue <= 0.01f)
+            _normalSensiValue = 0.01f;
 
         // 感度を反映
         OptionManager.Instance.SetNormalSensitivity(_normalSensiValue);
@@ -91,6 +95,8 @@ public class SensitivitySetting : UIBase
     {
         _stringBuilder.Clear();
         _adsSensiValue = _adsSensi.value;
+        if (_adsSensiValue <= 0.01f)
+            _adsSensiValue = 0.01f;
         OptionManager.Instance.SetAdsSensitivity(_adsSensiValue);
         _stringBuilder.AppendFormat("{0:F2}", _adsSensiValue);
         _adsSensiInput.text = _stringBuilder.ToString();
@@ -107,6 +113,8 @@ public class SensitivitySetting : UIBase
         // 感度上限オーバー対策
         if (_adsSensiValue >= _SENSI_MAX)
             _adsSensiValue = _SENSI_MAX;
+        else if (_adsSensiValue <= 0.01f)
+            _adsSensiValue = 0.01f;
 
         // 感度を反映
         OptionManager.Instance.SetAdsSensitivity(_adsSensiValue);
