@@ -13,7 +13,7 @@ public static class KillData
 
     public const string FILE_NAME_KD = "SaveData";
 
-    private static readonly string FILR_EXTENSION = ".csv";
+    private static readonly string FILR_EXTENSION = ".txt";
 
     public static void InGameDataSave(KIllCount kIll)
     {

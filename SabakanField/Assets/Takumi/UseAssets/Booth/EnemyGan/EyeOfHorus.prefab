@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2690671872896063503}
   - component: {fileID: 6319933724083083988}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: P_LPSP_WEP_Flash_Light(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6268540778253904018}
   - component: {fileID: 1047988089437116556}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: 1301_bolthead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 9039384709883929049}
   - component: {fileID: 4390938285506624234}
   - component: {fileID: 3283436921238111353}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: P_LPSP_WEP_Flash(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4998,7 +4998,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1458653625405998369}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: RotetoObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5042,7 +5042,7 @@ GameObject:
   - component: {fileID: 5937193134386313343}
   - component: {fileID: 4449709821070602343}
   - component: {fileID: 5450190511765784764}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: 1301_shell_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5125,7 +5125,7 @@ GameObject:
   - component: {fileID: 4782845783994769539}
   - component: {fileID: 2061861484121965331}
   - component: {fileID: 4261443139306487722}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: P_LPSP_WEP_Flash(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9935,7 +9935,7 @@ GameObject:
   - component: {fileID: 2850633990513285338}
   - component: {fileID: 8596546083942394236}
   - component: {fileID: 6339051520427548815}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: 1301_shell_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10019,7 +10019,7 @@ GameObject:
   - component: {fileID: 4675694702433923079}
   - component: {fileID: 2851346058537738850}
   - component: {fileID: 1517122199693495705}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: 1301_magazinefollower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10116,7 +10116,7 @@ GameObject:
   - component: {fileID: 2906662617567607943}
   - component: {fileID: 3813786490171066490}
   - component: {fileID: 4137795802736324102}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: 1301_loadinglamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10197,7 +10197,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7192622562249676032}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: P_LPSP_WEP_ATT_Muzzles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10231,7 +10231,7 @@ GameObject:
   - component: {fileID: 1875097549265754868}
   - component: {fileID: 4434212782605471158}
   - component: {fileID: 2600321687812580749}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: 1301_hontai
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10330,7 +10330,7 @@ GameObject:
   - component: {fileID: 3275530571019871230}
   - component: {fileID: 4685804753840067689}
   - component: {fileID: 764443865155863438}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: 1301_shell_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10412,7 +10412,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8649492910419939867}
   - component: {fileID: 9109655831095409665}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: P_LPSP_WEP_ATT_Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10470,7 +10470,7 @@ GameObject:
   - component: {fileID: 5561039812720677504}
   - component: {fileID: 7872390280632355878}
   - component: {fileID: 689646035535056778}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: EyeOfHorus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10578,6 +10578,7 @@ MonoBehaviour:
   audioClipReloadEmpty: {fileID: 8300000, guid: 1fe5c2e1733f354428fe88c1a7cbafe4,
     type: 3}
   audioClipFireEmpty: {fileID: 8300000, guid: 0c187ee2790c74c4e9985aa1ee1a12d5, type: 3}
+  weponScope: {fileID: 0}
 --- !u!1 &6765720261556957796
 GameObject:
   m_ObjectHideFlags: 0
@@ -10589,7 +10590,7 @@ GameObject:
   - component: {fileID: 7609801943929181835}
   - component: {fileID: 5621963507067777099}
   - component: {fileID: 8377918167020310256}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: 1301_shell1_empty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10672,7 +10673,7 @@ GameObject:
   - component: {fileID: 3688067495591814327}
   - component: {fileID: 1977170809974729117}
   - component: {fileID: 8434732462169821380}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: 1301_bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10755,7 +10756,7 @@ GameObject:
   - component: {fileID: 8214170481192158367}
   - component: {fileID: 3233319380919394426}
   - component: {fileID: 456150544188848175}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: 1301_hammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10837,7 +10838,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2027747443820798863}
   - component: {fileID: 3392415959559639031}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: P_LPSP_WEP_Flash_Light(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10930,7 +10931,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4875386855810244149}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SOCKET_Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10965,7 +10966,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6842947464918476501}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SOCKET_Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

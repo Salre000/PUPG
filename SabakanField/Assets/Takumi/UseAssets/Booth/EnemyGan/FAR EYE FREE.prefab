@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5777922394505041159}
   - component: {fileID: 7033743805939029370}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: P_LPSP_WEP_Flash_Light(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2010049194794152809}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SOCKET_Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 3991722533349986906}
   - component: {fileID: 5322049066963169903}
   - component: {fileID: 5576472985554414102}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: P_LPSP_WEP_Flash(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4946,7 +4946,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7297992602498997846}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: P_LPSP_WEP_ATT_Muzzles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4981,7 +4981,7 @@ GameObject:
   - component: {fileID: 5438839914090666036}
   - component: {fileID: 5438839914089569012}
   - component: {fileID: 3437831189726026662}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SCOPE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5078,7 +5078,7 @@ GameObject:
   - component: {fileID: 5438839914090666046}
   - component: {fileID: 5438839914089569022}
   - component: {fileID: 4324911605299175621}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: MAG A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5175,7 +5175,7 @@ GameObject:
   - component: {fileID: 5438839914091468820}
   - component: {fileID: 5438839914090666034}
   - component: {fileID: 5438839914089569010}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: PAD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5257,7 +5257,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5438839914091468822}
   - component: {fileID: 5438839914088384824}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Reciver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5343,7 +5343,7 @@ GameObject:
   - component: {fileID: 5438839914091468824}
   - component: {fileID: 5438839914090666040}
   - component: {fileID: 5438839914089569016}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5426,7 +5426,7 @@ GameObject:
   - component: {fileID: 5438839914091468826}
   - component: {fileID: 5438839914090666042}
   - component: {fileID: 5438839914089569018}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: BYPOD attach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5511,7 +5511,7 @@ GameObject:
   - component: {fileID: 1232444710309813370}
   - component: {fileID: 890506827469871695}
   - component: {fileID: -7493008124537834535}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: FAR EYE FREE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5619,6 +5619,7 @@ MonoBehaviour:
   audioClipReloadEmpty: {fileID: 8300000, guid: 1fe5c2e1733f354428fe88c1a7cbafe4,
     type: 3}
   audioClipFireEmpty: {fileID: 8300000, guid: 0c187ee2790c74c4e9985aa1ee1a12d5, type: 3}
+  weponScope: {fileID: 0}
 --- !u!1 &5438839914091562046
 GameObject:
   m_ObjectHideFlags: 0
@@ -5630,7 +5631,7 @@ GameObject:
   - component: {fileID: 5438839914091468830}
   - component: {fileID: 5438839914090666044}
   - component: {fileID: 5438839914089569020}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: FAREYE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5712,7 +5713,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9124242809286334797}
   - component: {fileID: 8718131261748180823}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: P_LPSP_WEP_ATT_Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5766,7 +5767,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 590846115249839286}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: RotetoObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}

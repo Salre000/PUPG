@@ -19,11 +19,11 @@ MonoBehaviour:
   - FAR EYE
   - EyeOfHorus
   objects:
-  - {fileID: 1045225505860587398, guid: 265446487ca725e4f813c125990e7a2d, type: 3}
-  - {fileID: 4168433871889688932, guid: 381cbbf9f5d23364380bc7d99be3afb6, type: 3}
-  - {fileID: 1982559505645326312, guid: 96c48d794445e554b96f9aaea4737ad6, type: 3}
-  - {fileID: 5438839914091562044, guid: 71bd016795db8c141be6afcc257b7840, type: 3}
-  - {fileID: 6754274659312352025, guid: 981a0b925aa8bd24b8af6efbac81c81d, type: 3}
+  - {fileID: 1045225505860587398, guid: f0623d95c2968c34bbc03bfbd968398c, type: 3}
+  - {fileID: 4168433871889688932, guid: 4bf3e4e2e61115f4ca12b67035a0b1df, type: 3}
+  - {fileID: 1982559505645326312, guid: fde4b381ecdb99b4b84889600997be55, type: 3}
+  - {fileID: 5438839914091562044, guid: 706bb5f12491bf348b6fb9097e3c2ba0, type: 3}
+  - {fileID: 6754274659312352025, guid: 1522b28dfb2cdce429261187ce39e570, type: 3}
   reloadTime:
   - 1
   - 0.5

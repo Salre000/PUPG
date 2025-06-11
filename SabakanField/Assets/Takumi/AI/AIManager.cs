@@ -172,6 +172,8 @@ public class AIManager : MonoBehaviour
 
     public void CreateAI()
     {
+        AICharacterUtility.ResetAI();
+
         GanObject.LoodGameObject();
 
         SoundManager.Initialize();
@@ -281,7 +283,7 @@ public class AIManager : MonoBehaviour
         Animator animator = ai.GetComponent<Animator>();
         int randomRenge = 0;
 
-        GameObject gan = GameObject.Instantiate(GanObject.constancyGun.objects[0]);
+        GameObject gan = GameObject.Instantiate(GanObject.enemyConstancyGan.objects[0]);
 
         AI aI = ai.GetComponent<AI>();
 
@@ -340,8 +342,7 @@ public class AIManager : MonoBehaviour
 
 
 }
-
-
+[System.Serializable]
 public class KIllCount 
 {
 

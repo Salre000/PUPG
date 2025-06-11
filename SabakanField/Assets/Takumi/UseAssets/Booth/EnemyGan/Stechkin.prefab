@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2469001805280110671}
   - component: {fileID: 8697851491548144500}
   - component: {fileID: 1254522362826109315}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: P_LPSP_WEP_Flash(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4819,7 +4819,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2755534558996511401}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4851,7 +4851,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1849017163942573923}
   - component: {fileID: 6019557555872706098}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: reload position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4896,7 +4896,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3770755707985962456}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Hammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4928,7 +4928,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2464014760789524485}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SOCKET_Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4971,7 +4971,7 @@ GameObject:
   - component: {fileID: 770549100560667064}
   - component: {fileID: -9002669699146239163}
   - component: {fileID: 7604039500855056501}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Stechkin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5067,6 +5067,7 @@ MonoBehaviour:
   audioClipReloadEmpty: {fileID: 8300000, guid: 1fe5c2e1733f354428fe88c1a7cbafe4,
     type: 3}
   audioClipFireEmpty: {fileID: 8300000, guid: 0c187ee2790c74c4e9985aa1ee1a12d5, type: 3}
+  weponScope: {fileID: 0}
 --- !u!114 &7604039500855056501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5089,7 +5090,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3311470204495050160}
   - component: {fileID: 3298219296259862421}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: P_LPSP_WEP_Flash_Light(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5183,7 +5184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4006098474357227107}
   - component: {fileID: 7639749512843484232}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: P_LPSP_WEP_Flash_Light(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5277,7 +5278,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3890945042560272953}
   - component: {fileID: 7714793960459421486}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Bullet-Case
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5363,7 +5364,7 @@ GameObject:
   - component: {fileID: 6266413928058215758}
   - component: {fileID: 2962851251425399757}
   - component: {fileID: 805137309702406680}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: P_LPSP_WEP_Flash(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10172,7 +10173,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3357215054016739459}
   - component: {fileID: 136130461669502955}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10267,7 +10268,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 367513514620080593}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: RotetoObjet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10317,7 +10318,7 @@ GameObject:
   - component: {fileID: 2566411792232507507}
   - component: {fileID: 8449371070817691616}
   - component: {fileID: 3283256816970218140}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: P_LPSP_WEP_Flash(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15170,7 +15171,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7276358728467225672}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15201,7 +15202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2452508228356224229}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: reload position.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15232,7 +15233,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7249598455862446349}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: reload position.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15265,7 +15266,7 @@ GameObject:
   - component: {fileID: 4405646302095754095}
   - component: {fileID: 8541161854754254157}
   - component: {fileID: 4590000534822736500}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Bullet-projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15346,7 +15347,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8208481014624854440}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: cylinder swing out
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15377,7 +15378,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3561911525115645510}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: cylinder.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15408,7 +15409,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2916035916941657268}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: reload position.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15441,7 +15442,7 @@ GameObject:
   - component: {fileID: 5100029817151403882}
   - component: {fileID: 8309765771718852749}
   - component: {fileID: 5739806284203397918}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: P_LPSP_WEP_Flash(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20250,7 +20251,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1524548114768421329}
   - component: {fileID: 2177633135273401145}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: P_LPSP_WEP_Flash_Light(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20343,7 +20344,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 543445613659728028}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: P_LPSP_WEP_ATT_Muzzles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20375,7 +20376,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6412554947566685338}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20407,7 +20408,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7175399644144079243}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: reload position.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20439,7 +20440,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6592690133385222404}
   - component: {fileID: 8847360306856774200}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: P_LPSP_WEP_ATT_Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20493,7 +20494,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 497784430305374177}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Root.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20524,7 +20525,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7816123200458966476}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20555,7 +20556,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2648433216204872558}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SOCKET_Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20588,7 +20589,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3531489381837753532}
   - component: {fileID: 2998869006853295791}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: P_LPSP_WEP_Flash_Light(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

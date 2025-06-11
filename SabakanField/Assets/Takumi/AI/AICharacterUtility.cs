@@ -11,6 +11,7 @@ public static class AICharacterUtility
     public static void ClearCharacterAI() {  characterAI.Clear(); }
 
     public static void AddAI(AI ai) {  characterAI.Add(ai); }
+    public static void ResetAI() {  characterAI.Clear(); }  
 
     public static void SetShotFlag(int id, bool flag) { characterAI[id].SetShotFlag(flag); }
 
