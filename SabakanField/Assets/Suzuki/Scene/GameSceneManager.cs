@@ -7,10 +7,11 @@ using UnityEngine.SceneManagement;
 public static class GameSceneManager
 {
     // シーンの名前
-    public const string titleSceneName = "TitleScene";
-    public const string flagSceneName = "GameFlagScene";
-    public const string clearSceneName = "ClearScene";
-    public const string resultSceneName = "ResultScene";
+    public const string titleScene = "TitleScene";
+    public const string flagScene = "GameFlagScene";
+    public const string clearScene = "ClearScene";
+    public const string resultScene = "ResultScene";
+    public const string lobbyScene = "LobbyScene";
 
     // 普通のシーン遷移
     public static void LoadScene(string sceneName)

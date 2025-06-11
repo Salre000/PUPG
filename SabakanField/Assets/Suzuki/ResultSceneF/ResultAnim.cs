@@ -21,6 +21,6 @@ public class ResultAnim : MonoBehaviour
 
     private void SpaceKeyMainScene()
     {
-        GameSceneManager.LoadScene(GameSceneManager.titleSceneName);
+        GameSceneManager.LoadScene(GameSceneManager.titleScene);
     }
 }

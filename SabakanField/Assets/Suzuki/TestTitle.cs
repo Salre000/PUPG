@@ -19,7 +19,7 @@ public class TestTitle : MonoBehaviour
 
     public void OnButton()
     {
-        //GameSceneManager.LoadScene(GameSceneManager.flagSceneName);
-        SceneManager.LoadScene(1);
+        GameSceneManager.LoadScene(GameSceneManager.lobbyScene,LoadSceneMode.Additive);
+        gameObject.SetActive(false);
     }
 }
