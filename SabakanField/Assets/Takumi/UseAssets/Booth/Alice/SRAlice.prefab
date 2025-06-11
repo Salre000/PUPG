@@ -279,6 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   automatic: 1
+  shotGan: 1
   projectileImpulse: 400
   roundsPerMinutes: 200
   mask:

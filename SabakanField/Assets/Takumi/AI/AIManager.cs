@@ -276,6 +276,9 @@ public class AIManager : MonoBehaviour
         if (Input.GetKey(KeyCode.Alpha6)) enemys[2].gameObject.GetComponent<CharacterInsterface>().HitAction();
         if (Input.GetKey(KeyCode.Alpha7)) enemys[3].gameObject.GetComponent<CharacterInsterface>().HitAction();
         if (Input.GetKey(KeyCode.Alpha8)) enemys[4].gameObject.GetComponent<CharacterInsterface>().HitAction();
+  
+        
+    
     }
 
     private void RaandomGan(GameObject ai)

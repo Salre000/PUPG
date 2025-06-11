@@ -17,6 +17,10 @@ namespace InfimaGames.LowPolyShooterPack
         [SerializeField, Header("セミorフル")]
         private bool automatic;
 
+        [SerializeField, Header("ショットガンor単発")]
+        private bool shotGan;
+
+
         [Tooltip("How fast the projectiles are."), Header("マズルフラッシュの調整")]
         [SerializeField]
         private float projectileImpulse = 400.0f;
@@ -269,6 +273,9 @@ namespace InfimaGames.LowPolyShooterPack
                 Debug.Log(playerCamera.forward);
             }
 
+            Debug.DrawLine(muzzleSocket.position, playerCamera.forward * 1000.0f,Color.red, 1000);
+            Debug.DrawLine(muzzleSocket.position, muzzleSocket.forward * 1000.0f,Color.black, 1000);
+
 
             //If there's something blocking, then we can aim directly at that thing, which will result in more accurate shooting.
             // 遮るものがあれば、それを直接狙えば、より正確な射撃が可能になる。
@@ -280,10 +287,32 @@ namespace InfimaGames.LowPolyShooterPack
             // 発射体スポーンポイントから発射体をスポーンする。
             // 薬莢のこと
             GameObject projectile = Instantiate(prefabProjectile, muzzleSocket.position, rotation);
+
+            prefabProjectile.transform.eulerAngles = playerCamera.forward;
+
             //Add velocity to the projectile.
             // 弾丸に速度を加える。
-            projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * projectileImpulse;
+            projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward* projectileImpulse;
+            if (!shotGan) return;
 
+            float yAngle = Mathf.Atan2(projectile.transform.forward.x, projectile.transform.forward.z);
+
+            for(int i = 0; i < 8; i++) 
+            {
+
+
+                projectile = Instantiate(prefabProjectile, muzzleSocket.position, rotation);
+
+                Vector3 randomAngle = new Vector3(Random.Range(-50, 50), Random.Range(-50, 50), Random.Range(-50, 50))*0.005f;
+
+                //Add velocity to the projectile.
+                // 弾丸に速度を加える。
+                projectile.GetComponent<Rigidbody>().velocity = (projectile.transform.forward+ randomAngle) * projectileImpulse;
+
+
+
+
+            }
 
 
         }
