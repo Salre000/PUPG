@@ -33,6 +33,8 @@ public class Armor : MonoBehaviour
         }
     }
 
+    public void SetIsArmor(bool flag = true) { _isArmor=flag; }
+
     // 
     private void Exesute()
     {

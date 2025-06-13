@@ -19,6 +19,8 @@ namespace InfimaGames.LowPolyShooterPack
 
         [SerializeField, Header("ショットガンor単発")]
         private bool shotGan;
+        [SerializeField, Header("弾が貫通するorしない")]
+        private bool pierce;
 
 
         [Tooltip("How fast the projectiles are."), Header("マズルフラッシュの調整")]
@@ -293,6 +295,8 @@ namespace InfimaGames.LowPolyShooterPack
             //Add velocity to the projectile.
             // 弾丸に速度を加える。
             projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward* projectileImpulse;
+
+            projectile.GetComponent<Projectile>().pierce = pierce;
             if (!shotGan) return;
 
             float yAngle = Mathf.Atan2(projectile.transform.forward.x, projectile.transform.forward.z);
