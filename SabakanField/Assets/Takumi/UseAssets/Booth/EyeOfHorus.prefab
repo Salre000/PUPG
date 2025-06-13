@@ -10560,7 +10560,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   automatic: 0
   shotGan: 1
-  projectileImpulse: 500
+  projectileImpulse: 60
   roundsPerMinutes: 100
   mask:
     serializedVersion: 2
