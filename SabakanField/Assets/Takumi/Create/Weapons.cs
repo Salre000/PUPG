@@ -22,11 +22,11 @@ public class Weapons : MonoBehaviour
         mainCamera = GameObject.Find("MainCamera");
         player = GameObject.Find("Player");
 
-        ID = Random.Range(0, 3);
+        ID = Random.Range(0, 4);
 
         for(int i = 0; i < weapons.Count; i++) 
         {
-            if (i == ID) continue;
+            if (i == ID) { weapon = weapons[i];   continue; }
             weapons[i].SetActive(false);
         }
 
@@ -71,10 +71,16 @@ public class Weapons : MonoBehaviour
 
             if (!Input.GetKeyDown(KeyCode.E)) return;
 
-            Debug.Log(GanObject.extraGan.objects[ID]+"DDD");
+            if(ID<3)
             player.GetComponent<PickUpWepon>().SetPicWepan(GanObject.extraGan.objects[ID]);
+            else 
+            {
+                player.GetComponent<Armor>().SetIsArmor(true);
 
-            GetWeapon();
+
+
+            }
+                GetWeapon();
             TimeTask.Add(Smaller);
 
         }
