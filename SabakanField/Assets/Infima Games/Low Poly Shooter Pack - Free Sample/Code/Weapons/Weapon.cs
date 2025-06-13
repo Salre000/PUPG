@@ -33,10 +33,6 @@ namespace InfimaGames.LowPolyShooterPack
         [SerializeField, Header("発射時に認識されるマスク")]
         private LayerMask mask;
 
-        [Tooltip("Maximum distance at which this weapon can fire accurately. Shots beyond this distance will not use linetracing for accuracy.")]
-        [SerializeField, Header("この武器が正確に発射できる最大距離。この距離を超えて発射した場合、命中精度にライントレーシングは使用されない")]
-        private float maximumDistance = 500.0f;
-
         [Header("Animation")]
 
         [Tooltip("Transform that represents the weapon's ejection port, meaning the part of the weapon that casings shoot from.")]
@@ -252,41 +248,33 @@ namespace InfimaGames.LowPolyShooterPack
             // 弾丸を発射する角度を決める。
             // この時歩き撃ちをしていたならば弾をぶらす
 
-            Quaternion rotation;
+            Vector3 angle = Vector3.zero;
 
             // 走り撃ち(Shift)
             if (playerCharacter.IsRunning())
             {
-                float random = Random.Range(-25.0f, 25.0f);
-                rotation = Quaternion.LookRotation(playerCamera.forward * 1000.0f - muzzleSocket.position * random);
-
+                float randomX = Random.Range(-25.0f, 25.0f);
+                float randomY = Random.Range(-25.0f, 25.0f);
+                angle = playerCamera.transform.eulerAngles + new Vector3(randomX, randomY, 0);
             }
             // 歩き撃ち
             else if (playerCharacter.IsWalking())
             {
-                float random = Random.Range(-15.0f, 15.0f);
-                rotation = Quaternion.LookRotation(playerCamera.forward * 1000.0f - (muzzleSocket.position * random));
+                float randomX = Random.Range(-15.0f, 15.0f);
+                float randomY = Random.Range(-15.0f, 15.0f);
+                angle = playerCamera.transform.eulerAngles + new Vector3(randomX, randomY, 0);
             }
             else
             {
-                rotation = Quaternion.LookRotation(playerCamera.forward * 1000.0f - muzzleSocket.position);
-                Debug.Log(playerCamera.forward);
+                angle = playerCamera.transform.eulerAngles;
             }
-
-            Debug.DrawLine(muzzleSocket.position, playerCamera.forward * 1000.0f,Color.red, 1000);
-            Debug.DrawLine(muzzleSocket.position, muzzleSocket.forward * 1000.0f,Color.black, 1000);
-
-
-            //If there's something blocking, then we can aim directly at that thing, which will result in more accurate shooting.
-            // 遮るものがあれば、それを直接狙えば、より正確な射撃が可能になる。
-            //if (Physics.Raycast(new Ray(playerCamera.position, playerCamera.forward),
-            //    out RaycastHit hit, maximumDistance, mask))
-            //    rotation = Quaternion.LookRotation(hit.point - muzzleSocket.position);
 
             //Spawn projectile from the projectile spawn point.
             // 発射体スポーンポイントから発射体をスポーンする。
             // 薬莢のこと
-            GameObject projectile = Instantiate(prefabProjectile, muzzleSocket.position, rotation);
+            GameObject projectile = Instantiate(prefabProjectile);
+            projectile.transform.position=muzzleSocket.position;
+            projectile.transform.eulerAngles = angle;
 
             prefabProjectile.transform.eulerAngles = playerCamera.forward;
 
@@ -297,11 +285,13 @@ namespace InfimaGames.LowPolyShooterPack
 
             float yAngle = Mathf.Atan2(projectile.transform.forward.x, projectile.transform.forward.z);
 
-            for(int i = 0; i < 8; i++) 
+            for(int i = 0; i < 6; i++) 
             {
 
 
-                projectile = Instantiate(prefabProjectile, muzzleSocket.position, rotation);
+                projectile = Instantiate(prefabProjectile);
+                projectile.transform.position = muzzleSocket.position;
+                projectile.transform.eulerAngles = angle;
 
                 Vector3 randomAngle = new Vector3(Random.Range(-50, 50), Random.Range(-50, 50), Random.Range(-50, 50))*0.005f;
 
