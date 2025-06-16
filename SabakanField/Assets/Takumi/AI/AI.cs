@@ -24,6 +24,8 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
     AIStatus status;
 
     AIGan iGan;
+    public void SetIGan(AIGan aIGan) { iGan = aIGan; }
+
     public AIStatus GetStatus() {  return status; }
 
     AIShot shot;
@@ -78,7 +80,7 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
         move.SetID(status.GetID());
 
         capsuleCollider = GetComponent<CapsuleCollider>();
-        iGan = GetComponentInChildren<AIGan>();
+
     }
 
     
@@ -121,7 +123,7 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
 
     public void ReStart() {  move.ReStart(); }
     public void EndShot() {  move.EndShot(); }
-    public void Shot() { iGan.Shot(); emainingBullet--; }
+    public void Shot() { iGan.Shot(new Vector3(0,move.GetNextAngle(),0) ); emainingBullet--; }
     public void Resurrect() { move.Resurrect(() => {capsuleCollider.enabled = true;ReLood(); }); }
     public void ReLoodAnime() { ReLood(); nowReLood = false; }
     public bool GetInvincibleFlag()

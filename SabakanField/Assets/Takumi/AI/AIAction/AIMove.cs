@@ -58,6 +58,8 @@ public class AIMove
 
     [SerializeField] float nextMoveAngle = 0;
 
+    public float GetNextAngle() {  return nextMoveAngle; }
+
     private readonly float _EPSILON = 5.0f;
 
 
@@ -315,80 +317,20 @@ public class AIMove
     }
 
     private GameObject hitObject;
+
+    private float countTime = 3;
+
     private void Back()
     {
-        if (Vector3.Distance(hitObject.transform.position, thisGameObject.transform.position) > AngleRange) return;
+        countTime-=Time.deltaTime;
+        if (Vector3.Distance(hitObject.transform.position, thisGameObject.transform.position) > countTime) return;
 
         ResetAnimation();
 
 
         nextMode = NowMode.Wandering;
 
-        nowMode = NowMode.ChageAngle;
-
-        Vector3 vec = flag.transform.position - thisGameObject.transform.position;
-        if (GameModes.mode == PublicEnum.GameMode.deathmatch) 
-            vec=new Vector3(25,0,25) - thisGameObject.transform.position;
-        //���݂̊p�x
-        float nowAngle = Mathf.Atan2(vec.x, vec.z) * Mathf.Rad2Deg;
-
-
-        //�ύX�����p�x�̗�
-        float angleVec = 0;
-
-        Vector3 rayAngle = Vector3.zero;
-
-        nextMoveAngle = 0;
-        while (true)
-        {
-            angleVec++;
-
-            RaycastHit hit;
-
-            //�������̕����x�N�g��
-            rayAngle.x = Mathf.Sin((nowAngle + angleVec) * Mathf.Deg2Rad);
-            rayAngle.z = Mathf.Cos((nowAngle + angleVec) * Mathf.Deg2Rad);
-
-            //�������̃��C
-            if (Physics.Raycast(thisGameObject.transform.position + RAYCAST_OFFSET[0], rayAngle, out hit))
-            {
-                if (Vector3.Distance(thisGameObject.transform.position, hit.point) > ChengeAngleRange)
-                {
-                    if (hitObject != hit.transform.gameObject)
-                        nextMoveAngle = nowAngle + angleVec;
-                }
-            }
-
-            //�E�����̕����x�N�g��
-            rayAngle.x = Mathf.Sin((nowAngle - angleVec) * Mathf.Deg2Rad);
-            rayAngle.z = Mathf.Cos((nowAngle - angleVec) * Mathf.Deg2Rad);
-
-
-            //�E�����̃��C
-            if (Physics.Raycast(thisGameObject.transform.position + RAYCAST_OFFSET[0], rayAngle, out hit))
-            {
-                if (Vector3.Distance(thisGameObject.transform.position, hit.point) > ChengeAngleRange)
-                {
-                    if (hitObject != hit.transform.gameObject)
-                        nextMoveAngle = nowAngle - angleVec;
-
-                }
-            }
-
-            if (angleVec >= 100)
-            {
-                nextMoveAngle = 0;
-                break;
-            }
-            //�ύX������������܂�����
-            if (nextMoveAngle != 0) break;
-        }
-
-
-        ChangeLRAnime(ChengeAngleType.Left);
-
-        nextMoveAngle += 360.0f;
-        nextMoveAngle %= 360.0f;
+        nowMode = NowMode.Wandering;
 
 
 
@@ -399,6 +341,8 @@ public class AIMove
 
     public void HitObject(Collision collision)
     {
+        if (nowMode == NowMode.Back) return;
+
         if (shotingFlag && nowMode != NowMode.Shot) 
         {
             //AICharacterUtility.SetShotFlag(ID, false);
@@ -410,6 +354,8 @@ public class AIMove
         endPosition = thisGameObject.transform.position + thisGameObject.transform.forward;
 
         hitObject = collision.gameObject;
+
+        countTime = 3;
 
         AICharacterUtility.GetCharacterAI(ID).SetAnimatorBool("Back", true);
         nowMode = NowMode.Back;

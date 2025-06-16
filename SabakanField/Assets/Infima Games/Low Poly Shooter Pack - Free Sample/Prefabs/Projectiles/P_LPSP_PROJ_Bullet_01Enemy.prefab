@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 54704279786675872}
   - component: {fileID: 65871565580582628}
   - component: {fileID: 96448838451407516}
-  - component: {fileID: 114243545424532484}
+  - component: {fileID: -360607094775284079}
   m_Layer: 15
-  m_Name: P_LPSP_PROJ_Bullet_01
+  m_Name: P_LPSP_PROJ_Bullet_01Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1086664671600574}
-  m_LocalRotation: {x: -0.0015041232, y: 0.003520158, z: 0.007847453, w: 0.9999619}
+  m_LocalRotation: {x: 0.00682997, y: -0.0009514499, z: 0.0053539816, w: 0.9999619}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.025}
   m_ConstrainProportionsScale: 0
@@ -175,7 +175,7 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!114 &114243545424532484
+--- !u!114 &-360607094775284079
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -184,7 +184,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1086664671600574}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02ff3ea705a4a7244a59eef82e75c660, type: 3}
+  m_Script: {fileID: 11500000, guid: 108bccda813fb0742b99c840afce20fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   destroyAfter: 5

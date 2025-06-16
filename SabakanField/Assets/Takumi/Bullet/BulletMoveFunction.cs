@@ -85,6 +85,20 @@ public static class BulletMoveFunction
         //当たった対象が無敵なのかを判定
         if (invincible.GetInvincibleFlag()) return;
 
+        Armor armor=target.transform.GetComponent<Armor>();
+
+        if (armor != null && armor.GetIsArmor()) 
+        {
+            //アーマーを破壊する
+            armor.SetIsArmor(false);
+
+            //アーマー破壊の音をならす
+
+            Debug.Log("アーマーが破壊された");
+
+
+
+        } 
 
 
         //自分と同じ陣営の場合はフレンドリーファイアの関数を呼ぶ
