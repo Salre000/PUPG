@@ -5507,10 +5507,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5438839914091468828}
-  - component: {fileID: 5438839914084284408}
-  - component: {fileID: 1232444710309813370}
-  - component: {fileID: 890506827469871695}
-  - component: {fileID: -7493008124537834535}
+  - component: {fileID: 9198975491433598431}
   m_Layer: 0
   m_Name: FAR EYE FREE
   m_TagString: Untagged
@@ -5534,28 +5531,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &5438839914084284408
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5438839914091562044}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 28804db564d57014cb5a8571f354ed95, type: 3}
-  m_Controller: {fileID: 22100000, guid: 290925d56c590904889ea4825dd212b8, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1232444710309813370
+--- !u!114 &9198975491433598431
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5564,62 +5540,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5438839914091562044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0210edd49dd4eefb8d56f54a7eaf0aa, type: 3}
+  m_Script: {fileID: 11500000, guid: 4765186dd029e6d4eb8d0f6356a62c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scopeDefaultShow: 1
-  scopeDefaultBehaviour: {fileID: 3437831189726026662}
-  muzzleIndex: 0
-  muzzleArray:
-  - {fileID: 8718131261748180823}
-  magazineIndex: 0
-  magazineArray:
-  - {fileID: 4324911605299175621}
---- !u!114 &890506827469871695
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5438839914091562044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe4c405f36d24a5db61be27959609b55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-7493008124537834535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5438839914091562044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7170d51de97d79e4fb11d3321667acb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  automatic: 0
-  projectileImpulse: 1000
-  roundsPerMinutes: 50
-  mask:
-    serializedVersion: 2
-    m_Bits: 1
-  maximumDistance: 1000
-  socketEjection: {fileID: 0}
-  prefabCasing: {fileID: 1492315059354262, guid: c638dfae3f3edf843b2614dae230a771,
-    type: 3}
-  prefabProjectile: {fileID: 1086664671600574, guid: 5953171a59c27394e9ad5cbb564affa8,
-    type: 3}
-  controller: {fileID: 22100000, guid: 1288116e5192cd84b808721e453eb7e7, type: 2}
-  spriteBody: {fileID: 21300000, guid: bcc477d9e47ffcf41acc147a6fc51cf9, type: 3}
-  audioClipHolster: {fileID: 8300000, guid: 8c4ede782a70c6e4b9e515d40d6e6e69, type: 3}
-  audioClipUnholster: {fileID: 8300000, guid: 4aaa78b2722c0344cb0363a3980adf64, type: 3}
-  audioClipReload: {fileID: 8300000, guid: 778c7be53403f9e45804f5a61a13a3e6, type: 3}
-  audioClipReloadEmpty: {fileID: 8300000, guid: 1fe5c2e1733f354428fe88c1a7cbafe4,
-    type: 3}
-  audioClipFireEmpty: {fileID: 8300000, guid: 0c187ee2790c74c4e9985aa1ee1a12d5, type: 3}
-  weponScope: {fileID: 0}
+  Bullet: {fileID: 4834526503407549940, guid: 2735bebe54c1f5a4096f5134a96f7e77, type: 3}
+  BulletPosition: {fileID: 4453196581178136409}
 --- !u!1 &5438839914091562046
 GameObject:
   m_ObjectHideFlags: 0

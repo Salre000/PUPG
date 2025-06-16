@@ -104,7 +104,7 @@ public class CreateMap : MonoBehaviour
         StringBuilder builder = new StringBuilder();
         builder.Clear();
         builder.Append(_PLAN_PASS);
-        builder.Append(_planData.GetMapTileName((int)MapTypeEnum.MapType._WeaponsMAP));
+        builder.Append(_planData.GetMapTileName((int)MapTypeEnum.MapType._CQCMAP));
 
 
         //繋げたファイルパスを使いファイルのロードを行う
@@ -250,8 +250,8 @@ public class CreateMap : MonoBehaviour
         //一辺の長さと壁一枚の長さを使い壁を一面貼るループ
         for (int i = 0; i < objectRate * _MAX_SIZE_X; i++)
         {
-            GameObject wall = GameObject.Instantiate(_wallObject, wallAll.transform);
-
+            GameObject wall;
+                
             Vector3 position = Vector3.zero;
 
             wall = GameObject.Instantiate(_wallObject, wallAll.transform);
@@ -264,6 +264,8 @@ public class CreateMap : MonoBehaviour
             wall.transform.eulerAngles = new Vector3(0, 0, 0);
 
             wall.transform.position = position;
+
+
             wall = GameObject.Instantiate(_wallObject, wallAll.transform);
             position = Vector3.zero;
 

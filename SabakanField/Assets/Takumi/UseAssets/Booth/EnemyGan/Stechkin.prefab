@@ -4967,10 +4967,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1209401154864158034}
-  - component: {fileID: 4889102082202518810}
-  - component: {fileID: 770549100560667064}
-  - component: {fileID: -9002669699146239163}
-  - component: {fileID: 7604039500855056501}
+  - component: {fileID: -2440086850761931378}
   m_Layer: 0
   m_Name: Stechkin
   m_TagString: Untagged
@@ -4995,7 +4992,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 42, y: 0, z: 0}
---- !u!114 &4889102082202518810
+--- !u!114 &-2440086850761931378
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5004,82 +5001,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1982559505645326312}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0210edd49dd4eefb8d56f54a7eaf0aa, type: 3}
+  m_Script: {fileID: 11500000, guid: 4765186dd029e6d4eb8d0f6356a62c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scopeDefaultShow: 0
-  scopeDefaultBehaviour: {fileID: 579136305745813521}
-  muzzleIndex: 0
-  muzzleArray:
-  - {fileID: 8847360306856774200}
-  magazineIndex: 0
-  magazineArray:
-  - {fileID: 6019557555872706098}
---- !u!95 &770549100560667064
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1982559505645326312}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 40cb849895dd45645ac3fadcc88190af, type: 3}
-  m_Controller: {fileID: 22100000, guid: d0f061f165597314d870681ebaff4ca9, type: 2}
-  m_CullingMode: 2
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-9002669699146239163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1982559505645326312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7170d51de97d79e4fb11d3321667acb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  automatic: 0
-  projectileImpulse: 70
-  roundsPerMinutes: 1000
-  mask:
-    serializedVersion: 2
-    m_Bits: 1
-  maximumDistance: 70
-  socketEjection: {fileID: 0}
-  prefabCasing: {fileID: 2169201534549289202}
-  prefabProjectile: {fileID: 1086664671600574, guid: 5953171a59c27394e9ad5cbb564affa8,
-    type: 3}
-  controller: {fileID: 22100000, guid: 257eac322a7afde43bfa9aa9e60baa84, type: 2}
-  spriteBody: {fileID: 21300000, guid: 5de2ff934a8b3ea4ebfe923a6f958686, type: 3}
-  audioClipHolster: {fileID: 8300000, guid: 8c4ede782a70c6e4b9e515d40d6e6e69, type: 3}
-  audioClipUnholster: {fileID: 8300000, guid: 4aaa78b2722c0344cb0363a3980adf64, type: 3}
-  audioClipReload: {fileID: 8300000, guid: 778c7be53403f9e45804f5a61a13a3e6, type: 3}
-  audioClipReloadEmpty: {fileID: 8300000, guid: 1fe5c2e1733f354428fe88c1a7cbafe4,
-    type: 3}
-  audioClipFireEmpty: {fileID: 8300000, guid: 0c187ee2790c74c4e9985aa1ee1a12d5, type: 3}
-  weponScope: {fileID: 0}
---- !u!114 &7604039500855056501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1982559505645326312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe4c405f36d24a5db61be27959609b55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  Bullet: {fileID: 4834526503407549940, guid: 2735bebe54c1f5a4096f5134a96f7e77, type: 3}
+  BulletPosition: {fileID: 8829617392553885460}
 --- !u!1 &2031925278367666870
 GameObject:
   m_ObjectHideFlags: 0

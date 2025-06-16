@@ -6,6 +6,10 @@ _normalMAP,
 _CQCMAP,
 //強武器を拾い易いマップ
 _WeaponsMAP,
+//自然だけがあるマップ
+_NetureMAP,
+//かべだけがあるマップ
+_WellMAP,
 MAX
 }
 }

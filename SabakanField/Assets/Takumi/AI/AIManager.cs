@@ -172,19 +172,20 @@ public class AIManager : MonoBehaviour
 
     public void CreateAI()
     {
+        kIll = KillData.InGameDataLoad();
+        kIll.killCount.Clear();
+        kIll.deathCount.Clear();
+        kIll.killCount.Add(0);
+        kIll.deathCount.Add(0);
+
         return;
+
         AICharacterUtility.ResetAI();
 
         GanObject.LoodGameObject();
 
         SoundManager.Initialize();
 
-        kIll = KillData.InGameDataLoad();
-
-        kIll.killCount.Clear();
-        kIll.deathCount.Clear();
-        kIll.killCount.Add(0);
-        kIll.deathCount.Add(0);
 
 
 

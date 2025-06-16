@@ -433,8 +433,8 @@ MonoBehaviour:
     type: 3}
   _aiObject: {fileID: 9213432157738317115, guid: 68e37ce96f23a3d4c957b00b1b8ba1a2,
     type: 3}
-  _MAX_SIZE_X: 6
-  _MAX_SIZE_Y: 6
+  _MAX_SIZE_X: 15
+  _MAX_SIZE_Y: 15
   MAXSIZE: -1
   MapSize: {x: 0, y: 0}
 --- !u!4 &1584106593
@@ -1016,11 +1016,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2371498419375578296, guid: 19eadcf8fbed56b4da77ca94c1b4145f,
-        type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 320
-      objectReference: {fileID: 0}
     - target: {fileID: 2748913124992463393, guid: 19eadcf8fbed56b4da77ca94c1b4145f,
         type: 3}
       propertyPath: m_RootOrder

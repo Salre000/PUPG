@@ -5056,7 +5056,6 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 1
-  maximumDistance: 70
   socketEjection: {fileID: 0}
   prefabCasing: {fileID: 2169201534549289202}
   prefabProjectile: {fileID: 1086664671600574, guid: 5953171a59c27394e9ad5cbb564affa8,
