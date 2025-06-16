@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 65871565580582628}
   - component: {fileID: 96448838451407516}
   - component: {fileID: -360607094775284079}
+  - component: {fileID: 5033907494641828930}
   m_Layer: 15
   m_Name: P_LPSP_PROJ_Bullet_01Enemy
   m_TagString: Untagged
@@ -200,6 +201,18 @@ MonoBehaviour:
   concreteImpactPrefabs:
   - {fileID: 4587651611338842, guid: 5e02303289b3c494e8e185be0fbbd405, type: 3}
   pierce: 0
+--- !u!114 &5033907494641828930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086664671600574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d8c5fd01e50704da336a41dcecaf7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1231345400216816
 GameObject:
   m_ObjectHideFlags: 0

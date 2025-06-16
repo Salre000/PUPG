@@ -15,4 +15,13 @@ public class Sandbag : MonoBehaviour, InvincibleInsterface,CharacterInsterface
         Debug.Log("“–‚Á‚½");
     }
 
+    void CharacterInsterface.HitAction()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    bool CharacterInsterface.HPFaction(float damage)
+    {
+        throw new System.NotImplementedException();
+    }
 }

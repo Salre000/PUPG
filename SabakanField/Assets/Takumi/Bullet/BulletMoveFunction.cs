@@ -74,8 +74,10 @@ public static class BulletMoveFunction
         //当たった対象に無敵の関数を内包したインターフェースクラスが付いている場合取得
         InvincibleInsterface invincible = target.transform.gameObject.GetComponent<InvincibleInsterface>();
 
+        BulletDamage bulletDamage=thisObject.GetComponent<BulletDamage>();
+
         //先の二つのインターフェースクラスが両方取得出来たかを判定
-        if (hitObject == null && invincible == null)
+        if (hitObject == null || invincible == null|| bulletDamage==null)
         {
             //SetPaintObject(thisObject.transform.position,dir.normalized, playerFaction);
 
@@ -97,8 +99,10 @@ public static class BulletMoveFunction
             Debug.Log("アーマーが破壊された");
 
 
+            return;
+        }
 
-        } 
+        if(!hitObject.HPFaction(bulletDamage.GetDamage()))return;
 
 
         //自分と同じ陣営の場合はフレンドリーファイアの関数を呼ぶ

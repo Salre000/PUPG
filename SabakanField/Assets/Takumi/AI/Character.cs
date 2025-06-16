@@ -14,4 +14,14 @@ public class Character : MonoBehaviour, CharacterInsterface
 
 
     }
+
+    void CharacterInsterface.HitAction()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    bool CharacterInsterface.HPFaction(float damage)
+    {
+        return false;
+    }
 }

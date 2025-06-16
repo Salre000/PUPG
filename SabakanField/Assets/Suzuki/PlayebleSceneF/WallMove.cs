@@ -10,5 +10,13 @@ public class WallMove : MonoBehaviour,CharacterInsterface
         return;
     }
 
+    void CharacterInsterface.HitAction()
+    {
+        throw new System.NotImplementedException();
+    }
 
+    bool CharacterInsterface.HPFaction(float damage)
+    {
+        throw new System.NotImplementedException();
+    }
 }

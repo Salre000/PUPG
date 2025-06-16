@@ -86,6 +86,10 @@ namespace InfimaGames.LowPolyShooterPack
         private AudioClip audioClipFireEmpty;
 
         private CharacterBehaviour playerCharacter;
+
+        //銃の攻撃力
+        [SerializeField, Header("銃の攻撃力")] private float bulletDamage = -1;
+
         // スコプ系
         [SerializeField]
         private GameObject weponScope = null;
@@ -275,21 +279,21 @@ namespace InfimaGames.LowPolyShooterPack
             // 発射体スポーンポイントから発射体をスポーンする。
             // 薬莢のこと
             GameObject projectile = Instantiate(prefabProjectile);
-            projectile.transform.position=muzzleSocket.position;
+            projectile.transform.position = muzzleSocket.position;
             projectile.transform.eulerAngles = angle;
 
             prefabProjectile.transform.eulerAngles = playerCamera.forward;
 
             //Add velocity to the projectile.
             // 弾丸に速度を加える。
-            projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward* projectileImpulse;
-
+            projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * projectileImpulse;
+            projectile.GetComponent<BulletDamage>().SetDamage(bulletDamage);
             projectile.GetComponent<Projectile>().pierce = pierce;
             if (!shotGan) return;
 
             float yAngle = Mathf.Atan2(projectile.transform.forward.x, projectile.transform.forward.z);
 
-            for(int i = 0; i < 6; i++) 
+            for (int i = 0; i < 6; i++)
             {
 
 
@@ -297,12 +301,13 @@ namespace InfimaGames.LowPolyShooterPack
                 projectile.transform.position = muzzleSocket.position;
                 projectile.transform.eulerAngles = angle;
 
-                Vector3 randomAngle = new Vector3(Random.Range(-50, 50), Random.Range(-50, 50), Random.Range(-50, 50))*0.005f;
+                Vector3 randomAngle = new Vector3(Random.Range(-50, 50), Random.Range(-50, 50), Random.Range(-50, 50)) * 0.005f;
 
                 //Add velocity to the projectile.
                 // 弾丸に速度を加える。
-                projectile.GetComponent<Rigidbody>().velocity = (projectile.transform.forward+ randomAngle) * projectileImpulse;
+                projectile.GetComponent<Rigidbody>().velocity = (projectile.transform.forward + randomAngle) * projectileImpulse;
 
+                projectile.GetComponent<BulletDamage>().SetDamage(bulletDamage);
 
 
 
@@ -331,7 +336,7 @@ namespace InfimaGames.LowPolyShooterPack
             else
             {
                 PlayerManager.SetIsScope(false);
-                adsDirayTime = 0.0f; 
+                adsDirayTime = 0.0f;
             }
         }
 

@@ -19,6 +19,8 @@ public class PlayerRespawn : MonoBehaviour, CharacterInsterface, InvincibleInste
     private void Start()
     {
         _respawnPosition = AIUtility.GetFlagPosition();
+        ChracterHPManager.instance.AddHP(100.0f);
+
         _respawnPosition.y += 0.1f;
         transform.position = _respawnPosition;
     }
@@ -45,12 +47,23 @@ public class PlayerRespawn : MonoBehaviour, CharacterInsterface, InvincibleInste
         RespawnManager.Instance.DelayRespawn(gameObject, _respawnPosition, _respawnTime);
         _invincibleFlag = true;
     }
+    public bool HPFaction(float damage) 
+    {
+        ChracterHPManager.instance.GetDamage(0, damage);
+
+        return ChracterHPManager.instance.GetHp(0) <= 0;
+
+
+
+    }
+
 
     // •œŠˆŠ®—¹
     private void RespawnComplete()
     {
         PlayerManager.SetIsPlayerDead(false);
         BulletManager.ResetMagazine();
+        ChracterHPManager.instance.ResetHP(0);
         _timeCount = 0.0f;
     }
 

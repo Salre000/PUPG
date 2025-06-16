@@ -83,7 +83,11 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
 
     }
 
-    
+    public void Start()
+    {
+        ChracterHPManager.instance.AddHP(100.0f);
+    }
+
 
     public void FixedUpdate()
     {
@@ -123,8 +127,9 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
 
     public void ReStart() {  move.ReStart(); }
     public void EndShot() {  move.EndShot(); }
-    public void Shot() { iGan.Shot(new Vector3(0,move.GetNextAngle(),0) ); emainingBullet--; }
-    public void Resurrect() { move.Resurrect(() => {capsuleCollider.enabled = true;ReLood(); }); }
+    public void Shot() { iGan.Shot(); emainingBullet--; }
+    public void Resurrect() { move.Resurrect(() => {capsuleCollider.enabled = true;ReLood(); ChracterHPManager.instance.ResetHP(status.GetID());
+    }); }
     public void ReLoodAnime() { ReLood(); nowReLood = false; }
     public bool GetInvincibleFlag()
     {
@@ -153,6 +158,14 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
         if (nowReLood) return;
         status.SetAnimatorTrigger("ReLood");
         nowReLood = true;
+
+    }
+
+    bool CharacterInsterface.HPFaction(float damage)
+    {
+        ChracterHPManager.instance.GetDamage(status.GetID(),damage);
+
+        return ChracterHPManager.instance.GetHp(status.GetID()) <= 0;
 
     }
 

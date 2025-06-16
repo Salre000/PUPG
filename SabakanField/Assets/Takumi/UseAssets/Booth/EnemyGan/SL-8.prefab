@@ -213,6 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bullet: {fileID: 1086664671600574, guid: dd9ad5ce7fd63de4595d6ef8cff99c30, type: 3}
   BulletPosition: {fileID: 1696065513796703384}
+  bulletDamage: 35
 --- !u!1 &1334874100012141794
 GameObject:
   m_ObjectHideFlags: 0
@@ -1162,22 +1163,22 @@ PrefabInstance:
     - target: {fileID: 1366133415999661822, guid: 613eeb9dc59c9934392391ae63fffa9d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0.000002861023
       objectReference: {fileID: 0}
     - target: {fileID: 1366133415999661822, guid: 613eeb9dc59c9934392391ae63fffa9d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.0000008121133
       objectReference: {fileID: 0}
     - target: {fileID: 1366133415999661822, guid: 613eeb9dc59c9934392391ae63fffa9d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.00000001071021
       objectReference: {fileID: 0}
     - target: {fileID: 1366133415999661822, guid: 613eeb9dc59c9934392391ae63fffa9d,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.99813485
       objectReference: {fileID: 0}
     - target: {fileID: 1366133415999661822, guid: 613eeb9dc59c9934392391ae63fffa9d,
         type: 3}
@@ -1192,7 +1193,7 @@ PrefabInstance:
     - target: {fileID: 1366133415999661822, guid: 613eeb9dc59c9934392391ae63fffa9d,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.061048605
       objectReference: {fileID: 0}
     - target: {fileID: 1366133415999661822, guid: 613eeb9dc59c9934392391ae63fffa9d,
         type: 3}
@@ -1207,7 +1208,7 @@ PrefabInstance:
     - target: {fileID: 1366133415999661822, guid: 613eeb9dc59c9934392391ae63fffa9d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 4344479955153924831, guid: 613eeb9dc59c9934392391ae63fffa9d,
         type: 3}

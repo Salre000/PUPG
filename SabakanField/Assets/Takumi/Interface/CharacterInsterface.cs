@@ -6,6 +6,8 @@ public interface CharacterInsterface
 {
     virtual public bool PlayerFaction() { return true; }
 
+    //€‚Ê‚Æ‚«‚Étrue‚ğ•Ô‚·ŠÖ”
+    abstract public bool HPFaction(float damage);
 
     //’e‚ª“–‚Á‚½‚Æ‚«‚Ìˆ—
     abstract public void HitAction();

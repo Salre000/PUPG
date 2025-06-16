@@ -9924,6 +9924,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bullet: {fileID: 1086664671600574, guid: dd9ad5ce7fd63de4595d6ef8cff99c30, type: 3}
   BulletPosition: {fileID: 2616862482261113065}
+  bulletDamage: 20
 --- !u!1 &4684918181194887504
 GameObject:
   m_ObjectHideFlags: 0
