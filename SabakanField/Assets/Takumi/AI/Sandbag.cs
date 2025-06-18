@@ -12,16 +12,11 @@ public class Sandbag : MonoBehaviour, InvincibleInsterface,CharacterInsterface
 
     public void HitAction()
     {
-        Debug.Log("当った");
-    }
-
-    void CharacterInsterface.HitAction()
-    {
-        throw new System.NotImplementedException();
+        Debug.Log("サンドバッグに当った");
     }
 
     bool CharacterInsterface.HPFaction(float damage)
     {
-        throw new System.NotImplementedException();
+        return true;
     }
 }

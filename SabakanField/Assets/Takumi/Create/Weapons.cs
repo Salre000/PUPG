@@ -22,10 +22,11 @@ public class Weapons : MonoBehaviour
         mainCamera = GameObject.Find("MainCamera");
         player = GameObject.Find("Player");
 
-        ID = Random.Range(0, 4);
+        ID = 2;//Random.Range(0, 4);
 
         for(int i = 0; i < weapons.Count; i++) 
         {
+            weapons[i].SetActive(true);
             if (i == ID) { weapon = weapons[i];   continue; }
             weapons[i].SetActive(false);
         }
@@ -131,7 +132,15 @@ public class Weapons : MonoBehaviour
         size.y = 1;
         this.transform.localScale = size;
 
-        weapon.SetActive(true);
+        ID = Random.Range(0, 4);
+
+        for (int i = 0; i < weapons.Count; i++)
+        {
+            weapons[i].SetActive(true);
+            if (i == ID) { weapon = weapons[i]; continue; }
+            weapons[i].SetActive(false);
+        }
+
 
         return true;
 

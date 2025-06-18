@@ -8,15 +8,17 @@ public class AIMove
 {
     private GameObject thisGameObject;
 
-    public void SetThisGameObject(GameObject thisGameObject) 
+    public void SetThisGameObject(GameObject thisGameObject)
     { this.thisGameObject = thisGameObject; }
 
     private int ID;
-    public void SetID(int getID) { ID = getID; } 
+    public void SetID(int getID) { ID = getID; }
 
-    private readonly Vector3[] RAYCAST_OFFSET =
+    private Vector3[] RAYCAST_OFFSET =
         {
          new Vector3(0, 1f, 0),
+         new Vector3(0, 0.5f, 0),
+         new Vector3(0, 0.5f, 0),
          new Vector3(0, 0.5f, 0),
     };
 
@@ -52,13 +54,15 @@ public class AIMove
         ChageAngle
 
     }
-    [SerializeField]public NowMode nowMode = NowMode.Wandering;
+    [SerializeField] public NowMode nowMode = NowMode.Wandering;
 
-    [SerializeField]public  NowMode nextMode = NowMode.Wandering;
+    [SerializeField] public NowMode nextMode = NowMode.Wandering;
 
     [SerializeField] float nextMoveAngle = 0;
 
-    public float GetNextAngle() {  return nextMoveAngle; }
+    [SerializeField] GameObject targetObject;
+
+    public float GetNextAngle() { return nextMoveAngle; }
 
     private readonly float _EPSILON = 5.0f;
 
@@ -89,9 +93,7 @@ public class AIMove
                 Wandering();
                 break;
             case NowMode.Shot:
-                break;
-            case NowMode.Back:
-                Back();
+                Shoter();
                 break;
             case NowMode.Chase:
                 break;
@@ -103,8 +105,23 @@ public class AIMove
     public void EndShot()
     {
         Debug.Log("射撃終了");
+
+
+        if (SearchHitEnemy()) 
+        {
+
+            AICharacterUtility.GetCharacterAI(ID).SetAnimatorTrigger("Shot");
+
+
+        }
+        else 
+        {
         nowMode = NowMode.Wandering;
         AICharacterUtility.SetShotFlag(ID, false);
+        }
+
+
+
 
     }
 
@@ -117,48 +134,57 @@ public class AIMove
     }
     private void ChackDash()
     {
-       
+
 
     }
+    private bool SearchHitEnemy() 
+    {
+        List<GameObject> targets = AICharacterFunction.TargetEnemysInAngle(thisGameObject, AICharacterUtility.GetPlayerFaction(ID));
 
+        if (targets.Count <= 0) return false;
+
+        Vector3 startPos = thisGameObject.transform.position + RAYCAST_OFFSET[0] + thisGameObject.transform.forward;
+
+        GameObject hitObject = AICharacterFunction.TargetGetAngle(targets, ID, thisGameObject, startPos);
+
+        if (hitObject == null) return false;
+
+        Debug.Log("内積" + Vector3.Dot(thisGameObject.transform.forward, (hitObject.transform.position - thisGameObject.transform.position).normalized) * Mathf.Rad2Deg);
+
+        if (Vector3.Dot(thisGameObject.transform.forward, (hitObject.transform.position - thisGameObject.transform.position).normalized) * Mathf.Rad2Deg > 50) return false;
+        targetObject = hitObject;
+
+        return true;
+    }
     private void SearchEnemy()
     {
         if (shotingFlag) return;
 
-        List<GameObject> targets =AICharacterFunction.TargetEnemysInAngle(thisGameObject,AICharacterUtility.GetPlayerFaction(ID));
+        List<GameObject> targets = AICharacterFunction.TargetEnemysInAngle(thisGameObject, AICharacterUtility.GetPlayerFaction(ID));
 
         if (targets.Count <= 0) return;
 
         Vector3 startPos = thisGameObject.transform.position + RAYCAST_OFFSET[0] + thisGameObject.transform.forward;
 
-        GameObject hitObject= AICharacterFunction.TargetGetAngle(targets,ID,thisGameObject, startPos);
+        GameObject hitObject = AICharacterFunction.TargetGetAngle(targets, ID, thisGameObject, startPos);
 
         if (hitObject == null) return;
 
-        thisGameObject.GetComponent<AI>();
+        Debug.Log("内積" + Vector3.Dot(thisGameObject.transform.forward, (hitObject.transform.position - thisGameObject.transform.position).normalized) * Mathf.Rad2Deg);
 
-        AICharacterUtility.SetShotFlag(ID, true);
+        //視野角
+        //if (Vector3.Dot(thisGameObject.transform.forward,(hitObject.transform.position - thisGameObject.transform.position).normalized)*Mathf.Rad2Deg > 50) return;
 
-        Vector3 tragetDir = hitObject.transform.position - thisGameObject.transform.position;
 
-        nextMoveAngle = Mathf.Atan2(tragetDir.x, tragetDir.z) * Mathf.Rad2Deg;
+        nowMode = NowMode.Shot;
 
-        nextMoveAngle += 360.0f;
-        nextMoveAngle %= 360.0f;
-
-        Vector3 Cross = Vector3.Cross(thisGameObject.transform.forward, tragetDir);
-
-        if (Cross.y < 0)
-            AICharacterUtility.GetCharacterAI(ID).SetAnimatorBool("Left", true);
-        else AICharacterUtility.GetCharacterAI(ID).SetAnimatorBool("Right", true);
-        nowMode = NowMode.ChageAngle;
-        nextMode = NowMode.Shot;
-
+        targetObject = hitObject;
+        Debug.DrawLine(thisGameObject.transform.position, targetObject.transform.position, Color.yellow,1);
 
     }
 
     [SerializeField] public bool shotingFlag = false;
-    public void SetShotFlag(bool flag) {  shotingFlag = flag; }
+    public void SetShotFlag(bool flag) { shotingFlag = flag; }
 
     private void Wandering()
     {
@@ -179,15 +205,17 @@ public class AIMove
 
 
 
-                //��]���������牽�����Ȃ�
                 if (rotateFlag) return;
 
                 rotateFlag = true;
+                Debug.Log("回転かいし");
                 if (ChengeAngle(startPos, i, hit.transform.gameObject)) return;
             }
 
 
         }
+
+
         if (daleyTime < 0.2f) return;
 
         ResetAnimation();
@@ -195,7 +223,23 @@ public class AIMove
 
     }
 
-    //������AI�̊p�x�Ɏw��������������K�v������
+    private void Shoter()
+    {
+        if (shotingFlag) return;
+
+        Vector3 vec=targetObject.transform.position-thisGameObject.transform.position;
+
+        float angle = Mathf.Atan2(vec.x, vec.z);
+
+        thisGameObject.transform.eulerAngles = new Vector3(0,angle*Mathf.Rad2Deg,0);
+
+        AICharacterUtility.GetCharacterAI(ID).SetAnimatorTrigger("Shot");
+
+        Debug.Log("射撃" + ID);
+        AICharacterUtility.SetShotFlag(ID, true);
+
+    }
+
     private void ChangeAngle()
     {
 
@@ -207,14 +251,22 @@ public class AIMove
         ResetAnimation();
 
         nowMode = nextMode;
+    }
 
-        if (nowMode == NowMode.Shot)
-            AICharacterUtility.GetCharacterAI(ID).SetAnimatorTrigger("Shot");
+    public float GetTargetAngle() 
+    {
+        if (targetObject == null)  { Debug.Log("対象なし");  return -1; }
+
+        Vector3 vec= targetObject.transform.position-thisGameObject.transform.position;
+
+        float angle=Mathf.Atan2(vec.x,vec.z)*Mathf.Rad2Deg;
+
+        return angle;
 
 
     }
 
-    //���C�ɉ���������Ȃ������Ƃ��̏���
+
     private void ResetAnimation()
     {
         AICharacterUtility.GetCharacterAI(ID).SetAnimatorBool("Left", false);
@@ -318,34 +370,16 @@ public class AIMove
 
     private GameObject hitObject;
 
-    private float countTime = 3;
+    private float countTime = 5;
 
-    private void Back()
-    {
-        countTime-=Time.deltaTime;
-        if (Vector3.Distance(hitObject.transform.position, thisGameObject.transform.position) > countTime) return;
-
-        ResetAnimation();
-
-
-        nextMode = NowMode.Wandering;
-
-        nowMode = NowMode.Wandering;
-
-
-
-        hitObject = null;
-    }
 
     Vector3 endPosition = Vector3.zero;
 
     public void HitObject(Collision collision)
     {
-        if (nowMode == NowMode.Back) return;
 
-        if (shotingFlag && nowMode != NowMode.Shot) 
+        if (shotingFlag && nowMode != NowMode.Shot)
         {
-            //AICharacterUtility.SetShotFlag(ID, false);
             return;
         }
 
@@ -355,14 +389,14 @@ public class AIMove
 
         hitObject = collision.gameObject;
 
-        countTime = 3;
+        countTime = 5;
 
-        AICharacterUtility.GetCharacterAI(ID).SetAnimatorBool("Back", true);
-        nowMode = NowMode.Back;
+        nowMode = NowMode.Wandering;
+        ResetAnimation();
 
-        //thisGameObject.transform.LookAt(hitObject.transform);
+        thisGameObject.transform.LookAt(hitObject.transform);
 
-        thisGameObject.transform.eulerAngles = new Vector3(0, thisGameObject.transform.eulerAngles.y, 0);
+        thisGameObject.transform.eulerAngles = new Vector3(0, thisGameObject.transform.eulerAngles.y + 180f, 0);
 
     }
 
@@ -375,33 +409,33 @@ public class AIMove
         AICharacterUtility.GetCharacterAI(ID).SetAnimatorFloat("DeathSpped", 0);
         Vector3 pos = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle)) * 5 + playerFlag.transform.position;
 
-        int mapMax = CreateMapManager.GetMAPMAXSIZE() * 5-1;
+        int mapMax = CreateMapManager.GetMAPMAXSIZE() * 5 - 1;
 
         Vector2 mapReta = CreateMapManager.GetMapRate();
 
-        if (GameModes.mode == PublicEnum.GameMode.deathmatch) 
+        if (GameModes.mode == PublicEnum.GameMode.deathmatch)
         {
 
-            pos = new Vector3((mapReta.x*10-10)/2, 0, (mapReta.y * 10 - 10) / 2);
+            pos = new Vector3((mapReta.x * 10 - 10) / 2, 0, (mapReta.y * 10 - 10) / 2);
 
             angle = UnityEngine.Random.Range(0, 360);
 
-            thisGameObject.transform.eulerAngles = new Vector3(0, angle+180, 0);
+            thisGameObject.transform.eulerAngles = new Vector3(0, angle + 180, 0);
 
             angle *= Mathf.Deg2Rad;
 
-            pos += new Vector3(Mathf.Sin(angle) * mapMax, 0, Mathf.Cos(angle)* mapMax);
+            pos += new Vector3(Mathf.Sin(angle) * mapMax, 0, Mathf.Cos(angle) * mapMax);
 
 
 
 
         }
-        
-        RespawnManager.Instance.DelayRespawn(thisGameObject, pos,UnityEngine.Random.Range(6,15), () => 
+
+        RespawnManager.Instance.DelayRespawn(thisGameObject, pos, UnityEngine.Random.Range(6, 15), () =>
         {
 
-        AICharacterUtility.GetCharacterAI(ID).SetAnimatorFloat("DeathSpped", 1);
-        AICharacterUtility.GetCharacterAI(ID).SetISLife(true);
+            AICharacterUtility.GetCharacterAI(ID).SetAnimatorFloat("DeathSpped", 1);
+            AICharacterUtility.GetCharacterAI(ID).SetISLife(true);
             action();
         });
 

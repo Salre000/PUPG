@@ -23,6 +23,9 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
 
     AIStatus status;
 
+    Outline outline;
+    public void ChengeOutLine(bool flag) { outline.enabled = flag; }
+
     AIGan iGan;
     public void SetIGan(AIGan aIGan) { iGan = aIGan; }
 
@@ -80,7 +83,8 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
         move.SetID(status.GetID());
 
         capsuleCollider = GetComponent<CapsuleCollider>();
-
+        outline=GetComponent<Outline>();
+        outline.enabled = false;
     }
 
     public void Start()
@@ -127,7 +131,7 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
 
     public void ReStart() {  move.ReStart(); }
     public void EndShot() {  move.EndShot(); }
-    public void Shot() { iGan.Shot(); emainingBullet--; }
+    public void Shot() { iGan.Shot(move.GetTargetAngle()); emainingBullet--; }
     public void Resurrect() { move.Resurrect(() => {capsuleCollider.enabled = true;ReLood(); ChracterHPManager.instance.ResetHP(status.GetID());
     }); }
     public void ReLoodAnime() { ReLood(); nowReLood = false; }
