@@ -1,4 +1,5 @@
 
+using InfimaGames.LowPolyShooterPack;
 using UnityEngine;
 
 public static class BulletManager
@@ -6,17 +7,20 @@ public static class BulletManager
     // ’eŠÖ˜A
 
     // e‚É“ü‚é’e‚ÌãŒÀ
-    private const int _LIMIT_BULLET = 30;
+    private static int _LIMIT_BULLET = 30;
     // ƒvƒŒƒCƒ„[‚Ìe‚É‚ß‚ç‚ê‚Ä‚¢‚é’e‚Ì”
     static int playerBulletMagazine = 30;
+    static int allBulletMagazine;
     // e‚É‚ß‚ç‚ê‚Ä‚¢‚é’e‚ğœ‚­AŠ—L‚µ‚Ä‚¢‚éc’e‚ÌÅ‘å”
-    private const int _LIMIT_MAGAZIN = 120;
-    static int bulletMagazin = 120;
+    private static int _limitMagazin;
+    static int bulletMagazin = -1;
 
     static public void Initialize()
     {
+        //_limitMagazin=GetBulletMagazine();
         playerBulletMagazine = _LIMIT_BULLET;
-        bulletMagazin = _LIMIT_MAGAZIN;
+        bulletMagazin = _limitMagazin;
+        SetMAXMagazine(allBulletMagazine);
     }
 
     // Œ‚‚Á‚½•ª‚¾‚¯e‚©‚ç’e‚ğŒ¸‚ç‚·
@@ -29,7 +33,7 @@ public static class BulletManager
         if (bulletMagazin <= 0) return;
         // –³‘Ê‚È‚­’e‚ğ•â[‚·‚é
         int reloadBullet = 0;
-        reloadBullet = _LIMIT_BULLET - playerBulletMagazine;
+        reloadBullet = bulletMagazin - playerBulletMagazine;
         bulletMagazin -= reloadBullet;
         // c‚è‚Ì’e‚ª30–¢–‚Ìê‡
         if (bulletMagazin < 0)
@@ -50,13 +54,42 @@ public static class BulletManager
         else
             return false;
     }
+
+    private static int _ammunition;
+    private static int _magazin;
+
+
+    /// <summary>
+    /// </summary>
+    /// <param ƒ}ƒKƒWƒ““à‚Ì’e”="zentai"></param>
+    /// <param e‚É“ü‚Á‚Ä‚¢‚é‹…”="now"></param>
+    /// <param e‚É“ü‚éŒÀŠE‚Ì’e”="max"></param>
+    static public void ReloadSystem(int magazin,int ammunition,int max)
+    {
+        // ƒŠƒ[ƒh‚·‚é’e”‚ğŒˆ’è‚·‚é
+        var value=max-ammunition;
+        // e‚É’e‚ğ•â[
+        ammunition += value;
+        // ‘’e”‚©‚çƒŠƒ[ƒh‚µ‚½•ª‚ğˆø‚­
+        magazin-=value;
+        _ammunition = ammunition;
+        _magazin = magazin;
+    }
+
+    static public int GetAmmunition() { return _ammunition; }
+    static public int GetMagazin() { return _magazin; }
+
     static public int GetPlayerBulletMagazine() { return playerBulletMagazine; }
     static public int GetBulletMagazine() { return bulletMagazin; }
 
     // e‚Æ’e‚Ì•â[
-    static public void ResetMagazine() { playerBulletMagazine = _LIMIT_BULLET; bulletMagazin = _LIMIT_MAGAZIN; }
+    static public void ResetMagazine(int value) { playerBulletMagazine = value; bulletMagazin = value; }
     // ’e‚Ì•â[
-    static public void SetMAXBulletMagazine() { bulletMagazin = _LIMIT_MAGAZIN; }
+    static public void SetMAXBulletMagazine(int value) { bulletMagazin = value; }
+    static public void SetAllBulletMagazine(int value) { allBulletMagazine = value; }
+    // ƒvƒŒƒCƒ„[‚Ì\
+    static public void SetPlayerBulletMagazine(int value) { playerBulletMagazine = value; }
+    static public void SetMAXMagazine(int value) { _LIMIT_BULLET = value * 3; SetMAXBulletMagazine(_LIMIT_BULLET); }
 
 
     ///ƒ‰ƒ“ƒ_ƒ€‚É¶¬‚µ‚½’l‚ğƒ‰ƒWƒAƒ“Šp‚Æ‚µ‚Ä•Ô‚·ŠÖ”i‚O‚ÉŠñ‚é‚±‚Æ‚ª‘½‚­‚È‚éj
@@ -71,7 +104,7 @@ public static class BulletManager
             angle -= UnityEngine.Random.Range(0, random);
             angle += UnityEngine.Random.Range(0, random);
         }
-        return angle *Mathf.Deg2Rad;
+        return angle * Mathf.Deg2Rad;
     }
 
 }

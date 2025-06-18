@@ -52,6 +52,7 @@ public class LoadoutSetting : MonoBehaviour
     private void WeponIndex(int index)
     {
         Instantiate(constancyGun.objects[index], _weponInventory);
+        GameManager.Instance.SetPlayerSpawn(true);
         _player.SetActive(true);
         _loadoutCamera.SetActive(false);
         // ロードアウトを閉じる

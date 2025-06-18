@@ -1,8 +1,9 @@
+using InfimaGames.LowPolyShooterPack.Interface;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletReChage : MonoBehaviour
+public class BulletReChage : Element
 {
     GameObject player;
     [SerializeField] float renge = 5;
@@ -18,7 +19,7 @@ public class BulletReChage : MonoBehaviour
 
         if (Vector3.Distance(player.transform.position,this.transform.position)< renge)
         {
-            BulletManager.SetMAXBulletMagazine();
+            BulletManager.SetMAXBulletMagazine(equippedWeapon.GetAmmunitionTotal());
             //Debug.DrawLine(this.transform.position, player.transform.position, Color.green);
 
         }

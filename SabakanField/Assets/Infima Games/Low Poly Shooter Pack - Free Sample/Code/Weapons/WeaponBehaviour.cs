@@ -74,6 +74,8 @@ namespace InfimaGames.LowPolyShooterPack
         /// Returns Total Ammunition.
         /// </summary>
         public abstract int GetAmmunitionTotal();
+        // 武器に入る弾の最大数
+        public abstract int GetAmmunitionAllTotal();
 
         /// <summary>
         /// Returns the Weapon's Animator component.

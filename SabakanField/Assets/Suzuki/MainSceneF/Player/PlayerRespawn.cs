@@ -62,7 +62,7 @@ public class PlayerRespawn : MonoBehaviour, CharacterInsterface, InvincibleInste
     private void RespawnComplete()
     {
         PlayerManager.SetIsPlayerDead(false);
-        BulletManager.ResetMagazine();
+        BulletManager.ResetMagazine(BulletManager.GetPlayerBulletMagazine());
         ChracterHPManager.instance.ResetHP(0);
         _timeCount = 0.0f;
     }

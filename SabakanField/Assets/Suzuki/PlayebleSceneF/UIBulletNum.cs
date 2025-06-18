@@ -17,7 +17,7 @@ public class UIBulletNum : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            BulletManager.PlayerReload();
+            //BulletManager.PlayerReload();
         }
     }
 

@@ -113,6 +113,7 @@ namespace InfimaGames.LowPolyShooterPack
         /// Amount of ammunition left.
         /// </summary>
         private int ammunitionCurrent;
+        private int ammunitionAllTotal;
 
         #region Attachment Behaviours
 
@@ -178,7 +179,7 @@ namespace InfimaGames.LowPolyShooterPack
             #endregion
 
             //Max Out Ammo.
-            ammunitionCurrent = magazineBehaviour.GetAmmunitionTotal();
+            ammunitionAllTotal=ammunitionCurrent = magazineBehaviour.GetAmmunitionTotal();
         }
 
         protected override void Update()
@@ -208,6 +209,8 @@ namespace InfimaGames.LowPolyShooterPack
         public override int GetAmmunitionCurrent() => ammunitionCurrent;
 
         public override int GetAmmunitionTotal() => magazineBehaviour.GetAmmunitionTotal();
+
+        public override int GetAmmunitionAllTotal() => ammunitionAllTotal;
 
         public override bool IsAutomatic() => automatic;
         public override float GetRateOfFire() => roundsPerMinutes;
@@ -246,7 +249,7 @@ namespace InfimaGames.LowPolyShooterPack
             //Reduce ammunition! We just shot, so we need to get rid of one!
             // 弾薬を減らす！さっき撃ったばかりだから、1発減らさないと！
             ammunitionCurrent = Mathf.Clamp(ammunitionCurrent - 1, 0, magazineBehaviour.GetAmmunitionTotal());
-
+            BulletManager.PlayerBulletShot();
             //Play all muzzle effects.
             muzzleBehaviour.Effect();
 
@@ -343,8 +346,12 @@ namespace InfimaGames.LowPolyShooterPack
         public override void FillAmmunition(int amount)
         {
             //Update the value by a certain amount.
-            ammunitionCurrent = amount != 0 ? Mathf.Clamp(ammunitionCurrent + amount,
-                0, GetAmmunitionTotal()) : magazineBehaviour.GetAmmunitionTotal();
+            // リロードで弾を補充するとこ
+            // ammunitionCurrentは今武器に装てんされている残弾数
+            //ammunitionCurrent = amount != 0 ? Mathf.Clamp(ammunitionCurrent + amount,
+            //    0, GetAmmunitionTotal()) : magazineBehaviour.GetAmmunitionTotal();
+            ammunitionCurrent=BulletManager.GetAmmunition();
+            GameManager.Instance.SetIsReload(true);
         }
 
         public override void EjectCasing()
