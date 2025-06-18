@@ -2217,12 +2217,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   automatic: 0
+  shotGan: 0
+  pierce: 0
   projectileImpulse: 70
   roundsPerMinutes: 1000
   mask:
     serializedVersion: 2
     m_Bits: 1
-  maximumDistance: 70
   socketEjection: {fileID: 0}
   prefabCasing: {fileID: 2169201534549289202, guid: 52b6e8d0052a54f449f7afe1987ae6a5,
     type: 3}
@@ -2236,6 +2237,7 @@ MonoBehaviour:
   audioClipReloadEmpty: {fileID: 8300000, guid: 1fe5c2e1733f354428fe88c1a7cbafe4,
     type: 3}
   audioClipFireEmpty: {fileID: 8300000, guid: 0c187ee2790c74c4e9985aa1ee1a12d5, type: 3}
+  bulletDamage: 101
   weponScope: {fileID: 0}
 --- !u!1 &4034568872739080608
 GameObject:

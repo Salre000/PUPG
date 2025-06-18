@@ -172,7 +172,8 @@ public class AIMove
 
         Debug.Log("内積" + Vector3.Dot(thisGameObject.transform.forward, (hitObject.transform.position - thisGameObject.transform.position).normalized) * Mathf.Rad2Deg);
 
-        if (Vector3.Dot(thisGameObject.transform.forward,(hitObject.transform.position - thisGameObject.transform.position).normalized)*Mathf.Rad2Deg > 50) return;
+        //視野角
+        //if (Vector3.Dot(thisGameObject.transform.forward,(hitObject.transform.position - thisGameObject.transform.position).normalized)*Mathf.Rad2Deg > 50) return;
 
 
         nowMode = NowMode.Shot;

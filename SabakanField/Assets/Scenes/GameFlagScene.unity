@@ -434,8 +434,8 @@ MonoBehaviour:
     type: 3}
   _aiObject: {fileID: 9213432157738317115, guid: 68e37ce96f23a3d4c957b00b1b8ba1a2,
     type: 3}
-  _MAX_SIZE_X: 3
-  _MAX_SIZE_Y: 3
+  _MAX_SIZE_X: 15
+  _MAX_SIZE_Y: 15
   MAXSIZE: -1
   MapSize: {x: 0, y: 0}
 --- !u!4 &1584106593

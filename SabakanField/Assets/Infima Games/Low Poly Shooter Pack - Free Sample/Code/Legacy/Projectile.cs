@@ -41,6 +41,8 @@ public class Projectile : MonoBehaviour {
         lostPostion=gameObject.transform.position;
         startPostion =gameObject.transform.position;
 
+		Destroy(this.gameObject, 10);
+
     }
     private void FixedUpdate()
     {
@@ -77,11 +79,16 @@ public class Projectile : MonoBehaviour {
 
 		if (pierce) 
 		{
+			Debug.Log("複製");
 			GameObject copy= GameObject.Instantiate(this.gameObject);
 
-			copy.transform.position=this.transform.position+transform.forward;
+			copy.name = "模造品";
+
+			copy.transform.position=this.transform.position+transform.forward/10;
 
             copy.GetComponent<Rigidbody>().velocity = transform.forward * 1000;
+
+			copy.GetComponent<Rigidbody>().useGravity = false;
 
 
 
