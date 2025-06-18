@@ -52,6 +52,8 @@ public static class AICharacterFunction
 
 
                 if (bullet == null) continue;
+
+
                 if (bullet.PlayerFaction() == AICharacterUtility.GetPlayerFaction(ID)) continue;
                 if (Vector3.Distance(startPos, hit.point) > 100) continue;
 

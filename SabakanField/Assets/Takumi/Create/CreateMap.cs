@@ -104,7 +104,7 @@ public class CreateMap : MonoBehaviour
         StringBuilder builder = new StringBuilder();
         builder.Clear();
         builder.Append(_PLAN_PASS);
-        builder.Append(_planData.GetMapTileName((int)MapTypeEnum.MapType._NetureMAP));
+        builder.Append(_planData.GetMapTileName((int)MapTypeEnum.MapType._CQCMAP));
 
 
         //繋げたファイルパスを使いファイルのロードを行う

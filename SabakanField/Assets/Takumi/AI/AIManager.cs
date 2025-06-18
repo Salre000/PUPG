@@ -35,6 +35,8 @@ public class AIManager : MonoBehaviour
     //1Ç¬ÇÃêwâcÇÃAIÇÃêîÅiÉvÉåÉCÉÑÅ[ë§ÇÕ-ÇPÅj
     public const int AI_NUMBER = 5;
 
+    private readonly float FLAG_PLAYER_RENGE=3;
+
     //ÉvÉåÉCÉÑÅ[ÇÃäiî[êÊ
     GameObject player;
     KIllCount kIll;
@@ -201,13 +203,15 @@ public class AIManager : MonoBehaviour
                 if (i == 0 && j == 0) continue;
                 GameObject ai = GameObject.Instantiate(origenAI);
 
-                float createAngle = angle + (15 * j) - 30;
+                float createAngle = angle + (30 * j) - 60;
                 RaandomGan(ai);
 
 
                 ai.transform.eulerAngles = new Vector3(0, createAngle, 0);
 
-                ai.transform.position = flagObject[i].transform.position + new Vector3(Mathf.Sin(createAngle * Mathf.Deg2Rad), 0, Mathf.Cos(createAngle * Mathf.Deg2Rad));
+                ai.transform.position = flagObject[i].transform.position 
+                    + new Vector3(Mathf.Sin(createAngle * Mathf.Deg2Rad), 0,
+                    Mathf.Cos(createAngle * Mathf.Deg2Rad))* FLAG_PLAYER_RENGE;
                 if (GameModes.mode == PublicEnum.GameMode.deathmatch)
                 {
 
@@ -243,7 +247,7 @@ public class AIManager : MonoBehaviour
                 {
                     ai.transform.GetChild(0).GetComponent<MeshRenderer>().material = color[0];
 
-                    Ai.SetPlayerFaction(() => false);
+                    Ai.SetPlayerFaction(() => true);
                     players.Add(Ai);
 
                 }
@@ -251,7 +255,7 @@ public class AIManager : MonoBehaviour
                 {
                     ai.transform.GetChild(0).GetComponent<MeshRenderer>().material = color[1];
 
-                    Ai.SetPlayerFaction(() => true);
+                    Ai.SetPlayerFaction(() => false);
                     enemys.Add(Ai);
                 }
 
@@ -286,7 +290,7 @@ public class AIManager : MonoBehaviour
         Animator animator = ai.GetComponent<Animator>();
         int randomRenge = 0;
 
-        GameObject gan = GameObject.Instantiate(GanObject.enemyConstancyGan.objects[0]);
+        GameObject gan = GameObject.Instantiate(GanObject.enemyConstancyGan.objects[4]);
 
         AI aI = ai.GetComponent<AI>();
 
@@ -296,7 +300,7 @@ public class AIManager : MonoBehaviour
         aI.GetIShot().SetGanType(type);
         aI.SetBullet(GanObject.GanBulletCount[(int)type]);
 
-        switch (ConstancyGanType.SL_8)
+        switch (ConstancyGanType.EyeOfHorus)
         {
             case ConstancyGanType.SL_8:
                 ai.GetComponent<AI>().GetStatus().SetAnimatorFloat("MoveSpped", 1);

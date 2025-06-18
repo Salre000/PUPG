@@ -127,7 +127,7 @@ public class AI : MonoBehaviour, CharacterInsterface,InvincibleInsterface
 
     public void ReStart() {  move.ReStart(); }
     public void EndShot() {  move.EndShot(); }
-    public void Shot() { iGan.Shot(); emainingBullet--; }
+    public void Shot() { iGan.Shot(move.GetTargetAngle()); emainingBullet--; }
     public void Resurrect() { move.Resurrect(() => {capsuleCollider.enabled = true;ReLood(); ChracterHPManager.instance.ResetHP(status.GetID());
     }); }
     public void ReLoodAnime() { ReLood(); nowReLood = false; }

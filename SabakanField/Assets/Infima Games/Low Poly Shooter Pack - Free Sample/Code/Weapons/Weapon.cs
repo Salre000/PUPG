@@ -257,14 +257,14 @@ namespace InfimaGames.LowPolyShooterPack
             Vector3 angle = Vector3.zero;
 
             // 走り撃ち(Shift)
-            if (playerCharacter.IsRunning())
+            if (playerCharacter.IsRunning()&&!shotGan)
             {
                 float randomX = Random.Range(-25.0f, 25.0f);
                 float randomY = Random.Range(-25.0f, 25.0f);
                 angle = playerCamera.transform.eulerAngles + new Vector3(randomX, randomY, 0);
             }
             // 歩き撃ち
-            else if (playerCharacter.IsWalking())
+            else if (playerCharacter.IsWalking() && !shotGan)
             {
                 float randomX = Random.Range(-15.0f, 15.0f);
                 float randomY = Random.Range(-15.0f, 15.0f);
