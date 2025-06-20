@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.UI;
 using static UnityEngine.InputSystem.DefaultInputActions;
 
 public class Dominator : MonoBehaviour
 {
+    private readonly float size = 30;
     Canvas _canvas;
     [SerializeField] List<Image> test=new List<Image>();
     [SerializeField]Image testImage;
@@ -85,6 +87,10 @@ public class Dominator : MonoBehaviour
 
             image.transform.position = _camera.WorldToScreenPoint(targetList[i].transform.position+ new Vector3(0, 1.25f, 0));
             Debug.Log(_camera.WorldToScreenPoint(targetList[i].transform.position) + "ç¿ïW");
+
+            float Size = size - Vector3.Distance(transform.position, targetList[i].transform.position)/5.0f;
+            image.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,Size);
+            image.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,Size);
 
             image.transform.position = new Vector3(image.rectTransform.position.x, image.rectTransform.position.y, 0);
 
