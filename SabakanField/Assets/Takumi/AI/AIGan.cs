@@ -48,7 +48,7 @@ public class AIGan : MonoBehaviour
                 bullet = GameObject.Instantiate(Bullet);
 
                 bullet.transform.position = BulletPosition.transform.position;
-                bullet.transform.eulerAngles = new Vector3(i, angle+j, 0);
+                bullet.transform.eulerAngles = new Vector3(i*5, angle+j * 5, 0);
                 Debug.DrawRay(bullet.transform.position, bullet.transform.forward * 100, Color.red, 2);
 
                 bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;

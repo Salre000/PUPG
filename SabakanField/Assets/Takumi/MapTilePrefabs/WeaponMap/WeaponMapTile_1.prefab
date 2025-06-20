@@ -915,14 +915,29 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 305692179108189486, guid: 0c7fb80c9a2a2f844a061100f8eea33a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 413863021324057942, guid: 0c7fb80c9a2a2f844a061100f8eea33a,
         type: 3}
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 466036350571169351, guid: 0c7fb80c9a2a2f844a061100f8eea33a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 822408112192447108, guid: 0c7fb80c9a2a2f844a061100f8eea33a,
         type: 3}
       propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033205743910735669, guid: 0c7fb80c9a2a2f844a061100f8eea33a,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1139377259112177679, guid: 0c7fb80c9a2a2f844a061100f8eea33a,
@@ -1205,6 +1220,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5965554634038686706, guid: 0c7fb80c9a2a2f844a061100f8eea33a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 57
+      objectReference: {fileID: 0}
     - target: {fileID: 6505025592129570611, guid: 0c7fb80c9a2a2f844a061100f8eea33a,
         type: 3}
       propertyPath: m_Layer
@@ -1218,6 +1238,11 @@ PrefabInstance:
     - target: {fileID: 7095459802336337643, guid: 0c7fb80c9a2a2f844a061100f8eea33a,
         type: 3}
       propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7609744144278346353, guid: 0c7fb80c9a2a2f844a061100f8eea33a,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7680216790856954839, guid: 0c7fb80c9a2a2f844a061100f8eea33a,

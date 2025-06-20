@@ -281,6 +281,8 @@ MonoBehaviour:
   automatic: 1
   shotGan: 0
   pierce: 1
+  GanType: 5
+  GanTypeExtra: 3
   projectileImpulse: 400
   roundsPerMinutes: 200
   mask:
@@ -1012,7 +1014,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 8075105568354613410}
-  m_PlaneDistance: 10
+  m_PlaneDistance: 0.24
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
