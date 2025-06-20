@@ -1,5 +1,6 @@
 
 using InfimaGames.LowPolyShooterPack;
+using System.Collections;
 using UnityEngine;
 
 public static class BulletManager
@@ -61,23 +62,26 @@ public static class BulletManager
 
     /// <summary>
     /// </summary>
-    /// <param ƒ}ƒKƒWƒ““à‚Ì’e”="zentai"></param>
-    /// <param e‚É“ü‚Á‚Ä‚¢‚é‹…”="now"></param>
+    /// <param ƒ}ƒKƒWƒ““à‚Ì’e”="magazin"></param>
+    /// <param e‚É“ü‚Á‚Ä‚¢‚é‹…”="ammunition"></param>
     /// <param e‚É“ü‚éŒÀŠE‚Ì’e”="max"></param>
-    static public void ReloadSystem(int magazin,int ammunition,int max)
+    static public void ReloadSystem(int magazin, int ammunition, int max)
     {
         // ƒŠƒ[ƒh‚·‚é’e”‚ğŒˆ’è‚·‚é
-        var value=max-ammunition;
+        var value = max - ammunition;
         // e‚É’e‚ğ•â[
         ammunition += value;
         // ‘’e”‚©‚çƒŠƒ[ƒh‚µ‚½•ª‚ğˆø‚­
-        magazin-=value;
+        magazin -= value;
         _ammunition = ammunition;
         _magazin = magazin;
     }
 
+
+
     static public int GetAmmunition() { return _ammunition; }
     static public int GetMagazin() { return _magazin; }
+    static public void SetMagazin(int value) { _magazin = value; }
 
     static public int GetPlayerBulletMagazine() { return playerBulletMagazine; }
     static public int GetBulletMagazine() { return bulletMagazin; }

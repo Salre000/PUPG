@@ -184,6 +184,7 @@ namespace InfimaGames.LowPolyShooterPack
 
             //Max Out Ammo.
             ammunitionAllTotal=ammunitionCurrent = magazineBehaviour.GetAmmunitionTotal();
+            BulletManager.SetMagazin(ammunitionCurrent*3);
         }
 
         protected override void Update()
@@ -390,8 +391,20 @@ namespace InfimaGames.LowPolyShooterPack
             // ammunitionCurrentは今武器に装てんされている残弾数
             //ammunitionCurrent = amount != 0 ? Mathf.Clamp(ammunitionCurrent + amount,
             //    0, GetAmmunitionTotal()) : magazineBehaviour.GetAmmunitionTotal();
-            ammunitionCurrent=BulletManager.GetAmmunition();
+
             GameManager.Instance.SetIsReload(true);
+            AmmunitionReload();
+
+        }
+
+        // マガジンの弾を補充した分引く
+        private void AmmunitionReload()
+        {
+            if (!GameManager.Instance.IsReload()) return;
+            BulletManager.ReloadSystem(BulletManager.GetMagazin(), ammunitionCurrent, GetAmmunitionAllTotal());
+
+            GameManager.Instance.SetIsReload(false);
+            ammunitionCurrent=BulletManager.GetAmmunition();
         }
 
         public override void EjectCasing()
