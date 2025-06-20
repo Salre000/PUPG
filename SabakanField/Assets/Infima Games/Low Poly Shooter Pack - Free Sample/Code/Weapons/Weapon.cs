@@ -1,5 +1,6 @@
 ﻿// Copyright 2021, Infima Games. All Rights Reserved.
 
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace InfimaGames.LowPolyShooterPack
@@ -21,7 +22,8 @@ namespace InfimaGames.LowPolyShooterPack
         private bool shotGan;
         [SerializeField, Header("弾が貫通するorしない")]
         private bool pierce;
-        [SerializeField] GanObject.ConstancyGanType GanType;
+        [SerializeField,Header("通常武器のタイプ")] GanObject.ConstancyGanType GanType=GanObject.ConstancyGanType.Max;
+        [SerializeField, Header("強武器のタイプ")] GanObject.ExtraGunType GanTypeExtra=GanObject.ExtraGunType.Max;
 
 
         [Tooltip("How fast the projectiles are."), Header("マズルフラッシュの調整")]
@@ -294,6 +296,7 @@ namespace InfimaGames.LowPolyShooterPack
             projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * projectileImpulse;
             projectile.GetComponent<BulletDamage>().SetDamage(bulletDamage);
             projectile.GetComponent<Projectile>().pierce = pierce;
+            Dominator(projectile);
             if (!shotGan) return;
 
             float yAngle = Mathf.Atan2(projectile.transform.forward.x, projectile.transform.forward.z);
@@ -320,7 +323,42 @@ namespace InfimaGames.LowPolyShooterPack
 
 
         }
+        private void Dominator(GameObject projectile)
+        {
+            if (GanTypeExtra != GanObject.ExtraGunType.Dominator) return;
 
+            Dominator dominator = GetComponent<Dominator>();
+            if (dominator == null) return;
+
+            List<GameObject> target = dominator.GetTarget();
+
+            for (int i = 0; i < target.Count; i++)
+            {
+
+                GameObject projectileBullet = Instantiate(prefabProjectile);
+                projectileBullet.transform.position = projectile.transform.position;
+                Vector3 vec = target[i].transform.position-transform.position;
+
+                projectileBullet.transform.eulerAngles = new Vector3(0, Mathf.Atan2(vec.x, vec.z)*Mathf.Rad2Deg, 0);
+
+
+                // 弾丸に速度を加える。
+                projectileBullet.GetComponent<Rigidbody>().velocity = projectileBullet.transform.forward * projectileImpulse;
+                projectileBullet.GetComponent<Rigidbody>().useGravity = false;
+                projectileBullet.GetComponent<BulletDamage>().SetDamage(bulletDamage);
+                Debug.Log("発射位置" + projectile.transform.position);
+                projectileBullet.GetComponent<Projectile>().pierce = false;
+                Debug.DrawLine(transform.position, target[i].transform.position, Color.black, 4);
+
+
+
+
+            }
+
+            Destroy(projectile);
+
+
+        }
         private void ScopeMode()
         {
             if (weponScope == null)
