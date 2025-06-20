@@ -9970,7 +9970,7 @@ MonoBehaviour:
   shotGan: 0
   pierce: 0
   projectileImpulse: 100
-  roundsPerMinutes: 600
+  roundsPerMinutes: 2000
   mask:
     serializedVersion: 2
     m_Bits: 1

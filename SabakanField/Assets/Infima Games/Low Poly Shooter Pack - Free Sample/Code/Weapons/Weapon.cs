@@ -21,6 +21,7 @@ namespace InfimaGames.LowPolyShooterPack
         private bool shotGan;
         [SerializeField, Header("弾が貫通するorしない")]
         private bool pierce;
+        [SerializeField] GanObject.ConstancyGanType GanType;
 
 
         [Tooltip("How fast the projectiles are."), Header("マズルフラッシュの調整")]
@@ -58,6 +59,7 @@ namespace InfimaGames.LowPolyShooterPack
         [Tooltip("Weapon Body Texture."), Header("UI左下に映る銃のスプライト")]
         [SerializeField]
         private Sprite spriteBody;
+
 
         [Header("Audio Clips Holster")]
 
