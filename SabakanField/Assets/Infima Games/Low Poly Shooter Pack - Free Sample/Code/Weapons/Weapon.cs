@@ -1,7 +1,10 @@
 ﻿// Copyright 2021, Infima Games. All Rights Reserved.
 
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 namespace InfimaGames.LowPolyShooterPack
 {
@@ -22,8 +25,8 @@ namespace InfimaGames.LowPolyShooterPack
         private bool shotGan;
         [SerializeField, Header("弾が貫通するorしない")]
         private bool pierce;
-        [SerializeField,Header("通常武器のタイプ")] GanObject.ConstancyGanType GanType=GanObject.ConstancyGanType.Max;
-        [SerializeField, Header("強武器のタイプ")] GanObject.ExtraGunType GanTypeExtra=GanObject.ExtraGunType.Max;
+        [SerializeField, Header("通常武器のタイプ")] GanObject.ConstancyGanType GanType = GanObject.ConstancyGanType.Max;
+        [SerializeField, Header("強武器のタイプ")] GanObject.ExtraGunType GanTypeExtra = GanObject.ExtraGunType.Max;
 
 
         [Tooltip("How fast the projectiles are."), Header("マズルフラッシュの調整")]
@@ -183,8 +186,8 @@ namespace InfimaGames.LowPolyShooterPack
             #endregion
 
             //Max Out Ammo.
-            ammunitionAllTotal=ammunitionCurrent = magazineBehaviour.GetAmmunitionTotal();
-            BulletManager.SetMagazin(ammunitionCurrent*3);
+            ammunitionAllTotal = ammunitionCurrent = magazineBehaviour.GetAmmunitionTotal();
+            BulletManager.SetMagazin(ammunitionCurrent * 3);
         }
 
         protected override void Update()
@@ -265,7 +268,7 @@ namespace InfimaGames.LowPolyShooterPack
             Vector3 angle = Vector3.zero;
 
             // 走り撃ち(Shift)
-            if (playerCharacter.IsRunning()&&!shotGan)
+            if (playerCharacter.IsRunning() && !shotGan)
             {
                 float randomX = Random.Range(-25.0f, 25.0f);
                 float randomY = Random.Range(-25.0f, 25.0f);
@@ -297,6 +300,7 @@ namespace InfimaGames.LowPolyShooterPack
             projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * projectileImpulse;
             projectile.GetComponent<BulletDamage>().SetDamage(bulletDamage);
             projectile.GetComponent<Projectile>().pierce = pierce;
+            if(Magiclean(projectile))return;
             Dominator(projectile);
             if (!shotGan) return;
 
@@ -338,9 +342,9 @@ namespace InfimaGames.LowPolyShooterPack
 
                 GameObject projectileBullet = Instantiate(prefabProjectile);
                 projectileBullet.transform.position = projectile.transform.position;
-                Vector3 vec = target[i].transform.position-transform.position;
+                Vector3 vec = target[i].transform.position - transform.position;
 
-                projectileBullet.transform.eulerAngles = new Vector3(0, Mathf.Atan2(vec.x, vec.z)*Mathf.Rad2Deg, 0);
+                projectileBullet.transform.eulerAngles = new Vector3(0, Mathf.Atan2(vec.x, vec.z) * Mathf.Rad2Deg, 0);
 
 
                 // 弾丸に速度を加える。
@@ -360,6 +364,48 @@ namespace InfimaGames.LowPolyShooterPack
 
 
         }
+
+        private bool Magiclean(GameObject projectile)
+        {
+            if (GanTypeExtra != GanObject.ExtraGunType.Magiclean) return false;
+
+            StartCoroutine(TestCoroutine(projectile));
+
+            return true;
+        }
+        IEnumerator TestCoroutine(GameObject projectile)
+        {
+            float speedrate = 1;
+
+            if (Character.character.IsAiming()) speedrate = 3;
+
+            Vector3 projectileAngle = projectile.transform.eulerAngles;
+            Vector3 projectilePos = projectile.transform.position;
+            for (int i = -1; i < 2; i++)
+            {
+                for (int j = -1; j < 2; j++)
+                {
+                    GameObject projectileBullet = GameObject.Instantiate(prefabProjectile);
+
+                    projectileBullet.transform.position = projectilePos;
+                    projectileBullet.transform.eulerAngles = new Vector3(i,j, 0) + projectileAngle;
+
+                    projectileBullet.GetComponent<Rigidbody>().velocity = projectileBullet.transform.forward * projectileImpulse * speedrate;
+                    projectileBullet.GetComponent<Rigidbody>().useGravity = false;
+                    projectileBullet.GetComponent<BulletDamage>().SetDamage(bulletDamage);
+                    yield return null;
+                    yield return null;
+
+                }
+
+
+            }
+            Destroy(projectile);
+
+
+        }
+
+
         private void ScopeMode()
         {
             if (weponScope == null)
@@ -404,7 +450,7 @@ namespace InfimaGames.LowPolyShooterPack
             BulletManager.ReloadSystem(BulletManager.GetMagazin(), ammunitionCurrent, GetAmmunitionAllTotal());
 
             GameManager.Instance.SetIsReload(false);
-            ammunitionCurrent=BulletManager.GetAmmunition();
+            ammunitionCurrent = BulletManager.GetAmmunition();
         }
 
         public override void EjectCasing()

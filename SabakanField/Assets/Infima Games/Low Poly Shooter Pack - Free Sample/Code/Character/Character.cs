@@ -50,6 +50,8 @@ namespace InfimaGames.LowPolyShooterPack
         [Tooltip("Character Animator.")]
         [SerializeField]
         private Animator characterAnimator;
+        [SerializeField, Header("プレイヤーのインスタンス")]
+        public static Character character;
 
         #endregion
 
@@ -207,6 +209,8 @@ namespace InfimaGames.LowPolyShooterPack
 
             //Refresh!
             RefreshWeaponSetup();
+
+            character = this;
         }
         protected override void Start()
         {
