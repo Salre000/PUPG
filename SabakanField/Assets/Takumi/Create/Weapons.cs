@@ -22,7 +22,7 @@ public class Weapons : MonoBehaviour
         mainCamera = GameObject.Find("MainCamera");
         player = GameObject.Find("Player");
 
-        ID = 0;//Random.Range(0, 4);
+        ID = Random.Range(0, 5);
 
         for(int i = 0; i < weapons.Count; i++) 
         {
@@ -72,7 +72,7 @@ public class Weapons : MonoBehaviour
 
             if (!Input.GetKeyDown(KeyCode.E)) return;
 
-            if(ID<3)
+            if(ID<4)
             player.GetComponent<PickUpWepon>().SetPicWepan(GanObject.extraGan.objects[ID]);
             else 
             {
