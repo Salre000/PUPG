@@ -15,7 +15,7 @@ public class BulletReChage : Element
 
     private void FixedUpdate()
     {
-        if (player == null) return;
+        if (player == null) player = GameObject.FindWithTag("Player");
 
         if (Vector3.Distance(player.transform.position,this.transform.position)< renge)
         {

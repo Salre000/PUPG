@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1086664671600574}
-  m_LocalRotation: {x: 0.008404323, y: -0.00064348895, z: 0.0022648165, w: 0.9999619}
+  m_LocalRotation: {x: -0.00070996815, y: -0.000009162145, z: -0.008697612, w: 0.999962}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.025}
   m_ConstrainProportionsScale: 0
@@ -201,6 +201,7 @@ MonoBehaviour:
   concreteImpactPrefabs:
   - {fileID: 4587651611338842, guid: 5e02303289b3c494e8e185be0fbbd405, type: 3}
   pierce: 0
+  oneCount: 0
 --- !u!114 &2738334687133938937
 MonoBehaviour:
   m_ObjectHideFlags: 0

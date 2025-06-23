@@ -22,7 +22,7 @@ public class Weapons : MonoBehaviour
         mainCamera = GameObject.Find("MainCamera");
         player = GameObject.Find("Player");
 
-        ID = 3;//Random.Range(0, 5);
+        ID = Random.Range(0, 5);
 
         for(int i = 0; i < weapons.Count; i++) 
         {

@@ -64,6 +64,9 @@ public class Dominator : MonoBehaviour
                 if (Vector2.Distance(main, point) > 500) continue;
 
                 if (point.z < 0) continue;
+
+                if (!hit.transform.gameObject.GetComponent<AI>().GetStatus().GetISLife()) continue;
+
                 Debug.Log("‰½‚©" + point.z);
 
                 Debug.DrawLine(transform.position, Characters[i].transform.position, UnityEngine.Color.magenta, 3);
