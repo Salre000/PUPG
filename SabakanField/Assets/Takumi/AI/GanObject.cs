@@ -41,6 +41,7 @@ public static class GanObject
         Dominator,
         Magiclean,
         Alice,
+        Minigun,
         Max
     }
 

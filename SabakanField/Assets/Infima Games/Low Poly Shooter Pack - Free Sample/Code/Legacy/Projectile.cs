@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using InfimaGames.LowPolyShooterPack;
 using Random = UnityEngine.Random;
+using Unity.VisualScripting;
 
 public class Projectile : MonoBehaviour {
 
@@ -22,7 +23,7 @@ public class Projectile : MonoBehaviour {
 	public Transform [] dirtImpactPrefabs;
 	public Transform []	concreteImpactPrefabs;
 	public bool pierce=false;
-
+	public bool oneCount=false;
 
     private Vector3 startPostion;
 	private Vector3 lostPostion;
@@ -90,6 +91,7 @@ public class Projectile : MonoBehaviour {
 
 			copy.GetComponent<Rigidbody>().useGravity = false;
 
+			if(oneCount)copy.GetComponent<Projectile>().pierce = false;
 
 
         }

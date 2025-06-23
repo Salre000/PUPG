@@ -16,7 +16,14 @@ MonoBehaviour:
   - Dominator
   - Magiclean
   - Alice
+  - minigun
   objects:
   - {fileID: 3940775734005510950, guid: 0c7fb80c9a2a2f844a061100f8eea33a, type: 3}
   - {fileID: 2027077221834656836, guid: c3640df2588a0c04c99188751a2a3d10, type: 3}
   - {fileID: 496049676607651450, guid: ce76ec367a5986b44b85b1f2f607e025, type: 3}
+  - {fileID: 4080046743332817693, guid: d5e84d2e3c164524e8a3fec444f2635e, type: 3}
+  reloadTime: []
+  "\uFF4DagazineBulletCount": 
+  ALLBulletCount: 
+  renge: []
+  Explanation: []

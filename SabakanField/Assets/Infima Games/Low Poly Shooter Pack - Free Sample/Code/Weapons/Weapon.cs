@@ -302,6 +302,7 @@ namespace InfimaGames.LowPolyShooterPack
             projectile.GetComponent<Projectile>().pierce = pierce;
             if(Magiclean(projectile))return;
             Dominator(projectile);
+            Minigun(projectile);
             if (!shotGan) return;
 
             float yAngle = Mathf.Atan2(projectile.transform.forward.x, projectile.transform.forward.z);
@@ -405,7 +406,15 @@ namespace InfimaGames.LowPolyShooterPack
 
         }
 
+        private void Minigun(GameObject projectile) 
+        {
+            if (GanTypeExtra != GanObject.ExtraGunType.Minigun) return;
 
+            projectile.GetComponent<Projectile>().pierce = true;
+            projectile.GetComponent<Projectile>().oneCount = true;
+
+
+        }
         private void ScopeMode()
         {
             if (weponScope == null)
