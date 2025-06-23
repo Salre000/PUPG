@@ -68,11 +68,19 @@ public static class BulletManager
     static public void ReloadSystem(int magazin, int ammunition, int max)
     {
         // ƒŠƒ[ƒh‚·‚é’e”‚ğŒˆ’è‚·‚é
-        var value = max - ammunition;
-        // e‚É’e‚ğ•â[
-        ammunition += value;
+        if (magazin < max)
+        {
+            int num = max;
+            max = magazin+ammunition;
+            if (num < max)
+                max = num;
+        }
+        int value = max - ammunition;
         // ‘’e”‚©‚çƒŠƒ[ƒh‚µ‚½•ª‚ğˆø‚­
         magazin -= value;
+        // e‚É’e‚ğ•â[
+        ammunition += value;
+
         _ammunition = ammunition;
         _magazin = magazin;
     }
