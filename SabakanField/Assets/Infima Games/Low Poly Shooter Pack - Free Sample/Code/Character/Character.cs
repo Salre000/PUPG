@@ -99,7 +99,7 @@ namespace InfimaGames.LowPolyShooterPack
         /// <summary>
         /// The currently equipped weapon.
         /// </summary>
-        private WeaponBehaviour equippedWeapon;
+        public WeaponBehaviour equippedWeapon { private set; get; }
         /// <summary>
         /// The equipped weapon's attachment manager.
         /// </summary>
@@ -269,6 +269,7 @@ namespace InfimaGames.LowPolyShooterPack
             //Holding the firing button.
             if (holdingButtonFire)
             {
+                
                 //Check.
                 if (CanPlayAnimationFire() && equippedWeapon.HasAmmunition() && equippedWeapon.IsAutomatic())
                 {
