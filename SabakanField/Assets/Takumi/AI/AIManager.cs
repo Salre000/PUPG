@@ -179,7 +179,6 @@ public class AIManager : MonoBehaviour
         kIll.deathCount.Clear();
         kIll.killCount.Add(0);
         kIll.deathCount.Add(0);
-
         AICharacterUtility.ResetAI();
 
         GanObject.LoodGameObject();
@@ -286,7 +285,7 @@ public class AIManager : MonoBehaviour
 
     private void RaandomGan(GameObject ai)
     {
-        GanObject.ConstancyGanType type = (ConstancyGanType)Random.Range(0, (int)GanObject.ConstancyGanType.Max - 1);
+        GanObject.ConstancyGanType type = ConstancyGanType.EyeOfHorus;//(ConstancyGanType)Random.Range(0, (int)GanObject.ConstancyGanType.Max - 1);
         Animator animator = ai.GetComponent<Animator>();
         int randomRenge = 0;
 
@@ -320,7 +319,7 @@ public class AIManager : MonoBehaviour
                 ai.GetComponent<AI>().GetStatus().SetAnimatorFloat("ShotSpped", 0.5f);
                 randomRenge = 3;
 
-                break;
+            break;
             case ConstancyGanType.FAR_EYE:
                 ai.GetComponent<AI>().GetStatus().SetAnimatorFloat("MoveSpped", 0.5f);
                 ai.GetComponent<AI>().GetStatus().SetAnimatorFloat("ShotSpped", 0.3f);
