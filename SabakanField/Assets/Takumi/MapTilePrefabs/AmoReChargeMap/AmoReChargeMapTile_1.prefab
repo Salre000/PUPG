@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8499196435559304087}
   - component: {fileID: 2661254010968274923}
   - component: {fileID: 6551171978521656390}
-  m_Layer: 8
+  m_Layer: 3
   m_Name: MiniMapUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 6128563853288734412}
   - component: {fileID: 6128563853288734415}
   - component: {fileID: 6128563853288734414}
-  m_Layer: 8
+  m_Layer: 3
   m_Name: AmoReChargeMapTile_1
   m_TagString: Floor
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ PrefabInstance:
     - target: {fileID: 7393725102303332160, guid: e2e48196f1ea3a743b6e60463e38d829,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7912852454173941242, guid: e2e48196f1ea3a743b6e60463e38d829,
         type: 3}

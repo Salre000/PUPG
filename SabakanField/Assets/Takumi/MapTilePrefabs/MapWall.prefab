@@ -13,12 +13,12 @@ GameObject:
   - component: {fileID: 2603607347155837493}
   - component: {fileID: 8794086499499996166}
   - component: {fileID: 1708789674771548581}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MapWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1286035276165655404
 Transform:

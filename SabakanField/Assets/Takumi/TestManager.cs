@@ -6,4 +6,9 @@ using UnityEngine.AI;
 
 public class TestManager : MonoBehaviour
 {
+    public static float takasa = 0;
+    void Start()
+    {
+        GetComponent<NavMeshSurface>().BuildNavMesh();
+    }
 }

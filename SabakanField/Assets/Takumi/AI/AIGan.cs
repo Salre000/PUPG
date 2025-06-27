@@ -16,7 +16,7 @@ public class AIGan : MonoBehaviour
     {
         AI ai = GetComponentInParent<AI>();
 
-        ai.SetIGan(this);
+        ai.SetAIGan(this);
     }
 
     public void FixedUpdate()
@@ -24,14 +24,14 @@ public class AIGan : MonoBehaviour
 
 
     }
-    public void Shot(float angle)
+    public void Shot(float angle,float vertical=0)
     {
 
 
         GameObject bullet = GameObject.Instantiate(Bullet);
 
         bullet.transform.position = BulletPosition.transform.position;
-        bullet.transform.eulerAngles = new Vector3(0, angle, 0);
+        bullet.transform.eulerAngles = new Vector3(vertical, angle, 0);
 
         Debug.DrawRay(bullet.transform.position, bullet.transform.forward * 100, Color.red, 2);
         bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;

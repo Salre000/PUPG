@@ -33,6 +33,9 @@ public class CreateMap : MonoBehaviour
     [SerializeField] int _MAX_SIZE_X = 6;
     [SerializeField] int _MAX_SIZE_Y = 6;
 
+    public int GetSIZEX() {  return _MAX_SIZE_X; }
+    public int GetSIZEY() {  return _MAX_SIZE_Y; }
+
     public int MAXSIZE = -1;
 
     public Vector2 MapSize=Vector2.zero;
@@ -41,7 +44,7 @@ public class CreateMap : MonoBehaviour
     const float _MAP_HEIGHT = 0.2f;
 
     //マップチップのサイズ
-    const int MAP_RETO = 10;
+    public const int MAP_RETO = 10;
 
     //敵と味方のフラッグの座標
     private Vector3 _ENEMYFLAG_POSITION;
@@ -62,6 +65,7 @@ public class CreateMap : MonoBehaviour
 
     public void Awake()
     {
+        
         MAXSIZE = Mathf.Min(_MAX_SIZE_X, _MAX_SIZE_Y);
         MapSize.x = _MAX_SIZE_X;
         MapSize.y = _MAX_SIZE_Y;
@@ -122,7 +126,7 @@ public class CreateMap : MonoBehaviour
         }
 
         //マップを1つのオブジェクトの子構造にするためのオブジェクト
-        GameObject maptileAll = new GameObject("MapTileAll");
+        GameObject maptileAll = GameObject.Find("Map");
 
         //int配列に変換したマップデータを使いマップチップを割り当てする
         for (int x = 0; x < _MAX_SIZE_X; x++)
@@ -141,6 +145,9 @@ public class CreateMap : MonoBehaviour
                 int randAngle = Random.Range(0, 4);
 
                 mapTile.transform.eulerAngles = new Vector3(0, 90 * randAngle, 0);
+
+                mapTile.gameObject.isStatic = true;
+
 
             }
         }

@@ -14,6 +14,16 @@ public class PublicEnum
         max
 
     }
+    public enum AIJob 
+    {
+        Nnne=-1,
+        reader,
+        defender,
+        member,
+        subreader,
+        Max
+    }
+
 
 
 

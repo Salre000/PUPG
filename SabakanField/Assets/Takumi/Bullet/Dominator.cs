@@ -65,7 +65,7 @@ public class Dominator : MonoBehaviour
 
                 if (point.z < 0) continue;
 
-                if (!hit.transform.gameObject.GetComponent<AI>().GetStatus().GetISLife()) continue;
+                //if (!hit.transform.gameObject.GetComponent<AI>().GetStatus().GetISLife()) continue;
 
                 Debug.Log("‰½‚©" + point.z);
 

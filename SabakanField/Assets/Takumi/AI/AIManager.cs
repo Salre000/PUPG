@@ -28,6 +28,12 @@ public class AIManager : MonoBehaviour
     //AIのオリジナルオブジェクト
     [SerializeField] GameObject origenAI;
 
+    [SerializeField] private TeamAIManager playerTeamAIManager;
+    private TeamAIManager enemyTeamAIManager;
+
+    public TeamAIManager GetEnemyTime(int index) { return index == 0 ? enemyTeamAIManager : playerTeamAIManager; }
+    public List<AI> GetEnemyAI(int index) { return index == 0 ? enemys : players; }
+
 
     [SerializeField, Header("ハンドガンの銃オーバライドのアニメーション")] AnimatorOverrideController HandGanType;
 
@@ -50,6 +56,7 @@ public class AIManager : MonoBehaviour
 
     public List<bool> GetPlayersLife() { return playersLife; }
     public List<bool> GetEnemyLife() { return enemyLife; }
+    public GameObject GetFlag(int ID) { return flagObject[ID]; }
 
     public List<GameObject> GetchracterALL()
     {
@@ -101,50 +108,6 @@ public class AIManager : MonoBehaviour
 
 
 
-    public List<GameObject> GetRelativeEnemy(bool isEnemyTeam)
-    {
-        int count;
-
-        if (isEnemyTeam) count = players.Count;
-        else count = enemys.Count;
-
-        List<GameObject> list = new List<GameObject>();
-
-        for (int i = 0; i < count; i++)
-        {
-            if (isEnemyTeam)
-            {
-                if (!players[i].GetStatus().GetISLife()) continue;
-                list.Add(players[i].gameObject);
-            }
-            else
-            {
-                if (!enemys[i].GetStatus().GetISLife()) continue;
-                list.Add(enemys[i].gameObject);
-            }
-        }
-
-        if (isEnemyTeam && player != null && !PlayerManager.GetIsPlayerDead()) list.Add(player);
-
-        if (GameModes.mode == PublicEnum.GameMode.deathmatch)
-        {
-            list.Clear();
-            for (int i = 0; i < enemys.Count; i++)
-            {
-                if (!enemys[i].GetStatus().GetISLife()) continue;
-                list.Add(enemys[i].gameObject);
-            }
-            for (int i = 0; i < players.Count; i++)
-            {
-                if (!players[i].GetStatus().GetISLife()) continue;
-                list.Add(players[i].gameObject);
-            }
-            list.Add(player);
-        }
-
-        return list;
-
-    }
 
     private void ScanAILife()
     {
@@ -152,7 +115,7 @@ public class AIManager : MonoBehaviour
         players.Capacity = players.Capacity;
         for (int i = 0; i < players.Count; i++)
         {
-            playersLife.Add(AICharacterUtility.GetCharacterAI(i).GetISLife());
+            //playersLife.Add(AICharacterUtility.GetCharacterAI(i).GetISLife());
 
         }
 
@@ -160,7 +123,7 @@ public class AIManager : MonoBehaviour
         enemyLife.Capacity = enemys.Capacity;
         for (int i = 0; i < enemys.Count; i++)
         {
-            enemyLife.Add(AICharacterUtility.GetCharacterAI(i + 4).GetISLife());
+            //enemyLife.Add(AICharacterUtility.GetCharacterAI(i + 4).GetISLife());
 
         }
 
@@ -230,13 +193,18 @@ public class AIManager : MonoBehaviour
 
                 }
                 ai.transform.name += ((i * 5) + j).ToString();
+
+
                 AI Ai = ai.GetComponent<AI>();
 
 
+                //Ai.Initialization();
 
 
-                Ai.SetEnemyFlag(flagObject[(i + 1) % 2]);
-                Ai.SetFlag(flagObject[i]);
+                //Ai.SetEnemyFlag(flagObject[(i + 1) % 2]);
+                //Ai.SetFlag(flagObject[i]);
+
+                //Ai.GetMove().Start();
 
                 kIll.killCount.Add(0);
                 kIll.deathCount.Add(0);
@@ -246,7 +214,6 @@ public class AIManager : MonoBehaviour
                 {
                     ai.transform.GetChild(0).GetComponent<MeshRenderer>().material = color[0];
 
-                    Ai.SetPlayerFaction(() => true);
                     players.Add(Ai);
 
                 }
@@ -254,7 +221,6 @@ public class AIManager : MonoBehaviour
                 {
                     ai.transform.GetChild(0).GetComponent<MeshRenderer>().material = color[1];
 
-                    Ai.SetPlayerFaction(() => false);
                     enemys.Add(Ai);
                 }
 
@@ -262,11 +228,16 @@ public class AIManager : MonoBehaviour
 
         }
 
+        playerTeamAIManager = new TeamAIManager();
+        enemyTeamAIManager = new TeamAIManager();
+
+        playerTeamAIManager.Initialize(players, 0);
+        enemyTeamAIManager.Initialize(enemys, 1);
+
+
 
 
     }
-
-
     private void Debug()
     {
         if (Input.GetKey(KeyCode.Alpha0)) players[0].gameObject.GetComponent<CharacterInsterface>().HitAction();
@@ -277,7 +248,7 @@ public class AIManager : MonoBehaviour
         if (Input.GetKey(KeyCode.Alpha5)) enemys[1].gameObject.GetComponent<CharacterInsterface>().HitAction();
         if (Input.GetKey(KeyCode.Alpha6)) enemys[2].gameObject.GetComponent<CharacterInsterface>().HitAction();
         if (Input.GetKey(KeyCode.Alpha7)) enemys[3].gameObject.GetComponent<CharacterInsterface>().HitAction();
-        if (Input.GetKey(KeyCode.Alpha8)) enemys[4].gameObject.GetComponent<AI>().Shot();
+        //if (Input.GetKey(KeyCode.Alpha8)) enemys[4].gameObject.GetComponent<AI>().Shot();
 
 
 
@@ -293,41 +264,36 @@ public class AIManager : MonoBehaviour
 
         AI aI = ai.GetComponent<AI>();
 
-        aI.SetGanObject(gan);
-        aI.Initialization();
-
-        aI.GetIShot().SetGanType(type);
-        aI.SetBullet(GanObject.GanBulletCount[(int)type]);
-
+        aI.SetGanType(type);
         switch (type)
         {
             case ConstancyGanType.SL_8:
-                ai.GetComponent<AI>().GetStatus().SetAnimatorFloat("MoveSpped", 1);
-                ai.GetComponent<AI>().GetStatus().SetAnimatorFloat("ShotSpped", 2);
+                ai.GetComponent<AI>().GetAIStatus().SetAnimatorFloat("MoveSpped", 1);
+                ai.GetComponent<AI>().GetAIStatus().SetAnimatorFloat("ShotSpped", 2);
                 randomRenge = 5;
                 break;
             case ConstancyGanType.Classic:
                 animator.runtimeAnimatorController = HandGanType;
-                ai.GetComponent<AI>().GetStatus().SetAnimatorFloat("MoveSpped", 1.1f);
-                ai.GetComponent<AI>().GetStatus().SetAnimatorFloat("ShotSpped", 3);
+                ai.GetComponent<AI>().GetAIStatus().SetAnimatorFloat("MoveSpped", 1.1f);
+                ai.GetComponent<AI>().GetAIStatus().SetAnimatorFloat("ShotSpped", 3);
                 randomRenge = 7;
 
                 break;
             case ConstancyGanType.Stechkin:
                 animator.runtimeAnimatorController = HandGanType;
-                ai.GetComponent<AI>().GetStatus().SetAnimatorFloat("MoveSpped", 1);
-                ai.GetComponent<AI>().GetStatus().SetAnimatorFloat("ShotSpped", 0.5f);
+                ai.GetComponent<AI>().GetAIStatus().SetAnimatorFloat("MoveSpped", 1);
+                ai.GetComponent<AI>().GetAIStatus().SetAnimatorFloat("ShotSpped", 0.5f);
                 randomRenge = 3;
 
-            break;
+                break;
             case ConstancyGanType.FAR_EYE:
-                ai.GetComponent<AI>().GetStatus().SetAnimatorFloat("MoveSpped", 0.5f);
-                ai.GetComponent<AI>().GetStatus().SetAnimatorFloat("ShotSpped", 0.3f);
+                ai.GetComponent<AI>().GetAIStatus().SetAnimatorFloat("MoveSpped", 0.5f);
+                ai.GetComponent<AI>().GetAIStatus().SetAnimatorFloat("ShotSpped", 0.3f);
                 randomRenge = 0;
                 break;
             case ConstancyGanType.EyeOfHorus:
-                ai.GetComponent<AI>().GetStatus().SetAnimatorFloat("MoveSpped", 0.8f);
-                ai.GetComponent<AI>().GetStatus().SetAnimatorFloat("ShotSpped", 0.8f);
+                ai.GetComponent<AI>().GetAIStatus().SetAnimatorFloat("MoveSpped", 0.8f);
+                ai.GetComponent<AI>().GetAIStatus().SetAnimatorFloat("ShotSpped", 0.8f);
                 randomRenge = 10;
                 break;
         }
@@ -338,11 +304,8 @@ public class AIManager : MonoBehaviour
         WeaponEquipment weapon = gan.AddComponent<WeaponEquipment>();
 
 
-        weapon.SetLefthand(aI.GetLeftHand());
-        weapon.SetRighthand(aI.GetRightHand());
-
-        aI.SetRandomRenge(randomRenge);
-
+        weapon.SetLefthand(aI.leftHand);
+        weapon.SetRighthand(aI.rightHand);
 
     }
 

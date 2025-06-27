@@ -8,7 +8,7 @@ public static class AIUtility
 
     public static List<GameObject> GetRelativeEnemy(bool isPlayerTeam) 
     {
-        return aIManager.GetRelativeEnemy(isPlayerTeam);
+        return null;//aIManager.GetRelativeEnemy(isPlayerTeam);
     }
 
     public static List<GameObject> GetChracterALL() { return aIManager.GetchracterALL(); }
@@ -37,5 +37,9 @@ public static class AIUtility
     public static List<bool> GetPlayersLife() {  return aIManager.GetPlayersLife(); }
     public static List<bool> GetEnemysLife() {return aIManager.GetEnemyLife(); }
 
+    public static GameObject GetFlag(int id) { return aIManager.GetFlag(id); }
 
+    public static TeamAIManager GetTeamAIManager(int index) { return aIManager.GetEnemyTime(index); }
+
+    public static List<AI>GetEnemyAI(int id) { return aIManager.GetEnemyAI(id); }
 }

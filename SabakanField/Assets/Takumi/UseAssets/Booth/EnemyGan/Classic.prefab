@@ -9886,7 +9886,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3644133558307566558}
-  - component: {fileID: -5218125256922829681}
+  - component: {fileID: -4521553374968925794}
   m_Layer: 0
   m_Name: Classic
   m_TagString: Untagged
@@ -9910,7 +9910,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
---- !u!114 &-5218125256922829681
+--- !u!114 &-4521553374968925794
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9919,12 +9919,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4168433871889688932}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4765186dd029e6d4eb8d0f6356a62c3b, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e576171b2191ca46a26bd2bbe0a334e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Bullet: {fileID: 1086664671600574, guid: dd9ad5ce7fd63de4595d6ef8cff99c30, type: 3}
-  BulletPosition: {fileID: 2616862482261113065}
-  bulletDamage: 20
+  BulletPosition: {fileID: 532409675461123287}
+  bulletDamage: 17
+  shotGan: 0
 --- !u!1 &4684918181194887504
 GameObject:
   m_ObjectHideFlags: 0

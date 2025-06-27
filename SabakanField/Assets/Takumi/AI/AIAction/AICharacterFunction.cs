@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static AIMove;
 
 public static class AICharacterFunction 
 {
@@ -54,7 +53,7 @@ public static class AICharacterFunction
                 if (bullet == null) continue;
 
 
-                if (GameModes.mode!= PublicEnum.GameMode.deathmatch?bullet.PlayerFaction() == AICharacterUtility.GetPlayerFaction(ID):false) continue;
+               // if (GameModes.mode!= PublicEnum.GameMode.deathmatch?bullet.PlayerFaction() == AICharacterUtility.GetPlayerFaction(ID):false) continue;
                 //if (Vector3.Distance(startPos, hit.point) > 100) continue;
 
                 Debug.Log("ƒŒƒ“ƒW" + Vector3.Distance(startPos, hit.point));

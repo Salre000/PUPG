@@ -16,11 +16,12 @@ TagManager:
   - Wood (Static)
   - Dirt (Static)
   - Wood
+  - Floor
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Nav
   - Water
   - UI
   - 
