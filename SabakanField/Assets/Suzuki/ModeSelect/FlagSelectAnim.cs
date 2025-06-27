@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SelectAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class FlagSelectAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     bool _isAnimating = false;
     [SerializeField] Transform _camera;
@@ -22,13 +22,13 @@ public class SelectAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     bool isThird = false;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Application.targetFrameRate = 120;
         GetComponent<Button>().onClick.AddListener(OnButton);
 
-        _camera.localPosition=movePosition = _farstPosition.localPosition;
-        _camera.localRotation=moveRotation = _farstPosition.localRotation;
+        _camera.localPosition = movePosition = _farstPosition.localPosition;
+        _camera.localRotation = moveRotation = _farstPosition.localRotation;
     }
 
     private void Update()
@@ -38,7 +38,7 @@ public class SelectAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     void OnButton()
     {
-        Debug.Log("n");
+        GameSceneManager.LoadScene(GameSceneManager.flagScene);
     }
 
 
@@ -63,12 +63,10 @@ public class SelectAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             movePosition = _secondPosition.localPosition;
             _camera.localRotation=_secondPosition.localRotation;
         }
-
-        movePosition.z += Time.deltaTime * (_speed / 15);
+        movePosition.x += Time.deltaTime * (_speed / 15);
+        movePosition.z += Time.deltaTime * (_speed / 30);
         _camera.localPosition = movePosition;
 
-        moveRotation.y += Time.deltaTime * _speed;
-        _camera.localRotation *= Quaternion.Euler(0, Time.deltaTime * _speed, 0);
     }
 
     private void SecondCameraPosition()
