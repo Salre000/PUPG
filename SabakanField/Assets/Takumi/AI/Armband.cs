@@ -16,7 +16,7 @@ public class Armband : MonoBehaviour
 
     public void FixedUpdate()
     {
-        this.transform.position = (start.transform.position-end.transform.position)/2+end.transform.position;
+        this.transform.position = ((start.transform.position-end.transform.position)/2)*2.5f+end.transform.position;
 
         transform.LookAt(end.transform);
 
