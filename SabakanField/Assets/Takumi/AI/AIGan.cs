@@ -6,6 +6,7 @@ public class AIGan : MonoBehaviour
 {
     [SerializeField] GameObject Bullet;
     [SerializeField] GameObject BulletPosition;
+    [SerializeField] GameObject BulletFront;
     [SerializeField, Header("Ç±ÇÃèeÇÃçUåÇóÕ")] float bulletDamage = -1;
     [SerializeField, Header("ÉVÉáÉbÉgÉKÉìÇ©Ç«Ç§Ç©")] bool shotGan = false;
     /*[SerializeField, Header("Ç±ÇÃèeÇÃë¨ìx")] */
@@ -24,14 +25,14 @@ public class AIGan : MonoBehaviour
 
 
     }
-    public void Shot(float angle,float vertical=0)
+    public void Shot()
     {
 
 
         GameObject bullet = GameObject.Instantiate(Bullet);
 
         bullet.transform.position = BulletPosition.transform.position;
-        bullet.transform.eulerAngles = new Vector3(vertical, angle, 0);
+        bullet.transform.LookAt(BulletFront.transform);
 
         Debug.DrawRay(bullet.transform.position, bullet.transform.forward * 100, Color.red, 2);
         bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;
@@ -48,7 +49,8 @@ public class AIGan : MonoBehaviour
                 bullet = GameObject.Instantiate(Bullet);
 
                 bullet.transform.position = BulletPosition.transform.position;
-                bullet.transform.eulerAngles = new Vector3(i*5, angle+j * 5, 0);
+                bullet.transform.LookAt(BulletFront.transform);
+                bullet.transform.eulerAngles += new Vector3(i * 5, j * 5, 0);
                 Debug.DrawRay(bullet.transform.position, bullet.transform.forward * 100, Color.red, 2);
 
                 bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;

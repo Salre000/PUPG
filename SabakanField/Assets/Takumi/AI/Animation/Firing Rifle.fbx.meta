@@ -73,7 +73,7 @@ ModelImporter:
         messageOptions: 0
       transformMask: []
       maskType: 3
-      maskSource: {instanceID: 0}
+      maskSource: {fileID: 31900000, guid: c8ce2c2bc431a064a8b48133e979f834, type: 2}
       additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:

@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public abstract class AIJobBase
 {
+    public static readonly Vector3 offSet=new Vector3(0,1.25f,0);
+
     protected NavMeshAgent _agent;
 
     protected GameObject _gameObject;
@@ -133,9 +135,10 @@ public abstract class AIJobBase
 
                 if (ai.GetAIJob().GetTimeID() == timeID) continue;
 
-                AIUtility.GetEnemyAI((timeID + 1) % 2)[characterID].ShotReserve(); ;
+                AIUtility.GetEnemyAI((timeID + 1) % 2)[characterID].ShotReserve(ai.transform.gameObject); ;
 
                 _gameObject.transform.LookAt(hit.transform);
+
                 Stop();
 
                 return true;
@@ -157,6 +160,5 @@ public abstract class AIJobBase
     }
 
     public void SetMoveSpeed(float speed) { _agent.speed = speed; }
-
 
 }
