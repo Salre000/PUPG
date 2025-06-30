@@ -13,6 +13,7 @@ public static class GameSceneManager
     public const string clearScene = "ClearScene";
     public const string resultScene = "ResultScene";
     public const string lobbyScene = "LobbyScene";
+    public const string modeScene = "ModeSelectScene";
 
     // •’Ê‚ÌƒV[ƒ“‘JˆÚ
     public static void LoadScene(string sceneName)
