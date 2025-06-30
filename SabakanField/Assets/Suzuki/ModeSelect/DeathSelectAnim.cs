@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class FlagSelectAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class DeathSelectAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     bool _isAnimating = false;
     [SerializeField] Transform _camera;
@@ -62,8 +62,8 @@ public class FlagSelectAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             movePosition = _secondPosition.localPosition;
             _camera.localRotation=_secondPosition.localRotation;
         }
-        movePosition.x += Time.deltaTime * (_speed / 15);
-        movePosition.z += Time.deltaTime * (_speed / 30);
+        movePosition.x -= Time.deltaTime * (_speed / 10);
+        movePosition.z -= Time.deltaTime * (_speed / 30);
         _camera.localPosition = movePosition;
 
     }
@@ -81,8 +81,8 @@ public class FlagSelectAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             _camera.localRotation = _thirdPosition.localRotation;
         }
 
-        movePosition.x += Time.deltaTime * (_speed / 30);
-        movePosition.z -= Time.deltaTime * (_speed / 10);
+        movePosition.x += Time.deltaTime * (_speed/3);
+        movePosition.z -= Time.deltaTime * (_speed / 5);
         _camera.localPosition = movePosition;
     }
 
@@ -100,8 +100,8 @@ public class FlagSelectAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             _camera.localRotation = _farstPosition.localRotation;
         }
 
-        movePosition.x += Time.deltaTime * (_speed / 30);
-        movePosition.z -= Time.deltaTime * (_speed / 10);
+        movePosition.x -= Time.deltaTime * (_speed / 10);
+        movePosition.z -= Time.deltaTime * (_speed / 15);
         _camera.localPosition = movePosition;
 
         _camera.rotation *= Quaternion.Euler(0, Time.deltaTime * -_speed, 0);
