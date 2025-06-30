@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+using static SelectManager;
+
 public class DeathSelectAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     bool _isAnimating = false;
@@ -37,7 +39,7 @@ public class DeathSelectAnim : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     void OnButton()
     {
-        GameSceneManager.LoadScene(GameSceneManager.flagScene);
+        Instance.SelectMode(Mode.Death);
     }
 
 

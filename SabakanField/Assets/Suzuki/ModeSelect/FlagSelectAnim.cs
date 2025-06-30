@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+using static SelectManager;
+
 public class FlagSelectAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     bool _isAnimating = false;
@@ -37,7 +39,7 @@ public class FlagSelectAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     void OnButton()
     {
-        GameSceneManager.LoadScene(GameSceneManager.flagScene);
+        Instance.SelectMode(Mode.Flag);
     }
 
 

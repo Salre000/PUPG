@@ -9,6 +9,7 @@ public static class GameSceneManager
     // ÉVÅ[ÉìÇÃñºëO
     public const string titleScene = "TitleScene";
     public const string flagScene = "GameFlagScene";
+    public const string deathScene = "GameDeathmatchScene";
     public const string clearScene = "ClearScene";
     public const string resultScene = "ResultScene";
     public const string lobbyScene = "LobbyScene";
