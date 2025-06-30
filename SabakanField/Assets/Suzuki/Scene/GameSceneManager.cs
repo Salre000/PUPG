@@ -9,9 +9,11 @@ public static class GameSceneManager
     // シーンの名前
     public const string titleScene = "TitleScene";
     public const string flagScene = "GameFlagScene";
+    public const string deathScene = "GameDeathmatchScene";
     public const string clearScene = "ClearScene";
     public const string resultScene = "ResultScene";
     public const string lobbyScene = "LobbyScene";
+    public const string modeScene = "ModeSelectScene";
 
     // 普通のシーン遷移
     public static void LoadScene(string sceneName)
