@@ -20,7 +20,6 @@ public class CreateMap : MonoBehaviour
     [SerializeField, Header("フラッグのマテリアル、プレイヤー、エネミーの順番")] private Material[] _flagMaterial = new Material[2];
     [SerializeField, Header("マップの範囲外と区切る壁のプレハブ")] private GameObject _wallObject;
     [SerializeField, Header("AIのプレハブベース")] private GameObject _aiObject;
-
     //マップの生成のデータの参照先のパス
     private readonly string _PLAN_PASS = "MapPlanData/";
 
@@ -86,7 +85,7 @@ public class CreateMap : MonoBehaviour
         CreateFlag();
 
         //マップの境目の壁を生成する関数
-        CreateMapWall();
+        //CreateMapWall();
 
         //Aiを生成する関数
         _AIManager.CreateAI();
@@ -168,6 +167,21 @@ public class CreateMap : MonoBehaviour
     {
         if(GameModes.mode!=PublicEnum.GameMode.spike)return false;
         //スパイクモードの際の地面の生成
+        GameObject maptileAll = GameObject.Find("Map");
+
+
+        GameObject prefab = GameObject.Instantiate(Resources.Load("SpaikPrefab").GameObject(), maptileAll.transform);
+
+        SpaikMap spaikMap = prefab.GetComponent<SpaikMap>();
+
+        flag[0] = spaikMap.GetStartPos(0);
+
+
+        _AIManager.SetFlagObject(flag[0], 0);
+
+        flag[1] = spaikMap.GetStartPos(1);
+
+        _AIManager.SetFlagObject(flag[1], 1);
 
 
         return true;
@@ -216,6 +230,8 @@ public class CreateMap : MonoBehaviour
     //フラッグを生成して座標とカラーを変更する関数
     private void CreateFlag()
     {
+        if (GameModes.mode == PublicEnum.GameMode.spike) return;
+
         flag[0] = GameObject.Instantiate(_flagObjectBase);
 
         flag[0].transform.GetChild(1).gameObject.GetComponent<SkinnedMeshRenderer>().materials = new Material[1] { _flagMaterial[0] };

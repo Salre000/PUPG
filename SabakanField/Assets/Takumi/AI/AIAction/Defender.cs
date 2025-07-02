@@ -18,7 +18,7 @@ public class Defender : AIJobBase
 
     public override void Initialize()
     {
-
+        defendObject = AIUtility.GetTeamAIManager(timeID).DefenderPos();
     }
     public override void Start()
     {

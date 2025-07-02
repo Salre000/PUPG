@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static CreateMap;
 
 public class TeamAIManager
 {
@@ -13,6 +14,9 @@ public class TeamAIManager
     public void Initialize(List<AI> characters, int id)
     {
         ID = id;
+        SetType();
+
+
 
         PublicEnum.AIJob[] job = SetAIJob(characters.Count);
 
@@ -27,9 +31,9 @@ public class TeamAIManager
                 jobBase.SetLoop();
             });
 
-            jobBase.Initialize();
             jobBase.SetTimeID(ID);
             jobBase.SetID(i);
+            jobBase.Initialize();
             jobBase.SetMoveSpeed(GetSpeed(characters[i].GetGanType()));
 
             Ais.Add(jobBase);
@@ -46,6 +50,26 @@ public class TeamAIManager
         }
     }
 
+    private void SetType()
+    {
+
+        switch (GameModes.mode)
+        {
+            case PublicEnum.GameMode.flag:
+                sbuPos = SetSbu();
+                readerPos = SetReader();
+                defenderPos = SetDefender();
+                break;
+            case PublicEnum.GameMode.deathmatch:
+                break;
+            case PublicEnum.GameMode.spike:
+                sbuPos = SetSbuSpaik();
+                readerPos = SetReaderSpaik();
+                defenderPos = SetDefenderSpaik();
+                break;
+        }
+
+    }
 
     /// <summary>
     /// チームメンバー全員に自陣に戻るように促す
@@ -83,9 +107,6 @@ public class TeamAIManager
         {
             case PublicEnum.AIJob.reader:
                 LeaderJob jobBaseL = new LeaderJob();
-
-                jobBaseL.SetTargetObject(AIUtility.GetFlag((ID + 1) % 2));
-
                 return jobBaseL;
             case PublicEnum.AIJob.defender:
 
@@ -113,7 +134,7 @@ public class TeamAIManager
 
     public List<AIJobBase> GetAIS() { return Ais; }
 
-    private float GetSpeed(GanObject.ConstancyGanType type) 
+    private float GetSpeed(GanObject.ConstancyGanType type)
     {
         switch (type)
         {
@@ -133,5 +154,64 @@ public class TeamAIManager
 
     }
 
+    private Vector3 sbuPos;
+    public Vector3 sbuReaderPos()
+    {
+        return sbuPos;
+    }
+    private GameObject readerPos;
+    public GameObject ReaderPos()
+    {
+        return readerPos;
+    }
+    private GameObject defenderPos;
+    public GameObject DefenderPos()
+    {
+       return defenderPos;
+    }
+
+
+    private Vector3 SetSbu()
+    {
+        Vector3 _via = Vector3.zero;
+        int Rand = Random.Range(0, 2);
+
+        if (Rand > 0) _via += new Vector3(0, 0, MAP_RETO * CreateMapManager.createMap.GetSIZEX() - 5);
+        else _via += new Vector3(MAP_RETO * CreateMapManager.createMap.GetSIZEY() - 5, 0, 0);
+
+        return _via;
+
+    }
+
+    private Vector3 SetSbuSpaik()
+    {
+        return SpaikMap.Instance.GetStartPos(ID).transform.position;
+
+
+    }
+    private GameObject SetReader()
+    {
+        return AIUtility.GetFlag((ID + 1) % 2);
+
+    }
+
+    private GameObject SetReaderSpaik()
+    {
+        return SpaikMap.Instance.GetSpaikArea(ID);
+
+
+    }
+    private GameObject SetDefender()
+    {
+        return AIUtility.GetFlag(ID);
+
+    }
+
+    private GameObject SetDefenderSpaik()
+    {
+        return SpaikMap.Instance.GetPoint(ID);
+
+
+    }
 
 }

@@ -43,8 +43,8 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
         Thiscollider = GetComponent<BoxCollider>();
 
         ////YÇæÇØÇçlÇ¶ÇÈ
-        aiIK.SetLeftRotate(new Vector3(0,0, 90));
-        aiIK.SetRightRotate(new Vector3(0,0, -90));
+        aiIK.SetLeftRotate(new Vector3(0, 0, 90));
+        aiIK.SetRightRotate(new Vector3(0, 0, -90));
 
     }
 
@@ -143,7 +143,7 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
         _aiStatus.SetAnimatorTrigger("Death");
         Thiscollider.enabled = false;
         HP = MAXHP;
-        _job.ChengeShoting(true);  
+        _job.ChengeShoting(true);
         _job.Stop();
 
 

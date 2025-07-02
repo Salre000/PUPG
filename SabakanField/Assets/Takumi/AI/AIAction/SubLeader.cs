@@ -17,12 +17,8 @@ public class SubLeader : AIJobBase
 
     public override void Initialize()
     {
-        _via = Vector3.zero;//new Vector3(-(MAP_RETO + (MAP_RETO / 2)), 0.01f, -(MAP_RETO + (MAP_RETO / 2)));
+        _via = AIUtility.GetTeamAIManager(timeID).sbuReaderPos();
 
-        int Rand = Random.Range(0, 2);
-
-        if (Rand > 0) _via += new Vector3(0, 0, MAP_RETO * CreateMapManager.createMap.GetSIZEX() - 5);
-        else _via += new Vector3(MAP_RETO * CreateMapManager.createMap.GetSIZEY()-5, 0, 0);
         target = _via;
 
     }
