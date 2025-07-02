@@ -20,8 +20,8 @@ public class ResultsIns : MonoBehaviour
     float _plusVecX = 2500;
     const int _PLAYER_NUM = 10;
 
-    private float _speed = 0.1f;
-
+    private float _speed = 0.01f;
+    private float _time = 0.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,9 +49,9 @@ public class ResultsIns : MonoBehaviour
     {
         for (int i = 0; i < _objectList.Count; i++)
         {
-            float time=Time.time*_speed;
+            _time+=Time.deltaTime*_speed;
             Vector3 position = _objectList[i].transform.localPosition;
-            position.x = Mathf.Lerp(_objectList[i].transform.localPosition.x, _targetPos.localPosition.x, time);
+            position.x = Mathf.Lerp(_objectList[i].transform.localPosition.x, _targetPos.localPosition.x, _time);
             _objectList[i].transform.localPosition = position;
         }
     }
