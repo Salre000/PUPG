@@ -9,8 +9,7 @@ public class PublicEnum
         none=-1,
         flag,
         deathmatch,
-        onelife,
-        strongweapon,
+        spike,
         max
 
     }

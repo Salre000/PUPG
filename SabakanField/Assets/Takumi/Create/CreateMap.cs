@@ -98,6 +98,14 @@ public class CreateMap : MonoBehaviour
     }
     private void CreateGraund()
     {
+        if (CreateDroundSpake()) return;
+
+        CreateDroundNotSpake();
+    
+    
+    }
+    private void CreateDroundNotSpake() 
+    {
         //読み込んだCSVファイルを格納
         List<string[]> csvDatas = new List<string[]>();
 
@@ -153,6 +161,16 @@ public class CreateMap : MonoBehaviour
         }
 
 
+
+
+    }
+    private bool CreateDroundSpake() 
+    {
+        if(GameModes.mode!=PublicEnum.GameMode.spike)return false;
+        //スパイクモードの際の地面の生成
+
+
+        return true;
 
     }
 

@@ -2164,6 +2164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7009024161851385727}
   - component: {fileID: 4009648987001191685}
+  - component: {fileID: -7087101103091959323}
   m_Layer: 0
   m_Name: demoModel
   m_TagString: Untagged
@@ -2211,6 +2212,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-7087101103091959323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7642290784761839045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b75d2d1041120a41ba540fdf513ff08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8146954278913486879
 GameObject:
   m_ObjectHideFlags: 0
@@ -2504,6 +2517,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -7980623190606961720, guid: f0623d95c2968c34bbc03bfbd968398c, type: 3}
+    - {fileID: -3218606634608664311, guid: f0623d95c2968c34bbc03bfbd968398c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f0623d95c2968c34bbc03bfbd968398c, type: 3}
 --- !u!4 &7135114167484303797 stripped
 Transform:
