@@ -36,6 +36,9 @@ public class ResultsIns : MonoBehaviour
             if (i %2==1)
                 position.x *= -2;
             instanObject.transform.position = position;
+
+            ResultKillManager.initialize.SetStatus(instanObject, i);
+
             _objectList.Add(instanObject);
 
             _plusVecY -= _num;

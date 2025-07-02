@@ -44,8 +44,6 @@ public abstract class AIJobBase
         }
         NextFixedAction.Clear();
 
-        Debug.Log("Count" + FixedAction.Count);
-
 
     }
     public virtual void Start()

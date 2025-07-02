@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using static GanObject;
@@ -20,7 +21,7 @@ public class AIManager : MonoBehaviour
     [SerializeField] List<bool> enemyLife = new List<bool>();
 
     //フラッグのオブジェクトの配列
-    [SerializeField]GameObject[] flagObject = new GameObject[2];
+    [SerializeField] GameObject[] flagObject = new GameObject[2];
 
     //フラッグのオブジェクトの色を変更するマテリアルの配列
     [SerializeField] private Material[] color = new Material[2];
@@ -46,8 +47,8 @@ public class AIManager : MonoBehaviour
     //プレイヤーの格納先
     GameObject player;
 
-    public GameObject GetPlayer() {  return player; }
-    KIllCount kIll;
+    public GameObject GetPlayer() { return player; }
+    public static KIllCount kIll;
 
     public List<int> GetKillCount() { return kIll.killCount; }
     public List<int> GetDeathCount() { return kIll.deathCount; }
@@ -139,11 +140,19 @@ public class AIManager : MonoBehaviour
 
     public void CreateAI()
     {
-        kIll = KillData.InGameDataLoad();
+        kIll = new KIllCount();
+
+        kIll.Name = kIll.GetRandomName();
+
+
         kIll.killCount.Clear();
         kIll.deathCount.Clear();
+        kIll.assistCount.Clear();
+
         kIll.killCount.Add(0);
         kIll.deathCount.Add(0);
+        kIll.assistCount.Add(0);
+
         AICharacterUtility.ResetAI();
 
         GanObject.LoodGameObject();
@@ -210,6 +219,7 @@ public class AIManager : MonoBehaviour
 
                 kIll.killCount.Add(0);
                 kIll.deathCount.Add(0);
+                kIll.assistCount.Add(0);
 
 
                 if (i <= 0)
@@ -317,10 +327,40 @@ public class AIManager : MonoBehaviour
 
 
 }
+
 [System.Serializable]
 public class KIllCount
 {
 
+    public List<string> Name = new List<string>(AIManager.AI_NUMBER * 2) { "Test" };
     public List<int> deathCount = new List<int>(AIManager.AI_NUMBER * 2) { 0 };
     public List<int> killCount = new List<int>(AIManager.AI_NUMBER * 2) { 0 };
+    public List<int> assistCount = new List<int>(AIManager.AI_NUMBER * 2) { 0 };
+
+
+    //決め打ち２０
+    public List<string> NameType = new List<string>(20)
+    { "Alex Storm","Isabelle Valkyrie","Marco Falcon","Lisa Shadow","Andrei Ice","Sophia Blaze","Lucas Thunder","Emily Fox","Jean Crow","Oscar Houn","Antonio Raven","Natalie Sky"
+    , "Michael Storm","Ana Shadow","Ethan Blaze","Maria Fox","Alexander Ice","Sarah Raven","Daniel Hound","Eve Thunder"};
+
+    public List<string> GetRandomName()
+    {
+        List<string> name = new List<string>();
+        List<int> index = new List<int>();
+
+        for (int i = 0; i < 9; i++)
+        {
+            int random = Random.Range(0, 20);
+
+            if (index.Contains(random)) { i--; continue; }
+
+            name.Add(NameType[random]);
+        }
+
+
+        return name;
+
+    }
+
+
 }
