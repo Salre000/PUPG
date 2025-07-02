@@ -120,7 +120,7 @@ public class TeamAIManager
             case GanObject.ConstancyGanType.SL_8:
                 return 3.0f;
             case GanObject.ConstancyGanType.Classic:
-                return 4f;
+                return 5f;
             case GanObject.ConstancyGanType.Stechkin:
                 return 3.0f;
             case GanObject.ConstancyGanType.FAR_EYE:

@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public abstract class AIJobBase
 {
-    public static readonly Vector3 offSet=new Vector3(0,1.25f,0);
+    public static readonly Vector3 offSet = new Vector3(0, 1.25f, 0);
 
     protected NavMeshAgent _agent;
 
@@ -19,6 +19,14 @@ public abstract class AIJobBase
     protected int characterID = -1;
 
     protected float viewing = 40;
+
+    protected bool shoting=false;
+
+    public bool sotp = false;   
+
+    public void ChengeShoting(bool flag) {shoting = flag;}
+
+    
 
     public virtual void FixedUpdate()
     {
@@ -90,10 +98,17 @@ public abstract class AIJobBase
     public void Stop()
     {
         _agent.isStopped = true;
+        sotp = true;
     }
     public void EndStop()
     {
+        sotp =false;
         _agent.isStopped = false;
+
+    }
+    public void EndShot()
+    {
+        shoting = false;
     }
 
     protected List<AIJobBase> GetTagetObject()
@@ -108,24 +123,29 @@ public abstract class AIJobBase
     //“G‚ðŽ‹”F‚µ‚½‚©‚Ç‚¤‚©
     protected bool CheckTarget()
     {
-        //Debag
-        if (_agent.isStopped) return false;
+        //‘«‚ªŽ~‚Ü‚Á‚Ä‚¢‚éŠÔ“®‚©‚³‚È‚¢
+        if (shoting) return false;
+
+        Vector3 vec;
+        float nowAngle;
+        RaycastHit hit;
+
 
         List<AIJobBase> ais = GetTagetObject();
 
         for (int i = 0; i < ais.Count; i++)
         {
-            Vector3 vec = _gameObject.transform.position - ais[i].GetGameObject().transform.position;
+           vec = ais[i].GetGameObject().transform.position - _gameObject.transform.position;
 
-            float nowAngle = Vector3.Angle(_gameObject.transform.forward, vec);
+            nowAngle = Vector3.Angle(_gameObject.transform.forward, vec);
 
             //Ž‹–ìŠp‚È‚¢‚Å‚ ‚é‚±‚Æ‚ªŠm’è
             if (nowAngle > viewing) continue;
 
-            RaycastHit hit;
 
             if (Physics.Raycast(_gameObject.transform.position + RayOffSet, vec, out hit))
             {
+
 
                 CharacterInsterface character = hit.transform.gameObject.GetComponent<CharacterInsterface>();
                 if (character == null) continue;
@@ -135,12 +155,13 @@ public abstract class AIJobBase
 
                 if (ai.GetAIJob().GetTimeID() == timeID) continue;
 
+                if (Vector3.Distance(hit.point, _gameObject.transform.position) > 50) continue;
+
                 AIUtility.GetEnemyAI((timeID + 1) % 2)[characterID].ShotReserve(ai.transform.gameObject); ;
 
-                _gameObject.transform.LookAt(hit.transform);
-
+                               
                 Stop();
-
+                shoting=true;
                 return true;
 
             }
@@ -154,9 +175,35 @@ public abstract class AIJobBase
 
         }
 
+        if (timeID == 0) return false;
+        vec = AIUtility.GetPlayer().transform.position - _gameObject.transform.position;
+
+       nowAngle = Vector3.Angle(_gameObject.transform.forward, vec);
+
+        //Ž‹–ìŠp‚È‚¢‚Å‚ ‚é‚±‚Æ‚ªŠm’è
+        if (nowAngle > viewing) return false;
 
 
-        return false;
+        if (Physics.Raycast(_gameObject.transform.position + RayOffSet, vec, out hit))
+        {
+
+
+            CharacterInsterface character = hit.transform.gameObject.GetComponent<CharacterInsterface>();
+            if (character == null) return false;
+            AIUtility.GetEnemyAI((timeID + 1) % 2)[characterID].ShotReserve(hit.transform.gameObject); ;
+
+            Stop();
+            shoting = true;
+
+            return true;
+
+        }
+
+
+
+            return false;
+
+
     }
 
     public void SetMoveSpeed(float speed) { _agent.speed = speed; }
