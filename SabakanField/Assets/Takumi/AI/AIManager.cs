@@ -20,7 +20,7 @@ public class AIManager : MonoBehaviour
     [SerializeField] List<bool> enemyLife = new List<bool>();
 
     //フラッグのオブジェクトの配列
-    GameObject[] flagObject = new GameObject[2];
+    [SerializeField]GameObject[] flagObject = new GameObject[2];
 
     //フラッグのオブジェクトの色を変更するマテリアルの配列
     [SerializeField] private Material[] color = new Material[2];
@@ -45,6 +45,8 @@ public class AIManager : MonoBehaviour
 
     //プレイヤーの格納先
     GameObject player;
+
+    public GameObject GetPlayer() {  return player; }
     KIllCount kIll;
 
     public List<int> GetKillCount() { return kIll.killCount; }
@@ -256,15 +258,18 @@ public class AIManager : MonoBehaviour
 
     private void RaandomGan(GameObject ai)
     {
-        GanObject.ConstancyGanType type = ConstancyGanType.EyeOfHorus;//(ConstancyGanType)Random.Range(0, (int)GanObject.ConstancyGanType.Max - 1);
+        GanObject.ConstancyGanType type = (ConstancyGanType)Random.Range(0, (int)GanObject.ConstancyGanType.Max - 1);
         Animator animator = ai.GetComponent<Animator>();
         int randomRenge = 0;
 
         GameObject gan = GameObject.Instantiate(GanObject.enemyConstancyGan.objects[(int)type]);
+        gan.transform.parent = ai.transform;
 
         AI aI = ai.GetComponent<AI>();
-
         aI.SetGanType(type);
+        WeaponEquipment weapon = gan.AddComponent<WeaponEquipment>();
+
+
         switch (type)
         {
             case ConstancyGanType.SL_8:
@@ -274,8 +279,9 @@ public class AIManager : MonoBehaviour
                 break;
             case ConstancyGanType.Classic:
                 animator.runtimeAnimatorController = HandGanType;
-                ai.GetComponent<AI>().GetAIStatus().SetAnimatorFloat("MoveSpped", 1.1f);
+                ai.GetComponent<AI>().GetAIStatus().SetAnimatorFloat("MoveSpped", 1.5f);
                 ai.GetComponent<AI>().GetAIStatus().SetAnimatorFloat("ShotSpped", 3);
+                weapon.handgunFlag = true;
                 randomRenge = 7;
 
                 break;
@@ -284,6 +290,7 @@ public class AIManager : MonoBehaviour
                 ai.GetComponent<AI>().GetAIStatus().SetAnimatorFloat("MoveSpped", 1);
                 ai.GetComponent<AI>().GetAIStatus().SetAnimatorFloat("ShotSpped", 0.5f);
                 randomRenge = 3;
+                weapon.handgunFlag = true;
 
                 break;
             case ConstancyGanType.FAR_EYE:
@@ -299,9 +306,6 @@ public class AIManager : MonoBehaviour
         }
 
 
-        gan.transform.parent = ai.transform;
-
-        WeaponEquipment weapon = gan.AddComponent<WeaponEquipment>();
 
 
         weapon.SetLefthand(aI.leftHand);

@@ -42,4 +42,6 @@ public static class AIUtility
     public static TeamAIManager GetTeamAIManager(int index) { return aIManager.GetEnemyTime(index); }
 
     public static List<AI>GetEnemyAI(int id) { return aIManager.GetEnemyAI(id); }
+
+    public static GameObject GetPlayer() {  return aIManager.GetPlayer(); }
 }

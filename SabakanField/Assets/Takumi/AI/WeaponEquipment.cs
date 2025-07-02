@@ -9,15 +9,26 @@ public class WeaponEquipment : MonoBehaviour
     [SerializeField] GameObject rightHand;
     public void SetRighthand(GameObject right) { rightHand = right; }
 
-    public void SetWeaponPosition() 
+    [SerializeField]public bool handgunFlag = false;
+
+    Transform angleObject;
+    float angloffSet = 0;
+    private void Start()
     {
-
-
-
+        angleObject = GetComponentInParent<AIIK>().handAnchorR;
+        angloffSet = transform.eulerAngles.x;
     }
 
     public void FixedUpdate()
     {
+        if (handgunFlag) 
+        {
+            this.transform.position = (rightHand.transform.position-leftHand.transform.position)+ leftHand.transform.position;
+
+            this.transform.eulerAngles= angleObject.eulerAngles+new Vector3(angloffSet, 0,90);
+
+            return;
+        }
         this.transform.position=rightHand.transform.position;
 
         transform.LookAt(leftHand.transform);

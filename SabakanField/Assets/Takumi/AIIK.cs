@@ -11,6 +11,8 @@ public class AIIK : MonoBehaviour
 
     private float IKWeight = 0;
 
+    public Vector3 vector3=Vector3.zero;
+
     // スタート時に呼ばれる
     void Start()
     {
@@ -36,5 +38,7 @@ public class AIIK : MonoBehaviour
     public void SetIK(int number) { IKWeight = number; }
     public void SetLeftPos(Vector3 pos) { handAnchorL.position = pos; }
     public void SetRightPos(Vector3 pos) { handAnchorR.position = pos; }
+    public void SetLeftRotate(Vector3 pos) { handAnchorL.eulerAngles = pos+ vector3; }
+    public void SetRightRotate(Vector3 pos) { handAnchorR.eulerAngles = pos + vector3; }
 
 }

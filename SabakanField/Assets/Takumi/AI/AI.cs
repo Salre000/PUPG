@@ -12,7 +12,7 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
 
     private AIStatus _aiStatus;
 
-    [SerializeField]private AIJobBase _job;
+    [SerializeField] private AIJobBase _job;
 
     private AIGan aiGan;
 
@@ -23,7 +23,7 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
 
     private BoxCollider Thiscollider;
 
-    [SerializeField]private GanObject.ConstancyGanType _constancyGanType;
+    [SerializeField] private GanObject.ConstancyGanType _constancyGanType;
 
 
     public AIStatus GetAIStatus() { return _aiStatus; }
@@ -33,28 +33,34 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
     public AIGan GetAIGan() { return aiGan; }
     public void SetGanType(ConstancyGanType gan) { _constancyGanType = gan; }
     public ConstancyGanType GetGanType() { return _constancyGanType; }
-
+    public bool Flag;
     public void Awake()
     {
         _aiStatus = new AIStatus();
         _aiStatus.Start(gameObject);
-        aiIK=GetComponent<AIIK>();
-        HP=MAXHP;
-        Thiscollider=GetComponent<BoxCollider>();
+        aiIK = GetComponent<AIIK>();
+        HP = MAXHP;
+        Thiscollider = GetComponent<BoxCollider>();
+
+        ////Yだけを考える
+        aiIK.SetLeftRotate(new Vector3(0,0, 90));
+        aiIK.SetRightRotate(new Vector3(0,0, -90));
+
     }
 
     public void FixedUpdate()
     {
         _job.FixedUpdate();
+        Flag = _job.sotp;
     }
 
 
 
     public bool HPFaction(float damage)
     {
-        HP-=damage;
+        HP -= damage;
 
-        return HP<=0;
+        return HP <= 0;
     }
 
     public void HitAction()
@@ -63,34 +69,65 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
     }
 
     //射撃モーションへの移行
-    public void ShotReserve(GameObject tragetPos) 
+    public void ShotReserve(GameObject tragetPos)
     {
-        
+
         _aiStatus.SetAnimatorTrigger("Shot");
-        SetHandPosition(tragetPos);
+        switch (_constancyGanType)
+        {
+            case ConstancyGanType.Classic:
+            case ConstancyGanType.Stechkin:
+                SetHandGunPosition(tragetPos);
+                break;
+            case ConstancyGanType.SL_8:
+            case ConstancyGanType.FAR_EYE:
+            case ConstancyGanType.EyeOfHorus:
+                SetHandPosition(tragetPos);
+
+                break;
+            case ConstancyGanType.Max:
+                break;
+        }
     }
     //射撃
-    public void Shot() 
+    public void Shot()
     {
         aiGan.Shot();
-        
+
     }
-    public void EndShot() 
+    public void EndShot()
     {
         aiIK.SetIK(0);
-        _job.EndStop();
+        _job.EndShot();
     }
-    private void SetHandPosition(GameObject tragetPos) 
+
+    public void MoveStart() { _job.EndStop(); }
+    private void SetHandPosition(GameObject tragetPos)
     {
         Vector3 vec = (tragetPos.transform.position) - (transform.position);
         vec.Normalize();
         aiIK.SetIK(1);
 
-        aiIK.SetRightPos(vec / 4f+transform.position + offSet);
-        aiIK.SetLeftPos(vec / 2f+transform.position + offSet);
+        aiIK.SetRightPos(vec / 4f + transform.position + offSet);
+        aiIK.SetLeftPos(vec / 2f + transform.position + offSet);
 
-        Debug.DrawLine(transform.position + offSet, transform.position + offSet + vec * 10f,Color.green,3);
+        Debug.DrawLine(transform.position + offSet, transform.position + offSet + vec * 10f, Color.green, 3);
 
+
+    }
+    private void SetHandGunPosition(GameObject tragetPos)
+    {
+        Vector3 vec = (tragetPos.transform.position) - (transform.position);
+        vec.Normalize();
+
+        aiIK.SetIK(1);
+
+        aiIK.SetRightPos(vec / 2f + transform.position + offSet + transform.right / 15f);
+        aiIK.SetLeftPos(vec / 2f + transform.position + offSet);
+
+        ////Yだけを考える
+        aiIK.SetLeftRotate(new Vector3(0, Mathf.Atan2(vec.x, vec.z) * Mathf.Rad2Deg, 90));
+        aiIK.SetRightRotate(new Vector3(0, Mathf.Atan2(vec.x, vec.z) * Mathf.Rad2Deg, -90));
 
     }
 
@@ -99,28 +136,31 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
         return false;
     }
 
-    private void Respawn() 
+    private void Respawn()
     {
         //アニメーションを替える
         aiIK.SetIK(0);
         _aiStatus.SetAnimatorTrigger("Death");
         Thiscollider.enabled = false;
         HP = MAXHP;
-
+        _job.ChengeShoting(true);  
         _job.Stop();
 
 
 
     }
-    public void Resurrect() 
+    public void Resurrect()
     {
         //座標の移動
-
-        _job.EndStop();
         transform.position = AIUtility.GetFlag(_job.GetTimeID()).transform.position;
 
+        Debug.Log(transform.position + "Z:Z" + AIUtility.GetFlag((_job.GetTimeID() + 1) % 2).transform.position);
+        _job.ChengeShoting(false);
+
+        _job.EndStop();
+
     }
-    public void ReStart() 
+    public void ReStart()
     {
         //フラグなどをリセットする
         Thiscollider.enabled = true;
