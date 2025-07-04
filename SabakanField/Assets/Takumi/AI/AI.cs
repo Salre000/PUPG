@@ -7,6 +7,7 @@ using static AIJobBase;
 
 public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
 {
+
     [SerializeField] public GameObject leftHand;
     [SerializeField] public GameObject rightHand;
 
@@ -18,7 +19,7 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
 
     private AIIK aiIK;
 
-    private float HP;
+    [SerializeField]private float HP;
     private readonly float MAXHP = 100;
 
     private BoxCollider Thiscollider;
@@ -51,7 +52,6 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
     public void FixedUpdate()
     {
         _job.FixedUpdate();
-        Flag = _job.sotp;
     }
 
 
@@ -92,7 +92,7 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
     //ŽËŒ‚
     public void Shot()
     {
-        aiGan.Shot();
+        aiGan.Shot(_job.characterID + (_job.timeID * 5));
 
     }
     public void EndShot()
@@ -105,13 +105,15 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
     private void SetHandPosition(GameObject tragetPos)
     {
         Vector3 vec = (tragetPos.transform.position) - (transform.position);
+
+
         vec.Normalize();
+        gameObject.transform.eulerAngles = new Vector3(0, Mathf.Atan2(vec.x, vec.z) * Mathf.Rad2Deg, 0);
         aiIK.SetIK(1);
 
         aiIK.SetRightPos(vec / 4f + transform.position + offSet);
         aiIK.SetLeftPos(vec / 2f + transform.position + offSet);
 
-        Debug.DrawLine(transform.position + offSet, transform.position + offSet + vec * 10f, Color.green, 3);
 
 
     }
@@ -121,6 +123,7 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
         vec.Normalize();
 
         aiIK.SetIK(1);
+        gameObject.transform.eulerAngles = new Vector3(0, Mathf.Atan2(vec.x, vec.z) * Mathf.Rad2Deg, 0);
 
         aiIK.SetRightPos(vec / 2f + transform.position + offSet + transform.right / 15f);
         aiIK.SetLeftPos(vec / 2f + transform.position + offSet);
@@ -142,7 +145,6 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
         aiIK.SetIK(0);
         _aiStatus.SetAnimatorTrigger("Death");
         Thiscollider.enabled = false;
-        HP = MAXHP;
         _job.ChengeShoting(true);
         _job.Stop();
         Debug.Log("Ž€‚ñ‚¾");
@@ -156,6 +158,7 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
 
         _job.ChengeShoting(false);
 
+        HP = MAXHP;
 
     }
     public void ReStart()
@@ -167,6 +170,10 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
 
     }
 
+    public bool GetISLife() 
+    {
+        return HP > 0;
+    }
 
     //Debag
     public PublicEnum.AIJob iJob;

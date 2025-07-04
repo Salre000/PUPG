@@ -54,7 +54,7 @@ public class ResultsIns : MonoBehaviour
     {
         for (int i = 0; i < _PLAYER_NUM; i++)
         {
-            int BScore = UnityEngine.Random.Range(0, 1000);/*(int)((count.killCount[i] * 100 + count.assistCount[i] * 15) + count.deathCount[i] * 5);*/
+            int BScore = (int)((count.killCount[i] * 100 + count.assistCount[i] * 15) + count.deathCount[i] * 5);
             _battelScoreSortList.Add(BScore);
         }
         int max = 0;

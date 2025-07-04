@@ -30,6 +30,8 @@ public class ProjectileEnemy : MonoBehaviour
 
     private Vector3 dir;
 
+    public int ID = 0;
+
     private void Start()
     {
 
@@ -53,7 +55,7 @@ public class ProjectileEnemy : MonoBehaviour
             return;
 
         //“G‚É“–‚Ä‚ê‚é‚æ‚¤‚É‚·‚é
-        BulletMoveFunction.RayHitTestMaterial(collision, gameObject, startPostion, dir);
+        BulletMoveFunction.RayHitTestMaterial(collision, gameObject, startPostion, dir, ID);
 
         // //Ignore collision if bullet collides with "Player" tag
         // if (collision.gameObject.CompareTag("Player")) 

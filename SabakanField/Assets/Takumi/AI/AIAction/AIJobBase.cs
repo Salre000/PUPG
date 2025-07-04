@@ -14,9 +14,9 @@ public abstract class AIJobBase
     protected List<System.Action> FixedAction = new List<System.Action>();
     protected List<System.Action> NextFixedAction = new List<System.Action>();
 
-    protected int timeID = -1;
+    public int timeID = -1;
 
-    protected int characterID = -1;
+    public int characterID = -1;
 
     protected float viewing = 40;
 
@@ -122,7 +122,7 @@ public abstract class AIJobBase
     //“G‚ðŽ‹”F‚µ‚½‚©‚Ç‚¤‚©
     protected bool CheckTarget()
     {
-        if (_agent.isStopped) return false;
+        if (sotp) return false;
         Vector3 vec;
         float nowAngle;
         RaycastHit hit;

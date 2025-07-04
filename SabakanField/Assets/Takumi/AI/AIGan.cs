@@ -25,7 +25,7 @@ public class AIGan : MonoBehaviour
 
 
     }
-    public void Shot()
+    public void Shot(int ID)
     {
 
 
@@ -38,6 +38,7 @@ public class AIGan : MonoBehaviour
         bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;
 
         bullet.GetComponent<BulletDamage>().SetDamage(bulletDamage);
+        bullet.GetComponent<ProjectileEnemy>().ID=ID;
 
         if (!shotGan) return;
         Debug.Log("ƒVƒ‡ƒbƒgƒKƒ“");

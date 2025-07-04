@@ -63,7 +63,7 @@ public static class BulletMoveFunction
     }
     static public void RayHitTestMaterial
         (Collision target, GameObject thisObject, Vector3 startPosition, Vector3 dir,
-        bool playerFaction = true, int ID = 0)
+        int ID = 0)
     {
 
         MIssSoundPlay(new Ray(startPosition, dir), ID);

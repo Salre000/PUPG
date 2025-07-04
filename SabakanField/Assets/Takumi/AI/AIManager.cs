@@ -117,9 +117,12 @@ public class AIManager : MonoBehaviour
     {
         playersLife.Clear();
         players.Capacity = players.Capacity;
+
+     
+
         for (int i = 0; i < players.Count; i++)
         {
-            //playersLife.Add(AICharacterUtility.GetCharacterAI(i).GetISLife());
+            playersLife.Add(AICharacterUtility.GetAIS()[i].GetISLife());
 
         }
 
@@ -127,7 +130,7 @@ public class AIManager : MonoBehaviour
         enemyLife.Capacity = enemys.Capacity;
         for (int i = 0; i < enemys.Count; i++)
         {
-            //enemyLife.Add(AICharacterUtility.GetCharacterAI(i + 4).GetISLife());
+            enemyLife.Add(AICharacterUtility.GetAIS()[i + 4].GetISLife());
 
         }
 
@@ -150,7 +153,9 @@ public class AIManager : MonoBehaviour
         kIll.deathCount.Clear();
         kIll.assistCount.Clear();
 
-        kIll.killCount.Add(0);
+        AICharacterUtility.ClearCharacterAI();
+
+    kIll.killCount.Add(0);
         kIll.deathCount.Add(0);
         kIll.assistCount.Add(0);
 
@@ -208,6 +213,7 @@ public class AIManager : MonoBehaviour
 
 
                 AI Ai = ai.GetComponent<AI>();
+                AICharacterUtility.AddAI(Ai);
 
 
                 //Ai.Initialization();
