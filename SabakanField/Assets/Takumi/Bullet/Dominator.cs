@@ -36,7 +36,7 @@ public class Dominator : MonoBehaviour
         Test();
         targetList.Clear();
 
-        List<AI> Characters = AICharacterUtility.GetAIS();
+        List<AI> Characters = AIUtility.GetEnemyAI(0);
         RaycastHit hit;
 
 
@@ -65,7 +65,7 @@ public class Dominator : MonoBehaviour
 
                 if (point.z < 0) continue;
 
-                //if (!hit.transform.gameObject.GetComponent<AI>().GetStatus().GetISLife()) continue;
+                if (!hit.transform.gameObject.GetComponent<AI>().GetISLife()) continue;
 
                 Debug.Log("‰½‚©" + point.z);
 
