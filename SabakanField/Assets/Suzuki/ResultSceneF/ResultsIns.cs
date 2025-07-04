@@ -8,11 +8,12 @@ public class ResultsIns : MonoBehaviour
 {
     [SerializeField]
     private GameObject _playerResultsPanel;
-    [SerializeField] 
+    [SerializeField]
     private GameObject _parent;
 
-    private List<GameObject>_objectList=new(_PLAYER_NUM);
-    private List<int>_battelScoreSortList=new(_PLAYER_NUM);
+    private List<GameObject> _objectList = new(_PLAYER_NUM);
+    private List<int> _battelScoreSortList = new(_PLAYER_NUM);
+    private List<int> _battelScoreIDList = new(_PLAYER_NUM);
 
     [SerializeField]
     private Transform _targetPos;
@@ -27,8 +28,11 @@ public class ResultsIns : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        count = AIManager.kIll;
+
         Application.targetFrameRate = 120;
+        count = AIManager.kIll;
+        for (int i = 0; i < _PLAYER_NUM; i++)
+            _battelScoreIDList.Add(i);
         BattelScoreSort();
         InstantiateScorePanel();
     }
@@ -39,7 +43,7 @@ public class ResultsIns : MonoBehaviour
     {
         for (int i = 0; i < _objectList.Count; i++)
         {
-            _time+=Time.deltaTime*_speed;
+            _time += Time.deltaTime * _speed;
             Vector3 position = _objectList[i].transform.localPosition;
             position.x = Mathf.Lerp(_objectList[i].transform.localPosition.x, _targetPos.localPosition.x, _time);
             _objectList[i].transform.localPosition = position;
@@ -50,11 +54,33 @@ public class ResultsIns : MonoBehaviour
     {
         for (int i = 0; i < _PLAYER_NUM; i++)
         {
-            int BScore = UnityEngine.Random.Range(0, 1000);//(int)((count.killCount[i] * 100 + count.assistCount[i] * 15) + count.deathCount[i] * 5);
+            int BScore = UnityEngine.Random.Range(0, 1000);/*(int)((count.killCount[i] * 100 + count.assistCount[i] * 15) + count.deathCount[i] * 5);*/
             _battelScoreSortList.Add(BScore);
         }
-        // 昇順
-        _battelScoreSortList.Sort();
+        int max = 0;
+        int index = 0;
+        // 降順ソート
+        for (int j = 0; j < _PLAYER_NUM; j++)
+        {
+            index = j;
+            max = 0;
+            for (int i = index; i < _PLAYER_NUM; i++)
+            {
+                if (max < _battelScoreSortList[i])
+                {
+                    // 今の最大値を代入
+                    max = _battelScoreSortList[i];
+                    // 一番上と入れ替える
+                    _battelScoreSortList[i] = _battelScoreSortList[index];
+                    _battelScoreSortList[index] = max;
+                    // IDも一緒に入れ替える
+                    int num = _battelScoreIDList[i];
+                    _battelScoreIDList[i] = _battelScoreIDList[index];
+                    _battelScoreIDList[index] = num;
+                }
+            }
+
+        }
     }
 
     private void InstantiateScorePanel()
@@ -70,7 +96,7 @@ public class ResultsIns : MonoBehaviour
                 position.x *= -2;
             instanObject.transform.position = position;
 
-            ResultKillManager.initialize.SetStatus(instanObject, _battelScoreSortList[i]);
+            ResultKillManager.initialize.SetStatus(instanObject, _battelScoreIDList[i], _battelScoreSortList[i]);
 
             _objectList.Add(instanObject);
 
