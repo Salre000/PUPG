@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -11,6 +12,7 @@ public class ResultsIns : MonoBehaviour
     private GameObject _parent;
 
     private List<GameObject>_objectList=new(_PLAYER_NUM);
+    private List<int>_battelScoreSortList=new(_PLAYER_NUM);
 
     [SerializeField]
     private Transform _targetPos;
@@ -25,27 +27,12 @@ public class ResultsIns : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        count = AIManager.kIll;
         Application.targetFrameRate = 120;
-        for(int i=0;i < _PLAYER_NUM; i++)
-        {
-            GameObject instanObject = Instantiate(_playerResultsPanel, _parent.transform);
-            Vector3 position = instanObject.transform.position;
-            position.y += _plusVecY;
-            position.x -= _plusVecX;
-            // Šï”‚Í‰E‚©‚ç“oê‚³‚¹‚é
-            if (i %2==1)
-                position.x *= -2;
-            instanObject.transform.position = position;
-
-            ResultKillManager.initialize.SetStatus(instanObject, i);
-
-            _objectList.Add(instanObject);
-
-            _plusVecY -= _num;
-            _plusVecX += 500f;
-        }
-        _plusVecY = 0f;
+        BattelScoreSort();
+        InstantiateScorePanel();
     }
+    KIllCount count;
 
     // Update is called once per frame
     void Update()
@@ -56,6 +43,39 @@ public class ResultsIns : MonoBehaviour
             Vector3 position = _objectList[i].transform.localPosition;
             position.x = Mathf.Lerp(_objectList[i].transform.localPosition.x, _targetPos.localPosition.x, _time);
             _objectList[i].transform.localPosition = position;
+        }
+    }
+
+    private void BattelScoreSort()
+    {
+        for (int i = 0; i < _PLAYER_NUM; i++)
+        {
+            int BScore = UnityEngine.Random.Range(0, 1000);//(int)((count.killCount[i] * 100 + count.assistCount[i] * 15) + count.deathCount[i] * 5);
+            _battelScoreSortList.Add(BScore);
+        }
+        // ¸‡
+        _battelScoreSortList.Sort();
+    }
+
+    private void InstantiateScorePanel()
+    {
+        for (int i = 0; i < _PLAYER_NUM; i++)
+        {
+            GameObject instanObject = Instantiate(_playerResultsPanel, _parent.transform);
+            Vector3 position = instanObject.transform.position;
+            position.y += _plusVecY;
+            position.x -= _plusVecX;
+            // Šï”‚Í‰E‚©‚ç“oê‚³‚¹‚é
+            if (i % 2 == 1)
+                position.x *= -2;
+            instanObject.transform.position = position;
+
+            ResultKillManager.initialize.SetStatus(instanObject, _battelScoreSortList[i]);
+
+            _objectList.Add(instanObject);
+
+            _plusVecY -= _num;
+            _plusVecX += 500f;
         }
     }
 }

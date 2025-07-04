@@ -22,7 +22,7 @@ public class ResultKillManager : MonoBehaviour
     {
         model.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text =index==0?"Player" :count.Name[index].ToString();
 
-        int BScore = (int)((count.killCount[index] * 100 + count.assistCount[index] * 15) + count.deathCount[index] * 5);
+        int BScore = index;// (int)((count.killCount[index] * 100 + count.assistCount[index] * 15) + count.deathCount[index] * 5);
 
         model.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = BScore.ToString();
 
