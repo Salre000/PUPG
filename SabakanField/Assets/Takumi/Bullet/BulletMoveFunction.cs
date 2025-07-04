@@ -111,12 +111,8 @@ public static class BulletMoveFunction
             return;
         }
 
-
-        //自分と同じ陣営の場合はフレンドリーファイアの関数を呼ぶ
-        if (hitObject.PlayerFaction() == playerFaction) hitObject.HitActionFriendlyFire();
-
         //自分と違う陣営の場合は弾が当った時の処理を呼ぶ
-        else hitObject.HitAction();
+        hitObject.HitAction();
 
         //指定のIDのキャラクターのキルカウントを増やす
         AIUtility.AddKillCount(ID);

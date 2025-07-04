@@ -63,7 +63,7 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
         return HP <= 0;
     }
 
-    public void HitAction()
+    public void HitAction(GameObject Enemy = null)
     {
         Respawn();
     }

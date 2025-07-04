@@ -15,7 +15,7 @@ public class Character : MonoBehaviour, CharacterInsterface
 
     }
 
-    void CharacterInsterface.HitAction()
+    void CharacterInsterface.HitAction(GameObject Enemy = null)
     {
         throw new System.NotImplementedException();
     }

@@ -10,7 +10,7 @@ public class Sandbag : MonoBehaviour, InvincibleInsterface,CharacterInsterface
         return false;
     }
 
-    public void HitAction()
+    public void HitAction(GameObject Enemy = null)
     {
         Debug.Log("サンドバッグに当った");
     }

@@ -10,7 +10,7 @@ public class WallMove : MonoBehaviour,CharacterInsterface
         return;
     }
 
-    void CharacterInsterface.HitAction()
+    void CharacterInsterface.HitAction(GameObject Enemy = null)
     {
         throw new System.NotImplementedException();
     }

@@ -35,7 +35,7 @@ public class PlayerRespawn : MonoBehaviour, CharacterInsterface, InvincibleInste
     }
 
     // “G‚©‚çUŒ‚‚ğó‚¯‚½
-    public void HitAction()
+    public void HitAction(GameObject Enemy = null)
     {
         if (PlayerManager.GetIsArmor())
         {
