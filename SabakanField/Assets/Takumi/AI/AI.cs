@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static GanObject;
+using UnityEngine.UI;
 using static AIJobBase;
+using static GanObject;
 
 public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
 {
@@ -18,6 +19,8 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
     private AIGan aiGan;
 
     private AIIK aiIK;
+
+    private Outline outline;
 
     [SerializeField]private float HP;
     private readonly float MAXHP = 100;
@@ -42,7 +45,8 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
         aiIK = GetComponent<AIIK>();
         HP = MAXHP;
         Thiscollider = GetComponent<BoxCollider>();
-
+        outline=GetComponent<Outline>();
+        outline.enabled = false;
         ////Y‚¾‚¯‚ðl‚¦‚é
         aiIK.SetLeftRotate(new Vector3(0, 0, 90));
         aiIK.SetRightRotate(new Vector3(0, 0, -90));
@@ -173,6 +177,11 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
     public bool GetISLife() 
     {
         return HP > 0;
+    }
+    public void ChengeOuutLIne(bool flag) 
+    {
+        outline.enabled = flag;
+
     }
 
     //Debag

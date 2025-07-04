@@ -14,23 +14,23 @@ public class Alice : MonoBehaviour
     private void OnEnable()
     {
         for (int i = 0; i < AICharacterUtility.CharacterCount(); i++)
-            //AICharacterUtility.ChengeOutLine(i, false);
+            AICharacterUtility.ChengeOutLine(i, false);
         oneFlag = false;
 
     }
-    void OnDisable ()
+    void OnDisable()
     {
         for (int i = 0; i < AICharacterUtility.CharacterCount(); i++)
-            //AICharacterUtility.ChengeOutLine(i, false);
+            AICharacterUtility.ChengeOutLine(i, false);
         oneFlag = false;
 
     }
 
     private void FixedUpdate()
     {
-        Debug.Log(Camera.main.name+"メインカメラ");
-        List<AI> AIS=AICharacterUtility.GetAIS();
-        for(int i=0;i< AIS.Count; i++) 
+        Debug.Log(Camera.main.name + "メインカメラ");
+        List<AI> AIS = AICharacterUtility.GetAIS();
+        for (int i = 0; i < AIS.Count; i++)
         {
 
 
@@ -39,13 +39,13 @@ public class Alice : MonoBehaviour
             if (pos.x < 0 || pos.x > 1920) continue;
             if (pos.y < 0 || pos.y > 1080) continue;
 
-            //AICharacterUtility.ChengeOutLine(i, true);
+            AICharacterUtility.ChengeOutLine(i, true);
 
         }
 
         if (oneFlag) return;
         for (int i = 0; i < AICharacterUtility.CharacterCount(); i++)
-            //AICharacterUtility.ChengeOutLine(i, false);
+            AICharacterUtility.ChengeOutLine(i, false);
         oneFlag = true;
 
     }
