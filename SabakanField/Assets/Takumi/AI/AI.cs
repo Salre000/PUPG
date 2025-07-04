@@ -96,7 +96,7 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
     //ŽËŒ‚
     public void Shot()
     {
-        aiGan.Shot(_job.characterID + (_job.timeID * 5));
+        aiGan.Shot(_job.characterID + (_job.timeID * 4));
 
     }
     public void EndShot()

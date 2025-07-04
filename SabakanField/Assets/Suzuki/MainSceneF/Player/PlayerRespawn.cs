@@ -37,6 +37,8 @@ public class PlayerRespawn : MonoBehaviour, CharacterInsterface, InvincibleInste
     // “G‚©‚çUŒ‚‚ğó‚¯‚½
     public void HitAction(GameObject Enemy = null)
     {
+        DeathCamera.traget = Enemy;
+
         if (PlayerManager.GetIsArmor())
         {
             PlayerManager.SetIsArmor(false);

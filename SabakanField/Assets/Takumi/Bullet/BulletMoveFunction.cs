@@ -112,7 +112,10 @@ public static class BulletMoveFunction
         }
 
         //自分と違う陣営の場合は弾が当った時の処理を呼ぶ
-        hitObject.HitAction();
+        hitObject.HitAction
+            (
+            armor == null ? null : AICharacterUtility.GetAIS()[ID].gameObject
+            );
 
         //指定のIDのキャラクターのキルカウントを増やす
         AIUtility.AddKillCount(ID);
