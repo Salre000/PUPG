@@ -85,7 +85,7 @@ public class CreateMap : MonoBehaviour
         CreateFlag();
 
         //ƒ}ƒbƒv‚Ì‹«–Ú‚Ì•Ç‚ğ¶¬‚·‚éŠÖ”
-        //CreateMapWall();
+        CreateMapWall();
 
         //Ai‚ğ¶¬‚·‚éŠÖ”
         _AIManager.CreateAI();

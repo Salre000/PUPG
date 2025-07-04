@@ -4,6 +4,6 @@ using UnityEngine;
 
 public static class GameModes
 {
-   public static PublicEnum.GameMode mode=PublicEnum.GameMode.spike;
+   public static PublicEnum.GameMode mode=PublicEnum.GameMode.flag;
     
 }
