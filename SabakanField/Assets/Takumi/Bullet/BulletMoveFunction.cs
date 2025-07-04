@@ -40,7 +40,7 @@ public static class BulletMoveFunction
 
 
             //先の二つのインターフェースクラスが両方取得出来たかを判定
-            if (hitObject == null && invincible == null) { SetPaintObject(hit.point,dir.normalized, playerFaction); return Vector3.zero; }
+            if (hitObject == null && invincible == null) { SetPaintObject(hit.point, dir.normalized, playerFaction); return Vector3.zero; }
 
             //当たった対象が無敵なのかを判定
             if (invincible.GetInvincibleFlag()) return Vector3.zero;
@@ -74,10 +74,10 @@ public static class BulletMoveFunction
         //当たった対象に無敵の関数を内包したインターフェースクラスが付いている場合取得
         InvincibleInsterface invincible = target.transform.gameObject.GetComponent<InvincibleInsterface>();
 
-        BulletDamage bulletDamage=thisObject.GetComponent<BulletDamage>();
+        BulletDamage bulletDamage = thisObject.GetComponent<BulletDamage>();
 
         //先の二つのインターフェースクラスが両方取得出来たかを判定
-        if (hitObject == null || invincible == null|| bulletDamage==null)
+        if (hitObject == null || invincible == null || bulletDamage == null)
         {
             //SetPaintObject(thisObject.transform.position,dir.normalized, playerFaction);
 
@@ -87,9 +87,9 @@ public static class BulletMoveFunction
         //当たった対象が無敵なのかを判定
         if (invincible.GetInvincibleFlag()) return;
 
-        Armor armor=target.transform.GetComponent<Armor>();
+        Armor armor = target.transform.GetComponent<Armor>();
 
-        if (armor != null && armor.GetIsArmor()) 
+        if (armor != null && armor.GetIsArmor())
         {
             //アーマーを破壊する
             armor.SetIsArmor(false);
@@ -98,11 +98,18 @@ public static class BulletMoveFunction
 
             Debug.Log("アーマーが破壊された");
 
+            //指定のIDのキャラクターのキルカウントを増やす
+            AIUtility.AddAssertCount(ID);
 
             return;
         }
 
-        if(!hitObject.HPFaction(bulletDamage.GetDamage()))return;
+        if (!hitObject.HPFaction(bulletDamage.GetDamage()))
+        {           
+            //指定のIDのキャラクターのキルカウントを増やす
+            AIUtility.AddAssertCount(ID);
+            return;
+        }
 
 
         //自分と同じ陣営の場合はフレンドリーファイアの関数を呼ぶ
@@ -146,7 +153,7 @@ public static class BulletMoveFunction
                 MIssSoundPlay(new Ray(startPosition, dir), ID);
 
                 //先の二つのインターフェースクラスが両方取得出来たかを判定
-                if (hitObject == null && invincible == null) { SetPaintObject(hit.point,dir.normalized, playerFaction); continue; }
+                if (hitObject == null && invincible == null) { SetPaintObject(hit.point, dir.normalized, playerFaction); continue; }
 
                 //当たった対象が無敵なのかを判定
                 if (invincible.GetInvincibleFlag()) continue;
@@ -233,7 +240,7 @@ public static class BulletMoveFunction
     }
 
 
-    private static void SetPaintObject(Vector3 pos,Vector3 normalVec, bool playerFaction)
+    private static void SetPaintObject(Vector3 pos, Vector3 normalVec, bool playerFaction)
     {
         GameObject paintObject;
         if (playerFaction) paintObject = playerPaintObjectPool.GetObject();

@@ -55,6 +55,7 @@ public class AIManager : MonoBehaviour
 
     public void AddDeathCount(int index) { kIll.deathCount[index]++; }
     public void AdDKillCount(int index) { kIll.killCount[index]++; }
+    public void AddAssertCount(int index) { kIll.assistCount[index]++; }
 
 
     public List<bool> GetPlayersLife() { return playersLife; }

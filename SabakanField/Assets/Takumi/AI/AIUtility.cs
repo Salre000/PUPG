@@ -22,9 +22,13 @@ public static class AIUtility
         aIManager.AdDKillCount(index);
     }
 
-    public static void AddDeathCount(int index=0) 
+    public static void AddDeathCount(int index = 0)
     {
         aIManager.AddDeathCount(index);
+    }
+    public static void AddAssertCount(int index = 0)
+    {
+        aIManager.AddAssertCount(index);
     }
     public static Vector3 GetFlagPosition() { return aIManager.PlayerFlagPosition(); }
 

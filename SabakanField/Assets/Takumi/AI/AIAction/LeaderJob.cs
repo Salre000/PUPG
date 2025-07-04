@@ -12,7 +12,7 @@ public class LeaderJob : AIJobBase
 
     public override void Initialize()
     {
-        targetObject = AIUtility.GetTeamAIManager(timeID).ReaderPos();
+        targetObject = AIUtility.GetTeamAIManager((timeID+1)%2).ReaderPos();
     }
     public override void Start()
     {

@@ -145,7 +145,7 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
         HP = MAXHP;
         _job.ChengeShoting(true);
         _job.Stop();
-
+        Debug.Log("死んだ");
 
 
     }
@@ -154,16 +154,16 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
         //座標の移動
         transform.position = AIUtility.GetFlag(_job.GetTimeID()).transform.position;
 
-        Debug.Log(transform.position + "Z:Z" + AIUtility.GetFlag((_job.GetTimeID() + 1) % 2).transform.position);
         _job.ChengeShoting(false);
 
-        _job.EndStop();
 
     }
     public void ReStart()
     {
         //フラグなどをリセットする
         Thiscollider.enabled = true;
+        _job.EndStop();
+
 
     }
 

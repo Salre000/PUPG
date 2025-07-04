@@ -100,13 +100,14 @@ public abstract class AIJobBase
     }
     public void EndStop()
     {
-        sotp =false;
+        sotp = false;
         _agent.isStopped = false;
 
     }
     public void EndShot()
     {
-        shoting = false;
+        //sotp = false;
+
     }
 
     protected List<AIJobBase> GetTagetObject()
@@ -121,9 +122,7 @@ public abstract class AIJobBase
     //“G‚ðŽ‹”F‚µ‚½‚©‚Ç‚¤‚©
     protected bool CheckTarget()
     {
-        //‘«‚ªŽ~‚Ü‚Á‚Ä‚¢‚éŠÔ“®‚©‚³‚È‚¢
-        if (shoting) return false;
-
+        if (_agent.isStopped) return false;
         Vector3 vec;
         float nowAngle;
         RaycastHit hit;
@@ -153,13 +152,14 @@ public abstract class AIJobBase
 
                 if (ai.GetAIJob().GetTimeID() == timeID) continue;
 
-                if (Vector3.Distance(hit.point, _gameObject.transform.position) > 50) continue;
+                if (Vector3.Distance(hit.point, _gameObject.transform.position) > 25) continue;
 
                 AIUtility.GetEnemyAI((timeID + 1) % 2)[characterID].ShotReserve(ai.transform.gameObject); ;
 
+                Debug.Log("Shot" + timeID + "*" + characterID);
+
                                
                 Stop();
-                shoting=true;
                 return true;
 
             }
