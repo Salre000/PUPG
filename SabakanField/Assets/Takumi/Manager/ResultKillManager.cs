@@ -20,7 +20,7 @@ public class ResultKillManager : MonoBehaviour
 
     public void SetStatus(GameObject model, int index)
     {
-        model.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text =index==0?"Player" :count.Name[index].ToString();
+        model.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text =index==0?"Player" :count.Name[index-1].ToString();
 
         int BScore = (int)((count.killCount[index] * 100 + count.assistCount[index] * 15) + count.deathCount[index] * 5);
 
