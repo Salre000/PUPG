@@ -45,7 +45,7 @@ public class AIManager : MonoBehaviour
     private readonly float FLAG_PLAYER_RENGE = 3;
 
     //ƒvƒŒƒCƒ„[‚ÌŠi”[æ
-    GameObject player;
+    [SerializeField]public GameObject player;
 
     public GameObject GetPlayer() { return player; }
     public static KIllCount kIll;

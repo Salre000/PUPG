@@ -110,7 +110,7 @@ public abstract class AIJobBase
 
     }
 
-    protected List<AIJobBase> GetTagetObject()
+    protected virtual List<AIJobBase> GetTagetObject()
     {
 
         return AIUtility.GetTeamAIManager(timeID).GetAIS();

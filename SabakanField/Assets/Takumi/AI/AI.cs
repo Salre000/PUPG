@@ -113,9 +113,11 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
 
         vec.Normalize();
         gameObject.transform.eulerAngles = new Vector3(0, Mathf.Atan2(vec.x, vec.z) * Mathf.Rad2Deg, 0);
+
+        float offsetAngle = Mathf.Atan2(vec.x, vec.z) + (4 * Mathf.Deg2Rad);
         aiIK.SetIK(1);
 
-        aiIK.SetRightPos(vec / 4f + transform.position + offSet);
+        aiIK.SetRightPos(vec / 4f + transform.position + offSet+new Vector3(Mathf.Sin(offsetAngle),0,Mathf.Cos(offsetAngle))/10f);
         aiIK.SetLeftPos(vec / 2f + transform.position + offSet);
 
 

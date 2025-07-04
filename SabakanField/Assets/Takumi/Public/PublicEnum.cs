@@ -20,6 +20,7 @@ public class PublicEnum
         defender,
         member,
         subreader,
+        kiiler,
         Max
     }
 

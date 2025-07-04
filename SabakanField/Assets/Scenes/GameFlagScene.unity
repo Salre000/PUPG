@@ -506,6 +506,7 @@ MonoBehaviour:
   origenAI: {fileID: 9213432157738317115, guid: 68e37ce96f23a3d4c957b00b1b8ba1a2,
     type: 3}
   HandGanType: {fileID: 22100000, guid: 7b0dca7cef786a247afdd2e44853035f, type: 2}
+  player: {fileID: 1152928031}
 --- !u!114 &1584106596
 MonoBehaviour:
   m_ObjectHideFlags: 0

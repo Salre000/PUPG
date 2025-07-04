@@ -61,6 +61,7 @@ public class TeamAIManager
                 defenderPos = SetDefender();
                 break;
             case PublicEnum.GameMode.deathmatch:
+
                 break;
             case PublicEnum.GameMode.spike:
                 sbuPos = SetSbuSpaik();
@@ -95,9 +96,13 @@ public class TeamAIManager
 
 
         }
+        if(GameModes.mode!=PublicEnum.GameMode.deathmatch)return aIJob;
 
+        for(int i = 0; i < aIJob.Length; i++) 
+        {
+            aIJob[i] = PublicEnum.AIJob.kiiler;
+        }
         return aIJob;
-
     }
 
     private AIJobBase GetAIJobType(PublicEnum.AIJob job)
@@ -126,6 +131,13 @@ public class TeamAIManager
 
 
                 return jobBaseS;
+            case PublicEnum.AIJob.kiiler:
+
+                return new Killer();
+
+                break;
+            default:
+                break;
         }
 
         return null;
