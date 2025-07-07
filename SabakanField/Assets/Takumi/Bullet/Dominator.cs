@@ -39,6 +39,18 @@ public class Dominator : MonoBehaviour
         targetList.Clear();
 
         List<AI> Characters = AIUtility.GetEnemyAI(0);
+
+        if (GameModes.mode != PublicEnum.GameMode.flag) 
+        {
+            List<AI> enem = AIUtility.GetEnemyAI(1);
+            for (int i = 0; i < enem.Count; i++) 
+            {
+                Characters.Add(enem[i]);
+            }
+
+
+
+        }
         RaycastHit hit;
 
 
