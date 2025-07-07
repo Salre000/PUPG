@@ -45,7 +45,7 @@ public class AIManager : MonoBehaviour
     private readonly float FLAG_PLAYER_RENGE = 3;
 
     //ÉvÉåÉCÉÑÅ[ÇÃäiî[êÊ
-    [SerializeField]public GameObject player;
+    [SerializeField] public GameObject player;
 
     public GameObject GetPlayer() { return player; }
     public static KIllCount kIll;
@@ -53,8 +53,8 @@ public class AIManager : MonoBehaviour
     public List<int> GetKillCount() { return kIll.killCount; }
     public List<int> GetDeathCount() { return kIll.deathCount; }
 
-    public void AddDeathCount(int index) { kIll.deathCount[index]++; }
-    public void AdDKillCount(int index) { kIll.killCount[index]++; }
+    public void AddDeathCount(int index) { kIll.deathCount[index]++;UnityEngine.Debug.Log("**éÄÇÒÇæ"); }
+    public void AdDKillCount(int index) { kIll.killCount[index]++; UnityEngine.Debug.Log("**éEÇµÇΩ"); }
     public void AddAssertCount(int index) { kIll.assistCount[index]++; }
 
 
@@ -90,17 +90,6 @@ public class AIManager : MonoBehaviour
     }
     public void FixedUpdate()
     {
-        if (!GameManager.Instance.GetPlayerSpawn()) return;
-
-        if (player==null)
-        {
-         
-            CreateAI();
-
-            player = GameObject.Find("Player");
-            
-        }
-
         ScanAILife();
         Debug();
     }
@@ -111,7 +100,7 @@ public class AIManager : MonoBehaviour
         return number;
     }
 
-    public Vector3 PlayerFlagPosition() { return flagObject[0].transform.position; }
+    public Vector3 PlayerFlagPosition() { return FlagPos[0]; }
 
     public void DataSave()
     {
@@ -127,7 +116,7 @@ public class AIManager : MonoBehaviour
         playersLife.Clear();
         players.Capacity = players.Capacity;
 
-     
+
 
         for (int i = 0; i < players.Count; i++)
         {
@@ -151,9 +140,16 @@ public class AIManager : MonoBehaviour
         this.flagObject[number] = flagObject;
     }
 
+    private bool one = false;
+    private Vector3[] FlagPos = { CreateMap._PLAYERFLAG_POSITION, CreateMap._ENEMYFLAG_POSITION };
     public void CreateAI()
     {
+        if (one) return;
+        FlagPos[0] = CreateMap._PLAYERFLAG_POSITION; FlagPos[1] = CreateMap._ENEMYFLAG_POSITION;
+
         kIll = new KIllCount();
+
+        kIll.players.Clear();
 
         kIll.Name = kIll.GetRandomName();
 
@@ -164,7 +160,7 @@ public class AIManager : MonoBehaviour
 
         AICharacterUtility.ClearCharacterAI();
 
-    kIll.killCount.Add(0);
+        kIll.killCount.Add(0);
         kIll.deathCount.Add(0);
         kIll.assistCount.Add(0);
 
@@ -178,11 +174,10 @@ public class AIManager : MonoBehaviour
 
 
 
-
-        for (int i = 0; i < flagObject.Length; i++)
+        for (int i = 0; i < FlagPos.Length; i++)
         {
 
-            Vector3 vec = flagObject[(i + 1) % 2].transform.position - flagObject[i].transform.position;
+            Vector3 vec = FlagPos[(i + 1) % 2] - FlagPos[i];
 
             float angle = Mathf.Atan2(vec.x, vec.z) * Mathf.Rad2Deg;
 
@@ -197,7 +192,7 @@ public class AIManager : MonoBehaviour
 
                 ai.transform.eulerAngles = new Vector3(0, createAngle, 0);
 
-                ai.transform.position = flagObject[i].transform.position
+                ai.transform.position = FlagPos[i]
                     + new Vector3(Mathf.Sin(createAngle * Mathf.Deg2Rad), 0,
                     Mathf.Cos(createAngle * Mathf.Deg2Rad)) * FLAG_PLAYER_RENGE;
                 if (GameModes.mode == PublicEnum.GameMode.deathmatch)
@@ -262,7 +257,9 @@ public class AIManager : MonoBehaviour
         playerTeamAIManager.Initialize(players, 0);
         enemyTeamAIManager.Initialize(enemys, 1);
 
+        one = true;
 
+        UnityEngine.Debug.Log("àÍìxÇ´ÇË");
 
 
     }
@@ -305,8 +302,8 @@ public class AIManager : MonoBehaviour
                 break;
             case ConstancyGanType.Classic:
                 animator.runtimeAnimatorController = HandGanType;
-                ai.GetComponent<AI>().GetAIStatus().SetAnimatorFloat("MoveSpped", 1.5f);
-                ai.GetComponent<AI>().GetAIStatus().SetAnimatorFloat("ShotSpped", 3);
+                ai.GetComponent<AI>().GetAIStatus().SetAnimatorFloat("MoveSpped", 1f);
+                ai.GetComponent<AI>().GetAIStatus().SetAnimatorFloat("ShotSpped", 2);
                 weapon.handgunFlag = true;
                 randomRenge = 7;
 
@@ -341,6 +338,7 @@ public class AIManager : MonoBehaviour
 
     public List<AI> GetAIS() { List<AI> chracters = players; for (int i = 0; i < enemys.Count; i++) chracters.Add(enemys[i]); return chracters; }
 
+    public void SetPlayer() { player = GameObject.FindGameObjectWithTag("Player"); }
 
 }
 
@@ -352,6 +350,7 @@ public class KIllCount
     public List<int> deathCount = new List<int>(AIManager.AI_NUMBER * 2) { 0 };
     public List<int> killCount = new List<int>(AIManager.AI_NUMBER * 2) { 0 };
     public List<int> assistCount = new List<int>(AIManager.AI_NUMBER * 2) { 0 };
+    public List<bool> players = new List<bool>(AIManager.AI_NUMBER * 2) { true };
 
 
     //åàÇﬂë≈ÇøÇQÇO
@@ -364,8 +363,11 @@ public class KIllCount
         List<string> name = new List<string>();
         List<int> index = new List<int>();
 
+        players.Add(true);
+
         for (int i = 0; i < 9; i++)
         {
+            players.Add(GameModes.mode == PublicEnum.GameMode.flag ? i < 5 : false);
             int random = Random.Range(0, 20);
 
             if (index.Contains(random)) { i--; continue; }

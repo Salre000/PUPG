@@ -31,8 +31,11 @@ public class GameManager : MonoBehaviour
         if (_playerSpawn)
         {
             BulletManager.Initialize();
+
+
             if (BulletManager.GetBulletMagazine() != -1)
                 _playerSpawn = false;
+
 
         }
 

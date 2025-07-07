@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Jobs;
 using UnityEngine;
 
 public class Killer : AIJobBase
@@ -9,17 +10,22 @@ public class Killer : AIJobBase
     /// </summary>
     GameObject targetObject;
     Vector3 targetPos;
-    private readonly float EPSILON = 5;
-
+    private readonly float EPSILON = 10;
+    int LostTimeID;
 
     public override void Initialize()
     {
-        targetObject = AIUtility.GetPlayer(); 
+        targetObject = AIUtility.GetPlayer();
+        LostTimeID = timeID;
         timeID = 1;
     }
     public override void Start()
     {
 
+    }
+    public override int GetUniqueID()
+    {
+        return characterID + (LostTimeID * 4) + 1;
     }
     public override void FixedUpdate()
     {
@@ -29,6 +35,11 @@ public class Killer : AIJobBase
 
     public override void EmergencyTarget()
     {
+
+    }
+    public override void Hit()
+    {
+        AIUtility.AddDeathCount(characterID + (timeID * 4) + 1);
 
     }
     protected override List<AIJobBase> GetTagetObject()

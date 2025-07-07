@@ -87,6 +87,8 @@ public static class BulletMoveFunction
         //当たった対象が無敵なのかを判定
         if (invincible.GetInvincibleFlag()) return;
 
+        if (hitObject.HPFaction(0)) return;
+
         Armor armor = target.transform.GetComponent<Armor>();
 
         if (armor != null && armor.GetIsArmor())
@@ -108,6 +110,7 @@ public static class BulletMoveFunction
         {           
             //指定のIDのキャラクターのキルカウントを増やす
             AIUtility.AddAssertCount(ID);
+
             return;
         }
 

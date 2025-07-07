@@ -32,12 +32,12 @@ public class CreateMap : MonoBehaviour
     [SerializeField] int _MAX_SIZE_X = 6;
     [SerializeField] int _MAX_SIZE_Y = 6;
 
-    public int GetSIZEX() {  return _MAX_SIZE_X; }
-    public int GetSIZEY() {  return _MAX_SIZE_Y; }
+    public int GetSIZEX() { return _MAX_SIZE_X; }
+    public int GetSIZEY() { return _MAX_SIZE_Y; }
 
     public int MAXSIZE = -1;
 
-    public Vector2 MapSize=Vector2.zero;
+    public Vector2 MapSize = Vector2.zero;
 
     //マップの高さ
     const float _MAP_HEIGHT = 0.2f;
@@ -46,9 +46,9 @@ public class CreateMap : MonoBehaviour
     public const int MAP_RETO = 10;
 
     //敵と味方のフラッグの座標
-    private Vector3 _ENEMYFLAG_POSITION;
-    private Vector3 _PLAYERFLAG_POSITION;
-    
+    public static Vector3 _ENEMYFLAG_POSITION;
+    public static Vector3 _PLAYERFLAG_POSITION;
+
     //  マップの種類の列挙体
     enum MapTileType
     {
@@ -64,7 +64,7 @@ public class CreateMap : MonoBehaviour
 
     public void Awake()
     {
-        
+
         MAXSIZE = Mathf.Min(_MAX_SIZE_X, _MAX_SIZE_Y);
         MapSize.x = _MAX_SIZE_X;
         MapSize.y = _MAX_SIZE_Y;
@@ -82,7 +82,7 @@ public class CreateMap : MonoBehaviour
         CreateGraund();
 
         //フラッグの生成する関数
-       if(GameModes.mode==PublicEnum.GameMode.flag)CreateFlag();
+        if (GameModes.mode == PublicEnum.GameMode.flag) CreateFlag();
 
         //マップの境目の壁を生成する関数
         CreateMapWall();
@@ -98,10 +98,10 @@ public class CreateMap : MonoBehaviour
         if (CreateDroundSpake()) return;
 
         CreateDroundNotSpake();
-    
-    
+
+
     }
-    private void CreateDroundNotSpake() 
+    private void CreateDroundNotSpake()
     {
         //読み込んだCSVファイルを格納
         List<string[]> csvDatas = new List<string[]>();
@@ -161,9 +161,9 @@ public class CreateMap : MonoBehaviour
 
 
     }
-    private bool CreateDroundSpake() 
+    private bool CreateDroundSpake()
     {
-        if(GameModes.mode!=PublicEnum.GameMode.spike)return false;
+        if (GameModes.mode != PublicEnum.GameMode.spike) return false;
         //スパイクモードの際の地面の生成
         GameObject maptileAll = GameObject.Find("Map");
 
@@ -290,7 +290,7 @@ public class CreateMap : MonoBehaviour
         for (int i = 0; i < objectRate * _MAX_SIZE_X; i++)
         {
             GameObject wall;
-                
+
             Vector3 position = Vector3.zero;
 
             wall = GameObject.Instantiate(_wallObject, wallAll.transform);

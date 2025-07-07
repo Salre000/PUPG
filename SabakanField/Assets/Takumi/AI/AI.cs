@@ -53,8 +53,25 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
 
     }
 
+    float time =0;
+
     public void FixedUpdate()
     {
+
+        if (!Thiscollider.enabled) 
+        {
+            time += Time.deltaTime;
+
+         _job.Stop();
+            if (time > 3) 
+            {
+                Resurrect();
+                ReStart();
+                time = 0;
+            }
+            return;
+        }
+
         _job.FixedUpdate();
     }
 
@@ -69,6 +86,7 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
 
     public void HitAction(GameObject Enemy = null)
     {
+        _job.Hit();
         Respawn();
     }
 
@@ -96,7 +114,7 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
     //éÀåÇ
     public void Shot()
     {
-        aiGan.Shot(_job.characterID + (_job.timeID * 4));
+        aiGan.Shot(_job.GetUniqueID());
 
     }
     public void EndShot()
@@ -160,7 +178,9 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
     public void Resurrect()
     {
         //ç¿ïWÇÃà⁄ìÆ
-        transform.position = AIUtility.GetFlag(_job.GetTimeID()).transform.position;
+        transform.position = GameModes.mode == PublicEnum.GameMode.flag ?
+            AIUtility.GetFlag(_job.GetTimeID()).transform.position :
+            new Vector3(Random.Range(0,CreateMap._ENEMYFLAG_POSITION.x), 0, Random.Range(0, CreateMap._ENEMYFLAG_POSITION.z));
 
         _job.ChengeShoting(false);
 

@@ -57,5 +57,8 @@ public class LoadoutSetting : MonoBehaviour
         _loadoutCamera.SetActive(false);
         // ロードアウトを閉じる
         _loadoutCanvas.SetActive(false);
+
+        AIUtility.aIManager.SetPlayer();
+        AIUtility.aIManager.CreateAI();    
     }
 }
