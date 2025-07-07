@@ -54,7 +54,9 @@ public class AIManager : MonoBehaviour
     public List<int> GetDeathCount() { return kIll.deathCount; }
 
     public void AddDeathCount(int index) { kIll.deathCount[index]++;UnityEngine.Debug.Log("**Ž€‚ñ‚¾"); }
-    public void AdDKillCount(int index) { kIll.killCount[index]++; UnityEngine.Debug.Log("**ŽE‚µ‚½"); }
+    //I—¹Ø‚é”
+    private readonly int KILLMAX = 30;
+    public void AdDKillCount(int index) { kIll.killCount[index]++; if (kIll.killCount[index] > KILLMAX) GameManager.Instance.GameClearCheck(); }
     public void AddAssertCount(int index) { kIll.assistCount[index]++; }
 
 
@@ -193,8 +195,8 @@ public class AIManager : MonoBehaviour
                 ai.transform.eulerAngles = new Vector3(0, createAngle, 0);
 
                 ai.transform.position = FlagPos[i]
-                    + new Vector3(Mathf.Sin(createAngle * Mathf.Deg2Rad), 0,
-                    Mathf.Cos(createAngle * Mathf.Deg2Rad)) * FLAG_PLAYER_RENGE;
+                +new Vector3(Mathf.Sin(createAngle * Mathf.Deg2Rad), 0,
+                Mathf.Cos(createAngle * Mathf.Deg2Rad)) * FLAG_PLAYER_RENGE;
                 if (GameModes.mode == PublicEnum.GameMode.deathmatch)
                 {
 
@@ -218,15 +220,6 @@ public class AIManager : MonoBehaviour
 
                 AI Ai = ai.GetComponent<AI>();
                 AICharacterUtility.AddAI(Ai);
-
-
-                //Ai.Initialization();
-
-
-                //Ai.SetEnemyFlag(flagObject[(i + 1) % 2]);
-                //Ai.SetFlag(flagObject[i]);
-
-                //Ai.GetMove().Start();
 
                 kIll.killCount.Add(0);
                 kIll.deathCount.Add(0);

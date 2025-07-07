@@ -22,7 +22,9 @@ public class Dominator : MonoBehaviour
 
     public void OnEnable()
     {
-        _canvas=GameObject.Find("UICanvas").GetComponent<Canvas>();
+        _canvas=GameObject.Find("UICanvas")?.GetComponent<Canvas>();
+        if(_canvas==null)
+        _canvas=GameObject.Find("DeathMatchUICanvas").GetComponent<Canvas>();
         _camera = GameObject.Find("MainCamera").GetComponent<Camera>();
     }
 

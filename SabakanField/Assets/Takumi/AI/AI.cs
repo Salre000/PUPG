@@ -57,7 +57,6 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
 
     public void FixedUpdate()
     {
-
         if (!Thiscollider.enabled) 
         {
             time += Time.deltaTime;
@@ -114,6 +113,9 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
     //ŽËŒ‚
     public void Shot()
     {
+        if(aiGan.Check()) _aiStatus.SetAnimatorTrigger("ReLood");
+
+
         aiGan.Shot(_job.GetUniqueID());
 
     }

@@ -62,6 +62,7 @@ public class CreateMap : MonoBehaviour
 
     private AIManager _AIManager;
 
+
     public void Awake()
     {
 

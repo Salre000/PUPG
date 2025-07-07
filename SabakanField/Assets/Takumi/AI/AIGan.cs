@@ -25,6 +25,12 @@ public class AIGan : MonoBehaviour
 
 
     }
+    public bool Check() 
+    {
+        return Random.Range(0, 20) == 0;
+
+
+    }
     public void Shot(int ID)
     {
 
