@@ -177,12 +177,14 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
     }
     public void Resurrect()
     {
+
+        _job.ChengeShoting(false);
         //ç¿ïWÇÃà⁄ìÆ
         transform.position = GameModes.mode == PublicEnum.GameMode.flag ?
             AIUtility.GetFlag(_job.GetTimeID()).transform.position :
-            new Vector3(Random.Range(0,CreateMap._ENEMYFLAG_POSITION.x), 0, Random.Range(0, CreateMap._ENEMYFLAG_POSITION.z));
+            new Vector3(Random.Range(0, CreateMap._ENEMYFLAG_POSITION.x), 0, Random.Range(0, CreateMap._ENEMYFLAG_POSITION.z));
 
-        _job.ChengeShoting(false);
+        Debug.Log(transform.position + "ÉäÉXín");
 
         HP = MAXHP;
 
