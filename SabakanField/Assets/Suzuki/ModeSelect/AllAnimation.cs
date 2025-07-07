@@ -20,9 +20,6 @@ public class AllAnimation : MonoBehaviour
     [SerializeField, Header("DeathMode")] private Transform _deathMode;
     [SerializeField] private Transform _targetDeathMode;
     private bool _isDeathMode = false;
-    [SerializeField, Header("SpikeMode")] private Transform _spikeMode;
-    [SerializeField] private Transform _targetSpikeMode;
-    private bool _isSpikeMode = false;
 
     private float _sqrDistance = 0.5f;
 
@@ -37,7 +34,6 @@ public class AllAnimation : MonoBehaviour
         if(!_isBackBlack) return;
         // モード選択のアニメーション
         FlagModeAnim();
-        DeathModeAnim();
         SpikeModeAnim();
     }
 
@@ -83,7 +79,7 @@ public class AllAnimation : MonoBehaviour
         if ((_flagMode.position - _targetFlagMode.position).sqrMagnitude <= _sqrDistance)
             _isFlagMode = true;
     }
-    private void DeathModeAnim()
+    private void SpikeModeAnim()
     {
         if (_isDeathMode) return;
         Vector3 value = _deathMode.position;
@@ -92,15 +88,5 @@ public class AllAnimation : MonoBehaviour
         _deathMode.position = value;
         if ((_deathMode.position - _targetDeathMode.position).sqrMagnitude <= _sqrDistance)
             _isDeathMode = true;
-    }
-    private void SpikeModeAnim()
-    {
-        if (_isSpikeMode) return;
-        Vector3 value = _spikeMode.position;
-        float num = Time.deltaTime + _speed;
-        value = Vector3.Lerp(_spikeMode.position, _targetSpikeMode.position, num);
-        _spikeMode.position = value;
-        if ((_spikeMode.position - _targetSpikeMode.position).sqrMagnitude <= _sqrDistance)
-            _isSpikeMode = true;
     }
 }
