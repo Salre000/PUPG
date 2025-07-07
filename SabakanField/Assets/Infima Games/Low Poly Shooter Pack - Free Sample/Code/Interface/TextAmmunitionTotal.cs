@@ -12,27 +12,14 @@ namespace InfimaGames.LowPolyShooterPack.Interface
     /// </summary>
     public class TextAmmunitionTotal : ElementText
     {
-        private int ammunitionTotal = -1;
-        bool start = false;
-        private int _total = 0;
         #region METHODS
         /// <summary>
         /// Tick.
         /// </summary>
         protected override void Tick()
         {
-            //Total Ammunition.
-            //if (ammunitionTotal == -1)
-            //{
-            //    // マガジンの総弾数
-            //    ammunitionTotal = equippedWeapon.GetAmmunitionTotal()*3;
-
-            //}
-            //BulletManager.SetAllBulletMagazine(ammunitionTotal);
-
-
             //Update Text.
-            textMesh.text = BulletManager.GetMagazin().ToString();/*ammunitionTotal.ToString(CultureInfo.InvariantCulture);*/
+            textMesh.text = BulletManager.GetMagazin().ToString();
         }
 
         

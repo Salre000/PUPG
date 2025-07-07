@@ -15,6 +15,7 @@ public class ChracterHPManager : MonoBehaviour
     public void GetDamage(int id,float damage) { HPList[id]-=damage; }
 
     public void ResetHP(int id) { HPList[id] = MAXHP; }
+    public float GetMaxHp() { return MAXHP; }
 
 
     public void Awake()
