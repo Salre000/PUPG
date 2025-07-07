@@ -49,6 +49,8 @@ public class Killer : AIJobBase
         {
             if (AICharacterUtility.GetAIS()[i].GetAIJob() == this) continue;
 
+            Debug.DrawLine(_gameObject.transform.position, AICharacterUtility.GetAIS()[i].gameObject.transform.position, Color.cyan, 2);
+
             ia.Add(AICharacterUtility.GetAIS()[i].GetAIJob());
         }
 
