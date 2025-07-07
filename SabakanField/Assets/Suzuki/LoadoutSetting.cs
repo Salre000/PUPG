@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static GanObject;
@@ -37,6 +38,7 @@ public class LoadoutSetting : MonoBehaviour
 
             // 通常武器のobjectsに入ってるものの上からを入れていく
             int index = i;
+            SetLoadOutText(gameObject, index);
             _weponButton[i].onClick.AddListener(() => WeponIndex(index));
             _weponImage[i] = gameObject.transform.GetChild(1).GetComponent<RawImage>();
             _weponImage[i].texture = _weponRawTexture[i];
@@ -47,6 +49,17 @@ public class LoadoutSetting : MonoBehaviour
                             , gameObject.transform.localPosition.z);
             _set += 400.0f;
         }
+    }
+    private void SetLoadOutText(GameObject loadout,int index) 
+    {
+        loadout.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = GanObject.constancyGun.objectName[index];
+        loadout.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text ="弾数："+ GanObject.constancyGun.ｍagazineBulletCount[index];
+        loadout.transform.GetChild(6).GetComponent<TextMeshProUGUI>().text ="弾数："+ GanObject.constancyGun.ALLBulletCount[index];
+        loadout.transform.GetChild(7).GetComponent<TextMeshProUGUI>().text ="リロード時間："+ GanObject.constancyGun.reloadTime[index]+"s";
+        loadout.transform.GetChild(8).GetComponent<TextMeshProUGUI>().text ="有効射程："+ GanObject.constancyGun.renge[index]+"m";
+        loadout.transform.GetChild(10).GetComponent<TextMeshProUGUI>().text ="武器効果、武器の説明　　"+ GanObject.constancyGun.Explanation[index];
+
+
     }
 
     private void WeponIndex(int index)
