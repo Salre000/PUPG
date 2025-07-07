@@ -53,9 +53,24 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
 
     }
 
+    float time =0;
+
     public void FixedUpdate()
     {
-        if (!Thiscollider.enabled) { _job.Stop(); return; }
+
+        if (!Thiscollider.enabled) 
+        {
+            time += Time.deltaTime;
+
+         _job.Stop();
+            if (time > 3) 
+            {
+                Resurrect();
+                ReStart();
+                time = 0;
+            }
+            return;
+        }
 
         _job.FixedUpdate();
     }
@@ -71,6 +86,7 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
 
     public void HitAction(GameObject Enemy = null)
     {
+        _job.Hit();
         Respawn();
     }
 
@@ -98,7 +114,7 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
     //ŽËŒ‚
     public void Shot()
     {
-        aiGan.Shot(_job.characterID + (_job.timeID * 4));
+        aiGan.Shot(_job.GetUniqueID());
 
     }
     public void EndShot()

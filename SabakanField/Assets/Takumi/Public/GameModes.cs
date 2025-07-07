@@ -4,6 +4,6 @@ using UnityEngine;
 
 public static class GameModes
 {
-   public static PublicEnum.GameMode mode=PublicEnum.GameMode.deathmatch;
+   public static PublicEnum.GameMode mode=PublicEnum.GameMode.flag;
     
 }

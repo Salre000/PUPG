@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -26,7 +27,7 @@ public abstract class AIJobBase
 
     public void ChengeShoting(bool flag) {shoting = flag;}
 
-    
+    public virtual int GetUniqueID() {return (characterID+timeID*4)+1;}
 
     public virtual void FixedUpdate()
     {
@@ -203,7 +204,14 @@ public abstract class AIJobBase
 
 
     }
+    public virtual void Hit() 
+    {
 
+        AIUtility.AddDeathCount(characterID + (timeID * 4) + 1);
+
+
+
+    }
     public void SetMoveSpeed(float speed) { _agent.speed = speed; }
 
 }

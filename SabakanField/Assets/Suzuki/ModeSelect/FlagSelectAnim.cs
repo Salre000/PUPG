@@ -40,6 +40,8 @@ public class FlagSelectAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     void OnButton()
     {
         Instance.SelectMode(Mode.Flag);
+        GameModes.mode = PublicEnum.GameMode.flag;
+
     }
 
 

@@ -22,15 +22,7 @@ public class AIStatus
 
     }
 
-    public void HitAction()
-    {
-        if (!isLife) return;
 
-        animator.SetTrigger("Death");
-        isLife = false;
-        AIUtility.AddDeathCount(ID);
-
-    }
 
 
     public void SetID(int id) { ID = id; }

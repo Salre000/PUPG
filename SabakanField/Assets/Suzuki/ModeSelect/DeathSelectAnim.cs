@@ -40,6 +40,7 @@ public class DeathSelectAnim : MonoBehaviour, IPointerEnterHandler, IPointerExit
     void OnButton()
     {
         Instance.SelectMode(Mode.Death);
+        GameModes.mode = PublicEnum.GameMode.deathmatch;
     }
 
 

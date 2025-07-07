@@ -53,8 +53,8 @@ public class AIManager : MonoBehaviour
     public List<int> GetKillCount() { return kIll.killCount; }
     public List<int> GetDeathCount() { return kIll.deathCount; }
 
-    public void AddDeathCount(int index) { kIll.deathCount[index]++; }
-    public void AdDKillCount(int index) { kIll.killCount[index]++; }
+    public void AddDeathCount(int index) { kIll.deathCount[index]++;UnityEngine.Debug.Log("**Ž€‚ñ‚¾"); }
+    public void AdDKillCount(int index) { kIll.killCount[index]++; UnityEngine.Debug.Log("**ŽE‚µ‚½"); }
     public void AddAssertCount(int index) { kIll.assistCount[index]++; }
 
 
@@ -145,8 +145,11 @@ public class AIManager : MonoBehaviour
     public void CreateAI()
     {
         if (one) return;
+        FlagPos[0] = CreateMap._PLAYERFLAG_POSITION; FlagPos[1] = CreateMap._ENEMYFLAG_POSITION;
 
         kIll = new KIllCount();
+
+        kIll.players.Clear();
 
         kIll.Name = kIll.GetRandomName();
 
@@ -347,6 +350,7 @@ public class KIllCount
     public List<int> deathCount = new List<int>(AIManager.AI_NUMBER * 2) { 0 };
     public List<int> killCount = new List<int>(AIManager.AI_NUMBER * 2) { 0 };
     public List<int> assistCount = new List<int>(AIManager.AI_NUMBER * 2) { 0 };
+    public List<bool> players = new List<bool>(AIManager.AI_NUMBER * 2) { true };
 
 
     //Œˆ‚ß‘Å‚¿‚Q‚O
@@ -359,8 +363,11 @@ public class KIllCount
         List<string> name = new List<string>();
         List<int> index = new List<int>();
 
+        players.Add(true);
+
         for (int i = 0; i < 9; i++)
         {
+            players.Add(GameModes.mode == PublicEnum.GameMode.flag ? i < 5 : false);
             int random = Random.Range(0, 20);
 
             if (index.Contains(random)) { i--; continue; }
