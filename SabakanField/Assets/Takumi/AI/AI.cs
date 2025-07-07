@@ -55,6 +55,8 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
 
     public void FixedUpdate()
     {
+        if (!Thiscollider.enabled) { _job.Stop(); return; }
+
         _job.FixedUpdate();
     }
 
@@ -160,7 +162,9 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
     public void Resurrect()
     {
         //ç¿ïWÇÃà⁄ìÆ
-        transform.position = AIUtility.GetFlag(_job.GetTimeID()).transform.position;
+        transform.position = GameModes.mode == PublicEnum.GameMode.flag ?
+            AIUtility.GetFlag(_job.GetTimeID()).transform.position :
+            new Vector3(Random.Range(0,CreateMap._ENEMYFLAG_POSITION.x), 0, Random.Range(0, CreateMap._ENEMYFLAG_POSITION.z));
 
         _job.ChengeShoting(false);
 
