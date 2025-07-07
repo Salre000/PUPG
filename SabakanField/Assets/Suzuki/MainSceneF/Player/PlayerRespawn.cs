@@ -18,7 +18,7 @@ public class PlayerRespawn : MonoBehaviour, CharacterInsterface, InvincibleInste
 
     private void Start()
     {
-        _respawnPosition = AIUtility.GetFlagPosition();
+        _respawnPosition = GameModes.mode==PublicEnum.GameMode.flag? AIUtility.GetFlagPosition():new Vector3(0,0,0);
         ChracterHPManager.instance.AddHP(100.0f);
 
         _respawnPosition.y += 0.1f;

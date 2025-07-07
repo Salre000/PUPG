@@ -52,20 +52,23 @@ public class UIManager : MonoBehaviour
 
     private void Initialize()
     {
+        if (GameModes.mode == PublicEnum.GameMode.flag)
+        {
+            _playerSideGageImage = GameObject.Find("PlayerSideGageImage").GetComponent<Image>();
+            _playerSideGageImage.fillAmount = 0.0f;
+            _playerSideGagePaercentText = GameObject.Find("PercentText").GetComponent<TextMeshProUGUI>();
+            _playerSideGagePaercentText.text = _stringBuilder.ToString();
 
-        _playerSideGageImage = GameObject.Find("PlayerSideGageImage").GetComponent<Image>();
-        _playerSideGageImage.fillAmount = 0.0f;
+        }
+
         _stringBuilder.Clear();
         _stringBuilder.AppendFormat("{0:0.0}%", _count);
-        _playerSideGagePaercentText = GameObject.Find("PercentText").GetComponent<TextMeshProUGUI>();
-        _playerSideGagePaercentText.text = _stringBuilder.ToString();
-
         // クラス群
         _timeLimit = new TimeLimit();
         _timeLimit.Initialize();
         _pauseWindow = new PauseWindow();
         _pauseWindow.Initialize();
-        _survivalStatus=new SurvivalStatus();
+        _survivalStatus = new SurvivalStatus();
         _survivalStatus.Initialize();
 
     }
@@ -97,7 +100,7 @@ public class UIManager : MonoBehaviour
     {
         _count = count / _PAERCENT;
         // ゲージの上昇
-        _playerSideGageImage.fillAmount = _count;
+        if (_playerSideGageImage != null) _playerSideGageImage.fillAmount = _count;
     }
 
     // ゲージをどれだけためたか視認できるように
@@ -107,7 +110,7 @@ public class UIManager : MonoBehaviour
         _stringBuilder.Clear();
         float count = _count * _PAERCENT;
         _stringBuilder.AppendFormat("{0:0.0}%", count);
-        _playerSideGagePaercentText.text = _stringBuilder.ToString();
+        if(_playerSideGagePaercentText!=null)_playerSideGagePaercentText.text = _stringBuilder.ToString();
     }
 
     // クリア画面遷移チェック

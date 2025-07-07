@@ -16,7 +16,7 @@ public static class AICharacterUtility
 
     public static void ChengeOutLine(int ID,bool flag) 
     {
-        characterAI[ID].ChengeOuutLIne(flag);
+        characterAI[ID].ChengeOutLIne(flag);
     }
 
 }

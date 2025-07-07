@@ -90,7 +90,16 @@ public class AIManager : MonoBehaviour
     }
     public void FixedUpdate()
     {
-        if (player == null) player = GameObject.FindGameObjectWithTag("Player");
+        if (!GameManager.Instance.GetPlayerSpawn()) return;
+
+        if (player==null)
+        {
+         
+            CreateAI();
+
+            player = GameObject.Find("Player");
+            
+        }
 
         ScanAILife();
         Debug();

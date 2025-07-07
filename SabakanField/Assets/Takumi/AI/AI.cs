@@ -180,7 +180,7 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
     {
         return HP > 0;
     }
-    public void ChengeOuutLIne(bool flag) 
+    public void ChengeOutLIne(bool flag) 
     {
         outline.enabled = flag;
 

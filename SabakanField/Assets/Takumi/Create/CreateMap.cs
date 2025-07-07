@@ -82,13 +82,11 @@ public class CreateMap : MonoBehaviour
         CreateGraund();
 
         //フラッグの生成する関数
-        CreateFlag();
+       if(GameModes.mode==PublicEnum.GameMode.flag)CreateFlag();
 
         //マップの境目の壁を生成する関数
         CreateMapWall();
 
-        //Aiを生成する関数
-        _AIManager.CreateAI();
 
     }
 

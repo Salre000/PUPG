@@ -15,12 +15,12 @@ public class DeathCamera : MonoBehaviour
     }
     public void OnDisable()
     {
-        traget.GetComponent<AI>().ChengeOuutLIne(false);
+        traget?.GetComponent<AI>().ChengeOutLIne(false);
         
     }
     public void OnEnable()
     {
-        traget.GetComponent<AI>().ChengeOuutLIne(true);
+        traget?.GetComponent<AI>().ChengeOutLIne(true);
     }
     private void FixedUpdate()
     {
