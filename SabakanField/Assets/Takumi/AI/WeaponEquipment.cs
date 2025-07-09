@@ -23,15 +23,16 @@ public class WeaponEquipment : MonoBehaviour
     {
         if (handgunFlag) 
         {
-            this.transform.position = (rightHand.transform.position-leftHand.transform.position)+ leftHand.transform.position;
+            this.transform.position = (rightHand.transform.position-leftHand.transform.position)/4+ leftHand.transform.position;
 
-            this.transform.eulerAngles= angleObject.eulerAngles+new Vector3(angloffSet, 0,90);
+            this.transform.eulerAngles= angleObject.eulerAngles+new Vector3(angloffSet, 4.5f,90);
 
             return;
         }
         this.transform.position=rightHand.transform.position;
 
         transform.LookAt(leftHand.transform);
+            this.transform.eulerAngles+=new Vector3(angloffSet, 3.5f,0);
 
         this.transform.position -= this.transform.forward / 11;
     }

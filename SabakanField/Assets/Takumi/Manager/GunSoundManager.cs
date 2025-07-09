@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public static class SoundManager
+public static class GunSoundManager
 {
     private static SoundList ShotList;
     public static AudioClip GetShotSound(GanObject.ConstancyGanType type) { return ShotList.SoundLists[(int)type]; }
@@ -14,7 +14,7 @@ public static class SoundManager
 
     private static List<AudioSource> SoundSource=new List<AudioSource>(50);
 
-    public static AudioClip GetInGameSoundList(SoundEnum.SoundEnumType type) { return InGameSoundList.SoundLists[(int)type]; }
+    public static AudioClip GetInGameSoundList(SoundGunEnum.SoundEnumType type) { return InGameSoundList.SoundLists[(int)type]; }
 
     public static void StartSound(Vector3 pos,AudioClip clip,System.Action addAction=null) 
     {

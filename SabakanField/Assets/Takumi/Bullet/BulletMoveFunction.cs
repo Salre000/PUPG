@@ -66,7 +66,7 @@ public static class BulletMoveFunction
         int ID = 0)
     {
 
-        MIssSoundPlay(new Ray(startPosition, dir), ID);
+        //MIssSoundPlay(new Ray(startPosition, dir), ID);
 
         //当たった対象にrayが当ったときの関数を内包したインターフェースクラスが付いている場合取得
         CharacterInsterface hitObject = target.transform.gameObject.GetComponentInParent<CharacterInsterface>();
@@ -100,7 +100,7 @@ public static class BulletMoveFunction
 
             Debug.Log("アーマーが破壊された");
 
-            //指定のIDのキャラクターのキルカウントを増やす
+            //指定のIDのキャラクターのアシストカウントを増やす
             AIUtility.AddAssertCount(ID);
 
             return;
@@ -108,7 +108,7 @@ public static class BulletMoveFunction
 
         if (!hitObject.HPFaction(bulletDamage.GetDamage()))
         {           
-            //指定のIDのキャラクターのキルカウントを増やす
+            //指定のIDのキャラクターのアシストカウントを増やす
             AIUtility.AddAssertCount(ID);
 
             return;
@@ -117,7 +117,7 @@ public static class BulletMoveFunction
         //自分と違う陣営の場合は弾が当った時の処理を呼ぶ
         hitObject.HitAction
             (
-            armor == null ? null : AICharacterUtility.GetAIS()[ID].gameObject
+            armor == null ? null : AICharacterUtility.GetAIS()[ID-1].gameObject
             );
 
         //指定のIDのキャラクターのキルカウントを増やす
@@ -303,8 +303,8 @@ public static class BulletMoveFunction
             //音をならす
             //現在のプレイ人数は1人の為プレイヤーだけで良いが複数人になったら変更がいる
 
-            SoundManager.StartSound(list[j].transform.position
-                , SoundManager.GetInGameSoundList(SoundEnum.SoundEnumType._bulletSoundMissShot));
+            GunSoundManager.StartSound(list[j].transform.position
+                , GunSoundManager.GetInGameSoundList(SoundGunEnum.SoundEnumType._bulletSoundMissShot));
 
 
 
