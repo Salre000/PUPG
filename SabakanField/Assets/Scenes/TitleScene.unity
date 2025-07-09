@@ -500,14 +500,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 65219be4349b969479daad072eb6ba37, type: 2}
-  titleBGM: {fileID: 0}
-  resultBGM: {fileID: 0}
-  footstep: {fileID: 8300000, guid: 12afd7177fc0a0c42b55eae21c512533, type: 3}
-  enemyHit: {fileID: 0}
-  armorBreak: {fileID: 0}
+  footstep:
+  - {fileID: 8300000, guid: 55d8b31302484f5488eb8fa2118d9fb8, type: 3}
+  - {fileID: 8300000, guid: f7c8538c767616342888783bbc5d4269, type: 3}
+  - {fileID: 8300000, guid: ef22af1ebc1608a4b9c6764478af19e9, type: 3}
+  enemyHit: {fileID: 8300000, guid: 4fe82bf4e8d1a1a429c797293b49c092, type: 3}
+  armorBreak: {fileID: 8300000, guid: a633f358c27a70c45b175dbbe2c2ff68, type: 3}
   enemykilled: {fileID: 0}
-  playerHit: {fileID: 0}
-  gameEnd: {fileID: 8300000, guid: fac766d719e16e847b956d1433580c9d, type: 3}
+  playerHit: {fileID: 8300000, guid: 4fe82bf4e8d1a1a429c797293b49c092, type: 3}
+  gameEnd: {fileID: 0}
+  End: {fileID: 8300000, guid: d1ca5e2f78340fc4b98c678ca832d222, type: 3}
 --- !u!1 &1073348821
 GameObject:
   m_ObjectHideFlags: 0

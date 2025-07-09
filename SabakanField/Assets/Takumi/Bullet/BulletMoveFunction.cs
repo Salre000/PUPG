@@ -89,7 +89,13 @@ public static class BulletMoveFunction
 
         if (hitObject.HPFaction(0)) return;
 
+        //敵に弾を当てたときの音
+        if (ID == 0) SoundSEManager.instance.PlayEnemyHit();
+
         Armor armor = target.transform.GetComponent<Armor>();
+
+        //プレイヤーが当てられたとき
+        if(armor!=null)SoundSEManager.instance.PlayplayerHit();
 
         if (armor != null && armor.GetIsArmor())
         {
@@ -97,6 +103,7 @@ public static class BulletMoveFunction
             armor.SetIsArmor(false);
 
             //アーマー破壊の音をならす
+            SoundSEManager.instance.PlayArmorBreak();
 
             Debug.Log("アーマーが破壊された");
 

@@ -18,7 +18,7 @@ public class Defender : AIJobBase
 
     public override void Initialize()
     {
-        defendObject = AIUtility.GetTeamAIManager(timeID).DefenderPos();
+        defendObject = AIUtility.GetTeamAIManager((timeID+1)%2).DefenderPos();
     }
     public override void Start()
     {
@@ -27,6 +27,7 @@ public class Defender : AIJobBase
     public override void FixedUpdate()
     {
         base.FixedUpdate();
+        Debug.Log(defendObject.name + ":" + timeID);
         GoalCheck();
     }
 
@@ -78,6 +79,7 @@ public class Defender : AIJobBase
     {
         if (_agent.hasPath) return false;
 
+        Debug.Log("‘ÎÛ‚ªŒ©‚Â‚©‚ç‚È‚¢");
         _agent.SetDestination(target);
 
         return true;

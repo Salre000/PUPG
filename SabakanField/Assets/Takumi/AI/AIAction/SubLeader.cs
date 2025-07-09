@@ -39,8 +39,8 @@ public class SubLeader : AIJobBase
     }
     private void CheckGole()
     {
-        Debug.Log("Žc‚è‚Ì‹——£" + Vector3.Distance(_attackObject.transform.position, _gameObject.transform.position));
-        if (Vector3.Distance(_attackObject.transform.position, _gameObject.transform.position) > 14) return;
+        //Debug.Log("Žc‚è‚Ì‹——£" + Vector3.Distance(_attackObject.transform.position, _gameObject.transform.position));
+        if (Vector3.Distance(_attackObject.transform.position, _gameObject.transform.position) > 20) return;
 
         if (timeID == 0)
         {
@@ -58,6 +58,8 @@ public class SubLeader : AIJobBase
             defender.SetTimeID((GetTimeID() + 1) % 2);
             defender.Initialize();
             defender.SetTimeID(GetTimeID());
+
+            AIUtility.GetTeamAIManager(timeID).SetJob(characterID, defender);
 
             _gameObject.GetComponent<AI>().SetAIJob(defender);
 
@@ -79,6 +81,7 @@ public class SubLeader : AIJobBase
             killer.SetTimeID(GetTimeID());
             killer.Initialize();
             _gameObject.GetComponent<AI>().iJob = PublicEnum.AIJob.kiiler;
+            AIUtility.GetTeamAIManager(timeID).SetJob(characterID, killer);
 
             _gameObject.GetComponent<AI>().SetAIJob(killer);
 

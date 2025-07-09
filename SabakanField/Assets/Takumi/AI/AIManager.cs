@@ -247,8 +247,8 @@ public class AIManager : MonoBehaviour
         playerTeamAIManager = new TeamAIManager();
         enemyTeamAIManager = new TeamAIManager();
 
-        playerTeamAIManager.Initialize(players, 0);
         enemyTeamAIManager.Initialize(enemys, 1);
+        playerTeamAIManager.Initialize(players, 0);
 
         one = true;
 

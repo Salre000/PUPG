@@ -14,7 +14,7 @@ public class SoundSEManager : MonoBehaviour
     private AudioMixer audioMixer;
 
     [SerializeField, Header("ë´âπÇÃSE")]
-    private AudioClip footstep;
+    private AudioClip []footstep;
     [SerializeField, Header("ìGÇ…íeÇìñÇƒÇΩÇ∆Ç´ÇÃâπ")]
     private AudioClip enemyHit;
     [SerializeField, Header("ÉAÅ[É}Å[Ç™äÑÇÁÇÍÇΩÇ∆Ç´ÇÃâπ")]
@@ -26,7 +26,7 @@ public class SoundSEManager : MonoBehaviour
     [SerializeField, Header("ÉQÅ[ÉÄÇ™èIóπÇ∑ÇÈéûÇÃâπ")]
     private AudioClip gameEnd;
     [SerializeField, Header("íeÇÃï‚ããÇÇ∑ÇÈÇ∆Ç´ÇÃâπ")]
-    private AudioClip End;
+    private AudioClip ReChege;
 
 
 
@@ -69,13 +69,15 @@ public class SoundSEManager : MonoBehaviour
         audioSource.spatialBlend = 1;
 
         audioSource.minDistance = 1;
-        audioSource.maxDistance = 5;
+        audioSource.maxDistance = 10;
 
         audioSource.transform.position = pos;
 
         audioSource.loop = false;
 
-        audioSource.clip = footstep;
+        audioSource.clip = footstep[Random.Range(0,3)];
+
+        audioSource.volume = 1;
 
         audioSource.Play();
 
@@ -91,6 +93,7 @@ public class SoundSEManager : MonoBehaviour
         audioSource.loop = false;
 
         audioSource.clip = enemyHit;
+        audioSource.volume = 1;
 
         audioSource.Play();
 
@@ -106,6 +109,7 @@ public class SoundSEManager : MonoBehaviour
         audioSource.loop = false;
 
         audioSource.clip = armorBreak;
+        audioSource.volume = 1;
 
         audioSource.Play();
 
@@ -121,6 +125,7 @@ public class SoundSEManager : MonoBehaviour
         audioSource.loop = false;
 
         audioSource.clip = enemykilled;
+        audioSource.volume = 1;
 
         audioSource.Play();
 
@@ -136,6 +141,7 @@ public class SoundSEManager : MonoBehaviour
         audioSource.loop = false;
 
         audioSource.clip = playerHit;
+        audioSource.volume = 1;
 
         audioSource.Play();
 
@@ -151,6 +157,23 @@ public class SoundSEManager : MonoBehaviour
         audioSource.loop = false;
 
         audioSource.clip = gameEnd;
+        audioSource.volume = 1;
+
+        audioSource.Play();
+
+    }
+    public void PlayReChege()
+    {
+
+        AudioSource audioSource = GetUsableAudioSource();
+        audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Master")[2];
+
+        audioSource.spatialBlend = 0;
+
+        audioSource.loop = false;
+
+        audioSource.clip = ReChege;
+        audioSource.volume = 1;
 
         audioSource.Play();
 
