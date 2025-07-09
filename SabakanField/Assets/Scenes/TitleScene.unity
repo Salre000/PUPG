@@ -499,6 +499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f17acdb48a6bfb4395921e950582a93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 65219be4349b969479daad072eb6ba37, type: 2}
   titleBGM: {fileID: 0}
   resultBGM: {fileID: 0}
   footstep: {fileID: 8300000, guid: 12afd7177fc0a0c42b55eae21c512533, type: 3}

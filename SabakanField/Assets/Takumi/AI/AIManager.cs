@@ -274,7 +274,7 @@ public class AIManager : MonoBehaviour
 
     private void RaandomGan(GameObject ai)
     {
-        GanObject.ConstancyGanType type = (ConstancyGanType)Random.Range(0, (int)GanObject.ConstancyGanType.Max - 1);
+        GanObject.ConstancyGanType type =(ConstancyGanType)Random.Range(0, (int)GanObject.ConstancyGanType.Max - 1);
         Animator animator = ai.GetComponent<Animator>();
         int randomRenge = 0;
 

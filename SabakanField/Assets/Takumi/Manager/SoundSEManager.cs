@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SoundSEManager : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class SoundSEManager : MonoBehaviour
 
     private const int MAXSOURECES = 200;
     private List<AudioSource> audioSources = new List<AudioSource>(MAXSOURECES);
+    [SerializeField,Header("オーディオミキサー")]
+    private AudioMixer audioMixer;
 
     [SerializeField, Header("タイトル画面と選択画面のBGM")]
     private AudioClip titleBGM;
@@ -52,7 +55,7 @@ public class SoundSEManager : MonoBehaviour
             GameObject soundObject = new GameObject("soundObject" + i.ToString());
 
             audioSources.Add(soundObject.AddComponent<AudioSource>());
-
+            audioSources[i].outputAudioMixerGroup= audioMixer.FindMatchingGroups("Master")[2];
             soundObject.transform.parent = transform;
 
         }
@@ -65,6 +68,8 @@ public class SoundSEManager : MonoBehaviour
     {
 
         AudioSource audioSource = GetUsableAudioSource();
+
+        audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Master")[1];
 
         audioSource.spatialBlend = 0;
 
@@ -84,7 +89,7 @@ public class SoundSEManager : MonoBehaviour
         AudioSource audioSource = GetUsableAudioSource();
 
         audioSource.spatialBlend = 0;
-
+        audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Master")[1];
 
         audioSource.loop = true;
 
@@ -97,6 +102,7 @@ public class SoundSEManager : MonoBehaviour
     {
 
         AudioSource audioSource = GetUsableAudioSource();
+        audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Master")[2];
 
         audioSource.spatialBlend = 1;
 
@@ -118,6 +124,7 @@ public class SoundSEManager : MonoBehaviour
         AudioSource audioSource = GetUsableAudioSource();
 
         audioSource.spatialBlend = 0;
+        audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Master")[2];
 
         audioSource.loop = false;
 
@@ -130,6 +137,7 @@ public class SoundSEManager : MonoBehaviour
     {
 
         AudioSource audioSource = GetUsableAudioSource();
+        audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Master")[2];
 
         audioSource.spatialBlend = 0;
 
@@ -144,6 +152,7 @@ public class SoundSEManager : MonoBehaviour
     {
 
         AudioSource audioSource = GetUsableAudioSource();
+        audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Master")[2];
 
         audioSource.spatialBlend = 0;
 
@@ -158,6 +167,7 @@ public class SoundSEManager : MonoBehaviour
     {
 
         AudioSource audioSource = GetUsableAudioSource();
+        audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Master")[2];
 
         audioSource.spatialBlend = 0;
 
@@ -172,6 +182,7 @@ public class SoundSEManager : MonoBehaviour
     {
 
         AudioSource audioSource = GetUsableAudioSource();
+        audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Master")[2];
 
         audioSource.spatialBlend = 0;
 

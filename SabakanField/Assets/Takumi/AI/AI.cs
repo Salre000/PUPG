@@ -120,7 +120,7 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
         }
 
 
-        aiGan.Shot(_job.GetUniqueID() - 1);
+        aiGan.Shot(_job.GetUniqueID());
 
     }
     public void EndShot()

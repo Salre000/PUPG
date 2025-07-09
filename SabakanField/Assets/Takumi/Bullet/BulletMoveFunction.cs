@@ -100,7 +100,7 @@ public static class BulletMoveFunction
 
             Debug.Log("アーマーが破壊された");
 
-            //指定のIDのキャラクターのキルカウントを増やす
+            //指定のIDのキャラクターのアシストカウントを増やす
             AIUtility.AddAssertCount(ID);
 
             return;
@@ -108,7 +108,7 @@ public static class BulletMoveFunction
 
         if (!hitObject.HPFaction(bulletDamage.GetDamage()))
         {           
-            //指定のIDのキャラクターのキルカウントを増やす
+            //指定のIDのキャラクターのアシストカウントを増やす
             AIUtility.AddAssertCount(ID);
 
             return;
@@ -117,7 +117,7 @@ public static class BulletMoveFunction
         //自分と違う陣営の場合は弾が当った時の処理を呼ぶ
         hitObject.HitAction
             (
-            armor == null ? null : AICharacterUtility.GetAIS()[ID].gameObject
+            armor == null ? null : AICharacterUtility.GetAIS()[ID-1].gameObject
             );
 
         //指定のIDのキャラクターのキルカウントを増やす

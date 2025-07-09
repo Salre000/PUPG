@@ -78,6 +78,18 @@ public class TeamAIManager
     public void EmergencyCall()
     {
 
+        sbuPos = AIUtility.GetFlag(ID).transform.position;
+        readerPos = AIUtility.GetFlag(ID);
+        defenderPos = AIUtility.GetFlag(ID);
+
+
+        for (int i=0;i< Ais.Count; i++) 
+        {
+            Ais[i].Initialize();
+
+
+
+        }
 
 
     }
