@@ -31,6 +31,7 @@ public class Killer : AIJobBase
     {
         base.FixedUpdate();
         GoalCheck();
+        CheckTIme();
     }
 
     public override void EmergencyTarget()
@@ -48,8 +49,6 @@ public class Killer : AIJobBase
         for(int i=0;i< AICharacterUtility.CharacterCount();i++)
         {
             if (AICharacterUtility.GetAIS()[i].GetAIJob() == this) continue;
-
-            //Debug.DrawLine(_gameObject.transform.position, AICharacterUtility.GetAIS()[i].gameObject.transform.position, Color.cyan, 2);
 
             ia.Add(AICharacterUtility.GetAIS()[i].GetAIJob());
         }
@@ -70,6 +69,15 @@ public class Killer : AIJobBase
         if (Vector3.Distance(_gameObject.transform.position, targetPos) > EPSILON) return;
 
         SetLoop();
+    }
+    float time = 0;
+    private void CheckTIme() 
+    {
+        time += Time.deltaTime;
+        if (time < 20) return;
+
+        SetLoop();
+
     }
 
     /// <summary>
