@@ -83,7 +83,7 @@ public class Dominator : MonoBehaviour
 
                 Debug.Log("‰½‚©" + point.z);
 
-                Debug.DrawLine(transform.position, Characters[i].transform.position, UnityEngine.Color.magenta, 3);
+                //Debug.DrawLine(transform.position, Characters[i].transform.position, UnityEngine.Color.magenta, 3);
 
                 targetList.Add(Characters[i].gameObject);
             }

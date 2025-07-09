@@ -189,7 +189,7 @@ public static class BulletMoveFunction
             if (Physics.Raycast(startPosition, dir, out hit))
             {
 
-                Debug.DrawLine(startPosition, hit.point, Color.red, 10);
+                //Debug.DrawLine(startPosition, hit.point, Color.red, 10);
 
 
                 //当たった対象にrayが当ったときの関数を内包したインターフェースクラスが付いている場合取得

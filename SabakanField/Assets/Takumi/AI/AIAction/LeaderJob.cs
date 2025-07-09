@@ -21,11 +21,58 @@ public class LeaderJob : AIJobBase
     public override void FixedUpdate() 
     {
         base.FixedUpdate();
-
+        CheckGole();
     }
 
     public override void EmergencyTarget()
     {
+
+    }
+    private void CheckGole() 
+    {
+        if (Vector3.Distance(targetObject.transform.position, _gameObject.transform.position) > 14) return;
+
+        if (timeID == 0) 
+        {
+
+            Defender defender=new Defender();
+
+            defender.SetObject(_gameObject);
+
+            defender.SetNextFixedAction(() =>
+            {
+                defender.SetLoop();
+            });
+
+            defender.SetID(GetID());
+            defender.SetTimeID((GetTimeID()+1)%2);
+            defender.Initialize();
+            defender.SetTimeID(GetTimeID());
+
+            _gameObject.GetComponent<AI>().SetAIJob(defender);
+
+            _gameObject.GetComponent<AI>().iJob = PublicEnum.AIJob.defender;
+
+        }
+        else 
+        {
+
+            Killer killer =new Killer();
+            killer.SetObject(_gameObject);
+
+            killer.SetNextFixedAction(() =>
+            {
+                killer.SetLoop();
+            });
+
+            killer.SetID(GetID());
+            killer.SetTimeID(GetTimeID());
+            killer.Initialize();
+            _gameObject.GetComponent<AI>().iJob = PublicEnum.AIJob.kiiler;
+
+            _gameObject.GetComponent<AI>().SetAIJob(killer);
+
+        }
 
     }
 

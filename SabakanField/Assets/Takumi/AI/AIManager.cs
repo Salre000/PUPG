@@ -258,14 +258,14 @@ public class AIManager : MonoBehaviour
     }
     private void Debug()
     {
-        if (Input.GetKey(KeyCode.Alpha0)) players[0].gameObject.GetComponent<CharacterInsterface>().HitAction();
-        if (Input.GetKey(KeyCode.Alpha1)) players[1].gameObject.GetComponent<CharacterInsterface>().HitAction();
-        if (Input.GetKey(KeyCode.Alpha2)) players[2].gameObject.GetComponent<CharacterInsterface>().HitAction();
-        if (Input.GetKey(KeyCode.Alpha3)) players[3].gameObject.GetComponent<CharacterInsterface>().HitAction();
-        if (Input.GetKey(KeyCode.Alpha4)) enemys[0].gameObject.GetComponent<CharacterInsterface>().HitAction();
-        if (Input.GetKey(KeyCode.Alpha5)) enemys[1].gameObject.GetComponent<CharacterInsterface>().HitAction();
-        if (Input.GetKey(KeyCode.Alpha6)) enemys[2].gameObject.GetComponent<CharacterInsterface>().HitAction();
-        if (Input.GetKey(KeyCode.Alpha7)) enemys[3].gameObject.GetComponent<CharacterInsterface>().HitAction();
+        //if (Input.GetKey(KeyCode.Alpha0)) players[0].gameObject.GetComponent<CharacterInsterface>().HitAction();
+        //if (Input.GetKey(KeyCode.Alpha1)) players[1].gameObject.GetComponent<CharacterInsterface>().HitAction();
+        //if (Input.GetKey(KeyCode.Alpha2)) players[2].gameObject.GetComponent<CharacterInsterface>().HitAction();
+        //if (Input.GetKey(KeyCode.Alpha3)) players[3].gameObject.GetComponent<CharacterInsterface>().HitAction();
+        //if (Input.GetKey(KeyCode.Alpha4)) enemys[0].gameObject.GetComponent<CharacterInsterface>().HitAction();
+        //if (Input.GetKey(KeyCode.Alpha5)) enemys[1].gameObject.GetComponent<CharacterInsterface>().HitAction();
+        //if (Input.GetKey(KeyCode.Alpha6)) enemys[2].gameObject.GetComponent<CharacterInsterface>().HitAction();
+        if (Input.GetKey(KeyCode.Alpha7)) enemys[3].Resurrect();
         //if (Input.GetKey(KeyCode.Alpha8)) enemys[4].gameObject.GetComponent<AI>().Shot();
 
 
@@ -274,7 +274,7 @@ public class AIManager : MonoBehaviour
 
     private void RaandomGan(GameObject ai)
     {
-        GanObject.ConstancyGanType type =(ConstancyGanType)Random.Range(0, (int)GanObject.ConstancyGanType.Max - 1);
+        GanObject.ConstancyGanType type = ConstancyGanType.Classic;//(ConstancyGanType)Random.Range(0, (int)GanObject.ConstancyGanType.Max - 1);
         Animator animator = ai.GetComponent<Animator>();
         int randomRenge = 0;
 
