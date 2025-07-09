@@ -22,7 +22,7 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
 
     private Outline outline;
 
-    [SerializeField]private float HP;
+    [SerializeField] private float HP;
     private readonly float MAXHP = 100;
 
     private BoxCollider Thiscollider;
@@ -45,7 +45,7 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
         aiIK = GetComponent<AIIK>();
         HP = MAXHP;
         Thiscollider = GetComponent<BoxCollider>();
-        outline=GetComponent<Outline>();
+        outline = GetComponent<Outline>();
         outline.enabled = false;
         ////Y‚¾‚¯‚ðl‚¦‚é
         aiIK.SetLeftRotate(new Vector3(0, 0, 90));
@@ -53,16 +53,16 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
 
     }
 
-    float time =0;
+    float time = 0;
 
     public void FixedUpdate()
     {
-        if (!Thiscollider.enabled) 
+        if (!Thiscollider.enabled)
         {
             time += Time.deltaTime;
 
-         _job.Stop();
-            if (time > 3) 
+            _job.Stop();
+            if (time > 3)
             {
                 Resurrect();
                 ReStart();
@@ -74,7 +74,7 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
         _job.FixedUpdate();
     }
 
-
+    public void MoveSound() { SoundSEManager.instance.PlayFootstep(transform.position); }
 
     public bool HPFaction(float damage)
     {
@@ -113,10 +113,14 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
     //ŽËŒ‚
     public void Shot()
     {
-        if(aiGan.Check()) _aiStatus.SetAnimatorTrigger("ReLood");
+        if (aiGan.Check())
+        {
+            _aiStatus.SetAnimatorTrigger("ReLood"); 
+            aiIK.SetIK(0);
+        }
 
 
-        aiGan.Shot(_job.GetUniqueID());
+        aiGan.Shot(_job.GetUniqueID() - 1);
 
     }
     public void EndShot()
@@ -137,7 +141,7 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
         float offsetAngle = Mathf.Atan2(vec.x, vec.z) + (4 * Mathf.Deg2Rad);
         aiIK.SetIK(1);
 
-        aiIK.SetRightPos(vec / 4f + transform.position + offSet+new Vector3(Mathf.Sin(offsetAngle),0,Mathf.Cos(offsetAngle))/10f);
+        aiIK.SetRightPos(vec / 4f + transform.position + offSet + new Vector3(Mathf.Sin(offsetAngle), 0, Mathf.Cos(offsetAngle)) / 10f);
         aiIK.SetLeftPos(vec / 2f + transform.position + offSet);
 
 
@@ -200,11 +204,11 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
 
     }
 
-    public bool GetISLife() 
+    public bool GetISLife()
     {
         return HP > 0;
     }
-    public void ChengeOutLIne(bool flag) 
+    public void ChengeOutLIne(bool flag)
     {
         outline.enabled = flag;
 

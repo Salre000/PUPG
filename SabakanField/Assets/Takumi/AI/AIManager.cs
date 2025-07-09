@@ -170,7 +170,7 @@ public class AIManager : MonoBehaviour
 
         GanObject.LoodGameObject();
 
-        SoundManager.Initialize();
+        GunSoundManager.Initialize();
 
 
 

@@ -11,9 +11,9 @@ public class TextAnim : MonoBehaviour
     private StringBuilder _stringBuilder = new StringBuilder();
     private string _buleWinText = "Bule team Win!!";    // 青が勝ったとき
     private string _defText = "Defeat";             // 負けた時
-    private Color32 _buleWinColor= new Color32(43, 69, 221, 255);
-    private Color32 _redWinColor= new Color32(221, 43, 48, 255);
-    private Color32 _defaultColor=new Color32();
+    private Color32 _buleWinColor = new Color32(43, 69, 221, 255);
+    private Color32 _redWinColor = new Color32(221, 43, 48, 255);
+    private Color32 _defaultColor = new Color32();
     // 次の文字への待ち時間
     private float _dileyTime = 0.02f;
 
@@ -28,7 +28,7 @@ public class TextAnim : MonoBehaviour
     private void Initialize()
     {
         _text = GetComponent<TextMeshProUGUI>();
-        _defaultColor= _text.color;
+        _defaultColor = _text.color;
         _stringBuilder.Clear();
     }
 
@@ -40,7 +40,7 @@ public class TextAnim : MonoBehaviour
 
     public IEnumerator TextAnimation()
     {
-        string resultText=DefaultAnimationSet();
+        string resultText = DefaultAnimationSet();
 
         foreach (var foreachText in resultText)
         {
@@ -72,8 +72,8 @@ public class TextAnim : MonoBehaviour
         // 勝ち負け以外でタイピングAnimする時
         if (GameManager.Instance.GetCheckResultScene())
         {
-            _text.color=_defaultColor;
-            resultText=_text.text;
+            _text.color = _defaultColor;
+            resultText = _text.text;
         }
         return resultText;
     }

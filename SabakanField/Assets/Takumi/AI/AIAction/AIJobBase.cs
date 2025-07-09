@@ -153,7 +153,7 @@ public abstract class AIJobBase
 
                 if (ai.GetAIJob().GetTimeID() == timeID) continue;
 
-                if (Vector3.Distance(hit.point, _gameObject.transform.position) > 25) continue;
+                if (Vector3.Distance(hit.point, _gameObject.transform.position) > 6) continue;
 
                 AIUtility.GetEnemyAI((timeID + 1) % 2)[characterID].ShotReserve(ai.transform.gameObject); ;
 
