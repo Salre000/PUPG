@@ -24,7 +24,7 @@ public class Dominator : MonoBehaviour
     {
         _canvas=GameObject.Find("UICanvas")?.GetComponent<Canvas>();
         if(_canvas==null)
-        _canvas=GameObject.Find("DeathMatchUICanvas").GetComponent<Canvas>();
+        _canvas=GameObject.Find("NormalWeponLoadoutCanvas").GetComponent<Canvas>();
         _camera = GameObject.Find("MainCamera").GetComponent<Camera>();
     }
 
