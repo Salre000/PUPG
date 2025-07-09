@@ -8,6 +8,7 @@ public class TeamAIManager
     public int ID = -1;
 
     private List<AIJobBase> Ais = new List<AIJobBase>();
+    public void SetJob(int id,AIJobBase aIJob) { Ais[id] = aIJob; }
     [SerializeField]
     private GameObject readerObject;
 
@@ -98,13 +99,13 @@ public class TeamAIManager
     {
         PublicEnum.AIJob[] aIJob = new PublicEnum.AIJob[count];
 
-        aIJob[0] = PublicEnum.AIJob.defender;
+        aIJob[0] = ID==0?PublicEnum.AIJob.defender: PublicEnum.AIJob.kiiler;
         aIJob[1] = PublicEnum.AIJob.reader;
 
 
         for (int i = 2; i < count; i++)
         {
-            aIJob[i] = (PublicEnum.AIJob)Random.Range((int)PublicEnum.AIJob.member, (int)PublicEnum.AIJob.kiiler);
+            aIJob[i] = ID==0?(PublicEnum.AIJob)Random.Range((int)PublicEnum.AIJob.member, (int)PublicEnum.AIJob.kiiler): PublicEnum.AIJob.kiiler;
 
 
         }

@@ -354,7 +354,7 @@ namespace InfimaGames.LowPolyShooterPack
                 projectileBullet.GetComponent<BulletDamage>().SetDamage(bulletDamage);
                 Debug.Log("発射位置" + projectile.transform.position);
                 projectileBullet.GetComponent<Projectile>().pierce = false;
-                Debug.DrawLine(transform.position, target[i].transform.position, Color.black, 4);
+                //Debug.DrawLine(transform.position, target[i].transform.position, Color.black, 4);
 
 
 

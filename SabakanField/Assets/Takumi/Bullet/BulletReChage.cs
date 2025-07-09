@@ -25,7 +25,9 @@ public class BulletReChage : MonoBehaviour
 
         if (Vector3.Distance(player.transform.position, this.transform.position) < renge)
         {
+            if (BulletManager.GetBulletMagazine()>= InfimaGames.LowPolyShooterPack.Character.character.equippedWeapon.GetAmmunitionTotal() * 3) return;
             BulletManager.SetMagazin(InfimaGames.LowPolyShooterPack.Character.character.equippedWeapon.GetAmmunitionTotal() * 3);
+            SoundSEManager.instance.PlayReChege();
 
         }
     }

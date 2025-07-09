@@ -236,6 +236,7 @@ public class CreateMap : MonoBehaviour
         flag[0].transform.GetChild(1).gameObject.GetComponent<SkinnedMeshRenderer>().materials = new Material[1] { _flagMaterial[0] };
 
         flag[0].transform.position = _PLAYERFLAG_POSITION;
+        flag[0].name = "PLayerFlag";
 
         _AIManager.SetFlagObject(flag[0], 0);
 
@@ -245,6 +246,7 @@ public class CreateMap : MonoBehaviour
 
         flag[1].transform.position = _ENEMYFLAG_POSITION;
         _AIManager.SetFlagObject(flag[1], 1);
+        flag[1].name = "enemyFlag";
 
     }
 

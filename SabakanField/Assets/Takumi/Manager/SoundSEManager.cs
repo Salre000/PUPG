@@ -13,12 +13,8 @@ public class SoundSEManager : MonoBehaviour
     [SerializeField,Header("オーディオミキサー")]
     private AudioMixer audioMixer;
 
-    [SerializeField, Header("タイトル画面と選択画面のBGM")]
-    private AudioClip titleBGM;
-    [SerializeField, Header("リザルト画面のBGM")]
-    private AudioClip resultBGM;
     [SerializeField, Header("足音のSE")]
-    private AudioClip footstep;
+    private AudioClip []footstep;
     [SerializeField, Header("敵に弾を当てたときの音")]
     private AudioClip enemyHit;
     [SerializeField, Header("アーマーが割られたときの音")]
@@ -29,6 +25,8 @@ public class SoundSEManager : MonoBehaviour
     private AudioClip playerHit;
     [SerializeField, Header("ゲームが終了する時の音")]
     private AudioClip gameEnd;
+    [SerializeField, Header("弾の補給をするときの音")]
+    private AudioClip ReChege;
 
 
 
@@ -61,43 +59,7 @@ public class SoundSEManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// タイトル画面と選択画面で使うBGMを再生させる関数
-    /// </summary>
-    public void PlayTitleBGM()
-    {
 
-        AudioSource audioSource = GetUsableAudioSource();
-
-        audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Master")[1];
-
-        audioSource.spatialBlend = 0;
-
-        audioSource.loop = true;
-
-        audioSource.clip = titleBGM;
-
-        audioSource.Play();
-
-    }
-    /// <summary>
-    /// リザルト画面で使うBGMを再生させる関数
-    /// </summary>
-    public void PlayResultBGM()
-    {
-
-        AudioSource audioSource = GetUsableAudioSource();
-
-        audioSource.spatialBlend = 0;
-        audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Master")[1];
-
-        audioSource.loop = true;
-
-        audioSource.clip = resultBGM;
-
-        audioSource.Play();
-
-    }
     public void PlayFootstep(Vector3 pos)
     {
 
@@ -107,13 +69,15 @@ public class SoundSEManager : MonoBehaviour
         audioSource.spatialBlend = 1;
 
         audioSource.minDistance = 1;
-        audioSource.maxDistance = 5;
+        audioSource.maxDistance = 10;
 
         audioSource.transform.position = pos;
 
         audioSource.loop = false;
 
-        audioSource.clip = footstep;
+        audioSource.clip = footstep[Random.Range(0,3)];
+
+        audioSource.volume = 1;
 
         audioSource.Play();
 
@@ -129,6 +93,7 @@ public class SoundSEManager : MonoBehaviour
         audioSource.loop = false;
 
         audioSource.clip = enemyHit;
+        audioSource.volume = 1;
 
         audioSource.Play();
 
@@ -144,6 +109,7 @@ public class SoundSEManager : MonoBehaviour
         audioSource.loop = false;
 
         audioSource.clip = armorBreak;
+        audioSource.volume = 1;
 
         audioSource.Play();
 
@@ -159,6 +125,7 @@ public class SoundSEManager : MonoBehaviour
         audioSource.loop = false;
 
         audioSource.clip = enemykilled;
+        audioSource.volume = 1;
 
         audioSource.Play();
 
@@ -174,6 +141,7 @@ public class SoundSEManager : MonoBehaviour
         audioSource.loop = false;
 
         audioSource.clip = playerHit;
+        audioSource.volume = 1;
 
         audioSource.Play();
 
@@ -189,6 +157,23 @@ public class SoundSEManager : MonoBehaviour
         audioSource.loop = false;
 
         audioSource.clip = gameEnd;
+        audioSource.volume = 1;
+
+        audioSource.Play();
+
+    }
+    public void PlayReChege()
+    {
+
+        AudioSource audioSource = GetUsableAudioSource();
+        audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Master")[2];
+
+        audioSource.spatialBlend = 0;
+
+        audioSource.loop = false;
+
+        audioSource.clip = ReChege;
+        audioSource.volume = 1;
 
         audioSource.Play();
 

@@ -30,10 +30,62 @@ public class SubLeader : AIJobBase
     {
         base.FixedUpdate();
         GoalCheck();
+        CheckGole();
     }
 
     public override void EmergencyTarget()
     {
+
+    }
+    private void CheckGole()
+    {
+        //Debug.Log("Žc‚è‚Ì‹——£" + Vector3.Distance(_attackObject.transform.position, _gameObject.transform.position));
+        if (Vector3.Distance(_attackObject.transform.position, _gameObject.transform.position) > 20) return;
+
+        if (timeID == 0)
+        {
+
+            Defender defender = new Defender();
+
+            defender.SetObject(_gameObject);
+
+            defender.SetNextFixedAction(() =>
+            {
+                defender.SetLoop();
+            });
+
+            defender.SetID(GetID());
+            defender.SetTimeID((GetTimeID() + 1) % 2);
+            defender.Initialize();
+            defender.SetTimeID(GetTimeID());
+
+            AIUtility.GetTeamAIManager(timeID).SetJob(characterID, defender);
+
+            _gameObject.GetComponent<AI>().SetAIJob(defender);
+
+            _gameObject.GetComponent<AI>().iJob = PublicEnum.AIJob.defender;
+
+        }
+        else
+        {
+
+            Killer killer = new Killer();
+            killer.SetObject(_gameObject);
+
+            killer.SetNextFixedAction(() =>
+            {
+                killer.SetLoop();
+            });
+
+            killer.SetID(GetID());
+            killer.SetTimeID(GetTimeID());
+            killer.Initialize();
+            _gameObject.GetComponent<AI>().iJob = PublicEnum.AIJob.kiiler;
+            AIUtility.GetTeamAIManager(timeID).SetJob(characterID, killer);
+
+            _gameObject.GetComponent<AI>().SetAIJob(killer);
+
+        }
 
     }
 

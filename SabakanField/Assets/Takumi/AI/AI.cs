@@ -62,7 +62,7 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
             time += Time.deltaTime;
 
             _job.Stop();
-            if (time > 3)
+            if (time > 20)
             {
                 Resurrect();
                 ReStart();
@@ -184,14 +184,12 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
     public void Resurrect()
     {
 
-        _job.ChengeShoting(false);
         //ç¿ïWÇÃà⁄ìÆ
         transform.position = GameModes.mode == PublicEnum.GameMode.flag ?
             AIUtility.GetFlag(_job.GetTimeID()).transform.position :
             new Vector3(Random.Range(0, CreateMap._ENEMYFLAG_POSITION.x), 0, Random.Range(0, CreateMap._ENEMYFLAG_POSITION.z));
 
-        Debug.Log(transform.position + "ÉäÉXín");
-
+        _job.ChengeShoting(false);
         HP = MAXHP;
 
     }

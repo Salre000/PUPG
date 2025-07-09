@@ -20,8 +20,8 @@ public class RandomRay : MonoBehaviour
 
         float angle = GetRandomAngle() * Mathf.Deg2Rad;
 
-        Debug.DrawLine(this.transform.position,
-            new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle)) * 30, Color.white, 10000);
+        //Debug.DrawLine(this.transform.position,
+        //    new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle)) * 30, Color.white, 10000);
 
 
     }
