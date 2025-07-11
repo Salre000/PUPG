@@ -38,9 +38,11 @@ public class Killer : AIJobBase
     {
 
     }
+    public override int GetTimeID() { return LostTimeID; }
+
     public override void Hit()
     {
-        AIUtility.AddDeathCount(characterID + (timeID * 4) + 1);
+        AIUtility.AddDeathCount(characterID + (LostTimeID * 4) + 1);
 
     }
     protected override List<AIJobBase> GetTagetObject()
@@ -86,7 +88,6 @@ public class Killer : AIJobBase
     public override bool SetNav()
     {
         if (_agent.hasPath) return false;
-
         _agent.SetDestination(targetObject.transform.position);
         targetPos=targetObject.transform.position;
         return true;

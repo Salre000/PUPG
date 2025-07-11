@@ -90,7 +90,7 @@ public abstract class AIJobBase
         SetNextFixedAction(() => { SetLoop(); });
     }
     public void SetTimeID(int id) { timeID = id; }
-    public int GetTimeID() { return timeID; }
+    public virtual int GetTimeID() { return timeID; }
     public void SetID(int id) { characterID = id; }
     public int GetID() { return characterID; }
 
@@ -157,7 +157,6 @@ public abstract class AIJobBase
 
                 AIUtility.GetEnemyAI((timeID + 1) % 2)[characterID].ShotReserve(ai.transform.gameObject); ;
 
-                Debug.Log("Shot" + timeID + "*" + characterID);
 
                                
                 Stop();
@@ -189,7 +188,7 @@ public abstract class AIJobBase
 
             CharacterInsterface character = hit.transform.gameObject.GetComponent<CharacterInsterface>();
             if (character == null) return false;
-            AIUtility.GetEnemyAI((timeID + 1) % 2)[characterID].ShotReserve(hit.transform.gameObject); ;
+            AIUtility.GetEnemyAI((GetTimeID()+1)%2)[characterID].ShotReserve(hit.transform.gameObject); ;
 
             Stop();
             shoting = true;

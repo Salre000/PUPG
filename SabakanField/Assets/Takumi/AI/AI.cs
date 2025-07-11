@@ -57,6 +57,21 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
 
     public void FixedUpdate()
     {
+
+        if (Deathtime >= 0) 
+        {
+            Deathtime += Time.deltaTime;
+
+            if (Deathtime > 3) 
+            {
+
+                Resurrect();
+                Deathtime = -1;
+
+            }
+
+        }
+
         if (!Thiscollider.enabled)
         {
             time += Time.deltaTime;
@@ -72,6 +87,9 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
         }
 
         _job.FixedUpdate();
+
+
+
     }
 
     public void MoveSound() { SoundSEManager.instance.PlayFootstep(transform.position); }
@@ -113,6 +131,7 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
     //射撃
     public void Shot()
     {
+        aiGan.type = _constancyGanType;
         if (aiGan.Check())
         {
             _aiStatus.SetAnimatorTrigger("ReLood"); 
@@ -169,6 +188,7 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
         return false;
     }
 
+    private float Deathtime = -1;
     private void Respawn()
     {
         //アニメーションを替える
@@ -177,13 +197,13 @@ public class AI : MonoBehaviour, CharacterInsterface, InvincibleInsterface
         Thiscollider.enabled = false;
         _job.ChengeShoting(true);
         _job.Stop();
-        Debug.Log("死んだ");
-
+        Deathtime = 0;
 
     }
     public void Resurrect()
     {
 
+        Deathtime = -1;
         //座標の移動
         transform.position = GameModes.mode == PublicEnum.GameMode.flag ?
             AIUtility.GetFlag(_job.GetTimeID()).transform.position :

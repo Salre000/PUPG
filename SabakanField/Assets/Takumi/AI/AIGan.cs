@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using static GanObject;
 public class AIGan : MonoBehaviour
 {
     [SerializeField] GameObject Bullet;
@@ -11,8 +11,8 @@ public class AIGan : MonoBehaviour
     [SerializeField, Header("ショットガンかどうか")] bool shotGan = false;
     /*[SerializeField, Header("この銃の速度")] */
     float bulletSpeed = 100;
-
-
+    
+    public ConstancyGanType type; 
     public void Start()
     {
         AI ai = GetComponentInParent<AI>();
@@ -34,18 +34,17 @@ public class AIGan : MonoBehaviour
     public void Shot(int ID)
     {
 
-
         GameObject bullet = GameObject.Instantiate(Bullet);
 
         bullet.transform.position = BulletPosition.transform.position;
         bullet.transform.LookAt(BulletFront.transform);
 
-        Debug.DrawRay(bullet.transform.position, bullet.transform.forward * 100, Color.red, 2);
         bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;
 
         bullet.GetComponent<BulletDamage>().SetDamage(bulletDamage);
         bullet.GetComponent<ProjectileEnemy>().ID=ID;
 
+        GunSoundManager.StartSound(bullet.transform.position,GunSoundManager.GetShotSound(type));
         if (!shotGan) return;
         Debug.Log("ショットガン");
         for (int i = -1; i < 2; i++)
