@@ -1003,6 +1003,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 883384445206776467, guid: 19eadcf8fbed56b4da77ca94c1b4145f,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 916095938892669238, guid: 19eadcf8fbed56b4da77ca94c1b4145f,
         type: 3}
       propertyPath: m_CullingMask.m_Bits
@@ -1376,6 +1381,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TabKillChackCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276091721793859860, guid: f7355d550cf8b6f408fd9a49129730c5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6276091721793859861, guid: f7355d550cf8b6f408fd9a49129730c5,
         type: 3}

@@ -53,10 +53,10 @@ public class AIManager : MonoBehaviour
     public List<int> GetKillCount() { return kIll.killCount; }
     public List<int> GetDeathCount() { return kIll.deathCount; }
 
-    public void AddDeathCount(int index) { kIll.deathCount[index]++;UnityEngine.Debug.Log("**Ž€‚ñ‚¾"); }
+    public void AddDeathCount(int index) { kIll.deathCount[index]++;}
     //I—¹Ø‚é”
     private readonly int KILLMAX = 30;
-    public void AdDKillCount(int index) { kIll.killCount[index]++; if (kIll.killCount[index] > KILLMAX) GameManager.Instance.GameClearCheck(); }
+    public void AdDKillCount(int index) { kIll.killCount[index]++; if (kIll.killCount[index] >= KILLMAX) GameManager.Instance.GameClearCheck(); }
     public void AddAssertCount(int index) { kIll.assistCount[index]++; }
 
 
@@ -252,8 +252,6 @@ public class AIManager : MonoBehaviour
 
         one = true;
 
-        UnityEngine.Debug.Log("ˆê“x‚«‚è");
-
 
     }
     private void Debug()
@@ -274,7 +272,7 @@ public class AIManager : MonoBehaviour
 
     private void RaandomGan(GameObject ai)
     {
-        GanObject.ConstancyGanType type = ConstancyGanType.Classic;//(ConstancyGanType)Random.Range(0, (int)GanObject.ConstancyGanType.Max - 1);
+        GanObject.ConstancyGanType type = (ConstancyGanType)Random.Range(0, (int)GanObject.ConstancyGanType.Max - 1);
         Animator animator = ai.GetComponent<Animator>();
         int randomRenge = 0;
 

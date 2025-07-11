@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour
     // パーセント表示
     private const float _MAX_FLAG_GAGE = 1.0f;
     // 何%でクリアかを決める
-    private const float _PAERCENT = 1.0f;
+    private const float _PAERCENT = 100.0f;
     // ゲージの値
     private float _count = 0.0f;
     // 制限時間クラス
@@ -54,6 +54,9 @@ public class UIManager : MonoBehaviour
     {
         if (GameModes.mode == PublicEnum.GameMode.flag)
         {
+
+            _stringBuilder.Clear();
+            _stringBuilder.AppendFormat("{0:0.0}%", _count);
             _playerSideGageImage = GameObject.Find("PlayerSideGageImage").GetComponent<Image>();
             _playerSideGageImage.fillAmount = 0.0f;
             _playerSideGagePaercentText = GameObject.Find("PercentText").GetComponent<TextMeshProUGUI>();
@@ -61,8 +64,6 @@ public class UIManager : MonoBehaviour
 
         }
 
-        _stringBuilder.Clear();
-        _stringBuilder.AppendFormat("{0:0.0}%", _count);
         // クラス群
         _timeLimit = new TimeLimit();
         _timeLimit.Initialize();
@@ -110,7 +111,7 @@ public class UIManager : MonoBehaviour
         _stringBuilder.Clear();
         float count = _count * _PAERCENT;
         _stringBuilder.AppendFormat("{0:0.0}%", count);
-        if(_playerSideGagePaercentText!=null)_playerSideGagePaercentText.text = _stringBuilder.ToString();
+        if (_playerSideGagePaercentText != null) _playerSideGagePaercentText.text = _stringBuilder.ToString();
     }
 
     // クリア画面遷移チェック
