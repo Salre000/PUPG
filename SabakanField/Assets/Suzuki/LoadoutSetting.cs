@@ -1,3 +1,4 @@
+using InfimaGames.LowPolyShooterPack;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -52,6 +53,7 @@ public class LoadoutSetting : MonoBehaviour
     }
     private void SetLoadOutText(GameObject loadout,int index) 
     {
+        loadout.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = GanObject.constancyGun.objects[index].GetComponent<Weapon>().IsAutomatic() ? "フルオート" : "セミオート";
         loadout.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = GanObject.constancyGun.objectName[index];
         loadout.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text ="弾数："+ GanObject.constancyGun.ｍagazineBulletCount[index];
         loadout.transform.GetChild(6).GetComponent<TextMeshProUGUI>().text ="弾数："+ GanObject.constancyGun.ALLBulletCount[index];
