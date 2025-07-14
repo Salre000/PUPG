@@ -4,6 +4,8 @@ using System;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
+using UnityEditor.Build.Reporting;
+using static PlayerAnimationManager;
 
 namespace InfimaGames.LowPolyShooterPack
 {
@@ -165,7 +167,7 @@ namespace InfimaGames.LowPolyShooterPack
         // true：切り替え false：長押し
         private bool _isAdsType;
         bool _isAds = false;
-        bool _adsNow = false;
+
 
         #endregion
 
@@ -221,6 +223,7 @@ namespace InfimaGames.LowPolyShooterPack
             //Cache a reference to the overlay layer's index.
             layerOverlay = characterAnimator.GetLayerIndex("Layer Overlay");
         }
+        
         private void OnDestroy()
         {
             Cursor.lockState = CursorLockMode.None;
@@ -251,8 +254,18 @@ namespace InfimaGames.LowPolyShooterPack
             if (CanChangeWeapon() && (indexCurrent != indexNext))
                 StartCoroutine(nameof(Equip), indexNext);
         }
+        private void SetAnimationFlag()
+        {
+            instance.SetWalking(walking);
+            instance.SetRunning(running);
+            instance.SetAiming(aiming);
+            instance.SetReloading(reloading);
+            instance.SetInspecting(inspecting);
+            instance.SetHolstering(holstering);
+        }
         protected override void Update()
         {
+            SetAnimationFlag();
             if (PlayerManager.GetIsPlayerDead()) return;
 
             Wepowepon();
