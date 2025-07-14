@@ -73,6 +73,7 @@ public class Defender : AIJobBase
 
 
         target = new Vector3(Mathf.Sin(tragetAngle)*targetRange,0, Mathf.Cos(tragetAngle) * targetRange);
+        Debug.Log("Ÿ‚ÌêŠ" + target);
 
     }
     public override bool SetNav()
