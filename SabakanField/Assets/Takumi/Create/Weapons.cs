@@ -72,6 +72,9 @@ public class Weapons : MonoBehaviour
 
             if (!Input.GetKeyDown(KeyCode.E)) return;
 
+            if (PlayerAnimationManager.instance.IsReloading()) return;
+            if (PlayerAnimationManager.instance.IsInspecting()) return;
+
             if(ID<4)
             player.GetComponent<PickUpWepon>().SetPicWepan(GanObject.extraGan.objects[ID]);
             else 

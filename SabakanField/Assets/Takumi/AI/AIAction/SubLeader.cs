@@ -58,6 +58,7 @@ public class SubLeader : AIJobBase
             defender.SetTimeID((GetTimeID() + 1) % 2);
             defender.Initialize();
             defender.SetTimeID(GetTimeID());
+            AIUtility.GetEnemyAI((GetTimeID() + 1) % 2)[characterID].Resurrect();
 
             AIUtility.GetTeamAIManager(timeID).SetJob(characterID, defender);
 
@@ -76,6 +77,7 @@ public class SubLeader : AIJobBase
             {
                 killer.SetLoop();
             });
+            AIUtility.GetEnemyAI((GetTimeID() + 1) % 2)[characterID].Resurrect();
 
             killer.SetID(GetID());
             killer.SetTimeID(GetTimeID());

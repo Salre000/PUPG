@@ -48,6 +48,7 @@ public class LeaderJob : AIJobBase
             defender.SetTimeID((GetTimeID()+1)%2);
             defender.Initialize();
             defender.SetTimeID(GetTimeID());
+            AIUtility.GetEnemyAI((GetTimeID() + 1) % 2)[characterID].Resurrect();
 
             _gameObject.GetComponent<AI>().SetAIJob(defender);
             AIUtility.GetTeamAIManager(timeID).SetJob(characterID, defender);
@@ -69,6 +70,7 @@ public class LeaderJob : AIJobBase
             killer.SetID(GetID());
             killer.SetTimeID(GetTimeID());
             killer.Initialize();
+            AIUtility.GetEnemyAI((GetTimeID() + 1) % 2)[characterID].Resurrect();
             _gameObject.GetComponent<AI>().iJob = PublicEnum.AIJob.kiiler;
             AIUtility.GetTeamAIManager(timeID).SetJob(characterID, killer);
 

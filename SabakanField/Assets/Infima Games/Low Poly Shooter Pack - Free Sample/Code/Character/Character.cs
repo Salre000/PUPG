@@ -4,7 +4,6 @@ using System;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
-using UnityEditor.Build.Reporting;
 using static PlayerAnimationManager;
 
 namespace InfimaGames.LowPolyShooterPack
@@ -413,6 +412,7 @@ namespace InfimaGames.LowPolyShooterPack
         private void PlayReloadAnimation()
         {
             #region Animation
+            if (PlayerManager.GetIsPlayerDead()) return;
 
             //Get the name of the animation state to play, which depends on weapon settings, and ammunition!
             string stateName = equippedWeapon.HasAmmunition() ? "Reload" : "Reload Empty";
@@ -422,7 +422,6 @@ namespace InfimaGames.LowPolyShooterPack
             //Set.
             reloading = true;
             #endregion
-
             //Reload.
             equippedWeapon.Reload();
         }
