@@ -509,7 +509,7 @@ MonoBehaviour:
   armorBreak: {fileID: 8300000, guid: a633f358c27a70c45b175dbbe2c2ff68, type: 3}
   enemykilled: {fileID: 8300000, guid: fc6a7167eea49514981885bc76686b3a, type: 3}
   playerHit: {fileID: 8300000, guid: 94103637b658d3545b9f65db521b18e1, type: 3}
-  gameEnd: {fileID: 0}
+  gameEnd: {fileID: 8300000, guid: 639c3b1dfde350144b024b5e3dc07e99, type: 3}
   ReChege: {fileID: 8300000, guid: d1ca5e2f78340fc4b98c678ca832d222, type: 3}
 --- !u!114 &1068923715
 MonoBehaviour:
