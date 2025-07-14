@@ -49,6 +49,7 @@ public class CameraSwitching : MonoBehaviour
             _deadCamera.SetActive(false);
             return;
         }
+        //ここでデスカメラを起動
         _mainCamera.SetActive(false);
         _uiCamera.SetActive(false);
         _deadCamera.SetActive(true);
