@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
     public void GameClearCheck()
     {
         if (_finaleFlag) return;
+        SoundSEManager.instance.PlayGameEnd();
         GameSceneManager.LoadScene(GameSceneManager.clearScene, LoadSceneMode.Additive);
         _finaleFlag = true;
     }

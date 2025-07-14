@@ -47,9 +47,11 @@ public class LeaderJob : AIJobBase
             defender.SetID(GetID());
             defender.SetTimeID((GetTimeID()+1)%2);
             defender.Initialize();
-            defender.SetTimeID(GetTimeID());
-            AIUtility.GetEnemyAI((GetTimeID() + 1) % 2)[characterID].Resurrect();
+            AIUtility.GetEnemyAI((GetTimeID()+1)%2)[characterID].Resurrect();
 
+            defender.SetTargetAngle(AIUtility.GetFlag(GetTimeID()));
+            defender.SetTimeID(GetTimeID());
+            defender.SetLoop();
             _gameObject.GetComponent<AI>().SetAIJob(defender);
             AIUtility.GetTeamAIManager(timeID).SetJob(characterID, defender);
 

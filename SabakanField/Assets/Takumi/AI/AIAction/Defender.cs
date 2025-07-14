@@ -64,7 +64,7 @@ public class Defender : AIJobBase
 
         SetLoop();
     }
-    private void SetNestTarget() 
+    public void SetNestTarget() 
     {
 
         float tragetAngle = (Angle + (Random.Range(0, 85)-40))*Mathf.Deg2Rad;
@@ -72,7 +72,7 @@ public class Defender : AIJobBase
         float targetRange = Random.Range(CreateMapManager.createMap.GetSIZEX() / 5, CreateMapManager.createMap.GetSIZEX() * 2);
 
 
-        target = new Vector3(Mathf.Sin(tragetAngle)*targetRange,0, Mathf.Cos(tragetAngle) * targetRange);
+        target = defendObject.transform.position+ new Vector3(Mathf.Sin(tragetAngle)*targetRange,0, Mathf.Cos(tragetAngle) * targetRange);
         Debug.Log("Ÿ‚ÌêŠ" + target);
 
     }
@@ -86,4 +86,5 @@ public class Defender : AIJobBase
         return true;
 
     }
+    public void SetNavPos() { _agent.SetDestination(target); }
 }
