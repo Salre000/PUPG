@@ -39,6 +39,7 @@ public static class AIUtility
 
 
     }
+    public static void DamageEffect(GameObject enemy) { aIManager.DamageEffect(enemy); }
 
     public static Vector3 GetFlagPosition() { return aIManager.PlayerFlagPosition(); }
 

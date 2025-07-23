@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using UnityEngine.UI;
 using static GanObject;
 
 public class AIManager : MonoBehaviour
@@ -31,7 +32,11 @@ public class AIManager : MonoBehaviour
 
     private List<List<int>> assist = new List<List<int>>(10);
 
+    [SerializeField] private Image DamegeImage;
+
     public void AddList(int id, int Enemyid) { if (!assist[id].Contains(Enemyid)) assist[id].Add(Enemyid); }
+
+
     public void Assist(int id,int killer)
     {
         if (assist[id].Contains(killer)) assist[id].Remove(killer);
@@ -45,6 +50,19 @@ public class AIManager : MonoBehaviour
 
         }
 
+
+
+    }
+
+    public void DamageEffect(GameObject enemy ) 
+    {
+
+        float angle = Vector3.Angle(player.transform.forward, player.transform.position-enemy.transform.position);
+        DamegeImage.gameObject.SetActive(true);
+
+        var ss= Vector3.Cross(player.transform.forward, player.transform.position - enemy.transform.position);
+        if (ss.y < 0) angle *= -1;
+        DamegeImage.transform.eulerAngles = -new Vector3(0, 0, angle-22.5f);
 
 
     }

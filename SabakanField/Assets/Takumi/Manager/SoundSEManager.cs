@@ -51,7 +51,6 @@ public class SoundSEManager : MonoBehaviour
     }
     private void Start()
     {
-        Debug.Log(OptionDataClass.GetMasterVolume()+"SS");
 
         audioMixer.SetFloat("Master_Volume", OptionDataClass.GetMasterVolume() - 80);
         audioMixer.SetFloat("BGM_Volume", OptionDataClass.GetBGMVolume() - 80);

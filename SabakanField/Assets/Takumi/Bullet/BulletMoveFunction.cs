@@ -92,13 +92,13 @@ public static class BulletMoveFunction
         //敵に弾を当てたときの音
         if (ID == 0) SoundSEManager.instance.PlayEnemyHit();
 
-        int TargtID =0;
+        int TargtID = 0;
 
-        if (target.gameObject.GetComponent<AI>() != null) 
+        if (target.gameObject.GetComponent<AI>() != null)
         {
             AI aI = target.gameObject.GetComponent<AI>();
 
-            TargtID=aI.GetAIJob().GetUniqueID();
+            TargtID = aI.GetAIJob().GetUniqueID();
 
 
         }
@@ -107,7 +107,11 @@ public static class BulletMoveFunction
         Armor armor = target.transform.GetComponent<Armor>();
 
         //プレイヤーが当てられたとき
-        if(armor!=null)SoundSEManager.instance.PlayplayerHit();
+        if (armor != null)
+        {
+            SoundSEManager.instance.PlayplayerHit();
+            AIUtility.DamageEffect(AICharacterUtility.GetAIS()[TargtID].gameObject);
+        }
 
         if (armor != null && armor.GetIsArmor())
         {
@@ -119,7 +123,7 @@ public static class BulletMoveFunction
 
             Debug.Log("アーマーが破壊された");
 
-            
+
 
             AIUtility.AddList(TargtID, ID);
 
@@ -127,7 +131,7 @@ public static class BulletMoveFunction
         }
 
         if (!hitObject.HPFaction(bulletDamage.GetDamage()))
-        {           
+        {
 
 
             AIUtility.AddList(TargtID, ID);
@@ -138,9 +142,8 @@ public static class BulletMoveFunction
         //自分と違う陣営の場合は弾が当った時の処理を呼ぶ
         hitObject.HitAction
             (
-            armor == null ? null : AICharacterUtility.GetAIS()[ID-1].gameObject
+            armor == null ? null : AICharacterUtility.GetAIS()[ID - 1].gameObject
             );
-
         AIUtility.Assist(TargtID, ID);
 
         //指定のIDのキャラクターのキルカウントを増やす
