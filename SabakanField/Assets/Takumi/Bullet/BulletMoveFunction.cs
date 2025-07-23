@@ -92,6 +92,18 @@ public static class BulletMoveFunction
         //敵に弾を当てたときの音
         if (ID == 0) SoundSEManager.instance.PlayEnemyHit();
 
+        int TargtID =0;
+
+        if (target.gameObject.GetComponent<AI>() != null) 
+        {
+            AI aI = target.gameObject.GetComponent<AI>();
+
+            TargtID=aI.GetAIJob().GetUniqueID();
+
+
+        }
+
+
         Armor armor = target.transform.GetComponent<Armor>();
 
         //プレイヤーが当てられたとき
@@ -107,16 +119,18 @@ public static class BulletMoveFunction
 
             Debug.Log("アーマーが破壊された");
 
-            //指定のIDのキャラクターのアシストカウントを増やす
-            AIUtility.AddAssertCount(ID);
+            
+
+            AIUtility.AddList(TargtID, ID);
 
             return;
         }
 
         if (!hitObject.HPFaction(bulletDamage.GetDamage()))
         {           
-            //指定のIDのキャラクターのアシストカウントを増やす
-            AIUtility.AddAssertCount(ID);
+
+
+            AIUtility.AddList(TargtID, ID);
 
             return;
         }
@@ -126,6 +140,8 @@ public static class BulletMoveFunction
             (
             armor == null ? null : AICharacterUtility.GetAIS()[ID-1].gameObject
             );
+
+        AIUtility.Assist(TargtID, ID);
 
         //指定のIDのキャラクターのキルカウントを増やす
         AIUtility.AddKillCount(ID);

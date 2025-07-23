@@ -22,7 +22,7 @@ public class SliderVolume : MonoBehaviour
     public void SetBGM(float volume)
     {
 
-        
+
         volume -= 80;
 
 
