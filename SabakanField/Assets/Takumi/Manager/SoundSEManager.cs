@@ -32,6 +32,10 @@ public class SoundSEManager : MonoBehaviour
 
     public void Awake()
     {
+
+        OptionDataClass.GetOptionData();
+
+
         if (instance == null)
         {
             instance = this;
@@ -45,9 +49,22 @@ public class SoundSEManager : MonoBehaviour
         }
         Initialize();
     }
+    private void Start()
+    {
+        Debug.Log(OptionDataClass.GetMasterVolume()+"SS");
+
+        audioMixer.SetFloat("Master_Volume", OptionDataClass.GetMasterVolume() - 80);
+        audioMixer.SetFloat("BGM_Volume", OptionDataClass.GetBGMVolume() - 80);
+        audioMixer.SetFloat("SE_Volume", OptionDataClass.GetSEVolume() - 80);
+
+
+    }
 
     private void Initialize()
     {
+
+
+
         for (int i = 0; i < MAXSOURECES; i++)
         {
             GameObject soundObject = new GameObject("soundObject" + i.ToString());

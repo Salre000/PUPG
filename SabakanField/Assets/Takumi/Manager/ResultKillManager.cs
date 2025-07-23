@@ -32,7 +32,7 @@ public class ResultKillManager : MonoBehaviour
         model.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = count.deathCount[index].ToString();
         model.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = count.assistCount[index].ToString();
 
-        model.GetComponent<Image>().color = count.players[index] ? PLAYERCOLOR : ENEMYCOLOR;
+        model.GetComponent<Image>().color = count.players[index] ? ENEMYCOLOR: PLAYERCOLOR;
 
     }
 

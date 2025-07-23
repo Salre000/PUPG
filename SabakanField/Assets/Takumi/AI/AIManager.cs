@@ -29,6 +29,26 @@ public class AIManager : MonoBehaviour
     //AIのオリジナルオブジェクト
     [SerializeField] GameObject origenAI;
 
+    private List<List<int>> assist = new List<List<int>>(10);
+
+    public void AddList(int id, int Enemyid) { if (!assist[id].Contains(Enemyid)) assist[id].Add(Enemyid); }
+    public void Assist(int id,int killer)
+    {
+        if (assist[id].Contains(killer)) assist[id].Remove(killer);
+
+
+        for (int i = 0; i < assist[id].Count; i++)
+        {
+
+            AIUtility.AddAssertCount(assist[id][i]);
+
+
+        }
+
+
+
+    }
+
     [SerializeField] private TeamAIManager playerTeamAIManager;
     private TeamAIManager enemyTeamAIManager;
 
@@ -53,7 +73,7 @@ public class AIManager : MonoBehaviour
     public List<int> GetKillCount() { return kIll.killCount; }
     public List<int> GetDeathCount() { return kIll.deathCount; }
 
-    public void AddDeathCount(int index) { kIll.deathCount[index]++;}
+    public void AddDeathCount(int index) { kIll.deathCount[index]++; }
     //終了切る数
     private readonly int KILLMAX = 30;
     public void AdDKillCount(int index) { kIll.killCount[index]++; if (kIll.killCount[index] >= KILLMAX) GameManager.Instance.GameClearCheck(); }
@@ -172,7 +192,7 @@ public class AIManager : MonoBehaviour
 
         GunSoundManager.Initialize();
 
-
+        assist.Add(new List<int>(10));
 
 
 
@@ -186,6 +206,8 @@ public class AIManager : MonoBehaviour
             for (int j = 0; j < AI_NUMBER; j++)
             {
                 if (i == 0 && j == 0) continue;
+                assist.Add(new List<int>(10));
+
                 GameObject ai = GameObject.Instantiate(origenAI);
 
                 float createAngle = angle + (30 * j) - 60;
@@ -195,7 +217,7 @@ public class AIManager : MonoBehaviour
                 ai.transform.eulerAngles = new Vector3(0, createAngle, 0);
 
                 ai.transform.position = FlagPos[i]
-                +new Vector3(Mathf.Sin(createAngle * Mathf.Deg2Rad), 0,
+                + new Vector3(Mathf.Sin(createAngle * Mathf.Deg2Rad), 0,
                 Mathf.Cos(createAngle * Mathf.Deg2Rad)) * FLAG_PLAYER_RENGE;
                 if (GameModes.mode == PublicEnum.GameMode.deathmatch)
                 {

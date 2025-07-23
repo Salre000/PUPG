@@ -30,6 +30,16 @@ public static class AIUtility
     {
         aIManager.AddAssertCount(index);
     }
+    public static void AddList(int id, int Enemyid) { aIManager.AddList(id, Enemyid); }
+    public static void Assist(int id,int killer) 
+    {
+
+
+        aIManager.Assist(id, killer);
+
+
+    }
+
     public static Vector3 GetFlagPosition() { return aIManager.PlayerFlagPosition(); }
 
     public static List<int> GetKillCount() {  return aIManager.GetKillCount(); }
