@@ -14,6 +14,7 @@ public class PauseButtonsSystem : MonoBehaviour
     private GameObject _settingPanel;
     private Button _settingButton;
     private Button _closeButton;
+    private Button _titleButton;
     private Button _gameCloseButton;
     private void Awake()
     {
@@ -22,9 +23,11 @@ public class PauseButtonsSystem : MonoBehaviour
         _settingPanel=GameObject.Find("SettingMode").gameObject;
         _settingButton=GameObject.Find("SettingButton").GetComponent<Button>();
         _closeButton=GameObject.Find("CloseButton").GetComponent<Button>();
+        _titleButton = GameObject.Find("TitleButton").GetComponent<Button>();
         _gameCloseButton=GameObject.Find("GameCloseButton").GetComponent<Button>();
         _settingButton.onClick.AddListener(PushSetting);
         _closeButton.onClick.AddListener(PushClosed);
+        _titleButton.onClick.AddListener(BackTitle);
         _gameCloseButton.onClick.AddListener(PushEndGame);
     }
 
@@ -45,6 +48,12 @@ public class PauseButtonsSystem : MonoBehaviour
     {
         _pauseWindow.PushClosed();
 
+    }
+    // タイトルボタンが押されたとき
+    public void BackTitle()
+    {
+        _pauseWindow.PushClosed();
+        GameSceneManager.LoadScene(GameSceneManager.titleScene);
     }
     // やめるボタンが押されたとき
     public void PushEndGame()
